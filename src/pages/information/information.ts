@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { InformationAnorexiaPage } from '../information-anorexia/information-anorexia';
-import { InformationConsequencesPage } from '../information-consequences/information-consequences';
 import { InformationPsychePage } from '../information-psyche/information-psyche';
-import { InformationAnatomyPage } from '../information-anatomy/information-anatomy';
+
 
 @IonicPage()
 @Component({
@@ -24,16 +23,8 @@ export class InformationPage {
     this.navCtrl.push(InformationAnorexiaPage, {});
   }
 
-  public gotoInformationConsequencesPage() {
-    this.navCtrl.push(InformationConsequencesPage, {});
-  }
-
   public gotoInformationPsychePage() {
     this.navCtrl.push(InformationPsychePage, {});
-  }
-
-  public gotoInformationAnatomyPage() {
-    this.navCtrl.push(InformationAnatomyPage, {});
   }
 
 }

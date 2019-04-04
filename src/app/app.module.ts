@@ -29,14 +29,11 @@ import { JournalDeletePage } from '../pages/journal-delete/journal-delete';
 
 import { InformationPage } from '../pages/information/information';
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
-import { InformationConsequencesPage } from '../pages/information-consequences/information-consequences';
 import { InformationPsychePage } from '../pages/information-psyche/information-psyche';
-import { InformationAnatomyPage } from '../pages/information-anatomy/information-anatomy';
 
 import { HelpPage } from '../pages/help/help';
 import { HelpPointsofcontactPage } from '../pages/help-pointsofcontact/help-pointsofcontact';
 import { HelpCopingPage } from '../pages/help-coping/help-coping';
-import { HelpRelaxationPage } from '../pages/help-relaxation/help-relaxation';
 
 import { ProfilePage } from '../pages/profile/profile';
 import { ProfileCustomizePage } from '../pages/profile-customize/profile-customize';
@@ -91,13 +88,10 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalDeletePage,
     InformationPage,
     InformationAnorexiaPage,
-    InformationConsequencesPage,
     InformationPsychePage,
-    InformationAnatomyPage,
     HelpPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
-    HelpRelaxationPage,
     ProfilePage,
     ProfileCustomizePage,
     ProfileCustomizecontactsPage,
@@ -135,13 +129,10 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalDeletePage,
     InformationPage,
     InformationAnorexiaPage,
-    InformationConsequencesPage,
     InformationPsychePage,
-    InformationAnatomyPage,
     HelpPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
-    HelpRelaxationPage,
     ProfilePage,
     ProfileCustomizePage,
     ProfileCustomizecontactsPage,

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { HelpPointsofcontactPage } from '../help-pointsofcontact/help-pointsofcontact';
 import { HelpCopingPage } from '../help-coping/help-coping';
-import { HelpRelaxationPage } from '../help-relaxation/help-relaxation';
 import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
@@ -293,10 +292,6 @@ export class HelpPage {
 
   public gotoHelpCopingPage() {
     this.navCtrl.push(HelpCopingPage, {});
-  }
-
-  public gotoHelpRelaxationPage() {
-    this.navCtrl.push(HelpRelaxationPage, {});
   }
 
   public gotoCustomizeContacts() {
