@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, DateTime } from 'ionic-angular';
 import { WelcomeAppexplanationPage } from '../welcome-appexplanation/welcome-appexplanation';
-import { WelcomeCapturePage } from '../welcome-capture/welcome-capture';
+import { OnboardingProfileCapturePage } from '../onboarding-profile-capture/onboarding-profile-capture';
 import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
 import { TabsPage } from '../tabs/tabs';
 import { WelcomeContactPage } from '../welcome-contact/welcome-contact';
@@ -26,8 +26,9 @@ export class WelcomePage {
       this.navCtrl.push(WelcomeAppexplanationPage, {});
    }
 
+   //only necessary for development
    public gotoProfilePage() {
-      this.navCtrl.push(WelcomeCapturePage, {});
+      this.navCtrl.push(OnboardingProfileCapturePage, {});
    }
 
    public gotoWelcomeContactPage() {

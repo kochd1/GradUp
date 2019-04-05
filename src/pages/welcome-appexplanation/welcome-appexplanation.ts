@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { MidataService } from '../../services/MidataService';
-import { WelcomeCapturePage } from '../welcome-capture/welcome-capture';
+import { OnboardingProfileCapturePage } from '../onboarding-profile-capture/onboarding-profile-capture';
 import { Page } from 'ionic-angular/umd/navigation/nav-util';
 
 @IonicPage()
@@ -19,11 +19,15 @@ export class WelcomeAppexplanationPage {
         private loadingCtrl: LoadingController,
         private midataService: MidataService
     ) {
-        this.nextPage = WelcomeCapturePage;
+        this.nextPage = OnboardingProfileCapturePage;
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad WelcomeAppexplanationPage');
+    }
+
+    gotoWelcomeCapturePage(){
+        this.navCtrl.push(OnboardingProfileCapturePage);
     }
 
     public goNext() {

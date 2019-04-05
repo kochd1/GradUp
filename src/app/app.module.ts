@@ -14,7 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { WelcomePage } from '../pages/welcome/welcome';
 import { WelcomeAppexplanationPage } from '../pages/welcome-appexplanation/welcome-appexplanation';
-import { WelcomeCapturePage } from '../pages/welcome-capture/welcome-capture';
+import { OnboardingProfileCapturePage } from '../pages/onboarding-profile-capture/onboarding-profile-capture';
 import { WelcomeContactPage } from '../pages/welcome-contact/welcome-contact';
 import { WelcomeContact2Page } from '../pages/welcome-contact2/welcome-contact2';
 import { WelcomeContact3Page } from '../pages/welcome-contact3/welcome-contact3';
@@ -76,7 +76,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     TabsPage,
     WelcomePage,
     WelcomeAppexplanationPage,
-    WelcomeCapturePage,
+    OnboardingProfileCapturePage,
     WelcomeContactPage,
     WelcomeContact2Page,
     WelcomeContact3Page,
@@ -117,7 +117,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     TabsPage,
     WelcomePage,
     WelcomeAppexplanationPage,
-    WelcomeCapturePage,
+    OnboardingProfileCapturePage,
     WelcomeContactPage,
     WelcomeContact2Page,
     WelcomeContact3Page,

@@ -28,10 +28,10 @@ import { validateWeight, validateWeightGains } from '../../services/validators';
 
 @IonicPage()
 @Component({
-  selector: 'page-welcome-capture',
-  templateUrl: 'welcome-capture.html',
+  selector: 'page-onboarding-profile-capture',
+  templateUrl: 'onboarding-profile-capture.html',
 })
-export class WelcomeCapturePage {
+export class OnboardingProfileCapturePage {
 
   //Local storage for username 
   inputtext: string;
@@ -126,17 +126,17 @@ export class WelcomeCapturePage {
     this.storage.set(this.key6, this.residential_status);
 
     // #MIDATA persistance: add Weight
-    var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
+    //var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
 
     // #MIDATA persistance: add Goal 
-    let goal = new Goal(this.weightGains);
+    /*let goal = new Goal(this.weightGains);
     let saveGoal = this.midataService.save(goal)
       .then((response) => {
         console.log("goal saved", response);
       })
       .catch((error) => {
         console.error("Error in save request:", error);
-      });
+      });*/
 
     // #MIDATA persistance: add Occupation 
     let occupation = new MyResource(this.userType);
@@ -149,8 +149,8 @@ export class WelcomeCapturePage {
       });
 
     Promise.all([
-      saveWeight,
-      saveGoal,
+      //saveWeight,
+      //saveGoal,
       saveOccupation
     ]).then(() => {
       this.notificationService.createWeeklyWeightNotification();
