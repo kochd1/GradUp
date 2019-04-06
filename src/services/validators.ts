@@ -19,25 +19,51 @@ export function validateEmailIfNotEmpty(control: AbstractControl) {
   return result;
 }
 
-export function validateWeight(control: AbstractControl) {
+/**
+ * Validates the input format of the weight.
+ * @param control 
+ */
+export function validateWeightInputFormat(control: AbstractControl) {
   const validateFn = Validators.compose([
     Validators.required,
     Validators.pattern(/^\d{2}\.\d{1}$/)
   ]);
 
   const result = validateFn(control);
-  console.debug('validateWeight()', control.value, result);
+  console.debug('validateWeightInputFormat()', control.value, result);
   return result;
 }
 
-export function validateWeightGains(control: AbstractControl) {
+/**
+ * Validates the weight gain input format.
+ * @param control 
+ */
+export function validateWeightGainInputFormat(control: AbstractControl) {
+  const validateFn = Validators.compose([
+    Validators.required,
+    Validators.pattern(/^\d{1}$|^\d{2}$|^\d{3}$|^\d{4}$/)
+   
+  ]);
+
+  const result = validateFn(control);
+  console.debug('validateWeightGainInputFormat()', control.value, result);
+  return result;
+}
+
+/**
+ * Validates the weight gain range.
+ * 
+ * @param control
+ */
+export function validateWeightGainRange(control: AbstractControl) {
   const validateFn = Validators.compose([
     Validators.required,
     Validators.min(500),
     Validators.max(1500)
   ]);
 
+
   const result = validateFn(control);
-  console.debug('validateWeightGains()', control.value, result);
+  console.debug('validateWeightGainRange()', control.value, result);
   return result;
 }

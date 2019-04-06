@@ -17,11 +17,11 @@
         <div *ngIf="state === 'FORM'">
             <p>Aktuelles Gewicht:</p>
             <ion-item id="textfield">
-                <ion-input [(ngModel)]="currentWeight" formControlName="currentWeight" type="number">
+                <ion-input [(ngModel)]="currentWeight" formControlName="currentWeightValidation" type="number">
                 </ion-input>
                 <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
             </ion-item>
-            <p *ngIf="isSubmitted && !formGroup.controls.currentWeight.valid" class="error-message">
+            <p *ngIf="isSubmitted && !formGroup.controls.currentWeightValidation.valid" class="error-message">
                 Bitte das aktuelle Gewicht korrekt eingeben.
             </p>
 

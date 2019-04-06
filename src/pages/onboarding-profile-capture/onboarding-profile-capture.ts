@@ -8,16 +8,19 @@ import { NotificationService } from '../../services/notification.service';
 //Form Validation
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
+//validators
+import { validateWeightInputFormat, validateWeightGainInputFormat, validateWeightGainRange } from '../../services/validators';
+
 //#MIDATA imports
 import { BodyWeight, Observation } from 'Midata';
 import { Goal } from '../../resources/goal';
 import { MidataService } from '../../services/MidataService';
 import * as Globals from '../../../typings/globals';
 
-
 //Accordion
 import { MyResource } from '../../resources/occupation';
-import { validateWeight, validateWeightGains } from '../../services/validators';
+
+
 
 /**
  * Generated class for the WelcomeCapturePage page.
@@ -62,18 +65,18 @@ export class OnboardingProfileCapturePage {
    */
   weightData: Array<{ date: Date, value: number }>;
 
-  //Global variable for currentWeight
+  //Global variable for current weight
   currentWeight: any;
 
-  //Global variable for Goal weight 
-  weightGains: number;
+  //Global variable for goal weight 
+  weightGain: number;
 
   //Global variable for work Occupation
   userType: number;
 
   items: any;
 
-  //Form Validation 
+  //Form validation 
   isSubmitted: boolean = false;
   formGroup: FormGroup;
 
@@ -87,12 +90,12 @@ export class OnboardingProfileCapturePage {
     formBuilder: FormBuilder    
   ) {
 
-    //Form Validation
+    //Form validation
     this.formGroup = formBuilder.group({
       username: ['', Validators.required],
       occupationM: ['', Validators.required],
-      currentWeight: ['', validateWeight],
-      weightGains: ['', validateWeightGains]
+      currentWeight: ['', validateWeightInputFormat],
+      weightGainValidation: ['', Validators.compose ([validateWeightGainInputFormat, validateWeightGainRange])]
     });
   }
 
@@ -129,7 +132,7 @@ export class OnboardingProfileCapturePage {
     //var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
 
     // #MIDATA persistance: add Goal 
-    /*let goal = new Goal(this.weightGains);
+    /*let goal = new Goal(this.weightGain);
     let saveGoal = this.midataService.save(goal)
       .then((response) => {
         console.log("goal saved", response);
