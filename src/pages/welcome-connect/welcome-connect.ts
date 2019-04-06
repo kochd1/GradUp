@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+import { AdaptionsPage } from '../adaptions/adaptions';
 import { TabsPage } from '../tabs/tabs';
 import { BiovotionConnector, BiovotionSensor, BatteryInformation, SensorDataType, SensorDataEntry, SENSORDATATYPE } from '@ionic-native/biovotion-connector';
 import { Storage } from '@ionic/storage';
@@ -424,8 +424,8 @@ alert.present();
     this.navCtrl.push(TabsPage, {});
   }
 
-  public gotoProfilePage(){
-    this.navCtrl.push(ProfilePage, {});
+  public gotoAdaptionsPage(){
+    this.navCtrl.push(AdaptionsPage, {});
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+import { AdaptionsPage } from '../adaptions/adaptions';
 import { Storage } from '@ionic/storage';
 
 //Form Validation
@@ -130,13 +130,13 @@ export class ProfileCustomizePage {
     ]
 
     Promise.all(saveAll).then(() => {
-      this.gotoProfilePage();
+      this.gotoAdaptionsPage();
     });
   }
 
 
-  public gotoProfilePage() {
-    this.navCtrl.push(ProfilePage, {});
+  public gotoAdaptionsPage() {
+    this.navCtrl.push(AdaptionsPage, {});
   }
 
 }

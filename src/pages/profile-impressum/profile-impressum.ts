@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+import { AdaptionsPage } from '../adaptions/adaptions';
 
 @IonicPage()
 @Component({
@@ -16,8 +16,8 @@ export class ProfileImpressumPage {
     console.log('ionViewDidLoad ProfileImpressumPage');
   }
 
-  public gotoProfilePage() {
-    this.navCtrl.push(ProfilePage, {});
+  public gotoAdaptionsPage() {
+    this.navCtrl.push(AdaptionsPage, {});
   }
 
 }

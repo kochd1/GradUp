@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+import { AdaptionsPage } from '../adaptions/adaptions';
 
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -124,7 +124,7 @@ export class ProfileCustomizecontactsPage {
     ]
 
     Promise.all(saveAll).then(() => {
-      this.gotoProfilePage();
+      this.gotoAdaptionsPage();
     });
   }
 
@@ -134,8 +134,8 @@ export class ProfileCustomizecontactsPage {
     return s;
   }
 
-  public gotoProfilePage() {
-    this.navCtrl.push(ProfilePage, {});
+  public gotoAdaptionsPage() {
+    this.navCtrl.push(AdaptionsPage, {});
   }
 
 }

@@ -35,7 +35,8 @@ import { HelpPage } from '../pages/help/help';
 import { HelpPointsofcontactPage } from '../pages/help-pointsofcontact/help-pointsofcontact';
 import { HelpCopingPage } from '../pages/help-coping/help-coping';
 
-import { ProfilePage } from '../pages/profile/profile';
+//adaptions
+import { AdaptionsPage } from '../pages/adaptions/adaptions';
 import { ProfileCustomizePage } from '../pages/profile-customize/profile-customize';
 import { ProfileCustomizecontactsPage } from '../pages/profile-customizecontacts/profile-customizecontacts';
 import { ProfileBiovotionPage } from '../pages/profile-biovotion/profile-biovotion';
@@ -83,16 +84,20 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,
+
     JournalPage,
     JournalEntryPage,
     JournalDeletePage,
     InformationPage,
+
     InformationAnorexiaPage,
     InformationPsychePage,
+
     HelpPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
-    ProfilePage,
+
+    AdaptionsPage,
     ProfileCustomizePage,
     ProfileCustomizecontactsPage,
     ProfileBiovotionPage,
@@ -124,16 +129,20 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,
+
     JournalPage,
     JournalEntryPage,
     JournalDeletePage,
+
     InformationPage,
     InformationAnorexiaPage,
     InformationPsychePage,
+
     HelpPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
-    ProfilePage,
+    
+    AdaptionsPage,
     ProfileCustomizePage,
     ProfileCustomizecontactsPage,
     ProfileBiovotionPage,
