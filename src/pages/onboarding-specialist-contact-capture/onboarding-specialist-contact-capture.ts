@@ -1,14 +1,14 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WelcomeContact3Page } from '../welcome-contact3/welcome-contact3';
+import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
 import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 
 import { Storage } from '@ionic/storage';
-import { FormBuilder, FormGroup } from '@angular/forms'; 
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { validatePhoneIfNotEmpty, validateEmailIfNotEmpty } from '../../services/validators';
 
 /**
- * Generated class for the WelcomeContact2Page page.
+ * Generated class for the WelcomeContact3Page page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,19 +16,18 @@ import { validatePhoneIfNotEmpty, validateEmailIfNotEmpty } from '../../services
 
 @IonicPage()
 @Component({
-  selector: 'page-welcome-contact2',
-  templateUrl: 'welcome-contact2.html',
+  selector: 'page-onboarding-specialist-contact-capture',
+  templateUrl: 'onboarding-specialist-contact-capture.html',
 })
-export class WelcomeContact2Page {
+export class OnboardingSpecialistContactCapturePage {
 
-  bezugsperson_inputtext: string;
-  bezugsperson_telefonnummer: any;
-  bezugsperson_smstext: string;
-  bezugsperson_email: string;
-  bezugsperson_emailtext: string;
+  fachperson_inputtext: string;
+  fachperson_telefonnummer: any;
+  fachperson_email: string;
+  fachperson_emailtext: string;
 
   isSubmitted: boolean = false;
-  formGroup: FormGroup; 
+  formGroup: FormGroup;
 
   constructor(
     private zone: NgZone,
@@ -37,11 +36,10 @@ export class WelcomeContact2Page {
     private storage: Storage,
     formBuilder: FormBuilder
   ) {
-  
+
     this.formGroup = formBuilder.group({
       inputtext: [''],
       telefonnummer: ['', validatePhoneIfNotEmpty],
-      smstext: [''],
       email: ['', validateEmailIfNotEmpty],
       emailtext: ['']
     });
@@ -51,7 +49,7 @@ export class WelcomeContact2Page {
   saveData() {
 
     this.isSubmitted = true;
- 
+
     if (!this.formGroup.valid) {
       this.zone.run(() => {
         // force ui repaint
@@ -61,26 +59,26 @@ export class WelcomeContact2Page {
 
     // TODO: move to separate service...
     Promise.all([
-      this.storage.set('bezugsperson_inputtext', this.bezugsperson_inputtext),
-      this.storage.set('bezugsperson_telefonnummer', this.bezugsperson_telefonnummer),
-      this.storage.set('bezugsperson_smstext', this.bezugsperson_smstext),
-      this.storage.set('bezugsperson_email', this.bezugsperson_email),
-      this.storage.set('bezugsperson_emailtext', this.bezugsperson_emailtext)
+      this.storage.set('fachperson_inputtext', this.fachperson_inputtext),
+      this.storage.set('fachperson_telefonnummer', this.fachperson_telefonnummer),
+      this.storage.set('fachperson_email', this.fachperson_email),
+      this.storage.set('fachperson_emailtext', this.fachperson_emailtext)
     ]).then(() => {
-      this.gotoWelcomeContact3Page();
-    })  
+      this.gotoWelcomeConnectPage();
+    })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeContact2Page');
+    console.log('ionViewDidLoad WelcomeContact3Page');
   }
 
-  public gotoOnboardingContactCapturePage() {
-    this.navCtrl.push(OnboardingContactCapturePage, {});
+  //TODO: User soll zurück zur letzten Erfassungsseite gelangen können.
+  public gotoOnboardingReferencePersonContactPage() {
+    //this.navCtrl.push(OnboardingReferencePersonContactCapturePage, {});
   }
 
-  public gotoWelcomeContact3Page() {
-    this.navCtrl.push(WelcomeContact3Page, {});
+  public gotoWelcomeConnectPage() {
+    this.navCtrl.push(WelcomeConnectPage, {});
   }
 
 }

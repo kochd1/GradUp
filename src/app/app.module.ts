@@ -17,8 +17,8 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { WelcomeAppexplanationPage } from '../pages/welcome-appexplanation/welcome-appexplanation';
 import { OnboardingProfileCapturePage } from '../pages/onboarding-profile-capture/onboarding-profile-capture';
 import { OnboardingContactCapturePage } from '../pages/onboarding-contact-capture/onboarding-contact-capture';
-import { WelcomeContact2Page } from '../pages/welcome-contact2/welcome-contact2';
-import { WelcomeContact3Page } from '../pages/welcome-contact3/welcome-contact3';
+import { OnboardingReferencePersonContactCapturePage } from '../pages/onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
+import { OnboardingSpecialistContactCapturePage } from '../pages/onboarding-specialist-contact-capture/onboarding-specialist-contact-capture';
 import { WelcomeConnectPage } from '../pages/welcome-connect/welcome-connect';
 
 import { WeightReminderNotificationPage } from '../pages/weight-reminder-notification/weight-reminder-notification';
@@ -80,8 +80,8 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomeAppexplanationPage,
     OnboardingProfileCapturePage,
     OnboardingContactCapturePage,
-    WelcomeContact2Page,
-    WelcomeContact3Page,
+    OnboardingReferencePersonContactCapturePage,
+    OnboardingSpecialistContactCapturePage,
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,
@@ -128,8 +128,8 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomeAppexplanationPage,
     OnboardingProfileCapturePage,
     OnboardingContactCapturePage,
-    WelcomeContact2Page,
-    WelcomeContact3Page,
+    OnboardingReferencePersonContactCapturePage,
+    OnboardingSpecialistContactCapturePage,
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,

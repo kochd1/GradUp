@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
-import { WelcomeContact2Page } from '../welcome-contact2/welcome-contact2';
+import { OnboardingReferencePersonContactCapturePage } from '../onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
 
 @IonicPage()
 @Component({
@@ -21,8 +21,8 @@ export class OnboardingContactCapturePage {
     this.navCtrl.push(WelcomeConnectPage, {});
   }
 
-  public gotoWelcomeContact2Page() {
-    this.navCtrl.push(WelcomeContact2Page, {});
+  public gotoOnboardingReferencePersonContactCapturePage() {
+    this.navCtrl.push(OnboardingReferencePersonContactCapturePage, {});
   }
 
 }
