@@ -2,7 +2,7 @@
 
     <ion-navbar hideBackButton="true">
         <ion-title>
-            <title-logo text="Kontakt erfassen"></title-logo>
+            <title-logo text="Fachperson erfassen"></title-logo>
         </ion-title>
     </ion-navbar>
 
@@ -45,7 +45,7 @@
         </ion-item>
 
         <p class="save-text">
-            * Die Telefonnummer, die E-Mail-Adresse und der Text werden lokal auf Ihrem Smartphone gespeichert.
+            * Die Kontaktinformationen werden nur lokal auf deinem Smartphone gespeichert.
         </p>
 
     </form>
@@ -59,7 +59,7 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <button ion-button [color]="primary" type="submit" [outline]="false" [round]="true" (click)="saveData()">
+        <button ion-button [color]="primary" type="submit" [outline]="false" [round]="true" [disabled]="!fachperson_inputtext || (!fachperson_telefonnummer && !fachperson_email)" (click)="saveData()">
             Speichern
         </button>
     </ion-toolbar>

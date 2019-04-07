@@ -45,9 +45,13 @@ export class OnboardingReferencePersonContactCapturePage {
       email: ['', validateEmailIfNotEmpty],
       emailtext: ['']
     });
+
+    this.getData();
   }
 
-  //Lokal Storage  
+  /**
+   * Saves the contact data to the local storage.
+   */  
   saveData() {
 
     this.isSubmitted = true;
@@ -69,6 +73,34 @@ export class OnboardingReferencePersonContactCapturePage {
     ]).then(() => {
       this.gotoOnboardingSpecialstContactCapturePage();
     })  
+  }
+
+  /**
+   * Gets the contact data from the local storage.
+   */
+  getData() {
+    let that = this;
+
+    // TODO: move to separate service...
+    this.storage.get('bezugsperson_inputtext').then((value) => {
+      that.bezugsperson_inputtext = value;
+    });
+
+    this.storage.get('bezugsperson_telefonnummer').then((value) => {
+      that.bezugsperson_telefonnummer = value;
+    });
+
+    this.storage.get('bezugsperson_smstext').then((value) => {
+      that.bezugsperson_smstext = value;
+    });
+
+    this.storage.get('bezugsperson_email').then((value) => {
+      that.bezugsperson_email = value;
+    });
+
+    this.storage.get('bezugsperson_emailtext').then((value) => {
+      that.bezugsperson_emailtext = value;
+    });
   }
 
   ionViewDidLoad() {

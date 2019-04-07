@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
 import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
+import { OnboardingReferencePersonContactCapturePage} from '../onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
 
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -72,9 +73,8 @@ export class OnboardingSpecialistContactCapturePage {
     console.log('ionViewDidLoad WelcomeContact3Page');
   }
 
-  //TODO: User soll zurück zur letzten Erfassungsseite gelangen können.
   public gotoOnboardingReferencePersonContactPage() {
-    //this.navCtrl.push(OnboardingReferencePersonContactCapturePage, {});
+    this.navCtrl.push(OnboardingReferencePersonContactCapturePage, {});
   }
 
   public gotoWelcomeConnectPage() {

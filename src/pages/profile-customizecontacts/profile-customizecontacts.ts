@@ -58,6 +58,9 @@ export class ProfileCustomizecontactsPage {
     console.log('ionViewDidLoad ProfileCustomizecontactsPage');
   }
 
+  /**
+   * Gets the contact data from the local storage.
+   */
   getData() {
     let that = this;
 
@@ -99,6 +102,9 @@ export class ProfileCustomizecontactsPage {
     });
   }
 
+  /**
+   * Saves the contact information to the local database.
+   */
   saveData() {
 
     this.isSubmitted = true;
