@@ -1,0 +1,74 @@
+<ion-header>
+    
+    <ion-navbar hideBackButton="true">
+        <ion-title>
+            <title-logo text="Profil"></title-logo>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+                <p></p>
+        <p>Hier kannst du deine Profilangaben anpassen.</p>
+        
+               <ion-item>
+               <ion-label stacked>Benutzername:</ion-label>
+                    <ion-input
+                    [(ngModel)]="inputtext"
+                    formControlName="usernameValidation"
+                    type="text"
+                    value="">
+                </ion-input>
+                </ion-item>
+                <p *ngIf="isSubmitted && !formGroup.controls.usernameValidation.valid" class="error-message">
+                    Bitte einen Benutzernamen eingeben.
+                </p>
+        
+                
+                <ion-item id="select-popover">
+                        <ion-label stacked>Ihr Tätigkeitsbereich:</ion-label>
+                    
+                    <ion-select interface="popover" [(ngModel)]="userType" formControlName="occupationValidation">
+                        <ion-option value="1">Sitzende Tätigkeit</ion-option>
+                        <ion-option value="2">Handwerkliche Tätigkeit</ion-option>
+                        <ion-option value="3">Student/-in</ion-option>
+                        <ion-option value="4">Hausfrau/-mann</ion-option>
+                        <ion-option value="5">Pflegende oder betreuende Tätigkeit</ion-option>
+                    </ion-select>
+                </ion-item>
+                <p *ngIf="isSubmitted && !formGroup.controls.occupationValidation.valid" class="error-message">
+                    Bitte wählen Sie einen Tätigkeitsbereich.
+                </p>               
+        
+            </form>
+        
+        
+            <p class="save-text">
+                * Der Benutzername wird nicht auf MIDATA gespeichert.
+                Dein aktuelles Gewicht sowie deinen Wochenfortschritt für die Folgewoche kannst du wöchentlich via Push-Benachrichtigung
+                aktualisieren.
+            </p>
+        
+        </ion-content>
+        
+        <ion-footer>
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-buttons left class="footer-no-borders">
+                            <button ion-button icon-only (click)="gotoAdaptionsPage()">
+                                <ion-icon name="arrow-back"></ion-icon>
+                            </button>
+                        </ion-buttons>
+                    </ion-col>
+                    <ion-col col-2 left>
+                        <ion-buttons no-shadow>
+                            <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
+                                Speichern
+                            </button>
+                        </ion-buttons>
+                    </ion-col>
+                </ion-row>
+            </ion-footer>

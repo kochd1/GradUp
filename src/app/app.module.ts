@@ -37,7 +37,7 @@ import { HelpCopingPage } from '../pages/help-coping/help-coping';
 
 //adaptions
 import { AdaptionsPage } from '../pages/adaptions/adaptions';
-import { ProfileCustomizePage } from '../pages/profile-customize/profile-customize';
+import { ProfileCustomisationPage } from '../pages/profile-customisation/profile-customisation';
 import { ProfileCustomizecontactsPage } from '../pages/profile-customizecontacts/profile-customizecontacts';
 import { ProfileBiovotionPage } from '../pages/profile-biovotion/profile-biovotion';
 import { ProfileImpressumPage } from '../pages/profile-impressum/profile-impressum';
@@ -98,7 +98,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     HelpCopingPage,
 
     AdaptionsPage,
-    ProfileCustomizePage,
+    ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
     ProfileBiovotionPage,
     ProfileImpressumPage,
@@ -143,7 +143,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     HelpCopingPage,
     
     AdaptionsPage,
-    ProfileCustomizePage,
+    ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
     ProfileBiovotionPage,
     ProfileImpressumPage,

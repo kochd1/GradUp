@@ -55,16 +55,20 @@ export class NotificationService {
     });
   }
 
+  /**
+   * Once per week the user receives a push-notification, in which the user can enter his/her new weight 
+   * and also new weight gain for the following week.
+   */
   public createWeeklyWeightNotification() {
     // First notification in 7 days, repeating each week
     let trigger: ILocalNotificationTrigger = {
       every: ELocalNotificationTriggerUnit.WEEK
     };
 
-    // for testing reduced Interval to 1 minute
+    // for testing reduced interval to 45 seconds
     trigger = {
-      every: ELocalNotificationTriggerUnit.MINUTE,
-      count: 1
+      every: ELocalNotificationTriggerUnit.SECOND,
+      count: 45
     };
 
     this.schedule({

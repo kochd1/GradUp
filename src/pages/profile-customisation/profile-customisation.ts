@@ -15,32 +15,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-customize',
-  templateUrl: 'profile-customize.html',
+  selector: 'page-profile-customisation',
+  templateUrl: 'profile-customisation.html',
 })
-export class ProfileCustomizePage {
+export class ProfileCustomisationPage {
 
   inputtext: string;
   key: string = "username";
-
-  relationship_status: string;
-  key1: string = "relationship_status";
-
-  hobbies_status: string;
-  key2: string = "hobbies_status";
-
-  pet_input: string;
-  key3: string = "pet_input";
-
-  pet_status: string;
-  key4: string = "pet_status";
-
-  residential_input: string;
-  key5: string = "residential_input";
-
-  residential_status: string;
-  key6: string = "residential_status";
-
 
   /**
    * #MIDATA -> array for the weight data 
@@ -67,15 +48,15 @@ export class ProfileCustomizePage {
 
     //Form Validation
     this.formGroup = formBuilder.group({
-      username: ['', Validators.required],
-      occupationM: ['', Validators.required]
+      usernameValidation: ['', Validators.required],
+      occupationValidation: ['', Validators.required]
     });
 
     this.getData();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeCapturePage');
+    console.log('ionViewDidLoad ProfileCustomisationPage');
   }
 
   getData() {
@@ -89,22 +70,6 @@ export class ProfileCustomizePage {
 
     this.storage.get('userType').then((value) => {
       that.userType = value;
-    });
-
-    this.storage.get('relationship_status').then((value) => {
-      that.relationship_status = value;
-    });
-
-    this.storage.get('residential_status').then((value) => {
-      that.residential_status = value;
-    });
-
-    this.storage.get('pet_status').then((value) => {
-      that.pet_status = value;
-    });
-
-    this.storage.get('hobbies_status').then((value) => {
-      that.hobbies_status = value;
     });
   }
 
@@ -123,10 +88,6 @@ export class ProfileCustomizePage {
     let saveAll = [
       this.storage.set('username', this.inputtext),
       this.storage.set('userType', this.userType),
-      this.storage.set('relationship_status', this.relationship_status),
-      this.storage.set('residential_status', this.residential_status),
-      this.storage.set('pet_status', this.pet_status),
-      this.storage.set('hobbies_status', this.hobbies_status)
     ]
 
     Promise.all(saveAll).then(() => {

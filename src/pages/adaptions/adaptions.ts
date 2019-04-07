@@ -3,7 +3,7 @@ import { IonicPage, NavController, MenuController, NavParams, LoadingController,
 import { ProfileImpressumPage } from '../profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../profile-terms/profile-terms';
-import { ProfileCustomizePage } from '../profile-customize/profile-customize';
+import { ProfileCustomisationPage } from '../profile-customisation/profile-customisation';
 import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
 import { ProfileBiovotionPage } from '../profile-biovotion/profile-biovotion';
 import { JournalPage } from '../journal/journal';
@@ -52,7 +52,7 @@ export class AdaptionsPage {
   }
 
   public gotoProfileCustomizePage() {
-    this.navCtrl.push(ProfileCustomizePage, {});
+    this.navCtrl.push(ProfileCustomisationPage, {});
   }
 
   public gotoProfileCustomizecontactsPage() {
