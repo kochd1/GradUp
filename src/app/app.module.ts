@@ -12,10 +12,11 @@ import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
+//onboarding
 import { WelcomePage } from '../pages/welcome/welcome';
 import { WelcomeAppexplanationPage } from '../pages/welcome-appexplanation/welcome-appexplanation';
 import { OnboardingProfileCapturePage } from '../pages/onboarding-profile-capture/onboarding-profile-capture';
-import { WelcomeContactPage } from '../pages/welcome-contact/welcome-contact';
+import { OnboardingContactCapturePage } from '../pages/onboarding-contact-capture/onboarding-contact-capture';
 import { WelcomeContact2Page } from '../pages/welcome-contact2/welcome-contact2';
 import { WelcomeContact3Page } from '../pages/welcome-contact3/welcome-contact3';
 import { WelcomeConnectPage } from '../pages/welcome-connect/welcome-connect';
@@ -78,7 +79,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomePage,
     WelcomeAppexplanationPage,
     OnboardingProfileCapturePage,
-    WelcomeContactPage,
+    OnboardingContactCapturePage,
     WelcomeContact2Page,
     WelcomeContact3Page,
     WelcomeConnectPage,
@@ -126,7 +127,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomePage,
     WelcomeAppexplanationPage,
     OnboardingProfileCapturePage,
-    WelcomeContactPage,
+    OnboardingContactCapturePage,
     WelcomeContact2Page,
     WelcomeContact3Page,
     WelcomeConnectPage,

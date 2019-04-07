@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WelcomeContactPage } from '../welcome-contact/welcome-contact';
+import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 import { Storage } from '@ionic/storage';
 
 import { NotificationService } from '../../services/notification.service';
@@ -104,7 +104,7 @@ export class OnboardingProfileCapturePage {
   }
 
   public gotoWelcomeContactPage() {
-    this.navCtrl.push(WelcomeContactPage, {});
+    this.navCtrl.push(OnboardingContactCapturePage, {});
   }
 
   //saves the data locally and also on MIDATA

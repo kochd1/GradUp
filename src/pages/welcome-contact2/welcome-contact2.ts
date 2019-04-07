@@ -1,7 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WelcomeContact3Page } from '../welcome-contact3/welcome-contact3';
-import { WelcomeContactPage } from '../welcome-contact/welcome-contact';
+import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms'; 
@@ -75,8 +75,8 @@ export class WelcomeContact2Page {
     console.log('ionViewDidLoad WelcomeContact2Page');
   }
 
-  public gotoWelcomeContactPage() {
-    this.navCtrl.push(WelcomeContactPage, {});
+  public gotoOnboardingContactCapturePage() {
+    this.navCtrl.push(OnboardingContactCapturePage, {});
   }
 
   public gotoWelcomeContact3Page() {

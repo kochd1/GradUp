@@ -5,16 +5,16 @@ import { WelcomeContact2Page } from '../welcome-contact2/welcome-contact2';
 
 @IonicPage()
 @Component({
-  selector: 'page-welcome-contact',
-  templateUrl: 'welcome-contact.html',
+  selector: 'page-onboarding-contact-capture',
+  templateUrl: 'onboarding-contact-capture.html',
 })
-export class WelcomeContactPage {
+export class OnboardingContactCapturePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeContactPage');
+    console.log('ionViewDidLoad OnboardingContactCapturePage');
   }
 
   public gotoWelcomeConnectPage() {

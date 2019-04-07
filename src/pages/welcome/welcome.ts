@@ -4,7 +4,7 @@ import { WelcomeAppexplanationPage } from '../welcome-appexplanation/welcome-app
 import { OnboardingProfileCapturePage } from '../onboarding-profile-capture/onboarding-profile-capture';
 import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
 import { TabsPage } from '../tabs/tabs';
-import { WelcomeContactPage } from '../welcome-contact/welcome-contact';
+import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 
 @IonicPage()
 @Component({
@@ -32,7 +32,7 @@ export class WelcomePage {
    }
 
    public gotoWelcomeContactPage() {
-      this.navCtrl.push(WelcomeContactPage, {});
+      this.navCtrl.push(OnboardingContactCapturePage, {});
    }
 
    public gotoWelcomeConnectPage() {
