@@ -135,7 +135,8 @@ export class ProfileCustomizecontactsPage {
   }
 
   public gotoAdaptionsPage() {
-    this.navCtrl.push(AdaptionsPage, {});
+    //this.navCtrl.push(AdaptionsPage, {});
+    this.navCtrl.popToRoot();
   }
 
 }

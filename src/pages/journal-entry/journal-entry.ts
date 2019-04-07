@@ -352,7 +352,8 @@ alert.present();
 
   public gotoJournalPage() {
     this.backBtnClicked=true;
-    this.navCtrl.push(JournalPage, {});
+    //this.navCtrl.push(JournalPage, {});
+    this.navCtrl.popToRoot();
 
     for (let entry of this.subjectiveConditionData){
       console.log("All subjCondition values (MIDATA)", entry);

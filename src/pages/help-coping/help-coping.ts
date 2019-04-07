@@ -17,7 +17,8 @@ export class HelpCopingPage {
   }
 
   public gotoHelpPage() {
-    this.navCtrl.push(HelpPage, {});
+    //this.navCtrl.push(HelpPage, {});
+    this.navCtrl.popToRoot();
   }
 
 }

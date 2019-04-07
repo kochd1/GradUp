@@ -17,7 +17,8 @@ export class InformationAnorexiaPage {
   }
 
   public gotoInformationPage() {
-    this.navCtrl.push(InformationPage, {});
+    //this.navCtrl.push(InformationPage, {});
+    this.navCtrl.popToRoot();
   }
 
 }

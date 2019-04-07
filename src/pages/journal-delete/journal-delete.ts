@@ -96,7 +96,8 @@ export class JournalDeletePage {
   }
 
   public gotoJournalPage() {
-    this.navCtrl.push(JournalPage, {});
+    //this.navCtrl.push(JournalPage, {});
+    this.navCtrl.popToRoot();
   }
 
   /**

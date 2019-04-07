@@ -17,7 +17,8 @@ export class InformationPsychePage {
   }
 
   public gotoInformationPage() {
-    this.navCtrl.push(InformationPage, {});
+    //this.navCtrl.push(InformationPage, {});
+    this.navCtrl.popToRoot();
   }
 
 }

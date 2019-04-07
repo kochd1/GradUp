@@ -112,10 +112,13 @@ import { PhotoProvider } from '../providers/photo/photo';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true, 
+      }),
+    //IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    IonicImageViewerModule
-  ],
+    IonicImageViewerModule,
+    ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
