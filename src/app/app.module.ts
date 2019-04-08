@@ -23,15 +23,19 @@ import { WelcomeConnectPage } from '../pages/welcome-connect/welcome-connect';
 
 import { WeightReminderNotificationPage } from '../pages/weight-reminder-notification/weight-reminder-notification';
 
-//journal pages
+//journal
 import { JournalPage } from '../pages/journal/journal';
 import { JournalEntryPage } from '../pages/journal-entry/journal-entry';
 import { JournalDeletePage } from '../pages/journal-delete/journal-delete';
 
+import { StateOfMindPage } from '../pages/state-of-mind/state-of-mind';
+
+//information & documentation
 import { InformationPage } from '../pages/information/information';
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
 import { InformationPsychePage } from '../pages/information-psyche/information-psyche';
 
+//support
 import { HelpPage } from '../pages/help/help';
 import { HelpPointsofcontactPage } from '../pages/help-pointsofcontact/help-pointsofcontact';
 import { HelpCopingPage } from '../pages/help-coping/help-coping';
@@ -89,8 +93,9 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalPage,
     JournalEntryPage,
     JournalDeletePage,
+    StateOfMindPage,
+    
     InformationPage,
-
     InformationAnorexiaPage,
     InformationPsychePage,
 
@@ -137,6 +142,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalPage,
     JournalEntryPage,
     JournalDeletePage,
+    StateOfMindPage,
 
     InformationPage,
     InformationAnorexiaPage,

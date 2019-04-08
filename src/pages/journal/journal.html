@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
+    <ion-navbar color = primary hideBackButton="true">
         <ion-title>
             <title-logo text="Mein Tagebuch"></title-logo>
         </ion-title>
@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-    <p></p>
+    <p><b>Tagebuch und Gemütszustandsangabe: </b></p>
     <p>
         In Ihrem persönlichen Tagebuch können Sie Ausflüge 
         / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw.
@@ -26,6 +26,10 @@
 
         <button ion-item (click)="gotoJournalDeletePage()">
             <span class="highlight">Alle Einträge ansehen und bearbeiten</span>
+        </button>
+
+        <button ion-item (click)="gotoStateOfMindPage()">
+            <span class="highlight">Gemütszustandsangabe</span>
         </button>
     </ion-list>
 
