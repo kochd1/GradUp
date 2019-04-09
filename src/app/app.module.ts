@@ -31,7 +31,7 @@ import { JournalDeletePage } from '../pages/journal-delete/journal-delete';
 import { StateOfMindPage } from '../pages/state-of-mind/state-of-mind';
 
 //information & documentation
-import { InformationPage } from '../pages/information/information';
+import { InformationDocumentationPage } from '../pages/information-documentation/information-documentation';
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
 import { InformationPsychePage } from '../pages/information-psyche/information-psyche';
 
@@ -95,7 +95,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalDeletePage,
     StateOfMindPage,
     
-    InformationPage,
+    InformationDocumentationPage,
     InformationAnorexiaPage,
     InformationPsychePage,
 
@@ -144,7 +144,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     JournalDeletePage,
     StateOfMindPage,
 
-    InformationPage,
+    InformationDocumentationPage,
     InformationAnorexiaPage,
     InformationPsychePage,
 

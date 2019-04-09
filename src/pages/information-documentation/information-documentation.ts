@@ -6,17 +6,17 @@ import { InformationPsychePage } from '../information-psyche/information-psyche'
 
 @IonicPage()
 @Component({
-  selector: 'page-information',
-  templateUrl: 'information.html',
+  selector: 'page-information-documentation',
+  templateUrl: 'information-documentation.html',
 })
-export class InformationPage {
+export class InformationDocumentationPage {
 
   constructor(
     public navCtrl: NavController
   ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InformationPage');
+    console.log('ionViewDidLoad InformationDocumentationPage');
   }
 
   public gotoInformationAnorexiaPage() {
