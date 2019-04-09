@@ -5,6 +5,7 @@ import { SecureStorage } from "@ionic-native/secure-storage";
 import { Network } from "@ionic-native/network";
 import { NativeStorage } from '@ionic-native/native-storage';
 import { IonicStorageModule } from '@ionic/storage';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
@@ -173,6 +174,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     Network,
     LocalNotifications,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    InAppBrowser,
     Contacts,
     DatabaseProvider,
     BiovotionConnector,

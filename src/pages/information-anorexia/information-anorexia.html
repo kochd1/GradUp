@@ -2,7 +2,7 @@
 
         <ion-navbar hideBackButton="true">
             <ion-title>
-                <title-logo text="Informationen"></title-logo>
+                <title-logo text="Information & Dokumentation"></title-logo>
             </ion-title>
         </ion-navbar>
     
@@ -10,8 +10,20 @@
 
 <ion-content padding>
     <p></p>
-    <p>Die Angst vor Gewichtszunahme</p>
-    <p>Behandlungsmethoden, die Therapeuten anwenden.</p>
+    <p><b>Leitlinien: </b></p>
+    <ion-item>
+        <ion-label floating>Patientenleitlinie</ion-label>
+    </ion-item>
+
+    <button ion-button (click) = "openWebPage('https://drive.google.com/open?id=1iFpiWLHepLsC7_paaELxr3cYtJIw_UJL')">Patientenleitlinie</button>
+
+    <button ion-button (click) = "openWebPage('https://drive.google.com/open?id=1PsO4-u-2kw7TtomX4RA5qFIjEThimGsq')">Behandlungsleitlinie (*S3)</button>
+
+    <p>*S3 = hohe Nachvollziehbarkeit der Ergebnisse, was für eine hohe Qualität steht.</p>
+
+    <button ion-button (click) = "openWebPage('https://www.netzwerk-essstoerungen.ch/')">Experten-Netzwerk Essstörungen Schweiz (ENES)</button> 
+    
+    <button ion-button (click) = "openWebPage('https://www.aes.ch/')">Arbeitsgemeinschaft Essstörungen AES</button> 
    
 </ion-content>
 
