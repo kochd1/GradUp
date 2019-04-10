@@ -4,4 +4,34 @@ page-information-anorexia {
       overflow-y: hidden;
     }
 
+    #popover{
+      bottom: 18%;
+      left: 84%;
+    }
+
+    #awmfDiv{
+      position: fixed;
+      top: 16%;
+    }
+
+    #link{
+      text-transform: none;
+      font-size: 17px;
+    }
+
+    .awmfLinkBtn{
+      width: 280px;
+      height: 35px;
+        .button-inner {
+          justify-content: flex-start;
+        }
+      }
+
+    .specialistDepartementLinkBtn{
+      width: 280px;
+      height: 50px;
+      
+    }
+  
+
 }

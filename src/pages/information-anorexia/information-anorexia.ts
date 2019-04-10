@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser'
 import { InformationDocumentationPage } from '../information-documentation/information-documentation';
+import { PopoverComponent } from '../../components/popover/popover';
 
 @IonicPage()
 @Component({
@@ -17,11 +18,28 @@ export class InformationAnorexiaPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
+              public popoverCtrl: PopoverController,
               private inAppBrowser: InAppBrowser) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformationAnorexiaPage');
+  }
+
+  presentPopover(myEvent){
+    let popover = this.popoverCtrl.create(PopoverComponent);
+    popover.present({
+      ev: myEvent
+    });
+  }
+
+  public async openInformationPopover(){
+    /*const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();*/
   }
 
   public openWebPage(url: string){

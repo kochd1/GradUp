@@ -73,6 +73,7 @@ import { MidataPulseService } from '../services/midata-pulse.service';
 import { PulseStepsService } from '../services/pulse-steps.service';
 import { NotificationService } from '../services/notification.service';
 import { PhotoProvider } from '../providers/photo/photo';
+import { PopoverComponent } from '../components/popover/popover';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { PhotoProvider } from '../providers/photo/photo';
 
     // components
     TitleLogoComponent,
-    AccordionListComponent
+    AccordionListComponent,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -139,6 +141,7 @@ import { PhotoProvider } from '../providers/photo/photo';
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,
+    PopoverComponent,
 
     JournalPage,
     JournalEntryPage,
