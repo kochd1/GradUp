@@ -4,16 +4,16 @@ import { InformationDocumentationPage } from '../information-documentation/infor
 
 @IonicPage()
 @Component({
-  selector: 'page-information-psyche',
-  templateUrl: 'information-psyche.html',
+  selector: 'page-documentation-fears-delights',
+  templateUrl: 'documentation-fears-delights.html',
 })
-export class InformationPsychePage {
+export class DocumentationFearsDelightsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InformationPsychePage');
+    console.log('ionViewDidLoad DocumentationFearsDelightsPage');
   }
 
   public gotoInformationPage() {

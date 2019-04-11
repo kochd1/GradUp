@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { InformationAnorexiaPage } from '../information-anorexia/information-anorexia';
-import { InformationPsychePage } from '../information-psyche/information-psyche';
+import { DocumentationFearsDelightsPage } from '../documentation-fears-delights/documentation-fears-delights';
 
 
 @IonicPage()
@@ -23,8 +23,8 @@ export class InformationDocumentationPage {
     this.navCtrl.push(InformationAnorexiaPage, {});
   }
 
-  public gotoInformationPsychePage() {
-    this.navCtrl.push(InformationPsychePage, {});
+  public gotoDocumentationFearsDelightsPage() {
+    this.navCtrl.push(DocumentationFearsDelightsPage, {});
   }
 
 }

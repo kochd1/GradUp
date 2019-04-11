@@ -34,7 +34,7 @@ import { StateOfMindPage } from '../pages/state-of-mind/state-of-mind';
 //information & documentation
 import { InformationDocumentationPage } from '../pages/information-documentation/information-documentation';
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
-import { InformationPsychePage } from '../pages/information-psyche/information-psyche';
+import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-delights/documentation-fears-delights';
 
 //support
 import { HelpPage } from '../pages/help/help';
@@ -99,7 +99,7 @@ import { PopoverComponent } from '../components/popover/popover';
     
     InformationDocumentationPage,
     InformationAnorexiaPage,
-    InformationPsychePage,
+    DocumentationFearsDelightsPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -150,7 +150,7 @@ import { PopoverComponent } from '../components/popover/popover';
 
     InformationDocumentationPage,
     InformationAnorexiaPage,
-    InformationPsychePage,
+    DocumentationFearsDelightsPage,
 
     HelpPage,
     HelpPointsofcontactPage,

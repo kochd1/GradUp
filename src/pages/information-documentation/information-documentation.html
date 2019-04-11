@@ -12,13 +12,36 @@
     <p></p>
     <p>Hier erhalten Sie einige Informationen u.a. über die Behandlung von Anorexie nervosa.</p>
 
-    <ion-list class="with-borders">
+    <ion-item>
+        <ion-label style="font-size: 20px">
+            <b>Information: </b>
+        </ion-label>
+    </ion-item>
+
+    <ion-list id = "information" class="with-borders">
         <button ion-item (click)="gotoInformationAnorexiaPage()">
             <span class="highlight">Krankheit und Behandlung Anorexie nervosa</span>
         </button>
+    </ion-list>
 
-        <button ion-item (click)="gotoInformationPsychePage()">
-            <span class="highlight">Einfluss auf Psyche / Umfeld / (Arbeits-)Alltag</span>
+    <ion-item>
+        <ion-label style="font-size: 20px">
+            <b>Dokumentation: </b>
+        </ion-label>
+    </ion-item>
+
+    <ion-list id = "documentation" class="with-borders">
+        <button ion-item (click)="gotoDocumentationFearsDelightsPage()">
+            <span class="highlight">Meine Ängste & Freuden</span>
+        </button>
+        <button ion-item (click)="gotoDocumentationPage()">
+            <span class="highlight">Meine Ansichten/Überzeugungen</span>
+        </button>
+        <button ion-item (click)="gotoDocumentationPage()">
+            <span class="highlight">Meine erlebten Rückschläge & Erfolge</span>
+        </button>
+        <button ion-item (click)="gotoDocumentationPage()">
+            <span class="highlight">Weitere Gedanken</span>
         </button>
     </ion-list>
     
