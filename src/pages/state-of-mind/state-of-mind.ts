@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { NotificationService } from '../../services/notification.service';
+
+//MIDATA imports
+import { MidataService } from '../../services/MidataService';
+import { Observation } from 'Midata';
+import { ObsMentalCondition } from '../../resources/subjectiveCondition';
+import { JournalPage } from '../journal/journal';
 
 /**
  * Generated class for the StateOfMindPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+  @author kochd1
  */
 
 @IonicPage()
@@ -28,25 +33,82 @@ export class StateOfMindPage {
 
   moodChecked:boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              private notificationService: NotificationService, 
+              private midataService: MidataService,
+              private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StateOfMindPage');
+    this.scheduleNotification();
   }
 
     /**
    * Adds subjective condition from user input to the resp. global variable.
    * @param value 
    */
-  addSubjConditionInput(value: number){
+  public addSubjConditionInput(value: number){
     this.subjectiveCondition = value;
     this.moodChecked = true;
+  }
+
+  /**
+   * Saves the moodEntry to MIDATA
+   */
+  public saveMoodEntry(){
+    console.log("saveMoodEntry() -> subjectiveCondition:", this.subjectiveCondition);
+
+      //input filter (additional)
+      if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
+
+        console.log("subjective condition input: ", this.subjectiveCondition);
+        console.log("mood reason: ", this.moodReason);
+        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, this.moodReason);
+
+        this.midataService.save(mentalCondition)
+        .then((response) => {
+          // we can now access the midata response
+          console.log("ObsMentalCondition fired on MIDATA");
+        
+    
+        }).catch((error) => {
+            console.error("Error in save request:", error);
+        });
+
+        console.log("mental condition: ", mentalCondition);
+        }
+
+        this.showInstantFeedback();
+  }
+
+  showInstantFeedback(){
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: 'Schön, dass du deine Stimmung angegeben hast :)',
+      cssClass: 'alert-button-inner',
+      buttons: [
+        {
+          text: 'Weiter',
+          handler: () =>{
+          this.navCtrl.popToRoot();
+        }
+      }
+  ]
+});
+
+alert.present();
+  
   }
 
   public gotoJournalPage() {
     this.navCtrl.popToRoot();
 
+  }
+
+  public scheduleNotification() {
+    this.notificationService.createDailyMoodDeclerationNotification();
   }
 
 }

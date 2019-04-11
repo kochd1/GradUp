@@ -23,4 +23,16 @@ page-state-of-mind {
     bottom: 10%;
 }
 
+.alert-button-inner { //funktioniert nicht
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+/*.alert-button { //funktioniert nicht
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}*/
+
 }
