@@ -58,6 +58,11 @@ export class JournalEntryPage {
   subjectiveCondition: number;
 
   /**
+   * stores the reason for the current mood of the user.
+   */
+  moodReason: string;
+
+  /**
    * #MIDATA -> array for the weight data 
      store the raw data in this array.
    */
@@ -103,7 +108,6 @@ export class JournalEntryPage {
     //this.photo = this.formgroup.controls['photo'];
     //this.smilie = this.formgroup.controls['smilie'];
 
-
     this.journalEntry = new JournalEntry(); //without this, the page will throw a "Uncaught (in promise): TypeError"
 
     //#MIDATA
@@ -115,7 +119,6 @@ export class JournalEntryPage {
   }
 
   /**
-   * 
    * Runs when the page is about to enter and become the active page.
    */
   ionViewWillEnter(){
@@ -129,7 +132,13 @@ export class JournalEntryPage {
     this.myPhoto = this.journalEntry.entryPhoto;
 
     this.subjectiveCondition = this.journalEntry.entrySubjCondition;
-    console.log("ionViewWillEnter() -> subj. Condition:", this.journalEntry.entrySubjCondition);
+    console.log("ionViewWillEnter() -> subj. Condition (local):", this.journalEntry.entrySubjCondition);
+
+    this.moodReason = this.journalEntry.entryMoodReason;
+    console.log("ionViewWillEnter() -> mood reason (local):", this.journalEntry.entryMoodReason);
+
+    //this.subjectiveCondition = this.journalEntry.entrySubjCondition;
+    //console.log("ionViewWillEnter() -> subj. Condition (MIDATA):", this.);
 
     this.dbp.getJournalEntryCollection().then((val) => {
       if(val == null) {
@@ -143,6 +152,22 @@ export class JournalEntryPage {
     //#MIDATA -> load the elements
     this.loadData();
 
+  }
+
+  //Runs when the page has loaded.
+  ionViewDidLoad() {
+
+    //this.loadData();
+    /*console.log('ionViewDidLoad JournalEntryPage');
+    this.dbp.getJournalEntryCollection().then((val) => {
+     if(val == null ) {
+        //no entry there
+     } else {
+       this.journalEntryCollection = val;
+     }
+    });*/
+
+    //this.journalEntry = this.navParams.data; //-> fetches data from "journal-deletePage"
     
     
   }
@@ -167,7 +192,6 @@ alert.present();
   }
 
   ionViewCanLeave(){
-
     //only show this alert, when back btn is clicked
 
     if(this.backBtnClicked){
@@ -214,31 +238,15 @@ alert.present();
     this.subjectiveCondition = value;
   }
 
-  //Runs when the page has loaded.
-  ionViewDidLoad() {
-
-    this.loadData();
-    /*console.log('ionViewDidLoad JournalEntryPage');
-    this.dbp.getJournalEntryCollection().then((val) => {
-     if(val == null ) {
-        //no entry there
-     } else {
-       this.journalEntryCollection = val;
-     }
-    });*/
-
-    //this.journalEntry = this.navParams.data; //-> fetches data from "journal-deletePage"
-    
-    
-  }
+  
 
     //kochd1: This codeline below is necessary to display the today's date.
     myDate: any = new Date().toISOString();
 
     /**
-     * save journal entry to database.
+     * Saves the journal entry to database.
      */
-    saveEntry():void{
+    public saveEntry():void{
       console.log("saveJournalEntry button was clicked");
       if(this.journalEntry.entryId==0 || this.journalEntry.entryId==null){
         console.log("saveEntry() -> entryId:", this.journalEntry.entryId);
@@ -254,12 +262,13 @@ alert.present();
             this.navCtrl.push(JournalPage);
           });
       });
-      
-      console.log("saveEntry() -> subjectiveCondition:", this.subjectiveCondition);
 
+      //check which condition was entered
       if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
 
-        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition);
+        console.log("subjective condition input: ", this.subjectiveCondition);
+        console.log("mood reason input: ", this.moodReason);
+        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, this.moodReason);
         this.journalEntry.entrySubjCondition = this.subjectiveCondition; //local copy
         this.midataService.save(mentalCondition)
         .then((response) => {
@@ -342,12 +351,13 @@ alert.present();
    * @param measure 
    * @param date 
    */
-  addSubjectiveCondition(measure: number, date: Date): void {
+  public addSubjectiveCondition(measure: number, date: Date): void {
     /*if (moment().diff(date) >= 0){ 
     }*/
 
     //push the data to the array
     this.subjectiveConditionData.push({ date: date, value: measure });
+    this.subjectiveCondition = measure;
   }
 
   public gotoJournalPage() {

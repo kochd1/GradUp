@@ -1,6 +1,6 @@
 <ion-header>
 
-        <ion-navbar hideBackButton="true">
+        <ion-navbar color = primary hideBackButton="true">
             <ion-title>
                 <title-logo text="Mein Tagebuch"></title-logo>
             </ion-title>
@@ -51,7 +51,7 @@
 
     <div text-left >
         <p>Wie fühlst du dich jetzt?</p>
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(0)" name="happy">
+        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(2)" name="happy">
             <ion-img [width]= "56" [height]= "56" src = "assets/imgs/happy.png"> </ion-img>
         </button>
 
@@ -59,7 +59,7 @@
             <ion-img [width]= "56" [height]= "56" src = "assets/imgs/meh.png"> </ion-img>
         </button>
 
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(2)" name="sad">
+        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(0)" name="sad">
             <ion-img [width]= "56" [height]= "56" src = "assets/imgs/sad.png"> </ion-img>
         </button>
     </div>
@@ -67,7 +67,7 @@
  <ion-grid>
         <ion-row>
                 <ion-label id="reasonLb"> <b>Grund:</b> </ion-label> <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
-                <ion-item id="reason"> <ion-input [(ngModel)]="moodReason" placeholder ="Wieso fühlst du dich so?"></ion-input> </ion-item>
+                <ion-item id="reason"> <ion-input [(ngModel)]="journalEntry.entryMoodReason" placeholder ="Wieso fühlst du dich so?"></ion-input> </ion-item>
         </ion-row>
  </ion-grid>
 
