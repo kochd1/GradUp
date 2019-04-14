@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { JournalEntryPage } from '../journal-entry/journal-entry';
-import { JournalDeletePage } from '../journal-delete/journal-delete';
+import { JournalEntryFormPage } from '../journal-entry-form/journal-entry-form';
+import { JournalEntryListPage } from '../journal-entry-list/journal-entry-list';
 import { StateOfMindPage } from '../state-of-mind/state-of-mind';
 
 import { NotificationService } from '../../services/notification.service';
@@ -28,7 +28,7 @@ export class JournalPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JournalPage');
-    this.scheduleNotification();
+    //this.scheduleNotification();
   }
 
   ionViewDidLeave() {
@@ -36,11 +36,11 @@ export class JournalPage {
   }
 
   public gotoJournalEntryPage() {
-    this.navCtrl.push(JournalEntryPage, {});
+    this.navCtrl.push(JournalEntryFormPage, {});
   }
 
   public gotoJournalDeletePage() {
-    this.navCtrl.push(JournalDeletePage, {});
+    this.navCtrl.push(JournalEntryListPage, {});
   }
 
   public gotoStateOfMindPage(){

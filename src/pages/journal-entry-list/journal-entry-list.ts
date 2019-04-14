@@ -5,7 +5,7 @@ import { JournalPage } from '../journal/journal';
 import { JournalEntry } from '../../classes/journalEntry';
 
 //Page, where the entries are being saved
-import { JournalEntryPage } from '../journal-entry/journal-entry';
+import { JournalEntryFormPage } from '../journal-entry-form/journal-entry-form';
 
 //import Providers
 import { DatabaseProvider } from '../../providers/database/database';
@@ -16,15 +16,15 @@ import { DatabaseProvider } from '../../providers/database/database';
  */
 @IonicPage()
 @Component({
-  selector: 'page-journal-delete',
-  templateUrl: 'journal-delete.html',
+  selector: 'page-journal-entry-list',
+  templateUrl: 'journal-entry-list.html',
 })
-export class JournalDeletePage {
+export class JournalEntryListPage {
 
   /**
-   * journal entry page.
+   * journal entry form page.
    */
-   journalEntryPage: any = JournalEntryPage;
+   journalEntryFormPage: any = JournalEntryFormPage;
 
    /**
     * the journal entry.
@@ -108,7 +108,7 @@ export class JournalDeletePage {
   editJournalEntry(jEntryId: number): void{
 
   this.dbp.getJournalEntryById(jEntryId).then((jEntry) => {
-    this.navCtrl.push(this.journalEntryPage, jEntry);
+    this.navCtrl.push(this.journalEntryFormPage, jEntry);
   })
    
   }

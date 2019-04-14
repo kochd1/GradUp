@@ -21,7 +21,7 @@ import { ObsMentalCondition } from '../../resources/subjectiveCondition';
 import { JournalEntry } from '../../classes/journalEntry';
 
 //import journalDeletePage
-import { JournalDeletePage } from '../journal-delete/journal-delete'; //not sure if needed...
+import { JournalEntryListPage } from '../journal-entry-list/journal-entry-list'; //not sure if needed...
 
 /**
  * Generated class for the JournalEntryPage page.
@@ -29,10 +29,10 @@ import { JournalDeletePage } from '../journal-delete/journal-delete'; //not sure
  */
 @IonicPage()
 @Component({
-  selector: 'page-journal-entry',
-  templateUrl: 'journal-entry.html',
+  selector: 'page-journal-entry-form',
+  templateUrl: 'journal-entry-form.html',
 })
-export class JournalEntryPage {
+export class JournalEntryFormPage {
 
   //Form Validation 
   //formgroup:FormGroup;
@@ -51,7 +51,7 @@ export class JournalEntryPage {
    */
   journalEntryCollection: JournalEntry[] = [];
 
-  journalDeletePage : JournalDeletePage;
+  journalDeletePage : JournalEntryListPage;
 
   /**
    * variable which stores the user input concerning the subj. condition.
@@ -148,6 +148,9 @@ export class JournalEntryPage {
     //this.subjectiveCondition = this.journalEntry.entrySubjCondition;
     //console.log("ionViewWillEnter() -> subj. Condition (MIDATA):", this.);
 
+    
+   
+
     this.dbp.getJournalEntryCollection().then((val) => {
       if(val == null) {
         // There's no journalEntry
@@ -157,6 +160,7 @@ export class JournalEntryPage {
 
       });
 
+    
       let that = this;
 
       this.storage.get('InstantFeedback').then((value) => {

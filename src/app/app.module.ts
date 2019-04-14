@@ -26,8 +26,8 @@ import { WeightReminderNotificationPage } from '../pages/weight-reminder-notific
 
 //journal
 import { JournalPage } from '../pages/journal/journal';
-import { JournalEntryPage } from '../pages/journal-entry/journal-entry';
-import { JournalDeletePage } from '../pages/journal-delete/journal-delete';
+import { JournalEntryFormPage } from '../pages/journal-entry-form/journal-entry-form';
+import { JournalEntryListPage } from '../pages/journal-entry-list/journal-entry-list';
 
 import { StateOfMindPage } from '../pages/state-of-mind/state-of-mind';
 
@@ -93,8 +93,8 @@ import { PopoverComponent } from '../components/popover/popover';
     TabsPage,
 
     JournalPage,
-    JournalEntryPage,
-    JournalDeletePage,
+    JournalEntryFormPage,
+    JournalEntryListPage,
     StateOfMindPage,
     
     InformationDocumentationPage,
@@ -144,8 +144,8 @@ import { PopoverComponent } from '../components/popover/popover';
     PopoverComponent,
 
     JournalPage,
-    JournalEntryPage,
-    JournalDeletePage,
+    JournalEntryFormPage,
+    JournalEntryListPage,
     StateOfMindPage,
 
     InformationDocumentationPage,
