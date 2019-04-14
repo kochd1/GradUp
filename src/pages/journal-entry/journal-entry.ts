@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, FabContainer, Events } from 'ionic-angular';
 import { JournalPage } from '../journal/journal';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Storage } from '@ionic/storage';
 
 //Form Validation
 //import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -83,12 +84,18 @@ export class JournalEntryPage {
    */
   backBtnClicked:boolean;
 
+  /**
+   * Counter variable for instant feedback
+   */
+  counter: number = 0;
+
 
   
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private midataService: MidataService,
     public dbp: DatabaseProvider,
+    private storage: Storage,
     private camera: Camera,
     private alertCtrl: AlertController,
     //private formBuilder: FormBuilder,
@@ -115,6 +122,7 @@ export class JournalEntryPage {
 
     this.showAlertMessage = true;
     this.backBtnClicked = false;
+    
   
   }
 
@@ -149,6 +157,22 @@ export class JournalEntryPage {
 
       });
 
+      let that = this;
+
+      this.storage.get('InstantFeedback').then((value) => {
+        if(value == null){
+          that.counter = 1;
+          this.storage.set('InstantFeedback', that.counter);
+          console.log("counter after empty storage", that.counter);
+        }
+
+        else{
+          that.counter = value;
+          that.counter++;
+          console.log("get counter (if not empty)", that.counter);
+          this.storage.set('InstantFeedback', that.counter);
+        }});
+
     //#MIDATA -> load the elements
     this.loadData();
 
@@ -173,6 +197,7 @@ export class JournalEntryPage {
   }
 
   showUserInformation(){
+
     let alert = this.alertCtrl.create({
       title: 'Infos über die Datenspeicherung',
       subTitle: 'Ihre Text- und Bilddateneinträge werden nur lokal gespeichert und nicht für die Forschung verwendet.' 
@@ -287,6 +312,8 @@ alert.present();
       
     //this.addMentalCondition();
     //console.log("addMentalCondition is called");
+
+    this.showInstantFeedback();
       
     }
 
@@ -423,4 +450,74 @@ alert.present();
     });
   }
 
+  /**
+   * Show instant feedback after saving a journal entry. There are three variants of feedbacks.
+   */
+  showInstantFeedback(){
+
+        if(this.counter == 1){
+
+          let alert1 = this.alertCtrl.create({
+            title: '',
+            subTitle: 'Schön, dass du dir die Zeit nimmst, deine Gefühle/Erlebnisse zu dokumentieren.',
+            cssClass: 'alert-button-inner',
+            buttons: [
+              {
+                text: 'Weiter',
+                handler: () =>{
+                this.navCtrl.popToRoot();
+              }
+            }
+        ]
+      });
+    
+      alert1.present();
+    
+        }
+
+        if(this.counter == 2){
+
+          let alert2 = this.alertCtrl.create({
+            title: '',
+            subTitle: 'Vielen Dank für deinen Eintrag. :)',
+            cssClass: 'alert-button-inner',
+            buttons: [
+              {
+                text: 'Weiter',
+                handler: () =>{
+                this.navCtrl.popToRoot();
+              }
+            }
+          ]
+          });
+    
+          alert2.present();
+    
+        }
+
+        if(this.counter == 3) {
+          this.counter = 0;
+          this.storage.set('InstantFeedback', this.counter);
+    
+          let alert3 = this.alertCtrl.create({
+            title: '',
+            subTitle: 'Super, danke fürs Eintragen :)',
+            cssClass: 'alert-button-inner',
+            buttons: [
+              {
+                text: 'Weiter',
+                handler: () =>{
+                this.navCtrl.popToRoot();
+              }
+            }
+          ]
+          });
+    
+          alert3.present();
+          }
+
+      }
+    
+    
 }
+  
