@@ -23,8 +23,8 @@ export class ModalPage {
   }
 
   ionViewWillLoad(){
-    const data = this.navParams.get('data'); //können Daten ins Modal speisen
-    console.log(data);
+    this.documentationEntryText = this.navParams.get('data'); //können Daten ins Modal speisen
+    console.log(this.documentationEntryText);
   }
 
   ionViewDidLoad() {

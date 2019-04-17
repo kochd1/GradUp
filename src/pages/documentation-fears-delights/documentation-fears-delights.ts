@@ -21,6 +21,8 @@ export class DocumentationFearsDelightsPage {
 
   documentationEntry: DocumentationEntry;
 
+  inputData: string;
+
    /**
     * id of this journal entry.
     */
@@ -31,6 +33,8 @@ export class DocumentationFearsDelightsPage {
   documentationEntryCollectionIsNull: boolean;
 
   newEntry: boolean;
+
+  aboutToEdit: boolean;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -49,6 +53,7 @@ export class DocumentationFearsDelightsPage {
     this.documentationEntryCollectionIsNull = false;
 
     this.newEntry=false;
+    this.aboutToEdit=false;
 
     //test
     /*this.documentationEntryCollection = [
@@ -90,31 +95,41 @@ export class DocumentationFearsDelightsPage {
       enableBackdropDismiss: false, //user can only go back via close btn
     }
 
-    //test
+    let myModal: Modal;
+
+   
+    if(this.aboutToEdit==true)
+    {
     /*const myModalData = {
       name: 'Dominik',
       occupation: 'student'
     };*/
 
-    const myModal: Modal = this.modalCtrl.create('ModalPage', myModalOptions); //{data: myModalData}
+    let myModalData = this.documentationEntry.entryText;
+
+    myModal = this.modalCtrl.create('ModalPage', {data: myModalData}, myModalOptions);
+    }
+
+    myModal = this.modalCtrl.create('ModalPage', myModalOptions);
 
     myModal.present();
 
     let that = this;
+    //let inputData: string;
+
     myModal.onDidDismiss((data) => {
       console.log("data from modal:", data);
-      that.documentationEntry.entryText = data;
+      //that.documentationEntry.entryText = data;
+      that.inputData = data;
       that.newEntry=true;
       
       
       console.log("newEntry: ", that.newEntry); //funktioniert nicht
-
-      //if(this.newEntry==true)
-      //{
+      
       console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText);
       this.saveDocumentationEntry();
       console.log("saveDocumentationEntry() called")
-      //}
+
     });
 
 
@@ -189,7 +204,7 @@ prompt.present();*/
   
    let entryDate = new Date();
    let entryId = Number(new Date);
-   let entryText = this.documentationEntry.entryText;
+   let entryText = this.inputData;
 
    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
@@ -207,8 +222,10 @@ prompt.present();*/
 
  }
 
+ //provisorisch
   public editDocumentationEntry(dEntryId: number){
-
+    this.aboutToEdit=true;
+    this.openModal();
   }
 
   public deleteDocumentationEntry(dEntryId: number, index: number){ //vorher (item)
