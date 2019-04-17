@@ -46,6 +46,10 @@ export class DocumentationFearsDelightsPage {
   newEntry: boolean;
 
   aboutToEdit: boolean;
+
+  editId: number;
+
+  entryIndex: number;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -217,23 +221,47 @@ prompt.present();*/
   */
  public saveDocumentationEntry(){
    this.newEntry=true;
-  
-  
+
+   /*let entryId;
+    //checks before setting the id, if it is a new or edited entry
+    if(this.documentationEntry.entryId==0 || this.documentationEntry.entryId==null){
+      console.log("saveDocumentationEntry() -> entryId:", this.documentationEntry.entryId);
+      entryId = Number(new Date);
+      //this.documentationEntry.entryId = Number(new Date()); //.getTime);
+    }
+    else{
+      entryId = this.documentationEntry.entryId;
+    }*/
+
    let entryDate = new Date();
-   let entryId = Number(new Date);
+   let entryId;
+   if(this.aboutToEdit==true)
+   {
+      entryId = this.editId;
+   }
+   else{
+    entryId = Number(entryDate);
+   }
+  
    let entryText = this.inputData;
 
    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
+
+   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry);
 
    /*this.storage.get("documentationEntryCollection").then(collection => {
 
    });*/
 
+   if(this.aboutToEdit){
+    this.documentationEntryCollection.splice(this.entryIndex, 1); //test -> does not work
+   }
+   
    this.documentationEntryCollection.push(this.documentationEntry);
    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
 
-   this.storage.set('documentationEntryCollection', this.documentationEntryCollection);
-   console.log("saveDocumentationEntry() -> documentationEntryColl", this.documentationEntryCollection);
+   /*this.storage.set('documentationEntryCollection', this.documentationEntryCollection);
+   console.log("saveDocumentationEntry() -> documentationEntryColl", this.documentationEntryCollection);*/
 
    //this.documentationEntry.entryText="reset!"; //reset
 
@@ -243,10 +271,12 @@ prompt.present();*/
 
  }
 
- //provisorisch
+ 
   public editDocumentationEntry(dEntryId: number, index: number){
     console.log("editDocumentationEntry() -> dEntryId: ", dEntryId); //as expected
     this.aboutToEdit=true;
+    this.editId = dEntryId;
+    this.entryIndex = index;
     //get element by id
     let that = this;
 

@@ -40,12 +40,12 @@ export class DatabaseProvider {
       } 
       
       else {
-        let dublicatedEntry = valArr.find(val => val.entryId == jEntry.entryId)
+        let duplicatedEntry = valArr.find(val => val.entryId == jEntry.entryId)
         
-        if (dublicatedEntry != null) {
-          console.log("storage-->find dublicate", dublicatedEntry.entryId);
+        if (duplicatedEntry != null) {
+          console.log("storage-->find dublicate", duplicatedEntry.entryId);
 
-          this.deleteJournalEntryById(dublicatedEntry.entryId).then(val => {
+          this.deleteJournalEntryById(duplicatedEntry.entryId).then(val => {
             if (val) {
               this.storage.get(this.journalEntryCollection_key).then(valArrWithoutDublicate => {
                 let journalEntryCollection: JournalEntry[] = valArrWithoutDublicate;
