@@ -37,10 +37,14 @@ export class DatabaseProvider {
         this.storage.set(this.journalEntryCollection_key, journalEntryCollection);
         console.log("storage was empty");
         return true;
-      } else {
+      } 
+      
+      else {
         let dublicatedEntry = valArr.find(val => val.entryId == jEntry.entryId)
+        
         if (dublicatedEntry != null) {
           console.log("storage-->find dublicate", dublicatedEntry.entryId);
+
           this.deleteJournalEntryById(dublicatedEntry.entryId).then(val => {
             if (val) {
               this.storage.get(this.journalEntryCollection_key).then(valArrWithoutDublicate => {
@@ -51,7 +55,10 @@ export class DatabaseProvider {
               });
             }
           });
-        } else {
+
+        } 
+        
+        else {
           console.log("storage--> got valArr");
           let journalEntryCollection: JournalEntry[] = valArr;
           journalEntryCollection.push(jEntry);

@@ -74,6 +74,7 @@ import { PulseStepsService } from '../services/pulse-steps.service';
 import { NotificationService } from '../services/notification.service';
 import { PhotoProvider } from '../providers/photo/photo';
 import { PopoverComponent } from '../components/popover/popover';
+import { DocumentationEntryDatabaseProvider } from '../providers/database/documentationEntryDB';
 
 
 @NgModule({
@@ -180,6 +181,7 @@ import { PopoverComponent } from '../components/popover/popover';
     InAppBrowser,
     Contacts,
     DatabaseProvider,
+    DocumentationEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,

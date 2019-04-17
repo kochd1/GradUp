@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
+//import documentationEntry utility class
+import { DocumentationEntry } from '../../classes/documentationEntry';
+
 /**
  * Generated class for the ModalPage page.
  *
@@ -15,20 +18,34 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ModalPage {
 
+  documentationEntry: DocumentationEntry;
+
   documentationEntryText: string;
 
   constructor(public navCtrl: NavController, 
               private viewCtrl: ViewController,
               public navParams: NavParams) {
+
+                //let newDate: Date = new Date();
+    this.documentationEntry = new DocumentationEntry(0, new Date(), "");
+
+    console.log("constr() -> this.documentationEntry", this.documentationEntry);
   }
 
   ionViewWillLoad(){
-    this.documentationEntryText = this.navParams.get('data'); //können Daten ins Modal speisen
-    console.log(this.documentationEntryText);
+    //data fetch was originally here before
+
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
+
+    this.documentationEntry = this.navParams.get('data'); //undefined!          können hiermit Daten ins Modal speisen
+    console.log("data from entry page", this.documentationEntry);
+
+    this.documentationEntryText = this.documentationEntry.entryText;
+    console.log("text data filtered from entry page", this.documentationEntryText);
   }
 
   public setEntryText(){

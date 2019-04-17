@@ -7,6 +7,9 @@ import { Storage } from '@ionic/storage';
 import { DocumentationEntry } from '../../classes/documentationEntry';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
+//import providers
+import { DocumentationEntryDatabaseProvider } from '../../providers/database/documentationEntryDB';
+
 @IonicPage()
 @Component({
   selector: 'page-documentation-fears-delights',
@@ -21,7 +24,15 @@ export class DocumentationFearsDelightsPage {
 
   documentationEntry: DocumentationEntry;
 
+  /**
+   * stores the data input from the modal
+   */
   inputData: string;
+
+  /**
+   * stores the data from the storage to edit via modal.
+   */
+  storageDataToEdit: string;
 
    /**
     * id of this journal entry.
@@ -40,7 +51,8 @@ export class DocumentationFearsDelightsPage {
               public navParams: NavParams,
               public alertCtrl: AlertController,
               private modalCtrl: ModalController,
-              private storage: Storage) {
+              private storage: Storage,
+              public dEntryDbp: DocumentationEntryDatabaseProvider) {
 
     this.items = [
       {title: 'Manchmal denke ich, ich sei nicht gut genug und verliere dadurch meinen Appetit.'},
@@ -97,7 +109,7 @@ export class DocumentationFearsDelightsPage {
 
     let myModal: Modal;
 
-   
+    //only go through, if there's an entry to edit
     if(this.aboutToEdit==true)
     {
     /*const myModalData = {
@@ -105,12 +117,15 @@ export class DocumentationFearsDelightsPage {
       occupation: 'student'
     };*/
 
-    let myModalData = this.documentationEntry.entryText;
+    let myModalData: DocumentationEntry = this.documentationEntry;
+    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
     myModal = this.modalCtrl.create('ModalPage', {data: myModalData}, myModalOptions);
     }
 
-    myModal = this.modalCtrl.create('ModalPage', myModalOptions);
+    else{
+      myModal = this.modalCtrl.create('ModalPage', myModalOptions);
+    }
 
     myModal.present();
 
@@ -122,16 +137,18 @@ export class DocumentationFearsDelightsPage {
       //that.documentationEntry.entryText = data;
       that.inputData = data;
       that.newEntry=true;
+      console.log("newEntry: ", that.newEntry);
       
-      
-      console.log("newEntry: ", that.newEntry); //funktioniert nicht
-      
-      console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText);
-      this.saveDocumentationEntry();
-      console.log("saveDocumentationEntry() called")
+      //console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText); //undefined
+      console.log("this.inputData after modal: ", this.inputData); //as expected
 
+      if(data!=null)
+      { 
+        this.saveDocumentationEntry();
+        console.log("saveDocumentationEntry() called")
+      }
+     
     });
-
 
   }
   
@@ -208,6 +225,10 @@ prompt.present();*/
 
    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
+   /*this.storage.get("documentationEntryCollection").then(collection => {
+
+   });*/
+
    this.documentationEntryCollection.push(this.documentationEntry);
    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
 
@@ -223,11 +244,38 @@ prompt.present();*/
  }
 
  //provisorisch
-  public editDocumentationEntry(dEntryId: number){
+  public editDocumentationEntry(dEntryId: number, index: number){
+    console.log("editDocumentationEntry() -> dEntryId: ", dEntryId); //as expected
     this.aboutToEdit=true;
-    this.openModal();
+    //get element by id
+    let that = this;
+
+    this.documentationEntry=that.documentationEntry; //is not a solution
+
+    //var documentationEntry: DocumentationEntry;
+
+    this.dEntryDbp.getDocumentationEntryById(dEntryId).then((dEntry) =>{
+      
+      that.documentationEntry = dEntry;
+      //documentationEntry = dEntry;
+      console.log("editDocumentationEntry() -> text after storage access: ", that.documentationEntry); //
+
+      this.openModal(); //must be called here, otherwise the value of dEntry can't be passed to the modal!
+    });
+
+    /*console.log("editDocumentationEntry() -> text from storage (after =>) this: ", this.documentationEntry); //not correct
+    console.log("editDocumentationEntry() -> text from storage (after =>) that: ", that.documentationEntry); //not correct
+    console.log("editDocumentationEntry() -> text from storage (after =>) var: ", documentationEntry); //not correct*/
+
+    
   }
 
+  /**
+   * deletes the respective documentation entry.
+   * 
+   * @param dEntryId - the id of the entry
+   * @param index - the index of the entry (relevant for the data presentation)
+   */
   public deleteDocumentationEntry(dEntryId: number, index: number){ //vorher (item)
     console.log("deleteEntry() called");
 
