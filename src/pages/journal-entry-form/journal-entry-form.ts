@@ -277,13 +277,15 @@ alert.present();
      */
     public saveEntry():void{
       console.log("saveJournalEntry button was clicked");
+
+      //checks before setting the id, if it is a new or edited entry
       if(this.journalEntry.entryId==0 || this.journalEntry.entryId==null){
         console.log("saveEntry() -> entryId:", this.journalEntry.entryId);
         this.journalEntry.entryId = Number(new Date()); //.getTime);
-
-        console.log("saveEntry() -> entryPhoto", this.myPhoto);
-        this.journalEntry.entryPhoto = this.myPhoto;
       }
+
+      console.log("saveEntry() -> entryPhoto", this.myPhoto);
+        this.journalEntry.entryPhoto = this.myPhoto;
       
       this.dbp.saveJournalEntry(this.journalEntry).then(val => {
         if(val)
