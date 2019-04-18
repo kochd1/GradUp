@@ -262,6 +262,8 @@ prompt.present();*/
    this.documentationEntryCollection.push(this.documentationEntry);
    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
 
+   this.aboutToEdit = false; //necessary because of new entries without page reload
+
    /*this.storage.set('documentationEntryCollection', this.documentationEntryCollection);
    console.log("saveDocumentationEntry() -> documentationEntryColl", this.documentationEntryCollection);*/
 
