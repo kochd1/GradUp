@@ -50,6 +50,8 @@ export class DocumentationFearsDelightsPage {
   editId: number;
 
   entryIndex: number;
+
+  slidingItem;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -103,7 +105,7 @@ export class DocumentationFearsDelightsPage {
   }
 
   /**
-   * opens the modal to make a new entry.
+   * opens the modal to add or to edit an entry.
    */
   public openModal(){
 
@@ -271,7 +273,22 @@ prompt.present();*/
 
  }
 
- 
+ /**
+  * closes the sliding item for editing.
+  * 
+  * @param slidingItem 
+  */
+ public closeSlidingItem(slidingItem){
+  this.slidingItem = slidingItem;
+  slidingItem.close();
+ }
+
+  /**
+   * Gets the entry to edit and opens the modal.
+   * 
+   * @param dEntryId 
+   * @param index 
+   */
   public editDocumentationEntry(dEntryId: number, index: number){
     console.log("editDocumentationEntry() -> dEntryId: ", dEntryId); //as expected
     this.aboutToEdit=true;
@@ -291,6 +308,7 @@ prompt.present();*/
       console.log("editDocumentationEntry() -> text after storage access: ", that.documentationEntry); //
 
       this.openModal(); //must be called here, otherwise the value of dEntry can't be passed to the modal!
+      this.closeSlidingItem(this.slidingItem);
     });
 
     /*console.log("editDocumentationEntry() -> text from storage (after =>) this: ", this.documentationEntry); //not correct

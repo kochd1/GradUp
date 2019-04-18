@@ -18,7 +18,7 @@
     </ion-item>
 
     <ion-list can-swipe = "true">
-        <ion-item-sliding *ngFor="let dEntry of documentationEntryCollection.slice(); let i = index">
+        <ion-item-sliding #slidingItem *ngFor="let dEntry of documentationEntryCollection.slice(); let i = index">
             <ion-item>
                 {{dEntry.entryText}}
             </ion-item>
@@ -33,7 +33,7 @@
                     Löschen
                     </button>
 
-                    <button ion-button color = "secondary" (click)="editDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="create"></ion-icon>
+                    <button ion-button color = "secondary" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
                     Ändern
                     </button>
 
