@@ -4,4 +4,13 @@ page-documentation-fears-delights {
       overflow-y: hidden;
     }
 
+    .topSection {
+      max-height: 32%;
+      overflow-y: scroll;
+    }
+
+    .manipBtn{
+      text-transform: none; //ion-buttons without caps
+    }
+
 }

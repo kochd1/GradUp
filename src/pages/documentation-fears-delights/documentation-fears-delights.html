@@ -9,15 +9,13 @@
 </ion-header>
 
 <ion-content padding>
-    <p></p>
-
     <ion-item>
         <ion-label style="font-size: 20px">
             <b>Meine Ängste: </b>
         </ion-label>
     </ion-item>
 
-    <ion-list can-swipe = "true">
+    <ion-list can-swipe = "true" class ="topSection">
         <ion-item-sliding #slidingItem *ngFor="let dEntry of documentationEntryCollection.slice(); let i = index">
             <ion-item>
                 {{dEntry.entryText}}
@@ -29,11 +27,11 @@
 
                 </ion-refresher>-->
               
-                    <button ion-button color = "danger" (click)="deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
+                    <button ion-button color = "danger" class="manipBtn" (click)="deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
                     Löschen
                     </button>
 
-                    <button ion-button color = "secondary" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
+                    <button ion-button color = "secondary" class="manipBtn" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
                     Ändern
                     </button>
 
@@ -52,10 +50,9 @@
             <ion-textarea [(ngModel)]="documentationEntry.entryText" rows = "1"></ion-textarea>
         </ion-item>-->
     </ion-list>
-
     <ion-grid>
         <ion-row > <!--*ngIf="!newEntry"-->
-            <button ion-button icon-only clear (click)="openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label></button>
+            <button ion-button icon-only clear class = "manipBtn" (click)="openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label></button>
         </ion-row>
         <!--><ion-row *ngIf="newEntry">
             <button ion-button [outline]="false" [round]="true" [disabled]="!documentationEntry.entryText" (click) = "saveDocumentationEntry()">Speichern</button>
