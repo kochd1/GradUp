@@ -7,8 +7,11 @@ import { DocumentationEntry } from '../../classes/documentationEntry';
 @Injectable()
 export class DocumentationEntryDatabaseProvider {
 
-  // journalEntry key
-  documentationEntryCollection_key: string = 'documentationEntryCollection';
+  // fear documentation entry key
+  fearDocumentationEntryCollection_key: string = 'fearDocumentationEntryCollection';
+
+  // delight documentation entry key
+  delightDocumentationEntryCollection_key: string = 'delightDocumentationEntryCollection';
 
   constructor(public storage: Storage) {
     console.log('Hello DocumentationEntryDatabaseProvider Provider');
@@ -20,26 +23,30 @@ export class DocumentationEntryDatabaseProvider {
    */
   getDocumentationEntryById(id: number): Promise<DocumentationEntry> {
 
-    return this.storage.get(this.documentationEntryCollection_key).then((valArr) => {
+    return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
       return valArr.find(DocumentationEntry => DocumentationEntry.entryId == id);
     });
   }
 
   /**
-   * saves a  documentation entry.
+   * saves a  documentation entry (fear or delight).
+   * 
    * @param dEntry 
    */
-  saveDocumentationEntry(dEntry: DocumentationEntry){
-    
-   this.storage.get("documentationEntryCollection").then(dEntryColl => {
-    console.log("saveDocumentationEntry() -> dEntryColl", dEntryColl);
+  saveDocumentationEntry(dEntry: DocumentationEntry, isFear: boolean){
+  console.log("DB -> isFear: ", isFear);
+  //fear
+  if(isFear)
+  {
+   this.storage.get("fearDocumentationEntryCollection").then(dEntryColl => {
+    console.log("dEntryDB_fear saveDocumentationEntry() -> dEntryColl", dEntryColl);
 
     if(dEntryColl == null)
     {
       console.log(dEntry + typeof (dEntry));
-      let journalEntryCollection: DocumentationEntry[] = [];
-      journalEntryCollection.push(dEntry);
-      this.storage.set(this.documentationEntryCollection_key, journalEntryCollection);
+      let fearDocumentationEntryCollection: DocumentationEntry[] = [];
+      fearDocumentationEntryCollection.push(dEntry);
+      this.storage.set(this.fearDocumentationEntryCollection_key, fearDocumentationEntryCollection);
       console.log("storage was empty");
       return true;
     }
@@ -52,10 +59,10 @@ export class DocumentationEntryDatabaseProvider {
         console.log("storage-->find dublicate", duplicatedEntry.entryId);
         this.deleteDocumentationEntryById(duplicatedEntry.entryId).then(val => {
           if(val){
-            this.storage.get('documentationEntryCollection').then(dEntryCollWADuplicate => {
+            this.storage.get('fearDocumentationEntryCollection').then(dEntryCollWADuplicate => {
               let documentationEntryCollection: DocumentationEntry[] = dEntryCollWADuplicate;
               documentationEntryCollection.push(dEntry);
-              this.storage.set('documentationEntryCollection', documentationEntryCollection);
+              this.storage.set('fearDocumentationEntryCollection', documentationEntryCollection);
               return true;
             });
           }
@@ -63,9 +70,9 @@ export class DocumentationEntryDatabaseProvider {
       }
 
       else{
-        let documentationEntryCollection: DocumentationEntry[] = dEntryColl;
-        documentationEntryCollection.push(dEntry);
-        this.storage.set('documentationEntryCollection', documentationEntryCollection);
+        let fearDocumentationEntryCollection: DocumentationEntry[] = dEntryColl;
+        fearDocumentationEntryCollection.push(dEntry);
+        this.storage.set('fearDocumentationEntryCollection', fearDocumentationEntryCollection);
         return true;
       }
     }
@@ -73,12 +80,59 @@ export class DocumentationEntryDatabaseProvider {
    });
 
   }
+  //delight
+  else if(!isFear){
+
+    this.storage.get("delightDocumentationEntryCollection").then(dEntryColl => {
+      console.log("dEntryDB_delight saveDocumentationEntry() -> dEntryColl", dEntryColl);
+  
+      if(dEntryColl == null)
+      {
+        console.log(dEntry + typeof (dEntry));
+        let delightDocumentationEntryCollection: DocumentationEntry[] = [];
+        delightDocumentationEntryCollection.push(dEntry);
+        this.storage.set(this.delightDocumentationEntryCollection_key, delightDocumentationEntryCollection);
+        console.log("storage was empty");
+        return true;
+      }
+  
+      else{
+        let duplicatedEntry = dEntryColl.find(val => val.entryId == dEntry.entryId)
+        console.log("dEntryDB_delight saveDocumentationEntry() -> duplicatedEntry: ", duplicatedEntry)
+        if(duplicatedEntry != null)
+        {
+          console.log("storage-->find dublicate", duplicatedEntry.entryId);
+          this.deleteDocumentationEntryById(duplicatedEntry.entryId).then(val => {
+            if(val){
+              this.storage.get('delightDocumentationEntryCollection').then(dEntryCollWADuplicate => {
+                let delightDocumentationEntryCollection: DocumentationEntry[] = dEntryCollWADuplicate;
+                delightDocumentationEntryCollection.push(dEntry);
+                this.storage.set('delightDocumentationEntryCollection', delightDocumentationEntryCollection);
+                return true;
+              });
+            }
+          });
+        }
+  
+        else{
+          let delightDocumentationEntryCollection: DocumentationEntry[] = dEntryColl;
+          delightDocumentationEntryCollection.push(dEntry);
+          this.storage.set('delightDocumentationEntryCollection', delightDocumentationEntryCollection);
+          return true;
+        }
+      }
+      return true;
+     });
+
+  }
+
+  }
 
   deleteDocumentationEntryById(id: number): Promise<boolean> {
 
-    return this.storage.get(this.documentationEntryCollection_key).then((valArr) => {
+    return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
       let newArr = valArr.filter(val => val.entryId != id); //true -> wird in newArr geschrieben
-      this.storage.set(this.documentationEntryCollection_key, newArr);
+      this.storage.set(this.fearDocumentationEntryCollection_key, newArr);
       return true;
     });
   }

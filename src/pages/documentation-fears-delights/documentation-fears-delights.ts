@@ -35,15 +35,31 @@ export class DocumentationFearsDelightsPage {
   storageDataToEdit: string;
 
    /**
-    * id of this journal entry.
+    * id of this documentation entry.
     */
    documentationEntryId: number;
 
-  documentationEntryCollection: DocumentationEntry[] = [];
+   /**
+    * collection of fear entries.
+    */
+  fearDocumentationEntryCollection: DocumentationEntry[] = [];
 
-  documentationEntryCollectionIsNull: boolean;
+  fearDocumentationEntryCollectionIsNull: boolean;
 
+  /**
+   * collection of delight entries.
+   */
+  delightDocumentationEntryCollection: DocumentationEntry[] = [];
+
+  delightDocumentationEntryCollectionIsNull: boolean;
+
+  /**
+   * boolean variable for new entry
+   */
   newEntry: boolean;
+
+  isFear: boolean;
+  isDelight: boolean;
 
   aboutToEdit: boolean;
 
@@ -68,9 +84,12 @@ export class DocumentationFearsDelightsPage {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
-    this.documentationEntryCollectionIsNull = false;
+    this.fearDocumentationEntryCollectionIsNull = false;
+    this.delightDocumentationEntryCollectionIsNull = false;
 
     this.newEntry=false;
+    this.isFear=false;
+    this.isDelight=false;
     this.aboutToEdit=false;
 
     //test
@@ -90,16 +109,31 @@ export class DocumentationFearsDelightsPage {
   
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
-    this.storage.get('documentationEntryCollection').then((value => {
+    //fear documentation entry collection
+    this.storage.get('fearDocumentationEntryCollection').then((value => {
       if(value!=null)
       {
-      that.documentationEntryCollection = value;
+      that.fearDocumentationEntryCollection = value;
       }
 
       else{
-        that.documentationEntryCollectionIsNull = true;
+        that.fearDocumentationEntryCollectionIsNull = true;
       }
-      console.log("ionViewDidLoad() -> documentationEntryCollection: ", that.documentationEntryCollection);
+      console.log("ionViewDidLoad() -> fearDocumentationEntryCollection: ", that.fearDocumentationEntryCollection);
+
+    }));
+
+    //delight documentation entry collection
+    this.storage.get('delightDocumentationEntryCollection').then((value => {
+      if(value!=null)
+      {
+      that.delightDocumentationEntryCollection = value;
+      }
+
+      else{
+        that.delightDocumentationEntryCollectionIsNull = true;
+      }
+      console.log("ionViewDidLoad() -> delightDocumentationEntryCollection: ", that.delightDocumentationEntryCollection);
 
     }));
   }
@@ -142,8 +176,12 @@ export class DocumentationFearsDelightsPage {
       console.log("data from modal:", data);
       //that.documentationEntry.entryText = data;
       that.inputData = data;
+
+      if(that.inputData)
+      {
       that.newEntry=true;
-      console.log("newEntry: ", that.newEntry);
+      }
+      console.log("modal onDidDismiss -> newEntry: ", that.newEntry);
       
       //console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText); //undefined
       console.log("this.inputData after modal: ", this.inputData); //as expected
@@ -157,9 +195,25 @@ export class DocumentationFearsDelightsPage {
     });
 
   }
+
+  public setEntryType(entryType: string){
+    console.log("setEntryType() called with value: ", entryType)
+    if(entryType=='fear'){
+      this.isFear=true;
+      console.log("isFear: ", this.isFear);
+      this.isDelight=false; //vice versa
+    }
+
+    else{
+      this.isDelight=true;
+      console.log("isDelight: ", this.isDelight);
+      this.isFear=false; //necessary, if user firstly want to enter a fear
+    }
+  }
   
   /**
    * Add an entry to the list (saving is not handled here)
+   * @deprecated
    */
  public addDocumentationEntry(){
   console.log("addDocumentationEntry() called");
@@ -178,44 +232,18 @@ export class DocumentationFearsDelightsPage {
   //this.documentationEntry.entryText='';
 
   console.log("documentationEntry_temp: ", this.documentationEntry);
-  this.documentationEntryCollection.push(this.documentationEntry);
+  this.fearDocumentationEntryCollection.push(this.documentationEntry);
   this.newEntry = true;
-
-
- /*let prompt = this.alertCtrl.create({
-    title: 'Neuer Dokumentationseintrag',
-    inputs: [{
-        name: 'title'
-    }],
-    buttons: [
-        {
-            text: 'Abbrechen'
-        },
-        {
-            text: 'Hinzufügen',
-            handler: data => {
-                this.documentationEntryCollection.push(data);
-            }
-        }
-    ]
-});
-//sollte besser multiline sein.
-prompt.addInput({
-  type: 'textarea',
-  name: 'about',
-  placeholder: 'Optional message'
-});
-
-prompt.present();*/
 
  }
 
  /**
   * Aborts the entry input and splices the last unfinished/unsaved entry.
+  * @deprecated
   */
  public abortEntryInput(){
    this.newEntry=false;
-   this.documentationEntryCollection.splice(this.documentationEntryCollection.length-1, 1);
+   this.fearDocumentationEntryCollection.splice(this.fearDocumentationEntryCollection.length-1, 1);
  }
 
  /**
@@ -249,17 +277,35 @@ prompt.present();*/
 
    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
-   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry);
-
-   /*this.storage.get("documentationEntryCollection").then(collection => {
-
-   });*/
+   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry, this.isFear);
 
    if(this.aboutToEdit){
-    this.documentationEntryCollection.splice(this.entryIndex, 1); //test -> does not work
+     if(this.isFear)
+     {
+      this.fearDocumentationEntryCollection.splice(this.entryIndex, 1);
+     }
+
+     else{
+      this.delightDocumentationEntryCollection.splice(this.entryIndex, 1);
+     }
+    
+   }
+
+   console.log("saveDocumentationEntry() -> this.isFear: ", this.isFear);
+   console.log("saveDocumentationEntry() -> this.isDelight: ", this.isDelight);
+
+   if(this.isFear)
+   {
+    this.fearDocumentationEntryCollection.push(this.documentationEntry);
+    console.log("this.fearDocumentationEntryCollection was pushed.");
+   }
+
+   else{
+    this.delightDocumentationEntryCollection.push(this.documentationEntry);
+    console.log("this.delightDocumentationEntryCollection was pushed.");
    }
    
-   this.documentationEntryCollection.push(this.documentationEntry);
+   
    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
 
    this.aboutToEdit = false; //necessary because of new entries without page reload
@@ -334,11 +380,11 @@ prompt.present();*/
     console.log("documentationEntryDelete -> documentationEntryId (local param): " + dEntryId);
     console.log("documentationEntryDelete -> documentationEntryId (instance variable): " + this.documentationEntryId);
 
-    return this.storage.get('documentationEntryCollection').then((valArr) => {
+    return this.storage.get('fearDocumentationEntryCollection').then((valArr) => {
       let newArr = valArr.filter(val => val.entryId != dEntryId); //true -> wird in newArr geschrieben
-      this.storage.set('documentationEntryCollection', newArr);
+      this.storage.set('fearDocumentationEntryCollection', newArr);
 
-      this.documentationEntryCollection.splice(index, 1); //test
+      this.fearDocumentationEntryCollection.splice(index, 1); //test
       return true;
     });
 
