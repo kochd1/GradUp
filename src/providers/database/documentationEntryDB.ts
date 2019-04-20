@@ -21,11 +21,24 @@ export class DocumentationEntryDatabaseProvider {
    * Gets the document entry by its id.
    * @param id - id of the document
    */
-  getDocumentationEntryById(id: number): Promise<DocumentationEntry> {
+  getDocumentationEntryById(id: number, isFear: boolean): Promise<DocumentationEntry> {
 
-    return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
-      return valArr.find(DocumentationEntry => DocumentationEntry.entryId == id);
-    });
+    //fear entry
+    if(isFear)
+    {
+      return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
+        return valArr.find(DocumentationEntry => DocumentationEntry.entryId == id);
+      });
+    }
+
+    //delight entry
+    else if(!isFear)
+    {
+      return this.storage.get(this.delightDocumentationEntryCollection_key).then((valArr) => {
+        return valArr.find(DocumentationEntry => DocumentationEntry.entryId == id);
+      });
+    }
+    
   }
 
   /**

@@ -352,7 +352,7 @@ export class DocumentationFearsDelightsPage {
 
     //var documentationEntry: DocumentationEntry;
 
-    this.dEntryDbp.getDocumentationEntryById(dEntryId).then((dEntry) =>{
+    this.dEntryDbp.getDocumentationEntryById(dEntryId, this.isFear).then((dEntry) =>{
       
       that.documentationEntry = dEntry;
       //documentationEntry = dEntry;

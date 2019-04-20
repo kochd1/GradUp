@@ -42,10 +42,10 @@ export class ModalPage {
     console.log('ionViewDidLoad ModalPage');
 
     this.documentationEntry = this.navParams.get('data'); //undefined!          können hiermit Daten ins Modal speisen
-    console.log("data from entry page", this.documentationEntry);
+    console.log("data from entry-overview page", this.documentationEntry);
 
     this.documentationEntryText = this.documentationEntry.entryText;
-    console.log("text data filtered from entry page", this.documentationEntryText);
+    console.log("text data filtered from entry-overview page", this.documentationEntryText);
   }
 
   public setEntryText(){

@@ -32,7 +32,7 @@
                     Löschen
                     </button>
 
-                    <button ion-button color = "secondary" class="manipBtn" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem); setEntryType('fear')"> <ion-icon name="create"></ion-icon>
+                    <button ion-button color = "secondary" class="manipBtn" (click)="setEntryType('fear'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
                     Ändern
                     </button>
 
@@ -84,7 +84,7 @@
                     Löschen
                     </button>
 
-                    <button ion-button color = "secondary" class="manipBtn" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem); setEntryType('delight')"> <ion-icon name="create"></ion-icon>
+                    <button ion-button color = "secondary" class="manipBtn" (click)="setEntryType('delight'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
                     Ändern
                     </button>
 
