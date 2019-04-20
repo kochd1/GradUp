@@ -28,7 +28,7 @@
 
                 </ion-refresher>-->
               
-                    <button ion-button color = "danger" class="manipBtn" (click)="deleteDocumentationEntry(dEntry.entryId, i); setEntryType('fear')"> <ion-icon name="trash"></ion-icon>
+                    <button ion-button color = "danger" class="manipBtn" (click)="setEntryType('fear'); deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
                     Löschen
                     </button>
 
@@ -80,7 +80,7 @@
 
                 </ion-refresher>-->
               
-                    <button ion-button color = "danger" class="manipBtn" (click)="deleteDocumentationEntry(dEntry.entryId, i); setEntryType('delight')"> <ion-icon name="trash"></ion-icon>
+                    <button ion-button color = "danger" class="manipBtn" (click)="setEntryType('delight'); deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
                     Löschen
                     </button>
 

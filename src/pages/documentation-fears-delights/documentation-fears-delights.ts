@@ -196,17 +196,20 @@ export class DocumentationFearsDelightsPage {
 
   }
 
+  /**
+   * Sets the type of this entry via "add entry" button.
+   */
   public setEntryType(entryType: string){
     console.log("setEntryType() called with value: ", entryType)
     if(entryType=='fear'){
       this.isFear=true;
-      console.log("isFear: ", this.isFear);
+      console.log("setEntryType() -> this.isFear: ", this.isFear);
       this.isDelight=false; //vice versa
     }
 
     else{
       this.isDelight=true;
-      console.log("isDelight: ", this.isDelight);
+      console.log("setEntryType() -> this.isDelight: ", this.isDelight);
       this.isFear=false; //necessary, if user firstly want to enter a fear
     }
   }
@@ -356,7 +359,7 @@ export class DocumentationFearsDelightsPage {
       console.log("editDocumentationEntry() -> text after storage access: ", that.documentationEntry); //
 
       this.openModal(); //must be called here, otherwise the value of dEntry can't be passed to the modal!
-      this.closeSlidingItem(this.slidingItem);
+      this.closeSlidingItem(this.slidingItem); //closes after the edit btn was fired
     });
 
     /*console.log("editDocumentationEntry() -> text from storage (after =>) this: ", this.documentationEntry); //not correct
@@ -380,13 +383,26 @@ export class DocumentationFearsDelightsPage {
     console.log("documentationEntryDelete -> documentationEntryId (local param): " + dEntryId);
     console.log("documentationEntryDelete -> documentationEntryId (instance variable): " + this.documentationEntryId);
 
-    return this.storage.get('fearDocumentationEntryCollection').then((valArr) => {
+    console.log("deleteDocumentatioEntry (logic)-> this.isFear before DB: ", this.isFear);
+
+    this.dEntryDbp.deleteDocumentationEntry(dEntryId, this.isFear); //db processing
+
+    if(this.isFear)
+    {
+      this.fearDocumentationEntryCollection.splice(index, 1);
+    }
+
+    else{
+      this.delightDocumentationEntryCollection.splice(index, 1);
+    }
+
+    /*return this.storage.get('fearDocumentationEntryCollection').then((valArr) => {
       let newArr = valArr.filter(val => val.entryId != dEntryId); //true -> wird in newArr geschrieben
       this.storage.set('fearDocumentationEntryCollection', newArr);
 
-      this.fearDocumentationEntryCollection.splice(index, 1); //test
+      
       return true;
-    });
+    });*/
 
     /*let  i: number;
     for(i = 0; i< this.items.length; i++){

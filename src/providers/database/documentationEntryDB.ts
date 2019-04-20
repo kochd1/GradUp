@@ -57,7 +57,7 @@ export class DocumentationEntryDatabaseProvider {
       if(duplicatedEntry != null)
       {
         console.log("storage-->find dublicate", duplicatedEntry.entryId);
-        this.deleteDocumentationEntryById(duplicatedEntry.entryId).then(val => {
+        this.deleteDocumentationEntry(duplicatedEntry.entryId, isFear).then(val => {
           if(val){
             this.storage.get('fearDocumentationEntryCollection').then(dEntryCollWADuplicate => {
               let documentationEntryCollection: DocumentationEntry[] = dEntryCollWADuplicate;
@@ -102,7 +102,7 @@ export class DocumentationEntryDatabaseProvider {
         if(duplicatedEntry != null)
         {
           console.log("storage-->find dublicate", duplicatedEntry.entryId);
-          this.deleteDocumentationEntryById(duplicatedEntry.entryId).then(val => {
+          this.deleteDocumentationEntry(duplicatedEntry.entryId, isFear).then(val => {
             if(val){
               this.storage.get('delightDocumentationEntryCollection').then(dEntryCollWADuplicate => {
                 let delightDocumentationEntryCollection: DocumentationEntry[] = dEntryCollWADuplicate;
@@ -128,13 +128,34 @@ export class DocumentationEntryDatabaseProvider {
 
   }
 
-  deleteDocumentationEntryById(id: number): Promise<boolean> {
+  /**
+   * deletes the documentation entry.
+   * 
+   * @param id - the id of this entry
+   * @param isFear - boolean variable for the type of this entry.
+   */
+  deleteDocumentationEntry(id: number, isFear: boolean): Promise<boolean> {
 
-    return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
-      let newArr = valArr.filter(val => val.entryId != id); //true -> wird in newArr geschrieben
-      this.storage.set(this.fearDocumentationEntryCollection_key, newArr);
-      return true;
-    });
+    //fear entries
+    if(isFear)
+    {
+      return this.storage.get(this.fearDocumentationEntryCollection_key).then((valArr) => {
+        let newArr = valArr.filter(val => val.entryId != id); //true -> wird in newArr geschrieben
+        this.storage.set(this.fearDocumentationEntryCollection_key, newArr);
+        return true;
+      });
+    }
+
+    //delight entries
+    else if(!isFear)
+    {
+      return this.storage.get(this.delightDocumentationEntryCollection_key).then((valArr) => {
+        let newArr = valArr.filter(val => val.entryId != id); //true -> wird in newArr geschrieben
+        this.storage.set(this.delightDocumentationEntryCollection_key, newArr);
+        return true;
+      });
+    }
+
   }
 
 }
