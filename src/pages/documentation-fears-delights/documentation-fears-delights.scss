@@ -9,8 +9,33 @@ page-documentation-fears-delights {
       overflow-y: scroll;
     }
 
+    .delightDiv{
+     position: relative;
+     padding-top: 10%;
+     //top: 15%;
+     //width: 100%;
+      
+      
+    }
+
+    #delightLb{
+      //bottom: 70%;
+      top: 80%;
+      margin-top: 2%;
+    }
+
+    .bottomSection {
+      max-height: 32%;
+      overflow-y: scroll;
+    }
+
     .manipBtn{
       text-transform: none; //ion-buttons without caps
+      margin-top: 0%;
     }
+
+    /*.manipBtnRow{
+      height: 80%;
+    }*/
 
 }

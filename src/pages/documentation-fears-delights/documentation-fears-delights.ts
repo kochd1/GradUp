@@ -200,6 +200,7 @@ export class DocumentationFearsDelightsPage {
    * Sets the type of this entry via "add entry" button.
    */
   public setEntryType(entryType: string){
+    this.documentationEntry = null; //reset documentation entry (necessary, if an entry modification is aborted)
     console.log("setEntryType() called with value: ", entryType)
     if(entryType=='fear'){
       this.isFear=true;

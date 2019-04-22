@@ -6,7 +6,6 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Neuer Eintrag</ion-title>
     <ion-buttons end>
         <button ion-button (click)="closeModal()">Schliessen</button>
     </ion-buttons>
@@ -16,9 +15,12 @@
 <ion-content padding>
 
     <ion-item>
-        <ion-label style="font-size: 20px">
-            <b>Neuer Eintrag: </b>
+        <ion-label *ngIf = "!documentationEntry" style="font-size: 20px">
+          <b>Neuer Eintrag: </b>
         </ion-label>
+        <ion-label *ngIf = "documentationEntry" style="font-size: 20px">
+          <b>Eintrag anpassen: </b>
+      </ion-label>
     </ion-item>
 
     <ion-item>
