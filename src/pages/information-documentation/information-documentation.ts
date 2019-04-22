@@ -3,6 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { InformationAnorexiaPage } from '../information-anorexia/information-anorexia';
 import { DocumentationFearsDelightsPage } from '../documentation-fears-delights/documentation-fears-delights';
 import { DocumentationViewsBeliefsPage } from '../documentation-views-beliefs/documentation-views-beliefs';
+import { DocumentationFurtherThoughtsPage } from '../documentation-further-thoughts/documentation-further-thoughts';
 
 
 @IonicPage()
@@ -30,6 +31,10 @@ export class InformationDocumentationPage {
 
   public gotoDocumentationViewsBeliefsPage() {
     this.navCtrl.push(DocumentationViewsBeliefsPage, {});
+  }
+
+  public gotoDocumentationFurtherThoughtsPage() {
+    this.navCtrl.push(DocumentationFurtherThoughtsPage, {});
   }
 
 }

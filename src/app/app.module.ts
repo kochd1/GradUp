@@ -77,6 +77,8 @@ import { PopoverComponent } from '../components/popover/popover';
 import { FearDelightDocumentationEntryDatabaseProvider } from '../providers/database/fearDelightDocumentationEntryDB';
 import { DocumentationViewsBeliefsPage } from '../pages/documentation-views-beliefs/documentation-views-beliefs';
 import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/database/viewBeliefDocumentationEntryDB';
+import { DocumentationFurtherThoughtsPage } from '../pages/documentation-further-thoughts/documentation-further-thoughts';
+import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/database/furtherThoughtDocumentationEntryDB';
 
 
 @NgModule({
@@ -104,6 +106,7 @@ import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/datab
     InformationAnorexiaPage,
     DocumentationFearsDelightsPage,
     DocumentationViewsBeliefsPage,
+    DocumentationFurtherThoughtsPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -156,6 +159,7 @@ import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/datab
     InformationAnorexiaPage,
     DocumentationFearsDelightsPage,
     DocumentationViewsBeliefsPage,
+    DocumentationFurtherThoughtsPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -187,6 +191,7 @@ import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/datab
     DatabaseProvider,
     FearDelightDocumentationEntryDatabaseProvider,
     ViewBeliefDocumentationEntryDatabaseProvider,
+    FurtherThoughtDocumentationEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,
