@@ -1,0 +1,17 @@
+page-documentation-views-beliefs {
+
+  .scroll-content {
+    overflow-y: hidden;
+  }
+
+  .listSection {
+    max-height: 83%;
+    overflow-y: scroll;
+  }
+
+  .manipBtn{
+    text-transform: none; //ion-buttons without caps
+    margin-top: -3%;
+  }
+
+}

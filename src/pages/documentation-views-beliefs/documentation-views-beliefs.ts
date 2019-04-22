@@ -8,15 +8,17 @@ import { DocumentationEntry } from '../../classes/documentationEntry';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 //import providers
-import { FearDelightDocumentationEntryDatabaseProvider } from '../../providers/database/fearDelightDocumentationEntryDB';
+import { ViewBeliefDocumentationEntryDatabaseProvider } from '../../providers/database/viewBeliefDocumentationEntryDB';
 
 @IonicPage()
 @Component({
-  selector: 'page-documentation-fears-delights',
-  templateUrl: 'documentation-fears-delights.html',
+  selector: 'page-documentation-views-beliefs',
+  templateUrl: 'documentation-views-beliefs.html',
 })
-export class DocumentationFearsDelightsPage {
+export class DocumentationViewsBeliefsPage {
   //@ViewChild('refresherRef') refresherRef;
+
+  items: any;
 
   testData: any;
 
@@ -38,26 +40,16 @@ export class DocumentationFearsDelightsPage {
    documentationEntryId: number;
 
    /**
-    * collection of fear entries.
+    * collection of views/beliefs entries.
     */
-  fearDocumentationEntryCollection: DocumentationEntry[] = [];
+  viewBeliefDocumentationEntryCollection: DocumentationEntry[] = [];
 
-  fearDocumentationEntryCollectionIsNull: boolean;
-
-  /**
-   * collection of delight entries.
-   */
-  delightDocumentationEntryCollection: DocumentationEntry[] = [];
-
-  delightDocumentationEntryCollectionIsNull: boolean;
+  viewBeliefDocumentationEntryCollectionIsNull: boolean;
 
   /**
    * boolean variable for new entry
    */
   newEntry: boolean;
-
-  isFear: boolean;
-  isDelight: boolean;
 
   aboutToEdit: boolean;
 
@@ -72,74 +64,47 @@ export class DocumentationFearsDelightsPage {
               public alertCtrl: AlertController,
               private modalCtrl: ModalController,
               private storage: Storage,
-              public dEntryDbp: FearDelightDocumentationEntryDatabaseProvider) {
+              public dEntryDbp: ViewBeliefDocumentationEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
-    this.fearDocumentationEntryCollectionIsNull = false;
-    this.delightDocumentationEntryCollectionIsNull = false;
+    this.viewBeliefDocumentationEntryCollectionIsNull = false;
 
     this.newEntry=false;
-    this.isFear=false;
-    this.isDelight=false;
     this.aboutToEdit=false;
 
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DocumentationFearsDelightsPage');
+    console.log('ionViewDidLoad DocumentationViewsBeliefsPage');
 
   
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
     //fear documentation entry collection
-    this.storage.get('fearDocumentationEntryCollection').then((value => {
+    this.storage.get('viewBeliefDocumentationEntryCollection').then((value => {
       if(value!=null)
       {
-      that.fearDocumentationEntryCollection = value;
+      that.viewBeliefDocumentationEntryCollection = value;
       }
 
       else{
-        that.fearDocumentationEntryCollectionIsNull = true;
+        that.viewBeliefDocumentationEntryCollectionIsNull = true;
       }
-      console.log("ionViewDidLoad() -> fearDocumentationEntryCollection: ", that.fearDocumentationEntryCollection);
-
-    }));
-
-    //delight documentation entry collection
-    this.storage.get('delightDocumentationEntryCollection').then((value => {
-      if(value!=null)
-      {
-      that.delightDocumentationEntryCollection = value;
-      }
-
-      else{
-        that.delightDocumentationEntryCollectionIsNull = true;
-      }
-      console.log("ionViewDidLoad() -> delightDocumentationEntryCollection: ", that.delightDocumentationEntryCollection);
+      console.log("ionViewDidLoad() -> viewBeliefDocumentationEntryCollection: ", that.viewBeliefDocumentationEntryCollection);
 
     }));
   }
 
   /**
-   * Sets the type of this entry via "add entry" button.
+   * resets the "documentationEntry" and the "aboutToEdit" variable (necessary, if an entry modification is being aborted 
+   * and a new one is being created instead.) This method will be executed everytime the "add entry" button is being pushed.
    */
-  public setEntryType(entryType: string){
-    this.documentationEntry = null; //reset documentation entry (necessary, if an entry modification is aborted)
-    this.aboutToEdit=false; //same reason
+  public resetDocumentationEntry(){
 
-    console.log("setEntryType() called with value: ", entryType)
-    if(entryType=='fear'){
-      this.isFear=true;
-      console.log("setEntryType() -> this.isFear: ", this.isFear);
-      this.isDelight=false; //vice versa
-    }
+    this.documentationEntry=null;
+    this.aboutToEdit=false;
 
-    else{
-      this.isDelight=true;
-      console.log("setEntryType() -> this.isDelight: ", this.isDelight);
-      this.isFear=false; //necessary, if user firstly want to enter a fear
-    }
   }
 
   /**
@@ -208,7 +173,7 @@ export class DocumentationFearsDelightsPage {
   //this.documentationEntry.entryText='';
 
   console.log("documentationEntry_temp: ", this.documentationEntry);
-  this.fearDocumentationEntryCollection.push(this.documentationEntry);
+  this.viewBeliefDocumentationEntryCollection.push(this.documentationEntry);
   this.newEntry = true;
 
  }
@@ -219,7 +184,7 @@ export class DocumentationFearsDelightsPage {
   */
  public abortEntryInput(){
    this.newEntry=false;
-   this.fearDocumentationEntryCollection.splice(this.fearDocumentationEntryCollection.length-1, 1);
+   this.viewBeliefDocumentationEntryCollection.splice(this.viewBeliefDocumentationEntryCollection.length-1, 1);
  }
 
  /**
@@ -242,33 +207,17 @@ export class DocumentationFearsDelightsPage {
 
    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
-   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry, this.isFear);
+   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry);
 
    if(this.aboutToEdit){
-     if(this.isFear)
-     {
-      this.fearDocumentationEntryCollection.splice(this.entryIndex, 1);
-     }
-
-     else{
-      this.delightDocumentationEntryCollection.splice(this.entryIndex, 1);
-     }
     
+      this.viewBeliefDocumentationEntryCollection.splice(this.entryIndex, 1);
    }
 
-   console.log("saveDocumentationEntry() -> this.isFear: ", this.isFear);
-   console.log("saveDocumentationEntry() -> this.isDelight: ", this.isDelight);
 
-   if(this.isFear)
-   {
-    this.fearDocumentationEntryCollection.push(this.documentationEntry);
-    console.log("this.fearDocumentationEntryCollection was pushed.");
-   }
-
-   else{
-    this.delightDocumentationEntryCollection.push(this.documentationEntry);
-    console.log("this.delightDocumentationEntryCollection was pushed.");
-   }
+    this.viewBeliefDocumentationEntryCollection.push(this.documentationEntry);
+    console.log("this.viewBeliefDocumentationEntryCollection was pushed.");
+   
    
    
    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
@@ -305,7 +254,7 @@ export class DocumentationFearsDelightsPage {
 
     //var documentationEntry: DocumentationEntry;
 
-    this.dEntryDbp.getDocumentationEntryById(dEntryId, this.isFear).then((dEntry) =>{
+    this.dEntryDbp.getDocumentationEntryById(dEntryId).then((dEntry) =>{
       
       that.documentationEntry = dEntry;
       //documentationEntry = dEntry;
@@ -331,18 +280,12 @@ export class DocumentationFearsDelightsPage {
     console.log("documentationEntryDelete -> documentationEntryId (local param): " + dEntryId);
     console.log("documentationEntryDelete -> documentationEntryId (instance variable): " + this.documentationEntryId);
 
-    console.log("deleteDocumentatioEntry (logic)-> this.isFear before DB: ", this.isFear);
 
-    this.dEntryDbp.deleteDocumentationEntry(dEntryId, this.isFear); //db processing
+    this.dEntryDbp.deleteDocumentationEntry(dEntryId); //db processing
 
-    if(this.isFear)
-    {
-      this.fearDocumentationEntryCollection.splice(index, 1);
-    }
+      this.viewBeliefDocumentationEntryCollection.splice(index, 1);
+   
 
-    else{
-      this.delightDocumentationEntryCollection.splice(index, 1);
-    }
 
   }
 

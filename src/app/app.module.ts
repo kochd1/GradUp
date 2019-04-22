@@ -74,7 +74,9 @@ import { PulseStepsService } from '../services/pulse-steps.service';
 import { NotificationService } from '../services/notification.service';
 import { PhotoProvider } from '../providers/photo/photo';
 import { PopoverComponent } from '../components/popover/popover';
-import { DocumentationEntryDatabaseProvider } from '../providers/database/documentationEntryDB';
+import { FearDelightDocumentationEntryDatabaseProvider } from '../providers/database/fearDelightDocumentationEntryDB';
+import { DocumentationViewsBeliefsPage } from '../pages/documentation-views-beliefs/documentation-views-beliefs';
+import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/database/viewBeliefDocumentationEntryDB';
 
 
 @NgModule({
@@ -101,6 +103,7 @@ import { DocumentationEntryDatabaseProvider } from '../providers/database/docume
     InformationDocumentationPage,
     InformationAnorexiaPage,
     DocumentationFearsDelightsPage,
+    DocumentationViewsBeliefsPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -152,6 +155,7 @@ import { DocumentationEntryDatabaseProvider } from '../providers/database/docume
     InformationDocumentationPage,
     InformationAnorexiaPage,
     DocumentationFearsDelightsPage,
+    DocumentationViewsBeliefsPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -181,7 +185,8 @@ import { DocumentationEntryDatabaseProvider } from '../providers/database/docume
     InAppBrowser,
     Contacts,
     DatabaseProvider,
-    DocumentationEntryDatabaseProvider,
+    FearDelightDocumentationEntryDatabaseProvider,
+    ViewBeliefDocumentationEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,

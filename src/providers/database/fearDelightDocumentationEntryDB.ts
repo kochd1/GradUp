@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import { DocumentationEntry } from '../../classes/documentationEntry';
 
 @Injectable()
-export class DocumentationEntryDatabaseProvider {
+export class FearDelightDocumentationEntryDatabaseProvider {
 
   // fear documentation entry key
   fearDocumentationEntryCollection_key: string = 'fearDocumentationEntryCollection';

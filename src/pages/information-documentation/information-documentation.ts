@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { InformationAnorexiaPage } from '../information-anorexia/information-anorexia';
 import { DocumentationFearsDelightsPage } from '../documentation-fears-delights/documentation-fears-delights';
+import { DocumentationViewsBeliefsPage } from '../documentation-views-beliefs/documentation-views-beliefs';
 
 
 @IonicPage()
@@ -25,6 +26,10 @@ export class InformationDocumentationPage {
 
   public gotoDocumentationFearsDelightsPage() {
     this.navCtrl.push(DocumentationFearsDelightsPage, {});
+  }
+
+  public gotoDocumentationViewsBeliefsPage() {
+    this.navCtrl.push(DocumentationViewsBeliefsPage, {});
   }
 
 }
