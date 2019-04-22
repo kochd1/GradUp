@@ -92,15 +92,6 @@ export class DocumentationFearsDelightsPage {
     this.isDelight=false;
     this.aboutToEdit=false;
 
-    //test
-    /*this.documentationEntryCollection = [
-      {entryId: 1, entryDate: new Date(), entryText: "Hallo1"},
-      {entryId: 2, entryDate: new Date(), entryText: "Hallo2"},
-      {entryId: 3, entryDate: new Date(), entryText: "Hallo3"},
-    ]
-
-    this.storage.set('documentationEntryCollection', this.documentationEntryCollection);*/
-
   }
 
   ionViewDidLoad() {
@@ -152,10 +143,6 @@ export class DocumentationFearsDelightsPage {
     //only go through, if there's an entry to edit
     if(this.aboutToEdit==true)
     {
-    /*const myModalData = {
-      name: 'Dominik',
-      occupation: 'student'
-    };*/
 
     let myModalData: DocumentationEntry = this.documentationEntry;
     console.log("myModalData (data to pass to modal): ", myModalData); //as expected
@@ -222,15 +209,6 @@ export class DocumentationFearsDelightsPage {
  public addDocumentationEntry(){
   console.log("addDocumentationEntry() called");
 
-  //test
-  /*this.documentationEntryCollection = [
-    {entryId: 1, entryDate: new Date(), entryText: "Hallo1"},
-    {entryId: 2, entryDate: new Date(), entryText: "Hallo2"},
-    {entryId: 3, entryDate: new Date(), entryText: "Hallo3"},
-  ]
-
-  this.storage.set('documentationEntryCollection', this.documentationEntryCollection);*/
-
   this.documentationEntry.entryId=1;
   //this.documentationEntry.entryDate= new Date();
   //this.documentationEntry.entryText='';
@@ -255,17 +233,6 @@ export class DocumentationFearsDelightsPage {
   */
  public saveDocumentationEntry(){
    this.newEntry=true;
-
-   /*let entryId;
-    //checks before setting the id, if it is a new or edited entry
-    if(this.documentationEntry.entryId==0 || this.documentationEntry.entryId==null){
-      console.log("saveDocumentationEntry() -> entryId:", this.documentationEntry.entryId);
-      entryId = Number(new Date);
-      //this.documentationEntry.entryId = Number(new Date()); //.getTime);
-    }
-    else{
-      entryId = this.documentationEntry.entryId;
-    }*/
 
    let entryDate = new Date();
    let entryId;
@@ -314,15 +281,6 @@ export class DocumentationFearsDelightsPage {
 
    this.aboutToEdit = false; //necessary because of new entries without page reload
 
-   /*this.storage.set('documentationEntryCollection', this.documentationEntryCollection);
-   console.log("saveDocumentationEntry() -> documentationEntryColl", this.documentationEntryCollection);*/
-
-   //this.documentationEntry.entryText="reset!"; //reset
-
- }
-
- public getAllDocumentationEntries(){
-
  }
 
  /**
@@ -363,11 +321,6 @@ export class DocumentationFearsDelightsPage {
       this.closeSlidingItem(this.slidingItem); //closes after the edit btn was fired
     });
 
-    /*console.log("editDocumentationEntry() -> text from storage (after =>) this: ", this.documentationEntry); //not correct
-    console.log("editDocumentationEntry() -> text from storage (after =>) that: ", that.documentationEntry); //not correct
-    console.log("editDocumentationEntry() -> text from storage (after =>) var: ", documentationEntry); //not correct*/
-
-    
   }
 
   /**
@@ -397,35 +350,11 @@ export class DocumentationFearsDelightsPage {
       this.delightDocumentationEntryCollection.splice(index, 1);
     }
 
-    /*return this.storage.get('fearDocumentationEntryCollection').then((valArr) => {
-      let newArr = valArr.filter(val => val.entryId != dEntryId); //true -> wird in newArr geschrieben
-      this.storage.set('fearDocumentationEntryCollection', newArr);
-
-      
-      return true;
-    });*/
-
-    /*let  i: number;
-    for(i = 0; i< this.items.length; i++){
-       if(this.items[i] == item){
-         this.items.splice(i, 1);
-       }
-    }*/
-
   }
 
   public gotoInformationPage() {
     //this.navCtrl.push(InformationPage, {});
     this.navCtrl.popToRoot();
   }
-
-  /*doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      this.refresherRef.complete();
-    }, 2000);
-  }*/
 
 }
