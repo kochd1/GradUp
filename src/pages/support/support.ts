@@ -17,10 +17,10 @@ import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-help',
-  templateUrl: 'help.html',
+  selector: 'page-support',
+  templateUrl: 'support.html',
 })
-export class HelpPage {
+export class SupportPage {
 
   bezugsperson_telefonnummer: any;
   bezugsperson_smstext: string;

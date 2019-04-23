@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HelpPage } from '../help/help';
+import { SupportPage } from "../support/support";
 
 @IonicPage()
 @Component({

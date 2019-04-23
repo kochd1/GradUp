@@ -37,7 +37,7 @@ import { InformationAnorexiaPage } from '../pages/information-anorexia/informati
 import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-delights/documentation-fears-delights';
 
 //support
-import { HelpPage } from '../pages/help/help';
+import { SupportPage } from '../pages/support/support';
 import { HelpPointsofcontactPage } from '../pages/help-pointsofcontact/help-pointsofcontact';
 import { HelpCopingPage } from '../pages/help-coping/help-coping';
 
@@ -111,7 +111,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationFurtherThoughtsPage,
     DocumentationSetbackSuccessPage,
 
-    HelpPage,
+    SupportPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
 
@@ -165,7 +165,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationFurtherThoughtsPage,
     DocumentationSetbackSuccessPage,
 
-    HelpPage,
+    SupportPage,
     HelpPointsofcontactPage,
     HelpCopingPage,
     

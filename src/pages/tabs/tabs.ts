@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { JournalPage } from '../journal/journal';
 import { InformationDocumentationPage } from '../information-documentation/information-documentation';
-import { HelpPage } from "../help/help";
+import { SupportPage } from "../support/support";
 import { AdaptionsPage } from '../adaptions/adaptions';
 import { Tabs } from 'ionic-angular/umd/navigation/nav-interfaces';
 
@@ -13,7 +13,7 @@ export class TabsPage {
 
   tab1 = JournalPage;
   tab2 = InformationDocumentationPage;
-  tab3 = HelpPage;
+  tab3 = SupportPage;
   tab4 = AdaptionsPage;
 
   @ViewChild('mainTabs') tabRef: Tabs;

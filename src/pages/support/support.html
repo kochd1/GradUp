@@ -9,7 +9,11 @@
 </ion-header>
 
 <ion-content padding>
-    <p>Kontaktaufnahme: </p>
+        <ion-item>
+                <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
+                    <b>Kontaktaufnahme:  </b>
+                </ion-label>
+        </ion-item>
 
     <div text-left class="help-buttons">
         <p>Direkt mit der <span class="highlight">Bezugsperson</span> in Kontakt treten:</p>
@@ -42,7 +46,11 @@
         </button>
     </div>
 
-    <p>Selbsthilfe: </p>
+    <ion-item>
+            <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
+                <b>Selbsthilfe:  </b>
+            </ion-label>
+    </ion-item>
 
     <ion-list class="with-borders">
         <button ion-item (click)="gotoHelpPointsofcontactPage()">
