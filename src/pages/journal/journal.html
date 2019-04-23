@@ -9,16 +9,21 @@
 </ion-header>
 
 <ion-content padding>
-    <p><b>Tagebuch und Gemütszustandsangabe: </b></p>
+
     <p>
-        In Ihrem persönlichen Tagebuch können Sie Ausflüge 
-        / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw.
-        nach Lust und Laune erfassen.
+        In deinem persönlichen Tagebuch kannst du Ausflüge 
+        / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw. erfassen.
     </p>
     <p>
-        Sie können die Einträge mit einem passenden Bild ergänzen.
+                Du kannst die Einträge mit einem Bild aus deiner Gallerie oder direkt mittels Fotoaufnahme ergänzen.
     </p>
 
+    <ion-item id ="journalItemLb">
+        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
+            <b>Tagebuch:  </b>
+        </ion-label>
+    </ion-item>
+        
     <ion-list class="with-borders">
         <button ion-item (click)="gotoJournalEntryPage()">
             <span class="highlight">Eintrag erstellen</span>
@@ -28,10 +33,20 @@
             <span class="highlight">Alle Einträge ansehen und bearbeiten</span>
         </button>
 
+    </ion-list>
+
+    <ion-item id ="journalItemLb">
+        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
+                <b>Gemütszustandsangabe:  </b>
+        </ion-label>
+    </ion-item>
+
+    <ion-list class="with-borders">
         <button ion-item (click)="gotoStateOfMindPage()">
-            <span class="highlight">Gemütszustandsangabe</span>
+            <span class="highlight">Deinen Gemütszustand angeben</span>
         </button>
     </ion-list>
+    
 
 
     <!-- anzeigen mit block, ausblenden mit none -->
