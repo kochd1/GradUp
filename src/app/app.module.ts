@@ -79,6 +79,8 @@ import { DocumentationViewsBeliefsPage } from '../pages/documentation-views-beli
 import { ViewBeliefDocumentationEntryDatabaseProvider } from '../providers/database/viewBeliefDocumentationEntryDB';
 import { DocumentationFurtherThoughtsPage } from '../pages/documentation-further-thoughts/documentation-further-thoughts';
 import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/database/furtherThoughtDocumentationEntryDB';
+import { DocumentationSetbackSuccessPage } from '../pages/documentation-setback-success/documentation-setback-success';
+import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/database/setbackSuccessDocumentationEntryDB';
 
 
 @NgModule({
@@ -107,6 +109,7 @@ import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationFearsDelightsPage,
     DocumentationViewsBeliefsPage,
     DocumentationFurtherThoughtsPage,
+    DocumentationSetbackSuccessPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -160,6 +163,7 @@ import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationFearsDelightsPage,
     DocumentationViewsBeliefsPage,
     DocumentationFurtherThoughtsPage,
+    DocumentationSetbackSuccessPage,
 
     HelpPage,
     HelpPointsofcontactPage,
@@ -192,6 +196,7 @@ import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/d
     FearDelightDocumentationEntryDatabaseProvider,
     ViewBeliefDocumentationEntryDatabaseProvider,
     FurtherThoughtDocumentationEntryDatabaseProvider,
+    SetbackSuccessDocumentationEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,

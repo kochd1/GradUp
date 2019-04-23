@@ -4,6 +4,7 @@ import { InformationAnorexiaPage } from '../information-anorexia/information-ano
 import { DocumentationFearsDelightsPage } from '../documentation-fears-delights/documentation-fears-delights';
 import { DocumentationViewsBeliefsPage } from '../documentation-views-beliefs/documentation-views-beliefs';
 import { DocumentationFurtherThoughtsPage } from '../documentation-further-thoughts/documentation-further-thoughts';
+import { DocumentationSetbackSuccessPage} from '../documentation-setback-success/documentation-setback-success';
 
 
 @IonicPage()
@@ -31,6 +32,10 @@ export class InformationDocumentationPage {
 
   public gotoDocumentationViewsBeliefsPage() {
     this.navCtrl.push(DocumentationViewsBeliefsPage, {});
+  }
+
+  public gotoDocumentationSetbackSuccessPage() {
+    this.navCtrl.push(DocumentationSetbackSuccessPage, {});
   }
 
   public gotoDocumentationFurtherThoughtsPage() {
