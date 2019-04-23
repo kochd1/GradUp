@@ -56,10 +56,10 @@ img {
     }    
 }
 
-.highlight {
+/*.highlight {
     color: #488aff;
     font-weight: bold;
-}
+}*/
 
 .toolbar-content-ios,
 .toolbar-content-md {
@@ -90,7 +90,7 @@ img {
     .item-md {
         padding-left: 0;
     }
-} 
+}
 
 .footer p {
     margin-left: 1em;
@@ -113,3 +113,35 @@ img {
 .error-message {
     color: #ea6153;
 }
+
+/*@media only screen and (orientation: landscape)  {
+    .my-modal {
+     .modal-wrapper {
+       position: absolute;
+       top: 0 !important;
+       left: 0 !important;
+       display: block;
+       width: 100% !important;
+       height: 100% !important;
+     } 
+   }
+ }*/
+
+ .modal-wrapper{
+    position: absolute;
+    width: 90vw;
+    height: 50vh;
+    top: 0;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    background: rgba(0,0,0,0.5);
+    
+    }
+    @media (min-width: 300px) and (min-height: 500px) {
+    ion-modal ion-backdrop {
+    visibility: visible;
+ }
+    }

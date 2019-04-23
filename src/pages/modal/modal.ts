@@ -41,15 +41,18 @@ export class ModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalPage');
 
-    this.documentationEntry = this.navParams.get('data'); //undefined!          können hiermit Daten ins Modal speisen
+    this.documentationEntry = this.navParams.get('data'); //können hiermit Daten ins Modal speisen
     console.log("data from entry-overview page", this.documentationEntry);
 
     this.documentationEntryText = this.documentationEntry.entryText;
     console.log("text data filtered from entry-overview page", this.documentationEntryText);
   }
 
+  /**
+   * Modal dismissed the entry text to the respective class.
+   */
   public setEntryText(){
-    this.viewCtrl.dismiss(this.documentationEntryText); //können Daten auch zurück zur eigentlichen Seite speisen.
+    this.viewCtrl.dismiss(this.documentationEntryText);
   }
 
   public closeModal(){
