@@ -1,4 +1,4 @@
-page-information-anorexia {
+page-support-self-help-propositions {
 
     .scroll-content {
       overflow-y: hidden;
@@ -11,7 +11,7 @@ page-information-anorexia {
       left: 84%;*/
     }
 
-    #awmfDiv{
+    #selfHelpGroupChatDiv{
       margin-top: -4%;
       /*position: fixed;
       top: 16%;*/
@@ -22,19 +22,16 @@ page-information-anorexia {
       font-size: 17px;
     }
 
-    .awmfLinkBtn{
+    #infoItemLb{
+      margin-top: -4%;
+    }
+
+    .selbsthilfeSchweizLinkBtn{
       width: 280px;
       height: 35px;
         .button-inner {
           justify-content: flex-start;
         }
       }
-
-    .specialistDepartementLinkBtn{
-      width: 280px;
-      height: 50px;
-      
-    }
-  
 
 }

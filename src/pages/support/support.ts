@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { HelpPointsofcontactPage } from '../help-pointsofcontact/help-pointsofcontact';
+import { SupportSelfHelpPropositionsPage } from '../support-self-help-propositions/support-self-help-propositions';
 import { HelpCopingPage } from '../help-coping/help-coping';
 import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
 import { CallNumber } from '@ionic-native/call-number';
@@ -286,8 +286,8 @@ export class SupportPage {
     });
   }
 
-  public gotoHelpPointsofcontactPage() {
-    this.navCtrl.push(HelpPointsofcontactPage, {});
+  public gotoSupportSelfHelpPropositionsPage() {
+    this.navCtrl.push(SupportSelfHelpPropositionsPage);
   }
 
   public gotoHelpCopingPage() {

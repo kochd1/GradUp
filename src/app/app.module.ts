@@ -38,7 +38,7 @@ import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-del
 
 //support
 import { SupportPage } from '../pages/support/support';
-import { HelpPointsofcontactPage } from '../pages/help-pointsofcontact/help-pointsofcontact';
+import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
 import { HelpCopingPage } from '../pages/help-coping/help-coping';
 
 //adaptions
@@ -112,7 +112,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationSetbackSuccessPage,
 
     SupportPage,
-    HelpPointsofcontactPage,
+    SupportSelfHelpPropositionsPage,
     HelpCopingPage,
 
     AdaptionsPage,
@@ -166,7 +166,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
     DocumentationSetbackSuccessPage,
 
     SupportPage,
-    HelpPointsofcontactPage,
+    SupportSelfHelpPropositionsPage,
     HelpCopingPage,
     
     AdaptionsPage,

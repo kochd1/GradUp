@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-navbar color = primary hideBackButton="true">
+        <ion-title>
+            <title-logo text="Unterstützung - Selbsthilfe"></title-logo>
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <button ion-button id ="popover" icon-only clear color = "dark" large (click) = "presentPopover($event)"><ion-icon name = "information-circle"></ion-icon></button>
+    <div id = "selfHelpGroupChatDiv">
+        <ion-item>
+            <ion-label style="font-size: 20px">
+                <b>Selbsthilfeangebote: </b>
+            </ion-label>
+        </ion-item>
+
+        <button ion-button id = "link" clear color ="dark" class = "selbsthilfeSchweizLinkBtn" (click) = "openWebPage('http://www.selbsthilfeschweiz.ch/shch/de/selbsthilfe-gesucht/themenliste.thema.4f494361-29b1-4e67-bad4-b4760533d03c.html')">selbsthilfeschweiz.ch</button>
+        <button ion-button icon-only clear (click) = "openWebPage('http://www.selbsthilfeschweiz.ch/shch/de/selbsthilfe-gesucht/themenliste.thema.4f494361-29b1-4e67-bad4-b4760533d03c.html')"><ion-icon name = "link"></ion-icon></button>
+
+        <button ion-button id = "link" clear color ="dark" class = "selbsthilfeSchweizLinkBtn" (click) = "openWebPage('http://www.selbsthilfe-chats.ch/views/home/aktuelle-chats.html')">selbsthilfe-chats.ch</button>
+        <button ion-button icon-only clear (click) = "openWebPage('http://www.selbsthilfe-chats.ch/views/home/aktuelle-chats.html')"><ion-icon name = "link"></ion-icon></button>
+        <ion-item id="infoItemLb" no-lines>
+                <ion-label text-wrap style="font-size: 12px">
+                *jeweils moderiert von einer Fachperson
+                </ion-label>
+        </ion-item>
+    </div>
+
+</ion-content>
+
+<ion-footer no-shadow>
+    <ion-toolbar no shadow position="bottom">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="gotoSupportPage()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

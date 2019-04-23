@@ -1,16 +1,12 @@
 <ion-header>
-
-        <ion-navbar hideBackButton="true">
-            <ion-title>
-                <title-logo text="Information & Dokumentation"></title-logo>
-            </ion-title>
-        </ion-navbar>
-    
-    </ion-header>
+    <ion-navbar color = primary hideBackButton="true">
+        <ion-title>
+            <title-logo text="Information"></title-logo>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
 
 <ion-content padding>
-    <p></p>
-
     <button ion-button id ="popover" icon-only clear color = "dark" large (click) = "presentPopover($event)"><ion-icon name = "information-circle"></ion-icon></button>
    <div id = "awmfDiv">
     <ion-item>
@@ -53,10 +49,12 @@
 </div> 
 </ion-content>
 
-<ion-footer class="footer-no-borders">
+<ion-footer no-shadow>
+    <ion-toolbar no shadow position="bottom">
         <ion-buttons left>
             <button ion-button icon-only (click)="gotoInformationPage()">
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-    </ion-footer>
+    </ion-toolbar>
+</ion-footer>
