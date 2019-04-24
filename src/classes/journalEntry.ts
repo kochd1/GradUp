@@ -15,22 +15,10 @@ export class JournalEntry {
     this.entryText = "";
     this.entryPhoto= "";
     this.entrySubjCondition;
-    this.entryMoodReason;
+    this.entryMoodReason= "";
 
     //does not work! -> work around in journal-entry.ts
     this.entryId = 0; //this.entryDate.getTime(); //sets the amount of milliseconds since 1970 as id
   }
-
-  /*setJournalEntryID(entryID: string){
-
-    this.entryID = entryID;
-
-  }
-
-  getJournalEntryID(): string{
-
-    return this.entryID;
-  }*/
-
 
 }

@@ -145,11 +145,8 @@ export class JournalEntryFormPage {
     this.moodReason = this.journalEntry.entryMoodReason;
     console.log("ionViewWillEnter() -> mood reason (local):", this.journalEntry.entryMoodReason);
 
-    //this.subjectiveCondition = this.journalEntry.entrySubjCondition;
     //console.log("ionViewWillEnter() -> subj. Condition (MIDATA):", this.);
 
-    
-   
 
     this.dbp.getJournalEntryCollection().then((val) => {
       if(val == null) {
@@ -172,9 +169,7 @@ export class JournalEntryFormPage {
 
         else{
           that.counter = value;
-          that.counter++;
-          console.log("get counter (if not empty)", that.counter);
-          this.storage.set('InstantFeedback', that.counter);
+          console.log("ionViewWillEnter() -> that.counter (if not empty)", that.counter);
         }});
 
     //#MIDATA -> load the elements
@@ -285,7 +280,7 @@ alert.present();
       }
 
       console.log("saveEntry() -> entryPhoto", this.myPhoto);
-        this.journalEntry.entryPhoto = this.myPhoto;
+      this.journalEntry.entryPhoto = this.myPhoto;
       
       this.dbp.saveJournalEntry(this.journalEntry).then(val => {
         if(val)
@@ -297,9 +292,21 @@ alert.present();
       //check which condition was entered
       if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
 
-        console.log("subjective condition input: ", this.subjectiveCondition);
-        console.log("mood reason input: ", this.moodReason);
-        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, this.moodReason);
+        console.log("saveEntry() -> subjective condition input: ", this.subjectiveCondition);
+        console.log("saveEntry() -> mood reason input: ", this.moodReason);
+
+        let moodReason: string;
+
+        if(this.journalEntry.entryMoodReason)
+        {
+          moodReason = this.journalEntry.entryMoodReason;
+        }
+
+        else{
+          moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
+        }
+      
+        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
         this.journalEntry.entrySubjCondition = this.subjectiveCondition; //local copy
         this.midataService.save(mentalCondition)
         .then((response) => {
@@ -319,6 +326,11 @@ alert.present();
     //this.addMentalCondition();
     //console.log("addMentalCondition is called");
 
+
+    //instant feedback
+    this.counter++;
+    console.log("saveEntry() -> this.counter (if not empty)", this.counter);
+    this.storage.set('InstantFeedback', this.counter);
     this.showInstantFeedback();
       
     }
@@ -390,7 +402,7 @@ alert.present();
 
     //push the data to the array
     this.subjectiveConditionData.push({ date: date, value: measure });
-    this.subjectiveCondition = measure;
+    //this.subjectiveCondition = measure; //!!problem with new entry!!
   }
 
   public gotoJournalPage() {
@@ -398,9 +410,9 @@ alert.present();
     //this.navCtrl.push(JournalPage, {});
     this.navCtrl.popToRoot();
 
-    for (let entry of this.subjectiveConditionData){
+    /*for (let entry of this.subjectiveConditionData){
       console.log("All subjCondition values (MIDATA)", entry);
-    }
+    }*/
   }
 
 
@@ -503,6 +515,7 @@ alert.present();
 
         if(this.counter == 3) {
           this.counter = 0;
+          console.log("alert3: this.counter", this.counter);
           this.storage.set('InstantFeedback', this.counter);
     
           let alert3 = this.alertCtrl.create({
