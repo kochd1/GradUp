@@ -4,8 +4,9 @@ import { NotificationService } from '../../services/notification.service';
 
 //MIDATA imports
 import { MidataService } from '../../services/MidataService';
-import { Observation } from 'Midata';
 import { ObsMentalCondition } from '../../resources/subjectiveCondition';
+
+//JournalPage
 import { JournalPage } from '../journal/journal';
 
 /**
@@ -55,7 +56,7 @@ export class StateOfMindPage {
   }
 
   /**
-   * Saves the moodEntry to MIDATA
+   * Saves the mood entry to MIDATA
    */
   public saveMoodEntry(){
     console.log("saveMoodEntry() -> subjectiveCondition:", this.subjectiveCondition);
@@ -63,9 +64,21 @@ export class StateOfMindPage {
       //input filter (additional)
       if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
 
-        console.log("subjective condition input: ", this.subjectiveCondition);
-        console.log("mood reason: ", this.moodReason);
-        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, this.moodReason);
+        console.log("saveMoodEntry() -> subjective condition input: ", this.subjectiveCondition);
+        console.log("saveMoodEntry() -> mood reason: ", this.moodReason);
+
+        let moodReason: string;
+
+        if(this.moodReason)
+        {
+          moodReason = this.moodReason;
+        }
+
+        else{
+          moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
+        }
+      
+        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
 
         this.midataService.save(mentalCondition)
         .then((response) => {

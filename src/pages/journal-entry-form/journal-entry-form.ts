@@ -282,12 +282,15 @@ alert.present();
       console.log("saveEntry() -> entryPhoto", this.myPhoto);
       this.journalEntry.entryPhoto = this.myPhoto;
       
-      this.dbp.saveJournalEntry(this.journalEntry).then(val => {
+      this.dbp.saveJournalEntry(this.journalEntry);
+
+      //retest before removal!
+      /*.then(val => {
         if(val)
           this.dbp.getJournalEntryCollection().then((val) =>{
-            this.navCtrl.push(JournalPage);
+            //this.navCtrl.push(JournalPage);
           });
-      });
+      });*/
 
       //check which condition was entered
       if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){

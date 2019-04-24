@@ -67,7 +67,7 @@
  <ion-grid>
         <ion-row>
             <ion-label id="reasonLb"> <b>Grund:</b> </ion-label> <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
-            <ion-item id="reason"> <ion-input [(ngModel)]="journalEntry.entryMoodReason" placeholder ="Wieso fühlst du dich so?"></ion-input> </ion-item>
+            <ion-item id="reason"> <ion-input [(ngModel)]="journalEntry.entryMoodReason" maxlength="25" placeholder ="Wieso fühlst du dich so?"></ion-input> </ion-item>
         </ion-row>
  </ion-grid>
 
