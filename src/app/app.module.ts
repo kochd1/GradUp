@@ -39,7 +39,7 @@ import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-del
 //support
 import { SupportPage } from '../pages/support/support';
 import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
-import { HelpCopingPage } from '../pages/help-coping/help-coping';
+import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/support-coping-strategies';
 
 //adaptions
 import { AdaptionsPage } from '../pages/adaptions/adaptions';
@@ -81,6 +81,7 @@ import { DocumentationFurtherThoughtsPage } from '../pages/documentation-further
 import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/database/furtherThoughtDocumentationEntryDB';
 import { DocumentationSetbackSuccessPage } from '../pages/documentation-setback-success/documentation-setback-success';
 import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/database/setbackSuccessDocumentationEntryDB';
+import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copingStrategyEntryDB';
 
 
 @NgModule({
@@ -113,7 +114,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
 
     SupportPage,
     SupportSelfHelpPropositionsPage,
-    HelpCopingPage,
+    SupportCopingStrategiesPage,
 
     AdaptionsPage,
     ProfileCustomisationPage,
@@ -167,7 +168,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
 
     SupportPage,
     SupportSelfHelpPropositionsPage,
-    HelpCopingPage,
+    SupportCopingStrategiesPage,
     
     AdaptionsPage,
     ProfileCustomisationPage,
@@ -197,6 +198,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
     ViewBeliefDocumentationEntryDatabaseProvider,
     FurtherThoughtDocumentationEntryDatabaseProvider,
     SetbackSuccessDocumentationEntryDatabaseProvider,
+    CopingStrategyEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,

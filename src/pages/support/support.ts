@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { SupportSelfHelpPropositionsPage } from '../support-self-help-propositions/support-self-help-propositions';
-import { HelpCopingPage } from '../help-coping/help-coping';
+import { SupportCopingStrategiesPage } from '../support-coping-strategies/support-coping-strategies';
 import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
@@ -290,8 +290,8 @@ export class SupportPage {
     this.navCtrl.push(SupportSelfHelpPropositionsPage);
   }
 
-  public gotoHelpCopingPage() {
-    this.navCtrl.push(HelpCopingPage, {});
+  public gotoSupportCopingStrategiesPage() {
+    this.navCtrl.push(SupportCopingStrategiesPage, {});
   }
 
   public gotoCustomizeContacts() {
