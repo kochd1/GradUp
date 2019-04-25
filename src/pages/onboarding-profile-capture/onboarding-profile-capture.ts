@@ -100,7 +100,7 @@ export class OnboardingProfileCapturePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeCapturePage');
+    console.log('ionViewDidLoad OnboardingProfileCapturePage');
   }
 
   public gotoWelcomeContactPage() {
@@ -129,17 +129,17 @@ export class OnboardingProfileCapturePage {
     this.storage.set(this.key6, this.residential_status);
 
     // #MIDATA persistance: add Weight
-    //var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
+    var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
 
     // #MIDATA persistance: add Goal 
-    /*let goal = new Goal(this.weightGain);
+    let goal = new Goal(this.weightGain);
     let saveGoal = this.midataService.save(goal)
       .then((response) => {
         console.log("goal saved", response);
       })
       .catch((error) => {
         console.error("Error in save request:", error);
-      });*/
+      });
 
     // #MIDATA persistance: add Occupation 
     let occupation = new MyResource(this.userType);

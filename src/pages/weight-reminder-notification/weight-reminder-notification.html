@@ -27,11 +27,11 @@
 
             <p>In der nächsten Woche möchte ich</p>
             <ion-item id="textfield">
-                <ion-input [(ngModel)]="weightGains" type="number" formControlName="weightGains">
+                <ion-input [(ngModel)]="weightGain" type="number" formControlName="weightGainValidation">
                 </ion-input>
                 <ion-label color="primary" class="fixedLabel" fixed>(500-1500gr)</ion-label>
             </ion-item>
-            <p *ngIf="isSubmitted && !formGroup.controls.weightGains.valid" class="error-message">
+            <p *ngIf="isSubmitted && !formGroup.controls.weightGainValidation.valid" class="error-message">
                 Bitte den Wochenfortschritt korrekt eingeben.
             </p>
             <p>gewinnen.</p>

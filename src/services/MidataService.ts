@@ -41,7 +41,7 @@ export class MidataService {
     });
 
     // TODO: Change platform
-    this.midata = new Midata('https://test.midata.coop', 'MiDemo', 'metal taste buzz bonus toy volume');
+    this.midata = new Midata('https://test.midata.coop', 'GradUp', 'metal taste buzz bonus toy volume');
     window["midata"] = this.midata;
 
     platform.ready().then(() => {
