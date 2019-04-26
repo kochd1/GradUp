@@ -7,34 +7,35 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons end>
-        <button ion-button (click)="closeModal()">Schliessen</button>
+      <button ion-button (click)="closeModal()">Schliessen</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-item>
-        <ion-label *ngIf = "!documentationEntrySubjectText" style="font-size: 20px">
-          <b>Neuer Eintrag: </b>
-        </ion-label>
-        <ion-label *ngIf = "documentationEntrySubjectText" style="font-size: 20px">
-          <b>Eintrag vom {{setbackSuccessDocumentationEntry.entryDate | date: 'dd.MM.yy' }} anpassen: </b>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-textarea [(ngModel)]="documentationEntrySubjectText" placeholder = "Was war dein Erfolg/Rückschlag?" rows ="3">
-        </ion-textarea>
-    </ion-item>
-    <ion-item>
-        <ion-textarea [(ngModel)]="documentationEntryReasonText"  placeholder = "Wie kam es dazu?" rows ="3">
-        </ion-textarea>
-    </ion-item>
+  <ion-item>
+    <ion-label *ngIf="!setbackSuccessDocumentationEntry" style="font-size: 20px">
+      <b>Neuer Eintrag: </b>
+    </ion-label>
+    <ion-label *ngIf="setbackSuccessDocumentationEntry" style="font-size: 20px">
+      <b>Eintrag vom {{setbackSuccessDocumentationEntry.entryDate | date: 'dd.MM.yy' }} anpassen: </b>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-textarea [(ngModel)]="documentationEntrySubjectText" placeholder="Was war dein Erfolg/Rückschlag?" rows="3">
+    </ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-textarea [(ngModel)]="documentationEntryReasonText" placeholder="Wie kam es dazu?" rows="3">
+    </ion-textarea>
+  </ion-item>
 
-    <div class = "entryDiv">
-      <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!documentationEntrySubjectText" (click)="setEntryText()">
-        Eintragen
-      </button>
-    </div>
+  <div class="entryDiv">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!documentationEntrySubjectText"
+      (click)="setEntryText()">
+      Eintragen
+    </button>
+  </div>
 
 </ion-content>

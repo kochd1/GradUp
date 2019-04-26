@@ -1,32 +1,11 @@
 page-documentation-setback-success {
 
+  ion-content{
+    height: 100%; //works as wrapper
+  }
+
   .scroll-content {
     overflow-y: hidden;
-  }
-
-  .topSection {
-    max-height: 32%;
-    overflow-y: scroll;
-  }
-
-  .delightDiv{
-   position: relative;
-   padding-top: 10%;
-   //top: 15%;
-   //width: 100%;
-    
-    
-  }
-
-  #successLb{
-    //bottom: 70%;
-    top: 80%;
-    margin-top: 2%;
-  }
-
-  .bottomSection {
-    max-height: 32%;
-    overflow-y: scroll;
   }
 
   .manipBtn{

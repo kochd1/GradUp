@@ -4,29 +4,8 @@ page-documentation-fears-delights {
       overflow-y: hidden;
     }
 
-    .topSection {
-      max-height: 32%;
-      overflow-y: scroll;
-    }
-
-    .delightDiv{
-     position: relative;
-     padding-top: 10%;
-     //top: 15%;
-     //width: 100%;
-      
-      
-    }
-
-    #delightLb{
-      //bottom: 70%;
-      top: 80%;
-      margin-top: 2%;
-    }
-
-    .bottomSection {
-      max-height: 32%;
-      overflow-y: scroll;
+    ion-content{
+      height: 100%; //works as wrapper
     }
 
     .manipBtn{

@@ -1,127 +1,147 @@
 <ion-header>
 
-    <ion-navbar color = primary hideBackButton="true">
-        <ion-title>
-            <title-logo text="Dokumentation"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title>
+      <title-logo text="Dokumentation"></title-logo>
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
- 
+  <div class="EntryDivTop">
     <!--fears-->
     <ion-item>
-        <ion-label style="font-size: 20px">
-            <b>Meine Ängste: </b>
-        </ion-label>
+      <ion-label style="font-size: 20px">
+        <b>Meine Ängste: </b>
+      </ion-label>
     </ion-item>
 
-    <ion-list can-swipe = "true" class ="topSection">
-        <ion-item-sliding #slidingItem *ngFor="let dEntry of fearDocumentationEntryCollection.slice(); let i = index">
-            <ion-item>
-                {{dEntry.entryText}}
-            </ion-item>
-            <ion-item-options side="end">
-                <!--><ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">-
+    <ion-list can-swipe="true" class="topSection">
+      <ion-item-sliding #slidingItem *ngFor="let dEntry of fearDocumentationEntryCollection.slice(); let i = index">
+        <ion-item>
+          {{dEntry.entryText}}
+        </ion-item>
+        <ion-item-options side="end">
+          <!--><ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">-
                         <ion-refresher-content>
                             </ion-refresher-content>
 
                 </ion-refresher>-->
-              
-                    <button ion-button color = "danger" class="manipBtn" (click)="setEntryType('fear'); deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
-                    Löschen
-                    </button>
 
-                    <button ion-button color = "secondary" class="manipBtn" (click)="setEntryType('fear'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
-                    Ändern
-                    </button>
+          <button ion-button color="danger" class="manipBtn"
+            (click)="setEntryType('fear'); deleteDocumentationEntry(dEntry.entryId, i)">
+            <ion-icon name="trash"></ion-icon>
+            Löschen
+          </button>
 
-            </ion-item-options>
-        </ion-item-sliding>
+          <button ion-button color="secondary" class="manipBtn"
+            (click)="setEntryType('fear'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)">
+            <ion-icon name="create"></ion-icon>
+            Ändern
+          </button>
 
-    <!--<div> <!--*ngIf = "!documentationEntryCollectionIsNull"> <!--alternative: ng-container-->
-       <!--<ion-item *ngFor = "let dEntry of documentationEntryCollection.slice(); let i = index">
+        </ion-item-options>
+      </ion-item-sliding>
+
+      <!--<div> <!--*ngIf = "!documentationEntryCollectionIsNull"> <!--alternative: ng-container-->
+      <!--<ion-item *ngFor = "let dEntry of documentationEntryCollection.slice(); let i = index">
                 <ion-textarea [(ngModel)]="dEntry.entryText" rows = "1">
                     <!---{{ dEntry.entryText }}-->
-                <!--</ion-textarea>
+      <!--</ion-textarea>
         </ion-item>
     <!--</div>-->
 
-        <!--><ion-item *ngIf = "documentationEntry.entryId==1">
+      <!--><ion-item *ngIf = "documentationEntry.entryId==1">
             <ion-textarea [(ngModel)]="documentationEntry.entryText" rows = "1"></ion-textarea>
         </ion-item>-->
     </ion-list>
     <!--><ion-grid>-->
-        <!--<ion-row > <!--*ngIf="!newEntry"-->
-            <button ion-button icon-only clear class = "manipBtn" (click)="setEntryType('fear'); openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label></button>
-        <!--></ion-row>-->
-        <!--><ion-row *ngIf="newEntry">
+    <!--<ion-row > <!--*ngIf="!newEntry"-->
+    <button ion-button icon-only clear class="manipBtn" (click)="setEntryType('fear'); openModal()">
+      <ion-icon name="add"></ion-icon>
+      <ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label>
+    </button>
+    <!--></ion-row>-->
+    <!--><ion-row *ngIf="newEntry">
             <button ion-button [outline]="false" [round]="true" [disabled]="!documentationEntry.entryText" (click) = "saveDocumentationEntry()">Speichern</button>
             <button ion-button [outline]="false" [round]="true" (click) = "abortEntryInput()">Abbrechen</button>
         </ion-row>-->
     <!--></ion-grid>-->
 
     <!--delights-->
+
+  </div>
+
+  <div class="EntryDivBottom">
     <ion-item>
-        <ion-label id = delightLb style="font-size: 20px">
-            <b>Meine Freuden: </b>
-        </ion-label>
+      <ion-label class="bottomSectionLb" style="font-size: 20px">
+        <b>Meine Freuden: </b>
+      </ion-label>
     </ion-item>
 
-    <ion-list can-swipe = "true" class ="bottomSection">
-        <ion-item-sliding #slidingItem *ngFor="let dEntry of delightDocumentationEntryCollection.slice(); let i = index">
-            <ion-item>
-                {{dEntry.entryText}}
-            </ion-item>
-            <ion-item-options side="end">
-                <!--><ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">-
+    <ion-list can-swipe="true" class="bottomSection">
+      <ion-item-sliding #slidingItem *ngFor="let dEntry of delightDocumentationEntryCollection.slice(); let i = index">
+        <ion-item>
+          {{dEntry.entryText}}
+        </ion-item>
+        <ion-item-options side="end">
+          <!--><ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">-
                         <ion-refresher-content>
                             </ion-refresher-content>
 
                 </ion-refresher>-->
-              
-                    <button ion-button color = "danger" class="manipBtn" (click)="setEntryType('delight'); deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
-                    Löschen
-                    </button>
 
-                    <button ion-button color = "secondary" class="manipBtn" (click)="setEntryType('delight'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
-                    Ändern
-                    </button>
+          <button ion-button color="danger" class="manipBtn"
+            (click)="setEntryType('delight'); deleteDocumentationEntry(dEntry.entryId, i)">
+            <ion-icon name="trash"></ion-icon>
+            Löschen
+          </button>
 
-            </ion-item-options>
-        </ion-item-sliding>
+          <button ion-button color="secondary" class="manipBtn"
+            (click)="setEntryType('delight'); editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)">
+            <ion-icon name="create"></ion-icon>
+            Ändern
+          </button>
 
-    <!--<div> <!--*ngIf = "!documentationEntryCollectionIsNull"> <!--alternative: ng-container-->
-       <!--<ion-item *ngFor = "let dEntry of documentationEntryCollection.slice(); let i = index">
+        </ion-item-options>
+      </ion-item-sliding>
+
+      <!--<div> <!--*ngIf = "!documentationEntryCollectionIsNull"> <!--alternative: ng-container-->
+      <!--<ion-item *ngFor = "let dEntry of documentationEntryCollection.slice(); let i = index">
                 <ion-textarea [(ngModel)]="dEntry.entryText" rows = "1">
                     <!---{{ dEntry.entryText }}-->
-                <!--</ion-textarea>
+      <!--</ion-textarea>
         </ion-item>
     <!--</div>-->
 
-        <!--><ion-item *ngIf = "documentationEntry.entryId==1">
+      <!--><ion-item *ngIf = "documentationEntry.entryId==1">
             <ion-textarea [(ngModel)]="documentationEntry.entryText" rows = "1"></ion-textarea>
         </ion-item>-->
     </ion-list>
-   <!--><ion-grid class="manipGrid">
+    <!--><ion-grid class="manipGrid">
         <ion-row id ="manipBtnRow"> <!--*ngIf="!newEntry"-->
-            <button ion-button icon-only clear class = "manipBtn" (click)="setEntryType('delight'); openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label></button>
-        <!--></ion-row>-->
+    <button ion-button icon-only clear class="manipBtn" (click)="setEntryType('delight'); openModal()">
+      <ion-icon name="add"></ion-icon>
+      <ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label>
+    </button>
+    <!--></ion-row>-->
 
 
-        <!--><ion-row *ngIf="newEntry">
+    <!--><ion-row *ngIf="newEntry">
             <button ion-button [outline]="false" [round]="true" [disabled]="!documentationEntry.entryText" (click) = "saveDocumentationEntry()">Speichern</button>
             <button ion-button [outline]="false" [round]="true" (click) = "abortEntryInput()">Abbrechen</button>
         </ion-row>-->
     <!--></ion-grid>-->
 
+  </div>
+
 </ion-content>
 
 <ion-footer class="footer-no-borders">
-    <ion-buttons left>
-        <button ion-button icon-only (click)="gotoInformationPage()">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
-    </ion-buttons>
+  <ion-buttons left>
+    <button ion-button icon-only (click)="gotoInformationPage()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-footer>
