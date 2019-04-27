@@ -9,8 +9,10 @@ import { ToastController } from 'ionic-angular';
 //#MIDATA imports
 import { MidataService } from '../../services/MidataService';
 import { HeartRate, StepsCount, Observation } from 'Midata';
-import { ObsRespirationRate } from '../../resources/respirationRate';
+import { RespirationRateObs } from '../../resources/respirationRate';
+import { GalvanicSkinResponseObs } from '../../resources/galvanicSkinResponse';
 import * as Globals from '../../../typings/globals';
+
 
 //TODO kochd1: daten mittels der .buffer() filtern und allenfalls zusätzlich filter bei der midata load() anpassen.
 
@@ -214,6 +216,8 @@ export class AdaptionsBiovotionPage {
           dataToRequest.push(SENSORDATATYPE.heartRate);
           dataToRequest.push(SENSORDATATYPE.steps);
           dataToRequest.push(SENSORDATATYPE.respirationRate);
+          //dataToRequest.push(SENSORDATATYPE
+          dataToRequest.push(SENSORDATATYPE.gsrElectrode);
 
           this.biovotion.readLiveData(dataToRequest)
             .subscribe((liveData: SensorDataEntry) => {
@@ -230,9 +234,14 @@ export class AdaptionsBiovotionPage {
               console.log("respiration rate:", liveData.respirationRate.value);
               var respirationRate = Number(liveData.respirationRate.value);
 
+              //galvanic skin response (also electrodermal activity)
+              console.log("galvanic skin response: ", liveData.gsrElectrode.value);
+              var galvanicSkinResponse = Number(liveData.gsrElectrode.value);
+
               //this.saveHeartRateValueToMidata(heartRate); //do not save at the moment
               //this.saveStepAmountToMidata(amountOfSteps); //do not save at the moment
               //this.saveRespirationRateToMIDATA(respirationRate); TODO: code must be registered on MIDATA by BFH dev team!
+              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse);
 
 
             });
@@ -369,9 +378,9 @@ export class AdaptionsBiovotionPage {
     //let MessageDate = new Date();
 
     //#MIDATA persistence
-    this.midataService.save(new ObsRespirationRate(respirationRate)).then((response) => {
+    this.midataService.save(new RespirationRateObs(respirationRate)).then((response) => {
       // we can now access the midata response
-      console.log("ObsrespirationRate fired on MIDATA");
+      console.log("RespirationRateObs fired on MIDATA");
 
 
     }).catch((error) => {
@@ -380,6 +389,28 @@ export class AdaptionsBiovotionPage {
 
     console.log("respiration rate: " + respirationRate);
   }
+
+  /**
+   * Saves the galvanicSkinResponses to MIDATA.
+   *
+   * @param galvanicSkinResponse
+   */
+  saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new GalvanicSkinResponseObs(galvanicSkinResponse)).then((response) => {
+      // we can now access the midata response
+      console.log("GalvanicSkinResponseObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Error in save request:", error);
+    });
+
+    console.log("respiration rate: " + galvanicSkinResponse);
+  }
+
+
 
   /**
    * #MIDATA: adds all heart rate measures to the array "heartRateData".
