@@ -11,6 +11,7 @@ import { MidataService } from '../../services/MidataService';
 import { HeartRate, StepsCount, Observation } from 'Midata';
 import { RespirationRateObs } from '../../resources/respirationRate';
 import { GalvanicSkinResponseObs } from '../../resources/galvanicSkinResponse';
+import { HeartRateVariabilityObs } from '../../resources/heartRateVariability';
 import * as Globals from '../../../typings/globals';
 
 
@@ -218,6 +219,7 @@ export class AdaptionsBiovotionPage {
           dataToRequest.push(SENSORDATATYPE.respirationRate);
           //dataToRequest.push(SENSORDATATYPE
           dataToRequest.push(SENSORDATATYPE.gsrElectrode);
+          dataToRequest.push(SENSORDATATYPE.heartRateVariability);
 
           this.biovotion.readLiveData(dataToRequest)
             .subscribe((liveData: SensorDataEntry) => {
@@ -225,6 +227,12 @@ export class AdaptionsBiovotionPage {
               //heart rate
               console.log("heart rate (bpm):", liveData.heartRate.value);
               var heartRate = Number(liveData.heartRate.value); //Midata -> only for first test
+
+              //heart rate variability
+              console.log("heart rate variability (ms): ", liveData.heartRateVariability.value);
+              console.log("heart rate variability quality: ", liveData.heartRateVariability.quality);
+              console.log("heart rate variability object: ", liveData.heartRateVariability);
+              var heartRateVariability = Number(liveData.heartRateVariability.value);
 
               //steps
               console.log("steps/s: ", liveData.steps.value);
@@ -241,7 +249,9 @@ export class AdaptionsBiovotionPage {
               //this.saveHeartRateValueToMidata(heartRate); //do not save at the moment
               //this.saveStepAmountToMidata(amountOfSteps); //do not save at the moment
               //this.saveRespirationRateToMIDATA(respirationRate); TODO: code must be registered on MIDATA by BFH dev team!
-              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse);
+              //this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //do not save at the moment
+              this.saveHeartRateVariabilityValuesToMidata(heartRateVariability);
+
 
 
             });
@@ -349,11 +359,22 @@ export class AdaptionsBiovotionPage {
    *
    * @param heartRate
    */
-  saveHeartRateValueToMidata(heartRate: number) { //any -> provisoric
+  saveHeartRateValueToMidata(heartRate: number) {
     let MessageDate = new Date();
 
-    //#MIDATA persistance
+    //#MIDATA persistence
     this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
+  }
+
+  /**
+   * Saves the heart rate variability rate values to MIDATA.
+   *
+   * @param heartRateVariability
+   */
+  saveHeartRateVariabilityValuesToMidata(heartRateVariability: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new HeartRateVariabilityObs(heartRateVariability));
   }
 
   /**
