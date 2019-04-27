@@ -1,9 +1,8 @@
 {
     "files.exclude": {
-        "**/node_modules*": true,
+        "**/.sourcemaps*": true,
         "**/platforms*": true,
-        "**/plugins*": true,
-        "**/.sourcemaps*": true
+        "**/plugins*": true
     },
     "search.exclude": {
         "**/node_modules": true,

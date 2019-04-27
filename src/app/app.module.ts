@@ -45,7 +45,7 @@ import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/
 import { AdaptionsPage } from '../pages/adaptions/adaptions';
 import { ProfileCustomisationPage } from '../pages/profile-customisation/profile-customisation';
 import { ProfileCustomizecontactsPage } from '../pages/profile-customizecontacts/profile-customizecontacts';
-import { ProfileBiovotionPage } from '../pages/profile-biovotion/profile-biovotion';
+import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
 import { ProfileImpressumPage } from '../pages/profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../pages/profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../pages/profile-terms/profile-terms';
@@ -86,7 +86,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
 
 @NgModule({
   declarations: [
-    MyApp,   
+    MyApp,
 
     // pages
     TabsPage,
@@ -104,7 +104,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     JournalEntryFormPage,
     JournalEntryListPage,
     StateOfMindPage,
-    
+
     InformationDocumentationPage,
     InformationAnorexiaPage,
     DocumentationFearsDelightsPage,
@@ -119,7 +119,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     AdaptionsPage,
     ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
-    ProfileBiovotionPage,
+    AdaptionsBiovotionPage,
     ProfileImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage,
@@ -133,12 +133,12 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
-      tabsHideOnSubPages: true, 
-      }),
+      tabsHideOnSubPages: true,
+    }),
     //IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     IonicImageViewerModule,
-    ],
+  ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -169,11 +169,11 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     SupportPage,
     SupportSelfHelpPropositionsPage,
     SupportCopingStrategiesPage,
-    
+
     AdaptionsPage,
     ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
-    ProfileBiovotionPage,
+    AdaptionsBiovotionPage,
     ProfileImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage
@@ -190,7 +190,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     SecureStorage,
     Network,
     LocalNotifications,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     InAppBrowser,
     Contacts,
     DatabaseProvider,
@@ -211,7 +211,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
 export class AppModule {
 
   constructor(private statusBar: StatusBar) {
-        // let status bar overlay webview
+    // let status bar overlay webview
     this.statusBar.overlaysWebView(true);
 
     // set status bar to white

@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar hideBackButton="true">
+    <ion-title>
+      <title-logo text="Profil"></title-logo>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <p></p>
+  <p>Verbinde nun deinen Biovotion Everion Sensor mit GradUp.</p>
+
+  <ion-item>
+    <ion-label> Biovotion Everion Sensor </ion-label>
+    <ion-toggle [(ngModel)]="isToggled" (ngModelChange)="handleSensorConnection()"></ion-toggle>
+    <!--checked = "isToggled"  -->
+  </ion-item>
+
+  <!--Entwicklung -> isToggled?: {{ isToggled }}-->
+
+</ion-content>
+
+<ion-footer class="footer-no-borders">
+  <ion-buttons left>
+    <button ion-button icon-only (click)="gotoAdaptionsPage()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-footer>
