@@ -174,4 +174,74 @@ img {
   overflow-y: scroll;
 }
 
+.tabbar {
+
+  /*a.tab-button[aria-selected=true]:nth-of-type(4) {
+		color: green;
+		.tab-button-icon {
+			color: green;
+    }
+
+  }*/
+
+  //journal tab
+	a.tab-button:nth-of-type(1) {
+		/*color: green;
+		.tab-button-icon {
+			color: green;
+    }*/
+    min-width: 75px;
+  }
+
+  //info & docu tab
+	a.tab-button:nth-of-type(2) {
+		/*color: orange;
+		.tab-button-icon {
+			color: orange;
+    }*/
+
+    min-width: 75px;
+  }
+
+  //goal tab
+	a.tab-button:nth-of-type(3) {
+		/*color: red;
+		.tab-button-icon {
+			color: red;
+    }*/
+
+    min-width: 66px;
+    max-width: 66px !important;
+    //margin-right: 5px;
+  }
+
+  //support tab
+  a.tab-button:nth-of-type(4) {
+		/*color: black;
+		.tab-button-icon {
+			color: black;
+    }*/
+
+    min-width: 88px;
+    max-width: 88px !important;
+
+  }
+
+  //adaptions tab
+  a.tab-button:nth-of-type(5) {
+		/*color: blueviolet;
+		.tab-button-icon {
+			color: blueviolet;
+    }*/
+
+    min-width: 75px !important;
+    margin-right: 1% !important;
+
+	}
+}
+
+/*.tab-button {
+  max-width: 80px;
+}*/
+
     }
