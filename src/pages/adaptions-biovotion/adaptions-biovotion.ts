@@ -9,11 +9,14 @@ import { ToastController } from 'ionic-angular';
 //#MIDATA imports
 import { MidataService } from '../../services/MidataService';
 import { HeartRate, StepsCount, Observation } from 'Midata';
+import * as Globals from '../../../typings/globals';
+
+//resources import
 import { RespirationRateObs } from '../../resources/respirationRate';
 import { GalvanicSkinResponseObs } from '../../resources/galvanicSkinResponse';
 import { HeartRateVariabilityObs } from '../../resources/heartRateVariability';
-import * as Globals from '../../../typings/globals';
-
+import { InterBeatIntervalObs } from '../../resources/interBeatInterval';
+import { EnergyExpenditureObs } from '../../resources/energyExpenditure';
 
 //TODO kochd1: daten mittels der .buffer() filtern und allenfalls zusätzlich filter bei der midata load() anpassen.
 
@@ -217,9 +220,14 @@ export class AdaptionsBiovotionPage {
           dataToRequest.push(SENSORDATATYPE.heartRate);
           dataToRequest.push(SENSORDATATYPE.steps);
           dataToRequest.push(SENSORDATATYPE.respirationRate);
-          //dataToRequest.push(SENSORDATATYPE
+          //dataToRequest.push(SENSORDATATYPE //skinTemperature
+          dataToRequest.push(SENSORDATATYPE.cTemp);
+          dataToRequest.push(SENSORDATATYPE.localTemp);
+          dataToRequest.push(SENSORDATATYPE.objectTemp);
           dataToRequest.push(SENSORDATATYPE.gsrElectrode);
           dataToRequest.push(SENSORDATATYPE.heartRateVariability);
+          //dataToRequest.push(SENSORDATATYPE) //Inter-Beat-Interval
+          dataToRequest.push(SENSORDATATYPE.energy);
 
           this.biovotion.readLiveData(dataToRequest)
             .subscribe((liveData: SensorDataEntry) => {
@@ -234,25 +242,43 @@ export class AdaptionsBiovotionPage {
               console.log("heart rate variability object: ", liveData.heartRateVariability);
               var heartRateVariability = Number(liveData.heartRateVariability.value);
 
+              //inter-beat-interval
+
               //steps
               console.log("steps/s: ", liveData.steps.value);
               var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
 
               //respiration rate
-              console.log("respiration rate:", liveData.respirationRate.value);
+              console.log("respiration rate:", liveData.respirationRate);
+              console.log("respiration rate (tag):", liveData.respirationRate.tag);
+              console.log("respiration rate (value):", liveData.respirationRate.value);
+              console.log("respiration rate (quality)", liveData.respirationRate.quality);
               var respirationRate = Number(liveData.respirationRate.value);
+
+              //skin temperature
+              console.log("cTemp: ", liveData.cTemp); //?
+              console.log("localTemp: ", liveData.localTemp); //?
+              console.log("objectTemp: ", liveData.objectTemp); //?
 
               //galvanic skin response (also electrodermal activity)
               console.log("galvanic skin response: ", liveData.gsrElectrode.value);
               var galvanicSkinResponse = Number(liveData.gsrElectrode.value);
 
+              //energy expenditure
+              console.log("energy expenditure: ", liveData.energy);
+              console.log("energy expenditure (tag): ", liveData.energy.tag);
+              console.log("energy expenditure (kCal): ", liveData.energy.value);
+              console.log("energy expenditure (quality): ", liveData.energy.quality);
+              var energyExpenditure = Number(liveData.energy.value);
+
               //this.saveHeartRateValueToMidata(heartRate); //do not save at the moment
               //this.saveStepAmountToMidata(amountOfSteps); //do not save at the moment
               //this.saveRespirationRateToMIDATA(respirationRate); TODO: code must be registered on MIDATA by BFH dev team!
+              //this.saveSkinTemperatureToMIDATA(); //it is not clear, which variable it is!
               //this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //do not save at the moment
-              this.saveHeartRateVariabilityValuesToMidata(heartRateVariability);
-
-
+              //this.saveHeartRateVariabilityValuesToMidata(heartRateVariability); //do not save at the moment
+              //this.saveInterBeatIntervalValuesToMidata(); //TODO: code must be registered on MIDATA by BFH dev team!
+              //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //TODO: code must be registered on MIDATA by BFH dev team!
 
             });
 
@@ -378,6 +404,17 @@ export class AdaptionsBiovotionPage {
   }
 
   /**
+   * Saves the inter-beat-interval values to MIDATA.
+   *
+   * @param interBeatInterval
+   */
+  saveInterBeatIntervalValuesToMidata(interBeatInterval: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new InterBeatIntervalObs(interBeatInterval));
+  }
+
+  /**
    * save a new amount of steps to MIDATA.
    *
    * @param amountOfSteps
@@ -429,6 +466,26 @@ export class AdaptionsBiovotionPage {
     });
 
     console.log("respiration rate: " + galvanicSkinResponse);
+  }
+
+  /**
+   * Saves the energy expenditure values to MIDATA.
+   *
+   * @param energyExpenditure
+   */
+  saveEnergyExpenditureToMIDATA(energyExpenditure: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new EnergyExpenditureObs(energyExpenditure)).then((response) => {
+      // we can now access the midata response
+      console.log("EnergyExpenditureObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Error in save request:", error);
+    });
+
+    console.log("respiration rate: " + energyExpenditure);
   }
 
 
