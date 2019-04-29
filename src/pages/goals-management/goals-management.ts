@@ -56,12 +56,19 @@ export class GoalsManagementPage {
   weeklyGoalEntryCollectionIsNull: boolean;
 
   /**
+   * collection of archived goals.
+   */
+  goalEntryArchiveCollection: GoalEntry[] = [];
+
+  /**
    * boolean variable for new entry
    */
   newEntry: boolean;
 
   isDailyGoal: boolean;
   isWeeklyGoal: boolean;
+
+  isAchieved: boolean;
 
   aboutToEdit: boolean;
 
@@ -82,7 +89,7 @@ export class GoalsManagementPage {
     public gEntryDbp: GoalEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
-    this.goalEntry = new GoalEntry(0, newDate, "");
+    this.goalEntry = new GoalEntry(0, newDate, "", false);
     this.dailyGoalEntryCollectionIsNull = false;
     this.weeklyGoalEntryCollectionIsNull = false;
 
@@ -90,6 +97,7 @@ export class GoalsManagementPage {
     this.isDailyGoal = false;
     this.isWeeklyGoal = false;
     this.aboutToEdit = false;
+    this.isAchieved = false;
 
     this.isDataAvailable = false;
 
@@ -110,8 +118,10 @@ export class GoalsManagementPage {
 
       else {
         that.dailyGoalEntryCollectionIsNull = true;
+        this.goals = "dailyGoal"; //default view
+        this.isDataAvailable = true; //anyway, because storage has been called
       }
-      console.log("ionViewDidLoad() -> dailyGoalEntryCollection: ", that.dailyGoalEntryCollection);
+      console.log("ionViewCanEnter() -> dailyGoalEntryCollection: ", that.dailyGoalEntryCollection);
 
     }));
 
@@ -124,7 +134,20 @@ export class GoalsManagementPage {
       else {
         that.weeklyGoalEntryCollectionIsNull = true;
       }
-      console.log("ionViewDidLoad() -> weeklyGoalEntryCollection: ", that.weeklyGoalEntryCollection);
+      console.log("ionViewCanEnter() -> weeklyGoalEntryCollection: ", that.weeklyGoalEntryCollection);
+
+    }));
+
+    //goal entry archive collection
+    this.storage.get('goalEntryArchiveCollection').then((value => {
+      if (value != null) {
+        that.goalEntryArchiveCollection = value;
+      }
+
+      else {
+        //that.weeklyGoalEntryCollectionIsNull = true;
+      }
+      console.log("ionViewCanEnter() -> goalArchiveEntryCollection: ", that.goalEntryArchiveCollection);
 
     }));
 
@@ -293,7 +316,7 @@ export class GoalsManagementPage {
 
     let entryText = this.inputData;
 
-    this.goalEntry = new GoalEntry(entryId, entryDate, entryText);
+    this.goalEntry = new GoalEntry(entryId, entryDate, entryText, false); //"false" -> a new/edited goal is always not achieved.
 
     this.gEntryDbp.saveGoalEntry(this.goalEntry, this.isDailyGoal);
 
@@ -329,6 +352,46 @@ export class GoalsManagementPage {
   }
 
   /**
+ * Sets this goal "achieved".
+ *
+ * @param gEntryId - the id of this goal entry
+ * @param index - the index of this goal entry
+ */
+  public setGoalEntryAchieved(gEntryId: number, index: number) {
+    console.log("setGoalEntryAchieved() called");
+    this.isAchieved = true;
+    //this.editId = gEntryId;
+    //this.entryIndex = index;
+
+    //get element by id
+    let that = this;
+
+    this.goalEntry = that.goalEntry; //is not a solution
+
+    this.gEntryDbp.getGoalEntryById(gEntryId, this.isDailyGoal).then((gEntry) => {
+
+      that.goalEntry = gEntry;
+      //documentationEntry = dEntry;
+      console.log("setGoalEntry() -> text after storage access: ", that.goalEntry);
+
+      this.archiveGoalEntry();
+
+    });
+
+  }
+
+  /**
+   * Archives this goal entry.
+   */
+  public archiveGoalEntry() {
+    console.log("archiveGoalEntry() called")
+    this.goalEntry.isAchieved = this.isAchieved;
+    console.log("this.goalEntry: ", this.goalEntry);
+    this.gEntryDbp.archiveGoalEntry(this.goalEntry);
+
+  }
+
+  /**
    * closes the sliding item for editing.
    *
    * @param slidingItem
@@ -341,8 +404,8 @@ export class GoalsManagementPage {
   /**
    * Gets the entry to edit and opens the modal.
    *
-   * @param dEntryId
-   * @param index
+   * @param gEntryId - the id of this goal entry
+   * @param index - the index of this goal entry
    */
   public editGoalEntry(gEntryId: number, index: number) {
     console.log("editGoalEntry() -> gEntryId: ", gEntryId); //as expected
@@ -353,8 +416,6 @@ export class GoalsManagementPage {
     let that = this;
 
     this.goalEntry = that.goalEntry; //is not a solution
-
-    //var documentationEntry: DocumentationEntry;
 
     this.gEntryDbp.getGoalEntryById(gEntryId, this.isDailyGoal).then((gEntry) => {
 
@@ -395,5 +456,7 @@ export class GoalsManagementPage {
     }
 
   }
+
+
 
 }

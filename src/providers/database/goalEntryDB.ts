@@ -13,6 +13,9 @@ export class GoalEntryDatabaseProvider {
   // weekly goal entry key
   weeklyGoalEntryCollection_key: string = 'weeklyGoalEntryCollection';
 
+  //goal entry archive key
+  goalEntryArchiveCollection_key: string = 'goalEntryArchiveCollection'
+
   constructor(public storage: Storage) {
     console.log('Hello GoalEntryDatabaseProvider Provider');
   }
@@ -131,6 +134,40 @@ export class GoalEntryDatabaseProvider {
       });
 
     }
+
+  }
+
+  /**
+   * Archives the goal entry.
+   *
+   * @param gEntry - entry to archive
+   */
+  archiveGoalEntry(gEntry: GoalEntry) {
+
+    this.storage.get(this.goalEntryArchiveCollection_key).then(gEntryArchiveColl => {
+      console.log("gEntryDB_ archiveGoalEntry() -> gEntryColl", gEntryArchiveColl);
+
+      if (gEntryArchiveColl == null) {
+        console.log(gEntry + typeof (gEntry));
+        let goalEntryArchiveCollection: GoalEntry[] = [];
+        goalEntryArchiveCollection.push(gEntry);
+        this.storage.set(this.goalEntryArchiveCollection_key, goalEntryArchiveCollection);
+        console.log("goal archived");
+        console.log("goal archive was empty");
+        return true;
+      }
+
+      else {
+        let goalEntryArchiveCollection: GoalEntry[] = gEntryArchiveColl;
+        goalEntryArchiveCollection.push(gEntry);
+        this.storage.set(this.goalEntryArchiveCollection_key, goalEntryArchiveCollection);
+        console.log("goal archived");
+        console.log("goal archive was filled");
+        return true;
+
+      }
+
+    });
 
   }
 

@@ -22,20 +22,20 @@ export class ModalPage {
 
   documentationEntryText: string;
 
-  constructor(public navCtrl: NavController, 
-              private viewCtrl: ViewController,
-              public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    private viewCtrl: ViewController,
+    public navParams: NavParams) {
 
-                //let newDate: Date = new Date();
+    //let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, new Date(), "");
 
-    console.log("constr() -> this.documentationEntry", this.documentationEntry);
+    console.log("modal constr() -> this.documentationEntry", this.documentationEntry);
   }
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     //data fetch was originally here before
 
-    
+
   }
 
   ionViewDidLoad() {
@@ -51,11 +51,11 @@ export class ModalPage {
   /**
    * Modal dismissed the entry text to the respective class.
    */
-  public setEntryText(){
+  public setEntryText() {
     this.viewCtrl.dismiss(this.documentationEntryText);
   }
 
-  public closeModal(){
+  public closeModal() {
 
     this.viewCtrl.dismiss();
     /*const data = {
