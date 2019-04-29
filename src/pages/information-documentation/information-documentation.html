@@ -1,48 +1,50 @@
 <ion-header>
 
-        <ion-navbar color = primary hideBackButton="true">
-            <ion-title>
-                <title-logo text="Information & Dokumentation"></title-logo>
-            </ion-title>
-        </ion-navbar>
-    
-    </ion-header>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title>
+      <title-logo text="Information & Dokumentation"></title-logo>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
 
 <ion-content padding>
-    <p></p>
-    <p>Hier erhälst du einige Informationen über die Krankheit sowie Behandlung von Anorexia nervosa.</p>
+  <p></p>
+  <p>Hier erhälst du einige Informationen über die Krankheit sowie Behandlung von Anorexia nervosa.</p>
 
-    <ion-item id="infoDocuItemLb">
-        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
-            <b>Information: </b>
-        </ion-label>
-    </ion-item>
+  <ion-item id="infoDocuItemLb">
+    <ion-label style="font-size: 20px">
+      <!--item-left does not change anything-->
+      <b>Information: </b>
+    </ion-label>
+  </ion-item>
 
-    <ion-list id = "information" class="with-borders">
-        <button ion-item (click)="gotoInformationAnorexiaPage()">
-            <span class="highlight">Krankheit und Behandlung Anorexia nervosa</span>
-        </button>
-    </ion-list>
+  <ion-list id="information" class="with-borders">
+    <button ion-item (click)="gotoInformationAnorexiaPage()">
+      <span class="highlight">Krankheit und Behandlung Anorexia nervosa</span>
+    </button>
+  </ion-list>
 
-    <ion-item id="infoDocuItemLb">
-        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
-            <b>Dokumentation: </b>
-        </ion-label>
-    </ion-item>
+  <ion-item id="infoDocuItemLb">
+    <ion-label style="font-size: 20px">
+      <!--item-left does not change anything-->
+      <b>Dokumentation: </b>
+    </ion-label>
+  </ion-item>
 
-    <ion-list id = "documentation" class="with-borders">
-        <button ion-item (click)="gotoDocumentationFearsDelightsPage()">
-            <span class="highlight">Meine Ängste & Freuden</span>
-        </button>
-        <button ion-item (click)="gotoDocumentationViewsBeliefsPage()">
-            <span class="highlight">Meine Ansichten/Überzeugungen</span>
-        </button>
-        <button ion-item (click)="gotoDocumentationSetbackSuccessPage()">
-            <span class="highlight">Meine erlebten Rückschläge & Erfolge</span>
-        </button>
-        <button ion-item (click)="gotoDocumentationFurtherThoughtsPage()">
-            <span class="highlight">Weitere Gedanken</span>
-        </button>
-    </ion-list>
-    
+  <ion-list id="documentation" class="with-borders">
+    <button ion-item (click)="gotoDocumentationFearsDelightsPage()">
+      <span class="highlight">Meine Ängste & Freuden</span>
+    </button>
+    <button ion-item (click)="gotoDocumentationViewsBeliefsPage()">
+      <span class="highlight">Meine Ansichten/Überzeugungen</span>
+    </button>
+    <button ion-item (click)="gotoDocumentationSetbackSuccessPage()">
+      <span class="highlight">Meine erlebten Rückschläge & Erfolge</span>
+    </button>
+    <button ion-item (click)="gotoDocumentationFurtherThoughtsPage()">
+      <span class="highlight">Weitere Gedanken</span>
+    </button>
+  </ion-list>
+
 </ion-content>

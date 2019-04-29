@@ -1,5 +1,12 @@
 page-support {
 
+  .toolbar-title {
+    text-align: right;
+    position: relative;
+    height: 95px;
+    vertical-align: bottom;
+  }
+
   .scroll-content {
     overflow-y: hidden;
   }
