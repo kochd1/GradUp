@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title>
+      <title-logo text="Zielverwaltung"></title-logo>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  Hier kannst du deine Tages- und Wochenziele verwalten.
+
+  <!--<ion-tabs tabbarPlacement="top">
+    <ion-tab [root]="tab1DailyGoals" tabTitle="Tagesziele"></ion-tab>
+    <ion-tab [root]="tab2WeeklyGoals" tabTitle="Wochenziele"></ion-tab>
+  </ion-tabs>-->
+
+  <ion-segment value="dailyGoal" [(ngModel)]="goals" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="dailyGoal">
+      <ion-label class="segmentLb">Tagesziele</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="weeklyGoal">
+      <ion-label class="segmentLb">Wochenziele</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="goals">
+    <ion-label>
+      <b>Heute:</b>
+    </ion-label>
+    <div *ngIf="isDataAvailable">
+      <ion-list can-swipe="true" *ngSwitchCase="'dailyGoal'">
+        <ion-item-sliding #slidingItem *ngFor="let gEntry of dailyGoalEntryCollection.slice(); let i = index">
+          <ion-item>
+            <ion-label>{{gEntry.entryText}}</ion-label>
+            <ion-checkbox slot="end"></ion-checkbox>
+            <!--[(ngModel)]="entry.isChecked"-->
+          </ion-item>
+
+          <ion-item-options side="end">
+
+            <button ion-button color="danger" class="manipBtn"
+              (click)="setEntryType('dailyGoal'); deleteGoalEntry(gEntry.entryId, i)">
+              <ion-icon name="trash"></ion-icon>
+              Löschen
+            </button>
+
+            <button ion-button color="secondary" class="manipBtn"
+              (click)="setEntryType('dailyGoal'); editGoalEntry(gEntry.entryId, i); closeSlidingItem(slidingItem)">
+              <ion-icon name="create"></ion-icon>
+              Ändern
+            </button>
+
+          </ion-item-options>
+        </ion-item-sliding>
+
+        <button ion-button icon-only clear class="manipBtn" (click)="setEntryType('dailyGoal'); openModal()">
+          <ion-icon name="add"></ion-icon>
+          <ion-label style="font-size: 16px">Ziel hinzufügen</ion-label>
+        </button>
+
+      </ion-list>
+
+    </div>
+
+    <ion-list can-swipe="true" *ngSwitchCase="'weeklyGoal'">
+      <!--><ion-label>
+        <b>Heute:</b>
+      </ion-label>-->
+      <ion-item-sliding #slidingItem *ngFor="let gEntry of weeklyGoalEntryCollection.slice(); let i = index">
+
+        <ion-item>
+          <ion-label>{{gEntry.entryText}}</ion-label>
+          <ion-checkbox slot="end"></ion-checkbox>
+        </ion-item>
+
+        <ion-item-options side="end">
+
+          <button ion-button color="danger" class="manipBtn"
+            (click)="setEntryType('weeklyGoal'); deleteGoalEntry(gEntry.entryId, i)">
+            <ion-icon name="trash"></ion-icon>
+            Löschen
+          </button>
+
+          <button ion-button color="secondary" class="manipBtn"
+            (click)="setEntryType('weeklyGoal'); editGoalEntry(gEntry.entryId, i); closeSlidingItem(slidingItem)">
+            <ion-icon name="create"></ion-icon>
+            Ändern
+          </button>
+
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+      <button ion-button icon-only clear class="manipBtn" (click)="setEntryType('weeklyGoal'); openModal()">
+        <ion-icon name="add"></ion-icon>
+        <ion-label style="font-size: 16px">Ziel hinzufügen</ion-label>
+      </button>
+
+    </ion-list>
+
+
+
+  </div>
+
+</ion-content>

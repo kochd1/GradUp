@@ -36,6 +36,9 @@ import { InformationDocumentationPage } from '../pages/information-documentation
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
 import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-delights/documentation-fears-delights';
 
+//goals management
+import { GoalsManagementPage } from '../pages/goals-management/goals-management';
+
 //support
 import { SupportPage } from '../pages/support/support';
 import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
@@ -82,6 +85,7 @@ import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../providers/d
 import { DocumentationSetbackSuccessPage } from '../pages/documentation-setback-success/documentation-setback-success';
 import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/database/setbackSuccessDocumentationEntryDB';
 import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copingStrategyEntryDB';
+import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
 
 
 @NgModule({
@@ -111,6 +115,8 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     DocumentationViewsBeliefsPage,
     DocumentationFurtherThoughtsPage,
     DocumentationSetbackSuccessPage,
+
+    GoalsManagementPage,
 
     SupportPage,
     SupportSelfHelpPropositionsPage,
@@ -166,6 +172,8 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     DocumentationFurtherThoughtsPage,
     DocumentationSetbackSuccessPage,
 
+    GoalsManagementPage,
+
     SupportPage,
     SupportSelfHelpPropositionsPage,
     SupportCopingStrategiesPage,
@@ -199,6 +207,7 @@ import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copin
     FurtherThoughtDocumentationEntryDatabaseProvider,
     SetbackSuccessDocumentationEntryDatabaseProvider,
     CopingStrategyEntryDatabaseProvider,
+    GoalEntryDatabaseProvider,
     BiovotionConnector,
     CallNumber,
     SMS,
