@@ -1,60 +1,68 @@
 <ion-header>
-    <ion-navbar color = primary hideBackButton="true">
-        <ion-title>
-            <title-logo text="Information"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Information
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <button ion-button id ="popover" icon-only clear color = "dark" large (click) = "presentPopover($event)"><ion-icon name = "information-circle"></ion-icon></button>
-   <div id = "awmfDiv">
+  <button ion-button id="popover" icon-only clear color="dark" large (click)="presentPopover($event)">
+    <ion-icon name="information-circle"></ion-icon>
+  </button>
+  <div id="awmfDiv">
     <ion-item>
-        <ion-label style="font-size: 20px">
-            <b>Leitlinien: </b>
-        </ion-label>
+      <ion-label style="font-size: 20px">
+        <b>Leitlinien: </b>
+      </ion-label>
     </ion-item>
-    <p ></p> 
-    
-    <button ion-button id = "link" clear color ="dark" class = "awmfLinkBtn" (click) = "openWebPage('https://drive.google.com/open?id=1iFpiWLHepLsC7_paaELxr3cYtJIw_UJL')">Patientenleitlinie</button>
-    <button ion-button icon-only clear (click) = "openWebPage('https://drive.google.com/open?id=1iFpiWLHepLsC7_paaELxr3cYtJIw_UJL')"><ion-icon name = "link"></ion-icon></button>
+    <p></p>
 
-    <button ion-button id = "link" clear color ="dark" text-left class = "awmfLinkBtn" (click) = "openWebPage('https://drive.google.com/open?id=1PsO4-u-2kw7TtomX4RA5qFIjEThimGsq')">Behandlungsleitlinie (*S3)</button>
-    <button ion-button icon-only clear (click) = "openWebPage('https://drive.google.com/open?id=1PsO4-u-2kw7TtomX4RA5qFIjEThimGsq')"><ion-icon name = "link"></ion-icon></button>
+    <button ion-button id="link" clear color="dark" class="awmfLinkBtn"
+      (click)="openWebPage('https://drive.google.com/open?id=1iFpiWLHepLsC7_paaELxr3cYtJIw_UJL')">Patientenleitlinie</button>
+    <button ion-button icon-only clear
+      (click)="openWebPage('https://drive.google.com/open?id=1iFpiWLHepLsC7_paaELxr3cYtJIw_UJL')">
+      <ion-icon name="link"></ion-icon>
+    </button>
+
+    <button ion-button id="link" clear color="dark" text-left class="awmfLinkBtn"
+      (click)="openWebPage('https://drive.google.com/open?id=1PsO4-u-2kw7TtomX4RA5qFIjEThimGsq')">Behandlungsleitlinie
+      (*S3)</button>
+    <button ion-button icon-only clear
+      (click)="openWebPage('https://drive.google.com/open?id=1PsO4-u-2kw7TtomX4RA5qFIjEThimGsq')">
+      <ion-icon name="link"></ion-icon>
+    </button>
     <ion-item no-lines>
-        <ion-label text-wrap style="font-size: 12px">
-        *S3 = hohe Nachvollziehbarkeit der Ergebnisse, was für eine hohe 
+      <ion-label text-wrap style="font-size: 12px">
+        *S3 = hohe Nachvollziehbarkeit der Ergebnisse, was für eine hohe
         Qualität steht.
-        </ion-label>
+      </ion-label>
     </ion-item>
-   
-
 
     <p></p>
 
-    
-
     <ion-item>
-        <ion-label style="font-size: 20px">
-            <b>Fachstellen: </b>
-        </ion-label>
+      <ion-label style="font-size: 20px">
+        <b>Fachstellen: </b>
+      </ion-label>
     </ion-item>
-        
-    <button ion-button id = "link" clear color ="dark" text-left text-wrap class = "specialistDepartementLinkBtn" (click) = "openWebPage('https://www.netzwerk-essstoerungen.ch/')">Experten-Netzwerk Essstörungen Schweiz (ENES)</button> 
-    <button ion-button icon-only clear (click) = "openWebPage('https://www.netzwerk-essstoerungen.ch/')"><ion-icon name = "link"></ion-icon></button>
 
-    <button ion-button id = "link" clear color ="dark" text-left text-wrap class = "specialistDepartementLinkBtn" (click) = "openWebPage('https://www.aes.ch/')">Arbeitsgemeinschaft Essstörungen AES</button> 
-    <button ion-button icon-only clear (click) = "openWebPage('https://www.aes.ch/')"><ion-icon name = "link"></ion-icon></button>
+    <button ion-button id="link" clear color="dark" text-left text-wrap class="specialistDepartementLinkBtn"
+      (click)="openWebPage('https://www.netzwerk-essstoerungen.ch/')">Experten-Netzwerk Essstörungen Schweiz
+      (ENES)</button>
+    <button ion-button icon-only clear (click)="openWebPage('https://www.netzwerk-essstoerungen.ch/')">
+      <ion-icon name="link"></ion-icon>
+    </button>
 
-</div> 
+    <button ion-button id="link" clear color="dark" text-left text-wrap class="specialistDepartementLinkBtn"
+      (click)="openWebPage('https://www.aes.ch/')">Arbeitsgemeinschaft Essstörungen AES</button>
+    <button ion-button icon-only clear (click)="openWebPage('https://www.aes.ch/')">
+      <ion-icon name="link"></ion-icon>
+    </button>
+
+  </div>
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar no shadow position="bottom">
-        <ion-buttons left>
-            <button ion-button icon-only (click)="gotoInformationPage()">
-                <ion-icon name="arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-toolbar>
+
 </ion-footer>

@@ -1,49 +1,52 @@
-
 <ion-header>
-  <ion-navbar color = primary hideBackButton="true">
-    <ion-title>
-      <title-logo text ='Gemütszustand'> </title-logo>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Gemütszustand
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content class = "no-scroll" padding>
+<ion-content class="no-scroll" padding>
 
-    <div id = "mood">
-        <p>Wie fühlst du dich jetzt?</p>
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(2)" name="happy">
-            <ion-img [width]= "64" [height]= "64" src = "assets/imgs/happy.png"> </ion-img>
-        </button>
+  <div id="mood">
+    <p>Wie fühlst du dich jetzt?</p>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(2)" name="happy">
+      <ion-img [width]="64" [height]="64" src="assets/imgs/happy.png"> </ion-img>
+    </button>
 
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(1)" name="meh">
-            <ion-img [width]= "64" [height]= "64" src = "assets/imgs/meh.png"> </ion-img>
-        </button>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(1)" name="meh">
+      <ion-img [width]="64" [height]="64" src="assets/imgs/meh.png"> </ion-img>
+    </button>
 
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(0)" name="sad">
-            <ion-img [width]= "64" [height]= "64" src = "assets/imgs/sad.png"> </ion-img>
-        </button>
-    </div>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(0)" name="sad">
+      <ion-img [width]="64" [height]="64" src="assets/imgs/sad.png"> </ion-img>
+    </button>
+  </div>
 
- <ion-grid>
-        <ion-row>
-            <ion-label id="reasonLb"> <b>Grund:</b> </ion-label> <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
-            <ion-item id="reason"> <ion-input [(ngModel)]="moodReason" maxlength="25" placeholder ="Stichwort"></ion-input> </ion-item>
-        </ion-row>
- </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-label id="reasonLb"> <b>Grund:</b> </ion-label>
+      <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
+      <ion-item id="reason">
+        <ion-input [(ngModel)]="moodReason" maxlength="25" placeholder="Stichwort"></ion-input>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 
 
 <ion-footer no-shadow>
-    <ion-toolbar no shadow position="bottom">
-        <ion-buttons left>
+  <ion-toolbar no shadow position="bottom">
+    <!--><ion-buttons left>
                 <button ion-button icon-only (click)="gotoJournalPage()">
                     <ion-icon name="arrow-back"></ion-icon>
                 </button>
-        </ion-buttons>
-        
-        <button ion-button class = "saveBtn" [color]="primary" [outline]="false" [round]="true" [disabled]="!moodChecked" (click)="saveMoodEntry();">
-            Speichern
-        </button>
-    </ion-toolbar>
+        </ion-buttons>-->
+
+    <button ion-button class="saveBtn" [color]="primary" [outline]="false" [round]="true" [disabled]="!moodChecked"
+      (click)="saveMoodEntry();">
+      Speichern
+    </button>
+  </ion-toolbar>
 </ion-footer>

@@ -1,5 +1,12 @@
 page-support-coping-strategies {
 
+  .title {
+    text-align: right;
+    position: relative;
+    //height: 95px; //causes problems
+    vertical-align: bottom;
+  }
+
     .scroll-content {
       overflow-y: hidden;
     }

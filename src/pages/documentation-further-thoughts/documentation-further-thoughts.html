@@ -1,48 +1,54 @@
-
 <ion-header>
-    <ion-navbar color = primary hideBackButton="true">
-        <ion-title>
-            <title-logo text="Dokumentation"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Dokumentation
+    </ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
   <!--further thoughts-->
   <ion-item>
-      <ion-label style="font-size: 19px">
-          <b>Weitere Gedanken: </b>
-      </ion-label>
+    <ion-label style="font-size: 19px">
+      <b>Weitere Gedanken: </b>
+    </ion-label>
   </ion-item>
 
-  <ion-list can-swipe = "true" class ="listSection">
-      <ion-item-sliding #slidingItem *ngFor="let dEntry of furtherThoughtDocumentationEntryCollection.slice(); let i = index">
-          <ion-item>
-              {{dEntry.entryText}}
-          </ion-item>
-          <ion-item-options side="end">
-            
-                  <button ion-button color = "danger" class="manipBtn" (click)="deleteDocumentationEntry(dEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
-                  Löschen
-                  </button>
+  <ion-list can-swipe="true" class="listSection">
+    <ion-item-sliding #slidingItem
+      *ngFor="let dEntry of furtherThoughtDocumentationEntryCollection.slice(); let i = index">
+      <ion-item>
+        {{dEntry.entryText}}
+      </ion-item>
+      <ion-item-options side="end">
 
-                  <button ion-button color = "secondary" class="manipBtn" (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
-                  Ändern
-                  </button>
+        <button ion-button color="danger" class="manipBtn" (click)="deleteDocumentationEntry(dEntry.entryId, i)">
+          <ion-icon name="trash"></ion-icon>
+          Löschen
+        </button>
 
-          </ion-item-options>
-      </ion-item-sliding>
+        <button ion-button color="secondary" class="manipBtn"
+          (click)="editDocumentationEntry(dEntry.entryId, i); closeSlidingItem(slidingItem)">
+          <ion-icon name="create"></ion-icon>
+          Ändern
+        </button>
+
+      </ion-item-options>
+    </ion-item-sliding>
 
   </ion-list>
-          <button ion-button icon-only clear class = "manipBtn" (click)="resetDocumentationEntry(); openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label></button>
+  <button ion-button icon-only clear class="manipBtn" (click)="resetDocumentationEntry(); openModal()">
+    <ion-icon name="add"></ion-icon>
+    <ion-label style="font-size: 16px">Eintrag hinzufügen</ion-label>
+  </button>
 
 </ion-content>
 
 <ion-footer class="footer-no-borders">
-    <ion-buttons left>
-        <button ion-button icon-only (click)="gotoInformationPage()">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
-    </ion-buttons>
+  <!--><ion-buttons left>
+    <button ion-button icon-only (click)="gotoInformationPage()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-buttons>-->
 </ion-footer>

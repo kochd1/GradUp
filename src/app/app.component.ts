@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MidataService } from '../services/MidataService';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { JournalPage } from '../pages/journal/journal';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class MyApp {
 
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
-        statusBar.styleDefault();
+        statusBar.styleLightContent();   //styleDefault(); //dark text for light backgrounds
         splashScreen.hide();
 
         // this does not work in the browser.
@@ -53,7 +54,7 @@ export class MyApp {
           console.log("appComponent() : storage username:=", username);
           if (username) {
             // => So it would be correct, it is checked whether a user name is already set. If yes, it goes directly to the diary page. For demonstration purposes the start is at the welcome page.
-            // this.gotoJournalPage(); 
+            // this.gotoJournalPage();
           }
         });
       });

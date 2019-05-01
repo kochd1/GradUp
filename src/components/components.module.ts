@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
-import { TestComponent } from './test/test';
 import { AccordionListComponent } from './accordion-list/accordion-list';
 import { PopoverComponent } from './popover/popover';
 @NgModule({
-	declarations: [TestComponent,
+  declarations: [
     AccordionListComponent,
     PopoverComponent],
-	imports: [],
-	exports: [TestComponent,
+  imports: [],
+  exports: [
     AccordionListComponent,
     PopoverComponent]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

@@ -1,5 +1,11 @@
 page-journal-entry-form {
 
+  .title {
+    text-align: right;
+    position: relative;
+    vertical-align: bottom;
+  }
+
     .no-scroll .scroll-content{
         overflow: hidden;
     }
@@ -26,7 +32,7 @@ page-journal-entry-form {
         left: 96px;
     }
 
-   
+
 
     .checkmark-circle{
         width: 56px;
@@ -43,9 +49,5 @@ page-journal-entry-form {
         width: 65%;
         right: 21%;
         bottom: 10%;
-    }
-
-    .saveBtn{
-        margin-right:42px;
     }
 }

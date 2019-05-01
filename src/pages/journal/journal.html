@@ -1,68 +1,71 @@
 <ion-header>
 
-    <ion-navbar color = primary hideBackButton="true">
-        <ion-title>
-            <title-logo text="Mein Tagebuch"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title class="title">
+      Mein Tagebuch
+      <!--><title-logo text="Mein Tagebuch"></title-logo>-->
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-    <p>
-        In deinem persönlichen Tagebuch kannst du Ausflüge 
-        / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw. erfassen.
+  <p>
+    In deinem persönlichen Tagebuch kannst du Ausflüge
+    / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw. erfassen.
+  </p>
+  <p>
+    Du kannst die Einträge mit einem Bild aus deiner Gallerie oder direkt mittels Fotoaufnahme ergänzen.
+  </p>
+
+  <ion-item id="journalItemLb">
+    <ion-label style="font-size: 20px">
+      <!--item-left does not change anything-->
+      <b>Tagebuch: </b>
+    </ion-label>
+  </ion-item>
+
+  <ion-list class="with-borders">
+    <button ion-item (click)="gotoJournalEntryPage()">
+      <span class="highlight">Eintrag erstellen</span>
+    </button>
+
+    <button ion-item (click)="gotoJournalDeletePage()">
+      <span class="highlight">Alle Einträge ansehen und bearbeiten</span>
+    </button>
+
+  </ion-list>
+
+  <ion-item id="journalItemLb">
+    <ion-label style="font-size: 20px">
+      <!--item-left does not change anything-->
+      <b>Gemütszustandsangabe: </b>
+    </ion-label>
+  </ion-item>
+
+  <ion-list class="with-borders">
+    <button ion-item (click)="gotoStateOfMindPage()">
+      <span class="highlight">Deinen Gemütszustand angeben</span>
+    </button>
+  </ion-list>
+
+
+
+  <!-- anzeigen mit block, ausblenden mit none -->
+  <div style="display:none">
+    <p style="color:red">
+      Für Entwicklung:
     </p>
-    <p>
-                Du kannst die Einträge mit einem Bild aus deiner Gallerie oder direkt mittels Fotoaufnahme ergänzen.
-    </p>
-
-    <ion-item id ="journalItemLb">
-        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
-            <b>Tagebuch:  </b>
-        </ion-label>
-    </ion-item>
-        
     <ion-list class="with-borders">
-        <button ion-item (click)="gotoJournalEntryPage()">
-            <span class="highlight">Eintrag erstellen</span>
-        </button>
+      <button ion-item (click)="scheduleNotification()">
+        <span class="highlight">Notification Test</span>
+      </button>
 
-        <button ion-item (click)="gotoJournalDeletePage()">
-            <span class="highlight">Alle Einträge ansehen und bearbeiten</span>
-        </button>
-
+      <button ion-item (click)="gotoWeightReminderPage()">
+        <span class="highlight">Zur Weight Reminder Page</span>
+      </button>
     </ion-list>
-
-    <ion-item id ="journalItemLb">
-        <ion-label style="font-size: 20px"> <!--item-left does not change anything-->
-                <b>Gemütszustandsangabe:  </b>
-        </ion-label>
-    </ion-item>
-
-    <ion-list class="with-borders">
-        <button ion-item (click)="gotoStateOfMindPage()">
-            <span class="highlight">Deinen Gemütszustand angeben</span>
-        </button>
-    </ion-list>
-    
-
-
-    <!-- anzeigen mit block, ausblenden mit none -->
-    <div style="display:none">
-        <p style="color:red">
-            Für Entwicklung:
-        </p>
-        <ion-list class="with-borders">
-            <button ion-item (click)="scheduleNotification()">
-                <span class="highlight">Notification Test</span>
-            </button>
-
-            <button ion-item (click)="gotoWeightReminderPage()">
-                <span class="highlight">Zur Weight Reminder Page</span>
-            </button>
-        </ion-list>
-    </div>
+  </div>
 
 </ion-content>

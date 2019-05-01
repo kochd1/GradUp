@@ -1,98 +1,110 @@
 <ion-header>
 
-        <ion-navbar color = primary hideBackButton="true">
-            <ion-title>
-                <title-logo text="Mein Tagebuch"></title-logo>
-            </ion-title>
-        </ion-navbar>
-    
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Mein Tagebuch
+    </ion-title>
+  </ion-navbar>
+
 </ion-header>
 
 
-<ion-content class = "no-scroll" padding>
-<!--<form [formGroup]="formgroup" (ngSubmit)="onSubmit()"> -->
-    <br>
-    <div class = "JEntryDiv">
-        <ion-item>
-        <ion-label><b>Datum:</b></ion-label> <!--must be an ion-label here!-->
-        <ion-datetime displayFormat ="DD.MM.YYYY" pickerFormat = "DD MM YYYY" [(ngModel)]="journalEntry.entryDate" placeholder =""></ion-datetime> <!--formControlName="date"-->
-        </ion-item>
+<ion-content class="no-scroll" padding>
+  <!--<form [formGroup]="formgroup" (ngSubmit)="onSubmit()"> -->
+  <br>
+  <div class="JEntryDiv">
+    <ion-item>
+      <ion-label><b>Datum:</b></ion-label>
+      <!--must be an ion-label here!-->
+      <ion-datetime displayFormat="DD.MM.YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="journalEntry.entryDate"
+        placeholder=""></ion-datetime>
+      <!--formControlName="date"-->
+    </ion-item>
 
     <!--<input type="date" [ngModel]= "dt" placeholder = "">-->
-        <ion-item>
-        <ion-textarea [(ngModel)]="journalEntry.entryText" placeholder = "Erfassen Sie hier Ihr heutiges Erlebnis." rows ="5"></ion-textarea> <!--[ngModelOptions]="{standalone: true}" formControlName="text"-->
-        </ion-item>
+    <ion-item>
+      <ion-textarea [(ngModel)]="journalEntry.entryText" placeholder="Erfassen Sie hier Ihr heutiges Erlebnis."
+        rows="5"></ion-textarea>
+      <!--[ngModelOptions]="{standalone: true}" formControlName="text"-->
+    </ion-item>
 
     <!--Platzhalter für Foto-->
 
 
-    <ion-item no-lines> <!--*ngIf = "myPhoto" alleine funktioniert nicht richtig -> thumbnail wird nicht aktualisiert.-->
-        <ion-thumbnail item-start>
-            <ion-img src="{{ myPhoto||'assets/imgs/photo_placeholder.jpg' }}" imageViewer="{{ myPhoto||'assets/imgs/photo_placeholder.jpg' }}"></ion-img> <!--[(ngModel)]="journalEntry.entryPhoto" formControlName="photo"-->
-        </ion-thumbnail>
+    <ion-item no-lines>
+      <!--*ngIf = "myPhoto" alleine funktioniert nicht richtig -> thumbnail wird nicht aktualisiert.-->
+      <ion-thumbnail item-start>
+        <ion-img src="{{ myPhoto||'assets/imgs/photo_placeholder.jpg' }}"
+          imageViewer="{{ myPhoto||'assets/imgs/photo_placeholder.jpg' }}"></ion-img>
+        <!--[(ngModel)]="journalEntry.entryPhoto" formControlName="photo"-->
+      </ion-thumbnail>
     </ion-item>
 
 
-    <ion-fab class = "fab1" #fab1>
-        <button ion-fab mini (click) = "clickMainFAB()"><ion-icon name ="add"></ion-icon></button>
-            <ion-fab-list side ="right">
-                <button ion-fab (click)="takePhoto($event, fab1)"><ion-icon name = "camera"></ion-icon></button>
-                <button ion-fab (click)="getImage($event, fab1)"><ion-icon name = "images"></ion-icon></button>
-            </ion-fab-list>
+    <ion-fab class="fab1" #fab1>
+      <button ion-fab mini (click)="clickMainFAB()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <ion-fab-list side="right">
+        <button ion-fab (click)="takePhoto($event, fab1)">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+        <button ion-fab (click)="getImage($event, fab1)">
+          <ion-icon name="images"></ion-icon>
+        </button>
+      </ion-fab-list>
     </ion-fab>
 
 
 
-    </div>
-    <br>
-<!--</form>-->
+  </div>
+  <br>
+  <!--</form>-->
 
 
 
-    <div text-left >
-        <p>Wie fühlst du dich jetzt?</p>
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(2)" name="happy">
-            <ion-img [width]= "56" [height]= "56" src = "assets/imgs/happy.png"> </ion-img>
-        </button>
+  <div text-left>
+    <p>Wie fühlst du dich jetzt?</p>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(2)" name="happy">
+      <ion-img [width]="56" [height]="56" src="assets/imgs/happy.png"> </ion-img>
+    </button>
 
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(1)" name="meh">
-            <ion-img [width]= "56" [height]= "56" src = "assets/imgs/meh.png"> </ion-img>
-        </button>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(1)" name="meh">
+      <ion-img [width]="56" [height]="56" src="assets/imgs/meh.png"> </ion-img>
+    </button>
 
-        <button ion-button icon-only clear class ="smileyBtn" (click)="addSubjConditionInput(0)" name="sad">
-            <ion-img [width]= "56" [height]= "56" src = "assets/imgs/sad.png"> </ion-img>
-        </button>
-    </div>
+    <button ion-button icon-only clear class="smileyBtn" (click)="addSubjConditionInput(0)" name="sad">
+      <ion-img [width]="56" [height]="56" src="assets/imgs/sad.png"> </ion-img>
+    </button>
+  </div>
 
- <ion-grid>
-        <ion-row>
-            <ion-label id="reasonLb"> <b>Grund:</b> </ion-label> <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
-            <ion-item id="reason"> <ion-input [(ngModel)]="journalEntry.entryMoodReason" maxlength="25" placeholder ="Wieso fühlst du dich so?"></ion-input> </ion-item>
-        </ion-row>
- </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-label id="reasonLb"> <b>Grund:</b> </ion-label>
+      <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
+      <ion-item id="reason">
+        <ion-input [(ngModel)]="journalEntry.entryMoodReason" maxlength="25" placeholder="Wieso fühlst du dich so?">
+        </ion-input>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
 
-<!--</div>-->
-   
+  <!--</div>-->
 
-    
-       
-    <!--<ion-fab bottom right> this button must not scroll-->
-        <!--<button ion-button clear class ="checkmark-circle" (click) = "saveEntry()"><ion-icon name="checkmark-circle"></ion-icon></button>-->
-    <!--</ion-fab>-->
-    
+
+
+
+  <!--<ion-fab bottom right> this button must not scroll-->
+  <!--<button ion-button clear class ="checkmark-circle" (click) = "saveEntry()"><ion-icon name="checkmark-circle"></ion-icon></button>-->
+  <!--</ion-fab>-->
+
 </ion-content>
 
 <ion-footer no-shadow>
-       
-    <ion-toolbar no shadow position="bottom">
-        <ion-buttons left>
-                <button ion-button icon-only (click)="gotoJournalPage()">
-                    <ion-icon name="arrow-back"></ion-icon>
-                </button>
-        </ion-buttons>
-        
-        <button ion-button class = "saveBtn" [color]="primary" [outline]="false" [round]="true" [disabled]="!journalEntry.entryDate" (click)="saveEntry();">
-            Speichern
-        </button>
-    </ion-toolbar>
+  <ion-toolbar no shadow position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!journalEntry.entryDate"
+      (click)="saveEntry();">
+      Speichern
+    </button>
+  </ion-toolbar>
 </ion-footer>

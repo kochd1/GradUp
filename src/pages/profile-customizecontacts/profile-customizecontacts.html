@@ -1,108 +1,99 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Profil"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Kontakte
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-        <p></p>
-        <p>Hier können Sie die gesamten Kontaktdaten und Texte pflegen.</p>
+    <p></p>
+    <p>Hier können Sie die gesamten Kontaktdaten und Texte pflegen.</p>
 
-        <ion-item>
-            <ion-label stacked>Name der Bezugsperson:</ion-label>
-            <ion-input [(ngModel)]="bezugsperson_inputtext" formControlName="bezugsperson_inputtext" placeholder="Kein Eintrag vorhanden"
-                type="text">
-            </ion-input>
-        </ion-item>
+    <ion-item>
+      <ion-label stacked>Name der Bezugsperson:</ion-label>
+      <ion-input [(ngModel)]="bezugsperson_inputtext" formControlName="bezugsperson_inputtext"
+        placeholder="Kein Eintrag vorhanden" type="text">
+      </ion-input>
+    </ion-item>
 
-        <ion-item>
-            <ion-label stacked>Telefonnummer:</ion-label>
-            <ion-input [(ngModel)]="bezugsperson_telefonnummer" formControlName="bezugsperson_telefonnummer" type="tel"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_telefonnummer.valid" class="error-message">Bitte
-            korrekte Telefon Nummer eingeben.</p>
+    <ion-item>
+      <ion-label stacked>Telefonnummer:</ion-label>
+      <ion-input [(ngModel)]="bezugsperson_telefonnummer" formControlName="bezugsperson_telefonnummer" type="tel"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_telefonnummer.valid" class="error-message">Bitte
+      korrekte Telefon Nummer eingeben.</p>
 
-        <ion-item>
-            <ion-label stacked>SMS-Text:</ion-label>
-            <ion-textarea [(ngModel)]="bezugsperson_smstext" formControlName="bezugsperson_smstext" rows="1"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-textarea>
-        </ion-item>
+    <ion-item>
+      <ion-label stacked>SMS-Text:</ion-label>
+      <ion-textarea [(ngModel)]="bezugsperson_smstext" formControlName="bezugsperson_smstext" rows="1"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-textarea>
+    </ion-item>
 
-        <ion-item>
-            <ion-label stacked>E-Mail-Adresse:</ion-label>
-            <ion-input [(ngModel)]="bezugsperson_email" formControlName="bezugsperson_email" type="email" placeholder="Kein Eintrag vorhanden">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_email.valid" class="error-message">Bitte korrekte
-            E-Mail-Adresse eingeben.</p>
+    <ion-item>
+      <ion-label stacked>E-Mail-Adresse:</ion-label>
+      <ion-input [(ngModel)]="bezugsperson_email" formControlName="bezugsperson_email" type="email"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_email.valid" class="error-message">Bitte korrekte
+      E-Mail-Adresse eingeben.</p>
 
-        <ion-item>
-            <ion-label stacked>E-Mail-Text:</ion-label>
-            <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="bezugsperson_emailtext" rows="1"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-textarea>
-        </ion-item>
+    <ion-item>
+      <ion-label stacked>E-Mail-Text:</ion-label>
+      <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="bezugsperson_emailtext" rows="1"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-textarea>
+    </ion-item>
 
-        <ion-item>
-            <ion-label stacked>Name der Fachperson:</ion-label>
-            <ion-input [(ngModel)]="fachperson_inputtext" formControlName="fachperson_inputtext" type="text"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-input>
-        </ion-item>
+    <ion-item>
+      <ion-label stacked>Name der Fachperson:</ion-label>
+      <ion-input [(ngModel)]="fachperson_inputtext" formControlName="fachperson_inputtext" type="text"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-input>
+    </ion-item>
 
-        <ion-item>
-            <ion-label stacked>Praxis-Telefonnummer:</ion-label>
-            <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="fachperson_telefonnummer" type="tel"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.fachperson_telefonnummer.valid" class="error-message">Bitte
-            korrekte Telefon Nummer eingeben.</p>
+    <ion-item>
+      <ion-label stacked>Praxis-Telefonnummer:</ion-label>
+      <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="fachperson_telefonnummer" type="tel"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.fachperson_telefonnummer.valid" class="error-message">Bitte
+      korrekte Telefon Nummer eingeben.</p>
 
-        <ion-item>
-            <ion-label stacked>E-Mail-Adresse:</ion-label>
-            <ion-input [(ngModel)]="fachperson_email" formControlName="fachperson_email" type="email" placeholder="Kein Eintrag vorhanden">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.fachperson_email.valid" class="error-message">Bitte korrekte
-            E-Mail-Adresse eingeben.</p>
+    <ion-item>
+      <ion-label stacked>E-Mail-Adresse:</ion-label>
+      <ion-input [(ngModel)]="fachperson_email" formControlName="fachperson_email" type="email"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.fachperson_email.valid" class="error-message">Bitte korrekte
+      E-Mail-Adresse eingeben.</p>
 
-        <ion-item>
-            <ion-label stacked>E-Mail-Text:</ion-label>
-            <ion-textarea [(ngModel)]="fachperson_emailtext" formControlName="fachperson_emailtext" rows="1"
-                placeholder="Kein Eintrag vorhanden">
-            </ion-textarea>
-        </ion-item>
+    <ion-item>
+      <ion-label stacked>E-Mail-Text:</ion-label>
+      <ion-textarea [(ngModel)]="fachperson_emailtext" formControlName="fachperson_emailtext" rows="1"
+        placeholder="Kein Eintrag vorhanden">
+      </ion-textarea>
+    </ion-item>
 
-    </form>
+  </form>
 
 </ion-content>
 
-<ion-footer>
-    <ion-row>
-        <ion-col col-4>
-            <ion-buttons left class="footer-no-borders">
-                <button ion-button icon-only (click)="gotoAdaptionsPage()">
-                    <ion-icon name="arrow-back"></ion-icon>
-                </button>
-            </ion-buttons>
-        </ion-col>
-        <ion-col col-2 left>
-            <ion-buttons no-shadow>
-                <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
-                    Speichern
-                </button>
-            </ion-buttons>
-        </ion-col>
-    </ion-row>
+<ion-footer no-shadow>
+  <ion-toolbar no shadow position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
+      Speichern
+    </button>
+  </ion-toolbar>
 </ion-footer>

@@ -1,55 +1,63 @@
 <ion-header>
 
-    <ion-navbar color = primary hideBackButton="true">
-        <ion-title>
-            <title-logo text="Unterstützung - Bewältigungsstrategien"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Bewältigungsstrategien
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-     <!--views/beliefs-->
+  <!--views/beliefs-->
   <ion-item>
-        <ion-label style="font-size: 19px">
-            <b>Meine Bewältigungsstrategien: </b>
-        </ion-label>
-    </ion-item>
-  
-    <ion-list can-swipe = "true" class ="listSection">
-        <ion-item-sliding #slidingItem *ngFor="let csEntry of copingStrategyEntryCollection.slice(); let i = index">
-            <ion-item>
-                {{csEntry.entryText}}
-            </ion-item>
-            <ion-item-options side="end">
-              
-                    <button ion-button color = "danger" class="manipBtn" (click)="deleteCopingStrategyEntry(csEntry.entryId, i)"> <ion-icon name="trash"></ion-icon>
-                    Löschen
-                    </button>
-  
-                    <button ion-button color = "secondary" class="manipBtn" (click)="editCopingStrategyEntry(csEntry.entryId, i); closeSlidingItem(slidingItem)"> <ion-icon name="create"></ion-icon>
-                    Ändern
-                    </button>
+    <ion-label style="font-size: 19px">
+      <b>Meine Bewältigungsstrategien: </b>
+    </ion-label>
+  </ion-item>
 
-                    <button ion-button color = "primary" class="manipBtn" (click)="performedCopingStrategy(); closeSlidingItem(slidingItem)"> <ion-icon name="repeat"></ion-icon>
-                    Durchgeführt
-                    </button>
-  
-            </ion-item-options>
-        </ion-item-sliding>
-  
-    </ion-list>
-        <button ion-button icon-only clear class = "manipBtn" (click)="resetCopingStrategyEntry(); openModal()"><ion-icon name = "add"></ion-icon><ion-label style="font-size: 16px">Strategie hinzufügen</ion-label></button>
-    
+  <ion-list can-swipe="true" class="listSection">
+    <ion-item-sliding #slidingItem *ngFor="let csEntry of copingStrategyEntryCollection.slice(); let i = index">
+      <ion-item>
+        {{csEntry.entryText}}
+      </ion-item>
+      <ion-item-options side="end">
+
+        <button ion-button color="danger" class="manipBtn" (click)="deleteCopingStrategyEntry(csEntry.entryId, i)">
+          <ion-icon name="trash"></ion-icon>
+          Löschen
+        </button>
+
+        <button ion-button color="secondary" class="manipBtn"
+          (click)="editCopingStrategyEntry(csEntry.entryId, i); closeSlidingItem(slidingItem)">
+          <ion-icon name="create"></ion-icon>
+          Ändern
+        </button>
+
+        <button ion-button color="primary" class="manipBtn"
+          (click)="performedCopingStrategy(); closeSlidingItem(slidingItem)">
+          <ion-icon name="repeat"></ion-icon>
+          Durchgeführt
+        </button>
+
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+  <button ion-button icon-only clear class="manipBtn" (click)="resetCopingStrategyEntry(); openModal()">
+    <ion-icon name="add"></ion-icon>
+    <ion-label style="font-size: 16px">Strategie hinzufügen</ion-label>
+  </button>
+
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar no shadow position="bottom">
+  <!---<ion-toolbar no shadow position="bottom">
         <ion-buttons left>
             <button ion-button icon-only (click)="gotoSupportPage()">
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-    </ion-toolbar>
+    </ion-toolbar>-->
 </ion-footer>

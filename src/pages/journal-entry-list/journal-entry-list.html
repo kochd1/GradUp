@@ -1,45 +1,45 @@
 <ion-header>
-    
-        <ion-navbar color = primary hideBackButton="true">
-            <ion-title>
-                <title-logo text="Mein Tagebuch"></title-logo>
-            </ion-title>
-        </ion-navbar>
-    
-    </ion-header>
+
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Mein Tagebuch
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
 
 <ion-content padding>
-    <p></p>
-    <p>Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen.</p>
+  <p></p>
+  <p>Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen.</p>
 
-    <!--Auflistung Tagebucheinträge-->
+  <!--Auflistung Tagebucheinträge-->
 
-    <ion-list>
-        <ion-card *ngFor="let jEntry of journalEntryCollection.slice().reverse(); let i = index ">
-            <ion-card-header>
-                <b>{{ jEntry.entryDate }}</b>
-            </ion-card-header>
+  <ion-list>
+    <ion-card *ngFor="let jEntry of journalEntryCollection.slice().reverse(); let i = index ">
+      <ion-card-header>
+        <b>{{ jEntry.entryDate }}</b>
+      </ion-card-header>
 
-            <ion-card-content>
-                {{ jEntry.entryText }}
-            </ion-card-content>
+      <ion-card-content>
+        {{ jEntry.entryText }}
+      </ion-card-content>
 
-            <ion-row>
-                <ion-col text-right>
-                  <button ion-button clear small (click)="editJournalEntry(jEntry.entryId)"><ion-icon name = "create"></ion-icon></button>
-                  <button ion-button clear small (click)="deleteJournalEntry(jEntry.entryId)"><ion-icon name = "trash"></ion-icon></button>
-                </ion-col>
-            </ion-row>
+      <ion-row>
+        <ion-col text-right>
+          <button ion-button clear small (click)="editJournalEntry(jEntry.entryId)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button ion-button clear small (click)="deleteJournalEntry(jEntry.entryId)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
 
-        </ion-card>
-    </ion-list>
+    </ion-card>
+  </ion-list>
 
 </ion-content>
 
-<ion-footer class="footer-no-borders">
-    <ion-buttons left>
-        <button  ion-button icon-only (click)="gotoJournalPage()">
-            <ion-icon name="arrow-back"></ion-icon>
-        </button>
-    </ion-buttons>
+<ion-footer>
+
 </ion-footer>

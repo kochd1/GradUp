@@ -1,9 +1,14 @@
 page-journal {
 
-  .toolbar-title {
+  ion-navbar.toolbar {
+    //min-height: 56px !important;
+    max-height: 56px !important;
+}
+
+  .title {
     text-align: right;
     position: relative;
-    height: 95px;
+    //height: 95px;
     vertical-align: bottom;
   }
 

@@ -221,9 +221,9 @@ export class AppModule {
 
   constructor(private statusBar: StatusBar) {
     // let status bar overlay webview
-    this.statusBar.overlaysWebView(true);
+    this.statusBar.overlaysWebView(false); //default = true
 
-    // set status bar to white
-    this.statusBar.backgroundColorByHexString('#ffffff');
+    // set color of status bar
+    this.statusBar.backgroundColorByHexString('#2d6edd');
   }
 }

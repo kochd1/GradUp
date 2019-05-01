@@ -3,24 +3,24 @@ img {
 }
 
 .title-image {
-  height: 70px;
-  position: absolute;
-  top: 27px;
+  height: 70px; //ok, height of picture
+  position: absolute; //ok
+  //top: 27px;
   left: 0;
 }
 
 .title-text {
-  text-overflow: ellipsis;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  padding: 0 10px 0 85px;
-  white-space: normal;
-  vertical-align: bottom;
-  text-align: right;
-  overflow: hidden;
-  max-height: 74px;
+  //text-overflow: ellipsis;
+  position: absolute; //ok
+  //bottom: 0;
+  right: 0; //ok
+  width: 100%; //ok
+  padding: 0 10px 0 85px; //ok
+  white-space: normal; //ok
+  vertical-align: bottom; //ok
+  text-align: right; //ok
+  overflow: hidden; //ok
+  //max-height: 74px;
 }
 
 /*.toolbar-title {
