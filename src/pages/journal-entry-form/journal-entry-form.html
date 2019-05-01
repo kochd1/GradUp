@@ -1,6 +1,11 @@
 <ion-header>
 
-  <ion-navbar color=primary hideBackButton="false">
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-buttons left class="backBtn">
+      <button ion-button icon-only (click)="gotoJournalPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title class="title">
       Mein Tagebuch
     </ion-title>

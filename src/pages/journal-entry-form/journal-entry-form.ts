@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, FabContainer, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Navbar, AlertController, FabContainer, Events } from 'ionic-angular';
 import { JournalPage } from '../journal/journal';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
@@ -33,8 +33,9 @@ import { JournalEntryListPage } from '../journal-entry-list/journal-entry-list';
   templateUrl: 'journal-entry-form.html',
 })
 export class JournalEntryFormPage {
+  //@ViewChild(Navbar) navBar: Navbar;
 
-  //Form Validation 
+  //Form Validation
   //formgroup:FormGroup;
   //date:AbstractControl;
   //text:AbstractControl;
@@ -51,7 +52,7 @@ export class JournalEntryFormPage {
    */
   journalEntryCollection: JournalEntry[] = [];
 
-  journalDeletePage : JournalEntryListPage;
+  journalDeletePage: JournalEntryListPage;
 
   /**
    * variable which stores the user input concerning the subj. condition.
@@ -64,25 +65,25 @@ export class JournalEntryFormPage {
   moodReason: string;
 
   /**
-   * #MIDATA -> array for the weight data 
+   * #MIDATA -> array for the weight data
      store the raw data in this array.
    */
-  subjectiveConditionData: Array<{date: Date, value: number }>;
+  subjectiveConditionData: Array<{ date: Date, value: number }>;
 
   /**
    * variable to store the image data
    */
-  myPhoto:any;
+  myPhoto: any;
 
   /**
    * For popup ionViewCanLeave
    */
-  showAlertMessage:boolean;
+  showAlertMessage: boolean;
 
   /**
    * For popup ionViewCanLeave
    */
-  backBtnClicked:boolean;
+  backBtnClicked: boolean;
 
   /**
    * Counter variable for instant feedback
@@ -90,8 +91,8 @@ export class JournalEntryFormPage {
   counter: number = 0;
 
 
-  
-  constructor(public navCtrl: NavController, 
+
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private midataService: MidataService,
     public dbp: DatabaseProvider,
@@ -103,10 +104,10 @@ export class JournalEntryFormPage {
 
     //Form Validation
     //this.formgroup = formBuilder.group({
-      //date:['', Validators.required],
-      //text:['', Validators.required],
-      //photo:['', Validators.required]
-      //smilie:['', Validators.required]
+    //date:['', Validators.required],
+    //text:['', Validators.required],
+    //photo:['', Validators.required]
+    //smilie:['', Validators.required]
     //});
 
     //controls
@@ -122,18 +123,18 @@ export class JournalEntryFormPage {
 
     this.showAlertMessage = true;
     this.backBtnClicked = false;
-    
-  
+
+
   }
 
   /**
    * Runs when the page is about to enter and become the active page.
    */
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     console.log("willEnter journalEntryPage");
-    
+
     //this.journalEntryId = this.navParams.data; //-> fetches data from "journal-deletePage" --> do not delete!, otherwise delete won't work properly
-   
+
     this.journalEntry = this.navParams.data;
 
     console.log("ionViewWillEnter() -> journalEntry:", this.journalEntry);
@@ -149,28 +150,29 @@ export class JournalEntryFormPage {
 
 
     this.dbp.getJournalEntryCollection().then((val) => {
-      if(val == null) {
+      if (val == null) {
         // There's no journalEntry
         console.log("ionViewWillEnter() -> val == null?:", val);
         this.showUserInformation();
       }
 
-      });
+    });
 
-    
-      let that = this;
 
-      this.storage.get('InstantFeedback').then((value) => {
-        if(value == null){
-          that.counter = 1;
-          this.storage.set('InstantFeedback', that.counter);
-          console.log("counter after empty storage", that.counter);
-        }
+    let that = this;
 
-        else{
-          that.counter = value;
-          console.log("ionViewWillEnter() -> that.counter (if not empty)", that.counter);
-        }});
+    this.storage.get('InstantFeedback').then((value) => {
+      if (value == null) {
+        that.counter = 1;
+        this.storage.set('InstantFeedback', that.counter);
+        console.log("counter after empty storage", that.counter);
+      }
+
+      else {
+        that.counter = value;
+        console.log("ionViewWillEnter() -> that.counter (if not empty)", that.counter);
+      }
+    });
 
     //#MIDATA -> load the elements
     this.loadData();
@@ -179,6 +181,8 @@ export class JournalEntryFormPage {
 
   //Runs when the page has loaded.
   ionViewDidLoad() {
+
+
 
     //this.loadData();
     /*console.log('ionViewDidLoad JournalEntryPage');
@@ -191,141 +195,147 @@ export class JournalEntryFormPage {
     });*/
 
     //this.journalEntry = this.navParams.data; //-> fetches data from "journal-deletePage"
-    
-    
+
+
   }
 
-  showUserInformation(){
+  showUserInformation() {
 
     let alert = this.alertCtrl.create({
       title: 'Infos über die Datenspeicherung',
-      subTitle: 'Ihre Text- und Bilddateneinträge werden nur lokal gespeichert und nicht für die Forschung verwendet.' 
-      +'<br> Angaben über Ihren Gemütszustand (Smilie) werden auf MIDATA gespeichert. Diese Angaben sind jedoch optional. ',
+      subTitle: 'Ihre Text- und Bilddateneinträge werden nur lokal gespeichert und nicht für die Forschung verwendet.'
+        + '<br> Angaben über Ihren Gemütszustand (Smilie) werden auf MIDATA gespeichert. Diese Angaben sind jedoch optional. ',
       buttons: [
         {
           text: 'OK',
-          handler: () =>{
-          //do nothing
+          handler: () => {
+            //do nothing
+          }
         }
-      }
-  ]
-});
+      ]
+    });
 
-alert.present();
-  
+    alert.present();
+
   }
 
-  ionViewCanLeave(){
+  ionViewCanLeave() {
     //only show this alert, when back btn is clicked
 
-    if(this.backBtnClicked){
+    /*this.navBar.backButtonClick = (e: UIEvent) => {
+      console.log("ionViewCanLeave() navBar.backButtonClick event");
+      console.log("this.showAlertMessage: ", this.showAlertMessage);*/
 
-    if(this.showAlertMessage){
-      let alert = this.alertCtrl.create({
-        title: 'Achtung!',
-        subTitle: 'Eintrag/Änderungen verwerfen?',
-        buttons: [
-          {
-            text: 'Ja',
-            handler: () =>{
-            alert.dismiss().then(() => {
-              this.exitPage();
-            })
-          }
-        },
-        {
-          text: 'Nein',
-          handler: () => {
-          }
-        }
-    ]
-  });
 
-  alert.present();
-      return false; //return false to avoid the page to be popped up
+    //this.navCtrl.popToRoot();
+
+    if (this.backBtnClicked) {
+
+      if (this.showAlertMessage) {
+        let alert = this.alertCtrl.create({
+          title: 'Achtung!',
+          subTitle: 'Eintrag/Änderungen verwerfen?',
+          buttons: [
+            {
+              text: 'Ja',
+              handler: () => {
+                alert.dismiss().then(() => {
+                  this.exitPage();
+                })
+              }
+            },
+            {
+              text: 'Nein',
+              handler: () => {
+              }
+            }
+          ]
+        });
+
+        alert.present();
+        return false; //return false to avoid the page to be popped up
+      }
+
+    }
+
   }
 
-}
-
-}
-
-  private exitPage(){
+  private exitPage() {
     this.showAlertMessage = false;
-    this.navCtrl.pop();
+    this.navCtrl.popToRoot();
   }
 
   /**
    * Adds subjective condition from user input to the resp. global variable.
-   * @param value 
+   * @param value
    */
-  addSubjConditionInput(value: number){
+  addSubjConditionInput(value: number) {
     this.subjectiveCondition = value;
   }
 
-  
 
-    //kochd1: This codeline below is necessary to display the today's date.
-    myDate: any = new Date().toISOString();
 
-    /**
-     * Saves the journal entry to database.
-     */
-    public saveEntry():void{
-      console.log("saveJournalEntry button was clicked");
+  //kochd1: This codeline below is necessary to display the today's date.
+  myDate: any = new Date().toISOString();
 
-      //checks before setting the id, if it is a new or edited entry
-      if(this.journalEntry.entryId==0 || this.journalEntry.entryId==null){
-        console.log("saveEntry() -> entryId:", this.journalEntry.entryId);
-        this.journalEntry.entryId = Number(new Date()); //.getTime);
+  /**
+   * Saves the journal entry to database.
+   */
+  public saveEntry(): void {
+    console.log("saveJournalEntry button was clicked");
+
+    //checks before setting the id, if it is a new or edited entry
+    if (this.journalEntry.entryId == 0 || this.journalEntry.entryId == null) {
+      console.log("saveEntry() -> entryId:", this.journalEntry.entryId);
+      this.journalEntry.entryId = Number(new Date()); //.getTime);
+    }
+
+    console.log("saveEntry() -> entryPhoto", this.myPhoto);
+    this.journalEntry.entryPhoto = this.myPhoto;
+
+    this.dbp.saveJournalEntry(this.journalEntry);
+
+    //retest before removal!
+    /*.then(val => {
+      if(val)
+        this.dbp.getJournalEntryCollection().then((val) =>{
+          //this.navCtrl.push(JournalPage);
+        });
+    });*/
+
+    //check which condition was entered
+    if (this.subjectiveCondition == 0 || this.subjectiveCondition == 1 || this.subjectiveCondition == 2) {
+
+      console.log("saveEntry() -> subjective condition input: ", this.subjectiveCondition);
+      console.log("saveEntry() -> mood reason input: ", this.moodReason);
+
+      let moodReason: string;
+
+      if (this.journalEntry.entryMoodReason) {
+        moodReason = this.journalEntry.entryMoodReason;
       }
 
-      console.log("saveEntry() -> entryPhoto", this.myPhoto);
-      this.journalEntry.entryPhoto = this.myPhoto;
-      
-      this.dbp.saveJournalEntry(this.journalEntry);
+      else {
+        moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
+      }
 
-      //retest before removal!
-      /*.then(val => {
-        if(val)
-          this.dbp.getJournalEntryCollection().then((val) =>{
-            //this.navCtrl.push(JournalPage);
-          });
-      });*/
-
-      //check which condition was entered
-      if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
-
-        console.log("saveEntry() -> subjective condition input: ", this.subjectiveCondition);
-        console.log("saveEntry() -> mood reason input: ", this.moodReason);
-
-        let moodReason: string;
-
-        if(this.journalEntry.entryMoodReason)
-        {
-          moodReason = this.journalEntry.entryMoodReason;
-        }
-
-        else{
-          moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
-        }
-      
-        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
-        this.journalEntry.entrySubjCondition = this.subjectiveCondition; //local copy
-        this.midataService.save(mentalCondition)
+      let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
+      this.journalEntry.entrySubjCondition = this.subjectiveCondition; //local copy
+      this.midataService.save(mentalCondition)
         .then((response) => {
           // we can now access the midata response
           console.log("ObsMentalCondition fired on MIDATA");
-        
-    
+
+
         }).catch((error) => {
-            console.error("Error in save request:", error);
+          console.error("Error in save request:", error);
         });
 
-        console.log("mental condition: " + mentalCondition);
-        }
+      console.log("mental condition: " + mentalCondition);
+    }
 
-        this.backBtnClicked = false; //otherwise popup is shown, when user beforhand tried to leave the page.
-      
+    this.backBtnClicked = false; //otherwise popup is shown, when user beforhand tried to leave the page.
+
     //this.addMentalCondition();
     //console.log("addMentalCondition is called");
 
@@ -335,16 +345,16 @@ alert.present();
     console.log("saveEntry() -> this.counter (if not empty)", this.counter);
     this.storage.set('InstantFeedback', this.counter);
     this.showInstantFeedback();
-      
-    }
 
-    /**
-   * #MIDATA: loads the data (FHIR Observations with code "subjective-condition") from the MIDATA server
-   */
+  }
+
+  /**
+ * #MIDATA: loads the data (FHIR Observations with code "subjective-condition") from the MIDATA server
+ */
   private loadData(): void {
     this.midataService.search('Observation/$lastn', { max: 1000, _sort: '-date', code: "subjective-condition", patient: this.midataService.getUser().id })
       .then(response => {
-        if( response.length > 0) {
+        if (response.length > 0) {
           response.forEach((measure: Observation) => {
             //console.log(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
             this.addSubjectiveCondition(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
@@ -355,52 +365,16 @@ alert.present();
       }
       );
 
-      /*this.dbp.saveJournalEntry(this.journalEntry).then(val => {
-        if(val) {
-          // work around, damit später gepoppet wird
-          this.dbp.getJournalEntryCollection().then(val => {
-            this.navCtrl.pop();
-          })
-          
-        }
-      });*/
+  }
 
-      /*
-      
-      this.dbp.getJournalEntryCollection()
-      .then((val) => {
-        if(val == null) {
-          console.log("getJournalEntryCollection -> null")
-          this.journalEntryCollection.push(this.journalEntry);
-          this.dbp.saveJournalEntry(this.journalEntryCollection);
-
-          console.log("JEntryId: this.journalEntry.entryId");
-          console.log(this.journalEntryCollection)
-
-        } else {
-          console.log("get-->" + val);
-          this.journalEntryCollection = val;
-          this.journalEntryCollection.push(this.journalEntry);
-          this.dbp.saveJournalEntry(this.journalEntryCollection);
-          
-          console.log(this.journalEntry.entryId)
-          console.log(this.journalEntryCollection)
-
-        }
-      })
-      
-      this.navCtrl.pop();*/
-    
-    }
-
- /**
-   * #MIDATA: add the weight values to the weightData array.
-   * 
-   * @param measure 
-   * @param date 
-   */
+  /**
+    * #MIDATA: add the weight values to the weightData array.
+    *
+    * @param measure
+    * @param date
+    */
   public addSubjectiveCondition(measure: number, date: Date): void {
-    /*if (moment().diff(date) >= 0){ 
+    /*if (moment().diff(date) >= 0){
     }*/
 
     //push the data to the array
@@ -409,7 +383,7 @@ alert.present();
   }
 
   public gotoJournalPage() {
-    this.backBtnClicked=true;
+    this.backBtnClicked = true;
     //this.navCtrl.push(JournalPage, {});
     this.navCtrl.popToRoot();
 
@@ -419,32 +393,32 @@ alert.present();
   }
 
 
-  clickMainFAB(){
+  clickMainFAB() {
     console.log("Clicked open menu")
   }
 
   /**
    * Gets image from Android photo gallery and fills the image placeholder with the respective image.
    */
-  getImage(event, fab1: FabContainer){
+  getImage(event, fab1: FabContainer) {
 
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,//this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum:false
+      saveToPhotoAlbum: false
     }
     fab1.close(); //close fab btn in the meantime
     this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     
-    //this.navCtrl.push(JournalEntryPage);
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
 
-    this.myPhoto = 'data:image/jpg;base64,' + imageData; // 'data:image/jpeg;base64,'
+      //this.navCtrl.push(JournalEntryPage);
+
+      this.myPhoto = 'data:image/jpg;base64,' + imageData; // 'data:image/jpeg;base64,'
 
     }, (err) => {
-     // Handle error
+      // Handle error
     });
 
   }
@@ -452,94 +426,94 @@ alert.present();
   /**
    * Activates the Android camera funtion and fills the image placeholder with the taken picture.
    */
-  takePhoto(event, fab1: FabContainer){
+  takePhoto(event, fab1: FabContainer) {
     const options: CameraOptions = {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,//this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      saveToPhotoAlbum:true
+      saveToPhotoAlbum: true
     }
 
     fab1.close(); //close fab btn in the meantime
     this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     this.myPhoto = 'data:image/jpg;base64,' + imageData; // 'data:image/jpeg;base64,'
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.myPhoto = 'data:image/jpg;base64,' + imageData; // 'data:image/jpeg;base64,'
     }, (err) => {
-     // Handle error
+      // Handle error
     });
   }
 
   /**
    * Show instant feedback after saving a journal entry. There are three variants of feedbacks.
    */
-  showInstantFeedback(){
+  showInstantFeedback() {
 
-        if(this.counter == 1){
+    if (this.counter == 1) {
 
-          let alert1 = this.alertCtrl.create({
-            title: '',
-            subTitle: 'Schön, dass du dir die Zeit nimmst, deine Gefühle/Erlebnisse zu dokumentieren.',
-            cssClass: 'alert-button-inner',
-            buttons: [
-              {
-                text: 'Weiter',
-                handler: () =>{
-                this.navCtrl.popToRoot();
-              }
+      let alert1 = this.alertCtrl.create({
+        title: '',
+        subTitle: 'Schön, dass du dir die Zeit nimmst, deine Gefühle/Erlebnisse zu dokumentieren.',
+        cssClass: 'alert-button-inner',
+        buttons: [
+          {
+            text: 'Weiter',
+            handler: () => {
+              this.navCtrl.popToRoot();
             }
+          }
         ]
       });
-    
+
       alert1.present();
-    
-        }
 
-        if(this.counter == 2){
+    }
 
-          let alert2 = this.alertCtrl.create({
-            title: '',
-            subTitle: 'Vielen Dank für deinen Eintrag. :)',
-            cssClass: 'alert-button-inner',
-            buttons: [
-              {
-                text: 'Weiter',
-                handler: () =>{
-                this.navCtrl.popToRoot();
-              }
+    if (this.counter == 2) {
+
+      let alert2 = this.alertCtrl.create({
+        title: '',
+        subTitle: 'Vielen Dank für deinen Eintrag. :)',
+        cssClass: 'alert-button-inner',
+        buttons: [
+          {
+            text: 'Weiter',
+            handler: () => {
+              this.navCtrl.popToRoot();
             }
-          ]
-          });
-    
-          alert2.present();
-    
-        }
-
-        if(this.counter == 3) {
-          this.counter = 0;
-          console.log("alert3: this.counter", this.counter);
-          this.storage.set('InstantFeedback', this.counter);
-    
-          let alert3 = this.alertCtrl.create({
-            title: '',
-            subTitle: 'Super, danke fürs Eintragen :)',
-            cssClass: 'alert-button-inner',
-            buttons: [
-              {
-                text: 'Weiter',
-                handler: () =>{
-                this.navCtrl.popToRoot();
-              }
-            }
-          ]
-          });
-    
-          alert3.present();
           }
+        ]
+      });
 
-      }
-    
-    
+      alert2.present();
+
+    }
+
+    if (this.counter == 3) {
+      this.counter = 0;
+      console.log("alert3: this.counter", this.counter);
+      this.storage.set('InstantFeedback', this.counter);
+
+      let alert3 = this.alertCtrl.create({
+        title: '',
+        subTitle: 'Super, danke fürs Eintragen :)',
+        cssClass: 'alert-button-inner',
+        buttons: [
+          {
+            text: 'Weiter',
+            handler: () => {
+              this.navCtrl.popToRoot();
+            }
+          }
+        ]
+      });
+
+      alert3.present();
+    }
+
+  }
+
+
 }
-  
+
