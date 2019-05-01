@@ -271,14 +271,14 @@ export class AdaptionsBiovotionPage {
               console.log("energy expenditure (quality): ", liveData.energy.quality);
               var energyExpenditure = Number(liveData.energy.value);
 
-              //this.saveHeartRateValueToMidata(heartRate); //do not save at the moment
-              //this.saveStepAmountToMidata(amountOfSteps); //do not save at the moment
-              //this.saveRespirationRateToMIDATA(respirationRate); TODO: code must be registered on MIDATA by BFH dev team!
+              this.saveHeartRateValueToMidata(heartRate); //works, do not save at the moment
+              //this.saveStepAmountToMidata(amountOfSteps); //works do not save at the moment
+              //this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
               //this.saveSkinTemperatureToMIDATA(); //it is not clear, which variable it is!
               //this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //do not save at the moment
               //this.saveHeartRateVariabilityValuesToMidata(heartRateVariability); //do not save at the moment
               //this.saveInterBeatIntervalValuesToMidata(); //TODO: code must be registered on MIDATA by BFH dev team!
-              //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //TODO: code must be registered on MIDATA by BFH dev team!
+              //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //works, do not save at the moment
 
             });
 
@@ -390,6 +390,32 @@ export class AdaptionsBiovotionPage {
 
     //#MIDATA persistence
     this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
+
+    this.calculateIBI(heartRate);
+  }
+
+  /**
+   * Caluclates the inter-beat-interval based on the measured heart beat (plugin does not support the direct reading from the sensor)
+   *
+   * @param heartRate
+   */
+  calculateIBI(heartRate: number) {
+
+    let interBeatInterval = (60 / heartRate) * 1000; //*1000 -> ms
+    console.log("calculateIBI() -> interBeatInterval [ms]", interBeatInterval);
+    this.saveInterBeatIntervalToMIDATA(Number(interBeatInterval.toFixed(4))); //must be overthinked for the potential clinical trial
+  }
+
+  /**
+   * Saves the calculated inter-beat-interval values to MIDATA.
+   *
+   * @param interBeatInterval
+   */
+  saveInterBeatIntervalToMIDATA(interBeatInterval: number) {
+
+    console.log("saveInterBeatIntervalToMIDATA() -> interBeatInterval [ms] to fixed(4): ", interBeatInterval);
+    this.midataService.save(new InterBeatIntervalObs(interBeatInterval));
+
   }
 
   /**
