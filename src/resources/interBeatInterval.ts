@@ -29,7 +29,10 @@ export class InterBeatIntervalObs extends Observation {
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": interBeatInterval
+        "value": interBeatInterval,
+        "unit": "ms",
+        "system": "http://unitsofmeasure.org",
+        "code": "millisecond"
       }
     };
 

@@ -29,7 +29,10 @@ export class GalvanicSkinResponseObs extends Observation {
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": galvanicSkinResponse
+        "value": galvanicSkinResponse,
+        "unit": "Ω",
+        "system": "http://unitsofmeasure.org",
+        "code": "Ohm"
       }
     };
 

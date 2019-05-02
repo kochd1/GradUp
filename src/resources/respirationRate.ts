@@ -29,7 +29,10 @@ export class RespirationRateObs extends Observation {
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": respirationRate
+        "value": respirationRate,
+        "unit": "BPM",
+        "system": "http://biovotion.zendesk.com", //no unit available on unitsofmeasure.org
+        "code": "breaths per minute"
       }
     };
 

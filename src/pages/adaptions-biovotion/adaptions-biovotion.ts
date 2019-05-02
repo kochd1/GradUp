@@ -271,13 +271,12 @@ export class AdaptionsBiovotionPage {
               console.log("energy expenditure (quality): ", liveData.energy.quality);
               var energyExpenditure = Number(liveData.energy.value);
 
-              this.saveHeartRateValueToMidata(heartRate); //works, do not save at the moment
+              //this.saveHeartRateValueToMidata(heartRate); //works, do not save at the moment
               //this.saveStepAmountToMidata(amountOfSteps); //works do not save at the moment
-              //this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
+              this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
               //this.saveSkinTemperatureToMIDATA(); //it is not clear, which variable it is!
               //this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //do not save at the moment
               //this.saveHeartRateVariabilityValuesToMidata(heartRateVariability); //do not save at the moment
-              //this.saveInterBeatIntervalValuesToMidata(); //TODO: code must be registered on MIDATA by BFH dev team!
               //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //works, do not save at the moment
 
             });
@@ -480,6 +479,8 @@ export class AdaptionsBiovotionPage {
    * @param galvanicSkinResponse
    */
   saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse: number) {
+
+    galvanicSkinResponse = galvanicSkinResponse * 1000; //kOhm is the measured output of the sensor but not defined by unitsofmeasure.org
 
     //#MIDATA persistence
     this.midataService.save(new GalvanicSkinResponseObs(galvanicSkinResponse)).then((response) => {

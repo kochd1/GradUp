@@ -29,7 +29,10 @@ export class EnergyExpenditureObs extends Observation {
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": energyExpenditure
+        "value": energyExpenditure,
+        "unit": "kcal",
+        "system": "http://unitsofmeasure.org",
+        "code": "kilocalorie"
       }
     };
 

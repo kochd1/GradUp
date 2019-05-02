@@ -29,7 +29,10 @@ export class HeartRateVariabilityObs extends Observation {
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": heartRateVariability
+        "value": heartRateVariability,
+        "unit": "ms",
+        "system": "http://unitsofmeasure.org",
+        "code": "millisecond"
       }
     };
 
