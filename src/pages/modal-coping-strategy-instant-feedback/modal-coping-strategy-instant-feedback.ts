@@ -15,14 +15,32 @@ import { IonicPage, NavController, ViewController, NavParams } from 'ionic-angul
 })
 export class ModalCopingStrategyInstantFeedbackPage {
 
+  entryType: string;
+
+  isCopingStrategyEntry: boolean;
+  isGoalEntry: boolean;
+
   constructor(public navCtrl: NavController, private viewCtrl: ViewController, public navParams: NavParams) {
+
+    this.isCopingStrategyEntry = false;
+    this.isGoalEntry = false;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalCopingStrategyInstantFeedbackPage');
+
+    this.entryType = this.navParams.get('data'); //können hiermit Daten ins Modal speisen
+
+    if (this.entryType == "copingStrategyEntry") {
+      this.isCopingStrategyEntry = true;
+    }
+
+    else {
+      this.isGoalEntry = true;
+    }
   }
 
-  public closeModal(){
+  public closeModal() {
 
     this.viewCtrl.dismiss();
   }

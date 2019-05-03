@@ -29,14 +29,14 @@ export class SupportCopingStrategiesPage {
    */
   storageDataToEdit: string;
 
-   /**
-    * id of this coping strategy entry.
-    */
-   copingStrategyEntryId: number;
+  /**
+   * id of this coping strategy entry.
+   */
+  copingStrategyEntryId: number;
 
-   /**
-    * collection of coping strategy entries.
-    */
+  /**
+   * collection of coping strategy entries.
+   */
   copingStrategyEntryCollection: DocumentationEntry[] = [];
 
   copingStrategyEntryCollectionIsNull: boolean;
@@ -53,37 +53,36 @@ export class SupportCopingStrategiesPage {
   entryIndex: number;
 
   slidingItem;
-  
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public alertCtrl: AlertController,
-              private modalCtrl: ModalController,
-              private storage: Storage,
-              public csEntryDbp: CopingStrategyEntryDatabaseProvider) {
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private storage: Storage,
+    public csEntryDbp: CopingStrategyEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
     this.copingStrategyEntry = new DocumentationEntry(0, newDate, "");
     this.copingStrategyEntryCollectionIsNull = false;
 
-    this.newEntry=false;
-    this.aboutToEdit=false;
+    this.newEntry = false;
+    this.aboutToEdit = false;
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SupportCopingStrategiesPage');
 
-  
+
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
     //fear documentation entry collection
     this.storage.get('copingStrategyEntryCollection').then((value => {
-      if(value!=null)
-      {
-      that.copingStrategyEntryCollection = value;
+      if (value != null) {
+        that.copingStrategyEntryCollection = value;
       }
 
-      else{
+      else {
         that.copingStrategyEntryCollectionIsNull = true;
       }
       console.log("ionViewDidLoad() -> copingStrategyEntryCollection: ", that.copingStrategyEntryCollection);
@@ -91,7 +90,10 @@ export class SupportCopingStrategiesPage {
     }));
   }
 
-  performedCopingStrategy(){
+  /**
+   * Creates/presents an instant feedback modal after the user has confirmed a performed coping strategy.
+   */
+  performedCopingStrategy() {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
@@ -99,27 +101,29 @@ export class SupportCopingStrategiesPage {
 
     let modalInstantFeedback: Modal;
 
-    modalInstantFeedback = this.modalCtrl.create('ModalCopingStrategyInstantFeedbackPage', myModalOptions);
+    let entryType = "copingStrategyEntry";
+
+    modalInstantFeedback = this.modalCtrl.create('ModalCopingStrategyInstantFeedbackPage', { data: entryType }, myModalOptions);
 
     modalInstantFeedback.present();
 
-    }
+  }
 
   /**
-   * resets the "copingStrategyEntry" and the "aboutToEdit" variable (necessary, if an entry modification is being aborted 
+   * resets the "copingStrategyEntry" and the "aboutToEdit" variable (necessary, if an entry modification is being aborted
    * and a new one is being created instead.) This method will be executed everytime the "add entry" button is being pushed.
    */
-  public resetCopingStrategyEntry(){
+  public resetCopingStrategyEntry() {
 
-    this.copingStrategyEntry=null;
-    this.aboutToEdit=false;
+    this.copingStrategyEntry = null;
+    this.aboutToEdit = false;
 
   }
 
   /**
    * opens the modal to add or to edit an entry.
    */
-  public openModal(){
+  public openModal() {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
@@ -128,16 +132,15 @@ export class SupportCopingStrategiesPage {
     let myModal: Modal;
 
     //only go through, if there's an entry to edit
-    if(this.aboutToEdit==true)
-    {
+    if (this.aboutToEdit == true) {
 
-    let myModalData: DocumentationEntry = this.copingStrategyEntry;
-    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+      let myModalData: DocumentationEntry = this.copingStrategyEntry;
+      console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
-    myModal = this.modalCtrl.create('ModalPage', {data: myModalData}, myModalOptions);
+      myModal = this.modalCtrl.create('ModalPage', { data: myModalData }, myModalOptions);
     }
 
-    else{
+    else {
       myModal = this.modalCtrl.create('ModalPage', myModalOptions);
     }
 
@@ -148,103 +151,100 @@ export class SupportCopingStrategiesPage {
 
     myModal.onDidDismiss((data) => {
       console.log("data from modal:", data);
-      
+
       that.inputData = data;
 
-      if(that.inputData)
-      {
-      that.newEntry=true;
+      if (that.inputData) {
+        that.newEntry = true;
       }
       console.log("modal onDidDismiss -> newEntry: ", that.newEntry);
-      
+
       console.log("this.inputData after modal: ", this.inputData); //as expected
 
-      if(data!=null)
-      { 
+      if (data != null) {
         this.saveCopingStrategyEntry();
         console.log("savecopingStrategyEntry() called")
       }
-     
+
     });
 
   }
 
- /**
-  * Aborts the entry input and splices the last unfinished/unsaved entry.
-  * @deprecated
-  */
- public abortEntryInput(){
-   this.newEntry=false;
-   this.copingStrategyEntryCollection.splice(this.copingStrategyEntryCollection.length-1, 1);
- }
+  /**
+   * Aborts the entry input and splices the last unfinished/unsaved entry.
+   * @deprecated
+   */
+  public abortEntryInput() {
+    this.newEntry = false;
+    this.copingStrategyEntryCollection.splice(this.copingStrategyEntryCollection.length - 1, 1);
+  }
 
- /**
-  * Saves the coping strategy entry from the modal input.
-  */
- public saveCopingStrategyEntry(){
-   this.newEntry=true;
+  /**
+   * Saves the coping strategy entry from the modal input.
+   */
+  public saveCopingStrategyEntry() {
+    this.newEntry = true;
 
-   let entryDate = new Date();
-   let entryId;
-   if(this.aboutToEdit==true)
-   {
+    let entryDate = new Date();
+    let entryId;
+    if (this.aboutToEdit == true) {
       entryId = this.editId;
-   }
-   else{
-    entryId = Number(entryDate);
-   }
-  
-   let entryText = this.inputData;
+    }
+    else {
+      entryId = Number(entryDate);
+    }
 
-   this.copingStrategyEntry = new DocumentationEntry(entryId, entryDate, entryText);
+    let entryText = this.inputData;
 
-   this.csEntryDbp.saveCopingStrategyEntry(this.copingStrategyEntry);
+    this.copingStrategyEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
-   if(this.aboutToEdit){
-    
+    this.csEntryDbp.saveCopingStrategyEntry(this.copingStrategyEntry);
+
+    if (this.aboutToEdit) {
+
       this.copingStrategyEntryCollection.splice(this.entryIndex, 1);
-   }
+    }
 
 
     this.copingStrategyEntryCollection.push(this.copingStrategyEntry);
     console.log("this.copingStrategyEntryCollection was pushed.");
-   
-   
-   
-   console.log("savecopingStrategyEntry() -> copingStrategyEntry", this.copingStrategyEntry);
 
-   this.aboutToEdit = false; //necessary because of new entries without page reload
 
- }
 
- /**
-  * closes the sliding item for editing.
-  * 
-  * @param slidingItem 
-  */
- public closeSlidingItem(slidingItem){
-  this.slidingItem = slidingItem;
-  slidingItem.close();
- }
+    console.log("savecopingStrategyEntry() -> copingStrategyEntry", this.copingStrategyEntry);
+
+    this.aboutToEdit = false; //necessary because of new entries without page reload
+
+  }
+
+  /**
+   * closes the sliding item for editing.
+   *
+   * @param slidingItem
+   */
+  public closeSlidingItem(slidingItem) {
+    this.slidingItem = slidingItem;
+    slidingItem.close();
+  }
 
   /**
    * Gets the entry to edit and opens the modal.
-   * 
-   * @param csEntryId 
-   * @param index 
+   *
+   * @param csEntryId
+   * @param index
    */
-  public editCopingStrategyEntry(csEntryId: number, index: number){
+  public editCopingStrategyEntry(csEntryId: number, index: number) {
     console.log("editcopingStrategyEntry() -> csEntryId: ", csEntryId); //as expected
-    this.aboutToEdit=true;
+    this.aboutToEdit = true;
     this.editId = csEntryId;
     this.entryIndex = index;
     //get element by id
     let that = this;
 
-    this.copingStrategyEntry=that.copingStrategyEntry; //is not a solution
+    this.copingStrategyEntry = that.copingStrategyEntry; //is not a solution
 
-    this.csEntryDbp.getCopingStrategyEntryById(csEntryId).then((csEntry) =>{
-      
+    this.csEntryDbp.getCopingStrategyEntryById(csEntryId).then((csEntry) => {
+
       that.copingStrategyEntry = csEntry;
       console.log("editcopingStrategyEntry() -> text after storage access: ", that.copingStrategyEntry);
 
@@ -256,11 +256,11 @@ export class SupportCopingStrategiesPage {
 
   /**
    * deletes the respective coping strategy entry.
-   * 
+   *
    * @param csEntryId - the id of the entry
    * @param index - the index of the entry (relevant for the data presentation)
    */
-  public deleteCopingStrategyEntry(csEntryId: number, index: number){ //vorher (item)
+  public deleteCopingStrategyEntry(csEntryId: number, index: number) { //vorher (item)
     console.log("deleteEntry() called");
 
     this.copingStrategyEntryId = csEntryId;
@@ -271,8 +271,8 @@ export class SupportCopingStrategiesPage {
 
     this.csEntryDbp.deleteCopingStrategyEntry(csEntryId); //db processing
 
-      this.copingStrategyEntryCollection.splice(index, 1);
-   
+    this.copingStrategyEntryCollection.splice(index, 1);
+
   }
 
   public gotoSupportPage() {

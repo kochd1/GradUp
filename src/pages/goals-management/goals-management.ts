@@ -392,6 +392,25 @@ export class GoalsManagementPage {
   }
 
   /**
+   * Creates/presents an instant feedback modal after the user has achieved a goal.
+   */
+  achievedGoal() {
+
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false, //user can only go back via close btn
+    }
+
+    let modalInstantFeedback: Modal;
+
+    let entryType = "goalEntry";
+
+    modalInstantFeedback = this.modalCtrl.create('ModalCopingStrategyInstantFeedbackPage', { data: entryType }, myModalOptions);
+
+    modalInstantFeedback.present();
+
+  }
+
+  /**
    * closes the sliding item for editing.
    *
    * @param slidingItem

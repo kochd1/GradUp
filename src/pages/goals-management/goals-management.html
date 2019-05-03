@@ -34,7 +34,7 @@
           <ion-item>
             <ion-label>{{gEntry.entryText}}</ion-label>
             <ion-checkbox [(ngModel)]="gEntry.isAchieved" slot="end"
-              (click)="setEntryType('dailyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i)">
+              (click)="setEntryType('dailyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i); achievedGoal();">
             </ion-checkbox>
           </ion-item>
 
@@ -73,7 +73,7 @@
         <ion-item>
           <ion-label>{{gEntry.entryText}}</ion-label>
           <ion-checkbox [(ngModel)]="gEntry.isAchieved" slot="end"
-            (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i)">
+            (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i); achievedGoal();">
           </ion-checkbox>
         </ion-item>
 
