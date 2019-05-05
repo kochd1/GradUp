@@ -46,13 +46,29 @@ export class GoalsManagementPage {
    */
   dailyGoalEntryCollection: GoalEntry[] = [];
 
+  /**
+   * boolean var to check, if above collection of daily goal entries is null.
+   */
   dailyGoalEntryCollectionIsNull: boolean;
+
+  /**
+   * collection of open daily goal entries.
+   */
+  openDailyGoalEntryCollection: GoalEntry[] = [];
+
+  /**
+   * collection of all daily goals.
+   */
+  allDailyGoalEntriesCollection: GoalEntry[] = [];
 
   /**
    * collection of weekly goal entries.
    */
   weeklyGoalEntryCollection: GoalEntry[] = [];
 
+  /**
+   * boolean var to check, if above collection of weekly goal entries is null.
+   */
   weeklyGoalEntryCollectionIsNull: boolean;
 
   /**
@@ -65,15 +81,44 @@ export class GoalsManagementPage {
    */
   newEntry: boolean;
 
+  /**
+   * boolean var to check, if it's a daily goal.
+   */
   isDailyGoal: boolean;
+
+  /**
+   * boolean var to check, if it's a weekly goal.
+   */
   isWeeklyGoal: boolean;
 
+  /**
+   * boolean var to check, if it's a open goal.
+   */
+  isOpenGoal: boolean;
+
+  /**
+   * boolean var to check, if the respective goal is achieved.
+   */
   isAchieved: boolean;
 
+  /**
+   * boolean var to check, if the respective goal is about to be edited.
+   */
   aboutToEdit: boolean;
 
+  /**
+   * holds the id of the entry to be edited.
+   */
   editId: number;
 
+  /**
+   * holds the original creation date of the goal.
+   */
+  editOrigEntryDate: string;
+
+  /**
+   * holds the goal entry index.
+   */
   entryIndex: number;
 
   //GUI
@@ -88,14 +133,15 @@ export class GoalsManagementPage {
     private storage: Storage,
     public gEntryDbp: GoalEntryDatabaseProvider) {
 
-    let newDate: Date = new Date();
-    this.goalEntry = new GoalEntry(0, newDate, "", false);
+    //let newDate: Date = new Date(); //new a string
+    this.goalEntry = new GoalEntry(0, "", "", false);
     this.dailyGoalEntryCollectionIsNull = false;
     this.weeklyGoalEntryCollectionIsNull = false;
 
     this.newEntry = false;
     this.isDailyGoal = false;
     this.isWeeklyGoal = false;
+    this.isOpenGoal = false;
     this.aboutToEdit = false;
     this.isAchieved = false;
 
@@ -108,9 +154,17 @@ export class GoalsManagementPage {
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
     //daily goal entry collection
-    this.storage.get('dailyGoalEntryCollection').then((value => {
-      if (value != null) {
-        that.dailyGoalEntryCollection = value;
+    this.storage.get('dailyGoalEntryCollection').then((goalArray => {
+      if (goalArray != null) {
+
+        that.allDailyGoalEntriesCollection = goalArray;
+
+        that.dailyGoalEntryCollection = goalArray.filter(goal => goal.entryDate == new Date().toDateString());
+
+        that.openDailyGoalEntryCollection = goalArray.filter(goal => goal.entryDate < new Date().toDateString());
+
+        console.log("ionViewCanEnter() -> new Date: ", new Date().toDateString());
+
         this.goals = "dailyGoal"; //default view
         this.isDataAvailable = true;
         //this.goals = "dailyGoal"; //default view
@@ -121,7 +175,12 @@ export class GoalsManagementPage {
         this.goals = "dailyGoal"; //default view
         this.isDataAvailable = true; //anyway, because storage has been called
       }
+
+      console.log("ionViewCanEnter() -> allDailyGoalEntriesCollection: ", that.allDailyGoalEntriesCollection);
+
       console.log("ionViewCanEnter() -> dailyGoalEntryCollection: ", that.dailyGoalEntryCollection);
+
+      console.log("ionViewCanEnter() -> openDailyGoalEntryCollection: ", that.openDailyGoalEntryCollection);
 
     }));
 
@@ -204,7 +263,7 @@ export class GoalsManagementPage {
   /**
    * Sets the type of this entry via "add entry" button.
    */
-  public setEntryType(entryType: string) {
+  public setEntryType(entryType: string, isOpenGoal: boolean) {
     this.goalEntry = null; //reset goal entry (necessary, if an entry modification is aborted)
     this.aboutToEdit = false; //same reason
 
@@ -220,6 +279,9 @@ export class GoalsManagementPage {
       console.log("setEntryType() -> this.isWeeklyGoal: ", this.isWeeklyGoal);
       this.isDailyGoal = false; //necessary, if user firstly want to enter a daily goal
     }
+
+    this.isOpenGoal = isOpenGoal;
+    console.log("setEntryType() -> this.isOpenGoal: ", this.isOpenGoal);
   }
 
   /**
@@ -266,7 +328,7 @@ export class GoalsManagementPage {
 
       if (data != null) {
         this.saveGoalEntry();
-        console.log("saveGoalEntry() called")
+        console.log("openModal() -> saveGoalEntry() called");
       }
 
     });
@@ -305,13 +367,20 @@ export class GoalsManagementPage {
   public saveGoalEntry() {
     this.newEntry = true;
 
-    let entryDate = new Date();
+    let entryDate;
     let entryId;
+
+    console.log("saveGoalEntry() -> this.aboutToEdit: ", this.aboutToEdit);
     if (this.aboutToEdit == true) {
       entryId = this.editId;
+      console.log("saveGoalEntry() -> entryId: ", entryId);
+      entryDate = this.editOrigEntryDate; //string
+      console.log("saveGoalEntry() -> entryDate: ", entryDate);
     }
     else {
+      entryDate = new Date(); //date because of entryId
       entryId = Number(entryDate);
+      entryDate = entryDate.toDateString(); //conversion to string after setting id
     }
 
     let entryText = this.inputData;
@@ -322,7 +391,15 @@ export class GoalsManagementPage {
 
     if (this.aboutToEdit) {
       if (this.isDailyGoal) {
-        this.dailyGoalEntryCollection.splice(this.entryIndex, 1);
+        if (!this.isOpenGoal) {
+
+          this.dailyGoalEntryCollection.splice(this.entryIndex, 1);
+        }
+
+        else {
+          this.openDailyGoalEntryCollection.splice(this.entryIndex, 1);
+        }
+
       }
 
       else {
@@ -331,12 +408,21 @@ export class GoalsManagementPage {
 
     }
 
+    console.log("saveGoalEntry() -> this.isOpenGoal", this.isOpenGoal);
     console.log("saveGoalEntry() -> this.isDailyGoal: ", this.isDailyGoal);
     console.log("saveGoalEntry() -> this.isWeeklyGoal: ", this.isWeeklyGoal);
 
     if (this.isDailyGoal) {
-      this.dailyGoalEntryCollection.push(this.goalEntry);
-      console.log("this.dailyGoalEntryCollection was pushed.");
+      if (!this.isOpenGoal) {
+        this.dailyGoalEntryCollection.push(this.goalEntry);
+        console.log("saveGoalEntry() -> this.dailyGoalEntryCollection was pushed.");
+      }
+
+      else {
+        this.openDailyGoalEntryCollection.push(this.goalEntry);
+        console.log("saveGoalEntry() -> this.openDailyGoalEntryCollection was pushed.");
+      }
+
     }
 
     else {
@@ -426,10 +512,13 @@ export class GoalsManagementPage {
    * @param gEntryId - the id of this goal entry
    * @param index - the index of this goal entry
    */
-  public editGoalEntry(gEntryId: number, index: number) {
-    console.log("editGoalEntry() -> gEntryId: ", gEntryId); //as expected
+  public editGoalEntry(gEntryId: number, gEntryDate: string, index: number) {
+    console.log("editGoalEntry() -> gEntryId: ", gEntryId);
+    console.log("editGoalEntry() -> gEntryDate: ", gEntryDate);
+
     this.aboutToEdit = true;
     this.editId = gEntryId;
+    this.editOrigEntryDate = gEntryDate;
     this.entryIndex = index;
     //get element by id
     let that = this;
@@ -454,10 +543,12 @@ export class GoalsManagementPage {
    * @param gEntryId - the id of the entry
    * @param index - the index of the entry (relevant for the data presentation)
    */
-  public deleteGoalEntry(gEntryId: number, index: number) { //vorher (item)
+  public deleteGoalEntry(gEntryId: number, index: number, isOpenGoalEntry: boolean) { //vorher (item)
     console.log("deleteEntry() called");
 
     this.goalEntryId = gEntryId;
+
+    let opengEntry: boolean = isOpenGoalEntry;
 
     console.log("goalEntryDelete -> goalEntryId (local param): " + gEntryId);
     console.log("goalEntryDelete -> goalEntryId (instance variable): " + this.goalEntryId);
@@ -467,7 +558,15 @@ export class GoalsManagementPage {
     this.gEntryDbp.deleteGoalEntry(gEntryId, this.isDailyGoal); //db processing
 
     if (this.isDailyGoal) {
-      this.dailyGoalEntryCollection.splice(index, 1);
+
+      if (!opengEntry) {
+        this.dailyGoalEntryCollection.splice(index, 1);
+      }
+
+      else {
+        this.openDailyGoalEntryCollection.splice(index, 1);
+      }
+
     }
 
     else {
