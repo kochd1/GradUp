@@ -69,6 +69,7 @@ import { BiovotionConnector } from '@ionic-native/biovotion-connector';
 //Accordion
 import { AccordionListComponent } from '../components/accordion-list/accordion-list';
 import { HttpModule } from '@angular/http';
+import { CustomMaxlengthModule } from 'custom-maxlength';
 
 import { MidataService } from '../services/MidataService';
 import { MidataStepsService } from '../services/midata-steps.service';
@@ -144,6 +145,8 @@ import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
     //IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     IonicImageViewerModule,
+    CustomMaxlengthModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

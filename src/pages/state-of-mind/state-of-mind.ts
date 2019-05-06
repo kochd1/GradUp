@@ -21,9 +21,9 @@ import { JournalPage } from '../journal/journal';
 })
 export class StateOfMindPage {
 
-    /**
-   * variable which stores the user input concerning the subj. condition.
-   */
+  /**
+ * variable which stores the user input concerning the subj. condition.
+ */
   subjectiveCondition: number;
 
   /**
@@ -32,13 +32,15 @@ export class StateOfMindPage {
   moodReason: string;
 
 
-  moodChecked:boolean;
+  moodChecked: boolean;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              private notificationService: NotificationService, 
-              private midataService: MidataService,
-              private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private notificationService: NotificationService,
+    private midataService: MidataService,
+    private alertCtrl: AlertController) {
+
+    this.moodReason = "";
   }
 
   ionViewDidLoad() {
@@ -46,11 +48,11 @@ export class StateOfMindPage {
     this.scheduleNotification();
   }
 
-    /**
-   * Adds subjective condition from user input to the resp. global variable.
-   * @param value 
-   */
-  public addSubjConditionInput(value: number){
+  /**
+ * Adds subjective condition from user input to the resp. global variable.
+ * @param value
+ */
+  public addSubjConditionInput(value: number) {
     this.subjectiveCondition = value;
     this.moodChecked = true;
   }
@@ -58,45 +60,44 @@ export class StateOfMindPage {
   /**
    * Saves the mood entry to MIDATA
    */
-  public saveMoodEntry(){
+  public saveMoodEntry() {
     console.log("saveMoodEntry() -> subjectiveCondition:", this.subjectiveCondition);
 
-      //input filter (additional)
-      if(this.subjectiveCondition==0 || this.subjectiveCondition==1 || this.subjectiveCondition==2){
+    //input filter (additional)
+    if (this.subjectiveCondition == 0 || this.subjectiveCondition == 1 || this.subjectiveCondition == 2) {
 
-        console.log("saveMoodEntry() -> subjective condition input: ", this.subjectiveCondition);
-        console.log("saveMoodEntry() -> mood reason: ", this.moodReason);
+      console.log("saveMoodEntry() -> subjective condition input: ", this.subjectiveCondition);
+      console.log("saveMoodEntry() -> mood reason: ", this.moodReason);
 
-        let moodReason: string;
+      let moodReason: string;
 
-        if(this.moodReason)
-        {
-          moodReason = this.moodReason;
-        }
+      if (this.moodReason) {
+        moodReason = this.moodReason;
+      }
 
-        else{
-          moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
-        }
-      
-        let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
+      else {
+        moodReason = "N/A" //so that if it is null, it is shown something useful on MIDATA
+      }
 
-        this.midataService.save(mentalCondition)
+      let mentalCondition = new ObsMentalCondition(this.subjectiveCondition, moodReason);
+
+      this.midataService.save(mentalCondition)
         .then((response) => {
           // we can now access the midata response
           console.log("ObsMentalCondition fired on MIDATA");
-        
-    
+
+
         }).catch((error) => {
-            console.error("Error in save request:", error);
+          console.error("Error in save request:", error);
         });
 
-        console.log("mental condition: ", mentalCondition);
-        }
+      console.log("mental condition: ", mentalCondition);
+    }
 
-        this.showInstantFeedback();
+    this.showInstantFeedback();
   }
 
-  showInstantFeedback(){
+  showInstantFeedback() {
     let alert = this.alertCtrl.create({
       title: '',
       subTitle: 'Schön, dass du deine Stimmung angegeben hast :)',
@@ -104,15 +105,15 @@ export class StateOfMindPage {
       buttons: [
         {
           text: 'Weiter',
-          handler: () =>{
-          this.navCtrl.popToRoot();
+          handler: () => {
+            this.navCtrl.popToRoot();
+          }
         }
-      }
-  ]
-});
+      ]
+    });
 
-alert.present();
-  
+    alert.present();
+
   }
 
   public gotoJournalPage() {

@@ -88,9 +88,11 @@
       <ion-label id="reasonLb"> <b>Grund:</b> </ion-label>
       <!--wrapping in ion-item würde eine Zeile für sich beanspruchen!-->
       <ion-item id="reason">
-        <ion-input [(ngModel)]="journalEntry.entryMoodReason" maxlength="25" placeholder="Wieso fühlst du dich so?">
+        <ion-input [(ngModel)]="journalEntry.entryMoodReason" maxlength="25" custom-maxlength [charMaxLength]="25"
+          placeholder="Wieso fühlst du dich so?">
         </ion-input>
       </ion-item>
+      <span id="characterCount">{{ 25 - journalEntry.entryMoodReason.length }} Zeichen verbleibend</span>
     </ion-row>
   </ion-grid>
 
