@@ -88,9 +88,9 @@ page-goals-management {
   }
 
 
-
-
-  //$checkbox-md-icon-border-color-off: #b3081f;
+  ion-checkbox .item-cover{ //only checkbox becomes clickable
+    display:none;
+  }
 
   .manipBtn{
     text-transform: none; //ion-buttons without caps
