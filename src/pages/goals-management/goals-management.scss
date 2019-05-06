@@ -42,8 +42,20 @@ page-goals-management {
 
   }
 
-  .openDailyGoals{
+  .openDailyGoalsList{
     max-height: 90%; //68% before
+    overflow-y: scroll;
+  }
+
+  .dailyGoalDiv{
+    height: 45%;
+    max-height: 45% !important;
+    margin-top: 5%;
+  }
+
+  .dailyGoalsList{
+    //height: 95%;
+    max-height: 95%;
     overflow-y: scroll;
   }
 
@@ -58,22 +70,25 @@ page-goals-management {
 
   }
 
-  .openWeeklyGoals{
+  .openWeeklyGoalsList{
     max-height: 90%; //68% before
     overflow-y: scroll;
   }
 
-  .dailyGoalDiv{
-    height: 45% !important; //new
+  .weeklyGoalDiv{
+    height: 45% !important;
     max-height: 45% !important;
     margin-top: 5%;
   }
 
-  .dailyGoals{
+  .weeklyGoalsList{
     //height: 95%;
     max-height: 95%;
     overflow-y: scroll;
   }
+
+
+
 
   //$checkbox-md-icon-border-color-off: #b3081f;
 
