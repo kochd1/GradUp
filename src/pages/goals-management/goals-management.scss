@@ -47,6 +47,22 @@ page-goals-management {
     overflow-y: scroll;
   }
 
+  .openWeeklyGoalDiv{
+    height: 30% !important;
+    max-height: 30% !important;
+
+    .checkbox-icon{
+      border-color:rgb(224, 12, 12) !important;
+      //background-color: #fff!important;
+    }
+
+  }
+
+  .openWeeklyGoals{
+    max-height: 90%; //68% before
+    overflow-y: scroll;
+  }
+
   .dailyGoalDiv{
     height: 45% !important; //new
     max-height: 45% !important;

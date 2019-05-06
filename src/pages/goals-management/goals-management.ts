@@ -11,8 +11,7 @@ import { GoalEntryDatabaseProvider } from '../../providers/database/goalEntryDB'
 /**
  * Generated class for the GoalsManagementPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -72,6 +71,16 @@ export class GoalsManagementPage {
   weeklyGoalEntryCollectionIsNull: boolean;
 
   /**
+   * collection of open weekly goal entries.
+   */
+  openWeeklyGoalEntryCollection: GoalEntry[] = [];
+
+  /**
+   * collection of all weekly goal entries.
+   */
+  allWeeklyGoalEntryCollection: GoalEntry[] = [];
+
+  /**
    * collection of archived goals.
    */
   goalEntryArchiveCollection: GoalEntry[] = [];
@@ -114,7 +123,7 @@ export class GoalsManagementPage {
   /**
    * holds the original creation date of the goal.
    */
-  editOrigEntryDate: string;
+  editOrigEntryDate: Date;
 
   /**
    * holds the goal entry index.
@@ -133,8 +142,8 @@ export class GoalsManagementPage {
     private storage: Storage,
     public gEntryDbp: GoalEntryDatabaseProvider) {
 
-    //let newDate: Date = new Date(); //new a string
-    this.goalEntry = new GoalEntry(0, "", "", false);
+    //let newDate: Date = new Date(); //new a string -> did not work
+    this.goalEntry = new GoalEntry(0, new Date(), "", false);
     this.dailyGoalEntryCollectionIsNull = false;
     this.weeklyGoalEntryCollectionIsNull = false;
 
@@ -159,11 +168,18 @@ export class GoalsManagementPage {
 
         that.allDailyGoalEntriesCollection = goalArray;
 
-        that.dailyGoalEntryCollection = goalArray.filter(goal => goal.entryDate == new Date().toDateString());
+        var today: Date = new Date();
+        today.setHours(0, 0, 0, 0); //reset to midnight
+        today.setDate(today.getDate());
 
-        that.openDailyGoalEntryCollection = goalArray.filter(goal => goal.entryDate < new Date().toDateString());
+        console.log("todayMidnight: ", today);
 
-        console.log("ionViewCanEnter() -> new Date: ", new Date().toDateString());
+        let todayMidnightMs: number = today.getTime();
+        console.log("todayMidnightMs: ", todayMidnightMs);
+
+        that.dailyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= todayMidnightMs);
+
+        that.openDailyGoalEntryCollection = goalArray.filter(goal => goal.entryId < todayMidnightMs);
 
         this.goals = "dailyGoal"; //default view
         this.isDataAvailable = true;
@@ -175,25 +191,47 @@ export class GoalsManagementPage {
         this.goals = "dailyGoal"; //default view
         this.isDataAvailable = true; //anyway, because storage has been called
       }
-
       console.log("ionViewCanEnter() -> allDailyGoalEntriesCollection: ", that.allDailyGoalEntriesCollection);
-
       console.log("ionViewCanEnter() -> dailyGoalEntryCollection: ", that.dailyGoalEntryCollection);
-
       console.log("ionViewCanEnter() -> openDailyGoalEntryCollection: ", that.openDailyGoalEntryCollection);
 
     }));
 
     //weekly goal entry collection
-    this.storage.get('weeklyGoalEntryCollection').then((value => {
-      if (value != null) {
-        that.weeklyGoalEntryCollection = value;
+    this.storage.get('weeklyGoalEntryCollection').then((goalArray => {
+      if (goalArray != null) {
+        that.allWeeklyGoalEntryCollection = goalArray;
+
+        let today: Date = new Date();
+        today.setHours(0, 0, 0, 0); //reset to midnight
+        var currentDay = today.getDay();
+        var deltaDay = currentDay - 1; //1= "monday"
+
+        if (deltaDay == -1) { //if it's sunday
+          deltaDay = 6;
+        }
+
+        //today.setDate(today.getDate() - 7); //a week ago
+        //var aWeekAgo: string = today.toDateString();
+        today.setDate(today.getDate() - deltaDay); //before last monday
+        var lastMonday: Date = today; // last monday at midnight      .toDateString();
+        var lastMondayMs = lastMonday.getTime(); //in ms
+        that.openWeeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId < lastMondayMs);
+        that.weeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= lastMondayMs);
       }
 
       else {
         that.weeklyGoalEntryCollectionIsNull = true;
       }
+
+      console.log("ionViewCanEnter() -> allWeeklyGoalEntryCollection: ", that.allWeeklyGoalEntryCollection);
       console.log("ionViewCanEnter() -> weeklyGoalEntryCollection: ", that.weeklyGoalEntryCollection);
+      console.log("ionViewCanEnter() -> openWeeklyGoalEntryCollection: ", that.openWeeklyGoalEntryCollection);
+
+      console.log("currentDay ", currentDay);
+      //console.log("aWeekago: ", aWeekAgo);
+      console.log("lastMonday: ", lastMonday);
+      console.log("lastMondayMs: ", lastMondayMs);
 
     }));
 
@@ -365,22 +403,22 @@ export class GoalsManagementPage {
    * Saves the goal entry from the modal input.
    */
   public saveGoalEntry() {
+
     this.newEntry = true;
 
-    let entryDate;
-    let entryId;
+    let entryDate: Date;
+    let entryId: number;
 
     console.log("saveGoalEntry() -> this.aboutToEdit: ", this.aboutToEdit);
     if (this.aboutToEdit == true) {
       entryId = this.editId;
       console.log("saveGoalEntry() -> entryId: ", entryId);
-      entryDate = this.editOrigEntryDate; //string
+      entryDate = this.editOrigEntryDate;
       console.log("saveGoalEntry() -> entryDate: ", entryDate);
     }
     else {
       entryDate = new Date(); //date because of entryId
       entryId = Number(entryDate);
-      entryDate = entryDate.toDateString(); //conversion to string after setting id
     }
 
     let entryText = this.inputData;
@@ -403,7 +441,14 @@ export class GoalsManagementPage {
       }
 
       else {
-        this.weeklyGoalEntryCollection.splice(this.entryIndex, 1);
+        if (!this.isOpenGoal) {
+          this.weeklyGoalEntryCollection.splice(this.entryIndex, 1);
+        }
+
+        else {
+          this.openWeeklyGoalEntryCollection.splice(this.entryIndex, 1);
+        }
+
       }
 
     }
@@ -426,10 +471,18 @@ export class GoalsManagementPage {
     }
 
     else {
-      this.weeklyGoalEntryCollection.push(this.goalEntry);
-      console.log("this.weeklyGoalEntryCollection was pushed.");
-    }
 
+      if (!this.isOpenGoal) {
+        this.weeklyGoalEntryCollection.push(this.goalEntry);
+        console.log("saveGoalEntry() -> this.weeklyGoalEntryCollection was pushed.");
+      }
+
+      else {
+        this.openWeeklyGoalEntryCollection.push(this.goalEntry);
+        console.log("saveGoalEntry() -> this.openWeeklyGoalEntryCollection was pushed.");
+      }
+
+    }
 
     console.log("saveGoalEntry() -> goalEntry", this.goalEntry);
 
@@ -512,7 +565,7 @@ export class GoalsManagementPage {
    * @param gEntryId - the id of this goal entry
    * @param index - the index of this goal entry
    */
-  public editGoalEntry(gEntryId: number, gEntryDate: string, index: number) {
+  public editGoalEntry(gEntryId: number, gEntryDate: Date, index: number) {
     console.log("editGoalEntry() -> gEntryId: ", gEntryId);
     console.log("editGoalEntry() -> gEntryDate: ", gEntryDate);
 
@@ -570,11 +623,17 @@ export class GoalsManagementPage {
     }
 
     else {
-      this.weeklyGoalEntryCollection.splice(index, 1);
+
+      if (!opengEntry) {
+        this.weeklyGoalEntryCollection.splice(index, 1);
+      }
+
+      else {
+        this.openWeeklyGoalEntryCollection.splice(index, 1);
+      }
+
     }
 
   }
-
-
 
 }
