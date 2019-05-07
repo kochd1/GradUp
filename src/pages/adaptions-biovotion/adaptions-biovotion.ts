@@ -17,6 +17,7 @@ import { GalvanicSkinResponseObs } from '../../resources/galvanicSkinResponse';
 import { HeartRateVariabilityObs } from '../../resources/heartRateVariability';
 import { InterBeatIntervalObs } from '../../resources/interBeatInterval';
 import { EnergyExpenditureObs } from '../../resources/energyExpenditure';
+import { SkinTemperatureObs } from '../../resources/skinTemperature';
 
 //TODO kochd1: daten mittels der .buffer() filtern und allenfalls zusätzlich filter bei der midata load() anpassen.
 
@@ -242,8 +243,6 @@ export class AdaptionsBiovotionPage {
               console.log("heart rate variability object: ", liveData.heartRateVariability);
               var heartRateVariability = Number(liveData.heartRateVariability.value);
 
-              //inter-beat-interval
-
               //steps
               console.log("steps/s: ", liveData.steps.value);
               var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
@@ -256,9 +255,8 @@ export class AdaptionsBiovotionPage {
               var respirationRate = Number(liveData.respirationRate.value);
 
               //skin temperature
-              console.log("cTemp: ", liveData.cTemp); //?
-              console.log("localTemp: ", liveData.localTemp); //?
-              console.log("objectTemp: ", liveData.objectTemp); //?
+              console.log("objectTemp (skin temperature): ", liveData.objectTemp);
+              var skinTemperature = Number(liveData.objectTemp.value);
 
               //galvanic skin response (also electrodermal activity)
               console.log("galvanic skin response: ", liveData.gsrElectrode.value);
@@ -273,9 +271,9 @@ export class AdaptionsBiovotionPage {
 
               //this.saveHeartRateValueToMidata(heartRate); //works, do not save at the moment
               //this.saveStepAmountToMidata(amountOfSteps); //works do not save at the moment
-              this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
-              //this.saveSkinTemperatureToMIDATA(); //it is not clear, which variable it is!
-              //this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //do not save at the moment
+              //this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
+              //this.saveSkinTemperatureToMIDATA(skinTemperature); //works, do not save at the moment
+              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //works do not save at the moment
               //this.saveHeartRateVariabilityValuesToMidata(heartRateVariability); //do not save at the moment
               //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //works, do not save at the moment
 
@@ -474,13 +472,33 @@ export class AdaptionsBiovotionPage {
   }
 
   /**
+   * saves the skin temperature values to MIDATA.
+   *
+   * @param skinTemperature
+   */
+  saveSkinTemperatureToMIDATA(skinTemperature: number) {
+
+    //let MessageDate = new Date();
+
+    //#MIDATA persistence
+    this.midataService.save(new SkinTemperatureObs(skinTemperature)).then((response) => {
+      // we can now access the midata response
+      console.log("SkinTemperatureObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Error in save request:", error);
+    });
+
+    console.log("skin temperature: " + skinTemperature);
+  }
+
+  /**
    * Saves the galvanicSkinResponses to MIDATA.
    *
    * @param galvanicSkinResponse
    */
   saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse: number) {
-
-    galvanicSkinResponse = galvanicSkinResponse * 1000; //kOhm is the measured output of the sensor but not defined by unitsofmeasure.org
 
     //#MIDATA persistence
     this.midataService.save(new GalvanicSkinResponseObs(galvanicSkinResponse)).then((response) => {

@@ -1,8 +1,8 @@
 import { Observation, OBSERVATIONSTATUS, CAT_SURVEY, registerResource, CAT_VITALSIGNS } from '.../../../node_modules/Midata';
 //import { ObservationEffective, ObservationStatus, Resource, registerResource} from '.../../../node_modules/Midata';
 
-@registerResource('code', '24672009')
-export class GalvanicSkinResponseObs extends Observation {
+@registerResource('code', '39106-0')
+export class SkinTemperatureObs extends Observation {
 
   // Implement a constructor
   // Check the hl7 fhir documentation of the resource
@@ -10,7 +10,7 @@ export class GalvanicSkinResponseObs extends Observation {
   // It's recommended that you define these already in the constructor
   // so there will be no way to save a resource without the required stuff
 
-  constructor(galvanicSkinResponse: number) {
+  constructor(skinTemperature: number) {
 
     /*effectiveType: ObservationEffective,
     status: ObservationStatus,
@@ -20,19 +20,19 @@ export class GalvanicSkinResponseObs extends Observation {
     let code = {
       coding: [
         {
-          "system": "http://snomed.info/sct",
-          "code": "24672009",
-          "display": "Galvanic skin response"
+          "system": "http://loinc.org",
+          "code": "39106-0",
+          "display": "Temperature of Skin"
         }
       ]
     };
 
     let valueQuantity = {
       "valueQuantity": {
-        "value": galvanicSkinResponse,
-        "unit": "kΩ",
+        "value": skinTemperature,
+        "unit": "°C",
         "system": "http://unitsofmeasure.org",
-        "code": "kOhm"
+        "code": "degree Celsius"
       }
     };
 
