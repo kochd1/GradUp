@@ -12,48 +12,77 @@
 <ion-content padding>
   <p></p>
   <!--><p>Hier kannst du sämtliche Angaben und Einstellungen verwalten.</p>-->
+  <div class="topOptions">
+    <ion-item id="adaptionsItemLb">
+      <ion-label style="font-size: 17px">
+        <!--item-left does not change anything-->
+        <b>Anpassungen/Einstellungen</b>
+      </ion-label>
+    </ion-item>
 
-  <ion-list class="with-borders">
-    <button ion-item (click)="gotoProfileCustomizePage()">
-      <span class="highlight">Profil anpassen</span>
-    </button>
+    <ion-list class="with-borders">
+      <button ion-item (click)="gotoProfileCustomizePage()">
+        <span class="highlight">Profil anpassen</span>
+      </button>
 
-    <button ion-item (click)="gotoProfileCustomizecontactsPage()">
-      <span class="highlight">Kontakte anpassen / erfassen</span>
-    </button>
+      <button ion-item (click)="gotoProfileCustomizecontactsPage()">
+        <span class="highlight">Kontakte anpassen / erfassen</span>
+      </button>
 
-    <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="!checkSensorConnection()">
-      <span class="highlight">Biovotion Everion Sensor verbinden</span>
-    </button>
+      <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="!checkSensorConnection()">
+        <span class="highlight">Biovotion Everion Sensor verbinden</span>
+      </button>
 
-    <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="checkSensorConnection()">
-      <span class="highlight">Biovotion Everion Sensor trennen</span>
-    </button>
+      <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="checkSensorConnection()">
+        <span class="highlight">Biovotion Everion Sensor trennen</span>
+      </button>
 
-    <button ion-item (click)="login()" *ngIf="!isLoggedIn()">
-      <span class="highlight">MIDATA verbinden</span>
-    </button>
+      <button ion-item (click)="login()" *ngIf="!isLoggedIn()">
+        <span class="highlight">MIDATA verbinden</span>
+      </button>
 
-    <button ion-item (click)="logout()" *ngIf="isLoggedIn()">
-      <span class="highlight">MIDATA-Verbindung trennen</span>
-    </button>
-  </ion-list>
-  <p></p>
+      <button ion-item (click)="logout()" *ngIf="isLoggedIn()">
+        <span class="highlight">MIDATA-Verbindung trennen</span>
+      </button>
+    </ion-list>
 
-  <p>Sonstiges:</p>
+    <ion-item id="awardsItemLb">
+      <ion-label style="font-size: 17px">
+        <!--item-left does not change anything-->
+        <b>Auszeichnungen</b>
+      </ion-label>
+    </ion-item>
 
-  <ion-list class="with-borders">
-    <button ion-item (click)="gotoProfileImpressumPage()">
-      <span class="highlight">Impressum</span>
-    </button>
+    <ion-list class="with-borders">
+      <button ion-item (click)="gotoMoreAwardsPage()">
+        <span class="highlight">GradUp Auszeichnungen</span>
+      </button>
+    </ion-list>
 
-    <button ion-item (click)="gotoProfilePrivacyPage()">
-      <span class="highlight">Datenschutzerklärung</span>
-    </button>
+  </div>
 
-    <button ion-item (click)="gotoProfileTermsPage()">
-      <span class="highlight">Nutzungsbedingungen</span>
-    </button>
-  </ion-list>
+  <div class="bottomOptions">
+    <ion-item id="miscellaneousItemLb">
+      <ion-label style="font-size: 17px">
+        <!--item-left does not change anything-->
+        <b>Sonstiges </b>
+      </ion-label>
+    </ion-item>
+
+    <ion-list class="with-borders">
+      <button ion-item (click)="gotoProfileImpressumPage()">
+        <span class="highlight">Impressum</span>
+      </button>
+
+      <button ion-item (click)="gotoProfilePrivacyPage()">
+        <span class="highlight">Datenschutzerklärung</span>
+      </button>
+
+      <button ion-item (click)="gotoProfileTermsPage()">
+        <span class="highlight">Nutzungsbedingungen</span>
+      </button>
+    </ion-list>
+
+  </div>
 
 </ion-content>

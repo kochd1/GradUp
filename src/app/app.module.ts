@@ -87,6 +87,7 @@ import { DocumentationSetbackSuccessPage } from '../pages/documentation-setback-
 import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/database/setbackSuccessDocumentationEntryDB';
 import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copingStrategyEntryDB';
 import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
+import { MoreAwardsPage } from '../pages/more-awards/more-awards';
 
 
 @NgModule({
@@ -127,6 +128,7 @@ import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
     ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
     AdaptionsBiovotionPage,
+    MoreAwardsPage,
     ProfileImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage,
@@ -185,6 +187,7 @@ import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
     ProfileCustomisationPage,
     ProfileCustomizecontactsPage,
     AdaptionsBiovotionPage,
+    MoreAwardsPage,
     ProfileImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage

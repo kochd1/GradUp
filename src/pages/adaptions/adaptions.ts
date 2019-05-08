@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, NavParams, LoadingController, App } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController, NavParams, LoadingController, App } from 'ionic-angular';
 import { ProfileImpressumPage } from '../profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../profile-terms/profile-terms';
 import { ProfileCustomisationPage } from '../profile-customisation/profile-customisation';
 import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
 import { AdaptionsBiovotionPage } from '../adaptions-biovotion/adaptions-biovotion';
+import { MoreAwardsPage } from '../more-awards/more-awards'
 import { JournalPage } from '../journal/journal';
 import { Storage } from '@ionic/storage';
 import { MidataService } from '../../services/MidataService';
@@ -34,6 +35,7 @@ export class AdaptionsPage {
     private midataService: MidataService,
     public navCtrl: NavController,
     private menuCtrl: MenuController,
+    private alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     public navParams: NavParams,
     private storage: Storage
@@ -63,6 +65,10 @@ export class AdaptionsPage {
     this.navCtrl.push(AdaptionsBiovotionPage, {});
   }
 
+  public gotoMoreAwardsPage() {
+    this.navCtrl.push(MoreAwardsPage, {});
+  }
+
   public gotoProfileImpressumPage() {
     this.navCtrl.push(ProfileImpressumPage, {});
   }
@@ -86,19 +92,42 @@ export class AdaptionsPage {
     return this.isConnectedToSensor; //true, if connected
   }
 
-  // Logout
+  //MIDATA Logout
   public logout() {
-    this.midataService.logout()
-      .then(() => {
-        this.menuCtrl.close();
-        this.selectJournalPage();
-      })
-      .catch(() => {
-        this.selectJournalPage();
-      })
+
+    let logoutAlert = this.alertCtrl.create({
+      title: 'Verbindung zu MIDATA trennen?',
+      subTitle: 'Die Studiendaten werden somit nicht mehr übertragen!',
+      cssClass: 'alert-button-inner',
+      buttons: [
+        {
+          text: 'Ja',
+          handler: () => {
+            this.midataService.logout()
+              .then(() => {
+                this.menuCtrl.close();
+                this.selectJournalPage();
+              })
+              .catch(() => {
+                this.selectJournalPage();
+              })
+          }
+        },
+        {
+          text: 'Nein',
+          handler: () => {
+            //do nothing
+          }
+        }
+      ]
+    });
+
+    logoutAlert.present();
+
+
   }
 
-  // Login
+  // MIDATA Login
   public login() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...'
