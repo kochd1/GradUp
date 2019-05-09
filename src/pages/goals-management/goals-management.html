@@ -41,7 +41,7 @@
             <ion-item>
               <ion-label>{{gEntry.entryText}}</ion-label>
               <ion-checkbox [(ngModel)]="gEntry.isAchieved" class="checkBoxOpenGoal" slot="end"
-                (click)="setEntryType('dailyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i, true); achievedGoal();">
+                (click)="setEntryType('dailyGoal', true, gEntry.isRepetitive); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i, true); handleRepetitiveGoalEntry(gEntry.entryId, gEntry.entryDate, gEntry.entryText, gEntry.isRepetitive, i); showInstantFeedbackGoalAchieved();">
               </ion-checkbox>
             </ion-item>
 
@@ -69,7 +69,7 @@
           <ion-item>
             <ion-label>{{gEntry.entryText}}</ion-label>
             <ion-checkbox [(ngModel)]="gEntry.isAchieved" slot="end"
-              (click)="setEntryType('dailyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i); achievedGoal();">
+              (click)="setEntryType('dailyGoal', false, gEntry.isRepetitive); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i, false); handleRepetitiveGoalEntry(gEntry.entryId, gEntry.entryDate, gEntry.entryText, gEntry.isRepetitive, i); showInstantFeedbackGoalAchieved();">
             </ion-checkbox>
           </ion-item>
 
@@ -108,7 +108,7 @@
             <ion-item>
               <ion-label>{{gEntry.entryText}}</ion-label>
               <ion-checkbox [(ngModel)]="gEntry.isAchieved" class="checkBoxOpenGoal" slot="end"
-                (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i, true); achievedGoal();">
+                (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i, true); showInstantFeedbackGoalAchieved();">
               </ion-checkbox>
             </ion-item>
 
@@ -140,7 +140,7 @@
           <ion-item>
             <ion-label>{{gEntry.entryText}}</ion-label>
             <ion-checkbox [(ngModel)]="gEntry.isAchieved" slot="end"
-              (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i); achievedGoal();">
+              (click)="setEntryType('weeklyGoal'); setGoalEntryAchieved(gEntry.entryId, i); deleteGoalEntry(gEntry.entryId, i); showInstantFeedbackGoalAchieved();">
             </ion-checkbox>
           </ion-item>
 

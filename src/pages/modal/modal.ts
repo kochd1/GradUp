@@ -7,8 +7,7 @@ import { DocumentationEntry } from '../../classes/documentationEntry';
 /**
  * Generated class for the ModalPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()

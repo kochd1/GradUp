@@ -20,6 +20,7 @@ page-goals-management {
 
   ion-content{
     height: 100%; //works as wrapper
+    max-height: 100% !important; //new
   }
 
   .scroll-content {
@@ -34,23 +35,25 @@ page-goals-management {
   .openDailyGoalDiv{
     height: 30% !important;
     max-height: 30% !important;
+    margin-top: 3%;
 
     .checkbox-icon{
       border-color:rgb(224, 12, 12) !important;
       //background-color: #fff!important;
     }
 
-  }
+    .openDailyGoalsList{
+      height: 20vh; //no percent, because parent can't be 100%
+      max-height: 68%; //68% before
+      overflow-y: scroll;
+    }
 
-  .openDailyGoalsList{
-    max-height: 90%; //68% before
-    overflow-y: scroll;
   }
 
   .dailyGoalDiv{
     height: 45%;
     max-height: 45% !important;
-    margin-top: 5%;
+    margin-top: 3%;
   }
 
   .dailyGoalsList{
@@ -62,6 +65,7 @@ page-goals-management {
   .openWeeklyGoalDiv{
     height: 30% !important;
     max-height: 30% !important;
+    margin-top: 3%;
 
     .checkbox-icon{
       border-color:rgb(224, 12, 12) !important;
@@ -78,7 +82,7 @@ page-goals-management {
   .weeklyGoalDiv{
     height: 45% !important;
     max-height: 45% !important;
-    margin-top: 5%;
+    margin-top: 3%;
   }
 
   .weeklyGoalsList{

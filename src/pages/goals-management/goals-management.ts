@@ -26,9 +26,14 @@ export class GoalsManagementPage {
   goalEntry: GoalEntry;
 
   /**
-   * stores the data input from the modal
+   * stores the goal entry text data input from the modal
    */
-  inputData: string;
+  inputEntryTextData: string;
+
+  /**
+   * stores the goal entry check-box data input from the modal.
+   */
+  inputGoalIsRepetitive: boolean;
 
   /**
    * stores the data from the storage to edit via modal.
@@ -106,6 +111,11 @@ export class GoalsManagementPage {
   isOpenGoal: boolean;
 
   /**
+   * boolean var to check, if it's a repetitive daily goal.
+   */
+  isRepetitive: boolean;
+
+  /**
    * boolean var to check, if the respective goal is achieved.
    */
   isAchieved: boolean;
@@ -126,6 +136,16 @@ export class GoalsManagementPage {
   editOrigEntryDate: Date;
 
   /**
+   * holds the original text of the goal.
+   */
+  editOrigEntryText: string;
+
+  /**
+   * holds the original text of the goal.
+   */
+  editOrigIsRepetitive: boolean;
+
+  /**
    * holds the goal entry index.
    */
   entryIndex: number;
@@ -143,7 +163,7 @@ export class GoalsManagementPage {
     public gEntryDbp: GoalEntryDatabaseProvider) {
 
     //let newDate: Date = new Date(); //new a string -> did not work
-    this.goalEntry = new GoalEntry(0, new Date(), "", false);
+    this.goalEntry = new GoalEntry(0, new Date(), "", false, false);
     this.dailyGoalEntryCollectionIsNull = false;
     this.weeklyGoalEntryCollectionIsNull = false;
 
@@ -172,14 +192,20 @@ export class GoalsManagementPage {
         today.setHours(0, 0, 0, 0); //reset to midnight
         today.setDate(today.getDate());
 
-        console.log("todayMidnight: ", today);
+        console.log("lastMidnight: ", today);
 
-        let todayMidnightMs: number = today.getTime();
-        console.log("todayMidnightMs: ", todayMidnightMs);
+        let lastMidnightMs: number = today.getTime();
+        console.log("lastMidnightMs: ", lastMidnightMs);
 
-        that.dailyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= todayMidnightMs);
+        var nextMidnight: Date = new Date();
+        nextMidnight.setHours(23, 59, 59, 999);
+        nextMidnight.setDate(today.getDate());
 
-        that.openDailyGoalEntryCollection = goalArray.filter(goal => goal.entryId < todayMidnightMs);
+        var nextMidnightMs = nextMidnight.getTime();
+
+        that.dailyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= lastMidnightMs && goal.entryId <= nextMidnightMs);
+
+        that.openDailyGoalEntryCollection = goalArray.filter(goal => goal.entryId < lastMidnightMs);
 
         this.goals = "dailyGoal"; //default view
         this.isDataAvailable = true;
@@ -194,6 +220,8 @@ export class GoalsManagementPage {
       console.log("ionViewCanEnter() -> allDailyGoalEntriesCollection: ", that.allDailyGoalEntriesCollection);
       console.log("ionViewCanEnter() -> dailyGoalEntryCollection: ", that.dailyGoalEntryCollection);
       console.log("ionViewCanEnter() -> openDailyGoalEntryCollection: ", that.openDailyGoalEntryCollection);
+
+      console.log("nextMidnightMs", nextMidnightMs)
 
     }));
 
@@ -214,10 +242,10 @@ export class GoalsManagementPage {
         //today.setDate(today.getDate() - 7); //a week ago
         //var aWeekAgo: string = today.toDateString();
         today.setDate(today.getDate() - deltaDay); //before last monday
-        var lastMonday: Date = today; // last monday at midnight      .toDateString();
-        var lastMondayMs = lastMonday.getTime(); //in ms
-        that.openWeeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId < lastMondayMs);
-        that.weeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= lastMondayMs);
+        var lastMondayMidnight: Date = today; // last monday at midnight      .toDateString();
+        var lastMondayMidnightMs = lastMondayMidnight.getTime(); //in ms
+        that.openWeeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId < lastMondayMidnightMs);
+        that.weeklyGoalEntryCollection = goalArray.filter(goal => goal.entryId >= lastMondayMidnightMs);
       }
 
       else {
@@ -230,8 +258,8 @@ export class GoalsManagementPage {
 
       console.log("currentDay ", currentDay);
       //console.log("aWeekago: ", aWeekAgo);
-      console.log("lastMonday: ", lastMonday);
-      console.log("lastMondayMs: ", lastMondayMs);
+      console.log("lastMonday: ", lastMondayMidnight);
+      console.log("lastMondayMs: ", lastMondayMidnightMs);
 
     }));
 
@@ -301,7 +329,7 @@ export class GoalsManagementPage {
   /**
    * Sets the type of this entry via "add entry" button.
    */
-  public setEntryType(entryType: string, isOpenGoal: boolean) {
+  public setEntryType(entryType: string, isOpenGoal: boolean, isRepetitive: boolean) {
     this.goalEntry = null; //reset goal entry (necessary, if an entry modification is aborted)
     this.aboutToEdit = false; //same reason
 
@@ -320,6 +348,9 @@ export class GoalsManagementPage {
 
     this.isOpenGoal = isOpenGoal;
     console.log("setEntryType() -> this.isOpenGoal: ", this.isOpenGoal);
+
+    this.isRepetitive = isRepetitive;
+
   }
 
   /**
@@ -334,35 +365,40 @@ export class GoalsManagementPage {
     let myModal: Modal;
 
     //only go through, if there's an entry to edit
-    if (this.aboutToEdit == true) {
+    //if (this.aboutToEdit == true) {
 
-      let myModalData: GoalEntry = this.goalEntry;
-      console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+    //let myModalData: GoalEntry = this.goalEntry;
 
-      myModal = this.modalCtrl.create('ModalPage', { data: myModalData }, myModalOptions);
-    }
+    const myModalData = {
+      goalEntry: this.goalEntry,
+      isDailyGoal: this.isDailyGoal
+    };
 
-    else {
-      myModal = this.modalCtrl.create('ModalPage', myModalOptions);
-    }
+    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+
+    myModal = this.modalCtrl.create('ModalGoalsPage', { data: myModalData }, myModalOptions);
+    //}
+
+    /*else {
+      myModal = this.modalCtrl.create('ModalGoalsPage', myModalOptions);
+    }*/
 
     myModal.present();
 
     let that = this;
-    //let inputData: string;
-
     myModal.onDidDismiss((data) => {
       console.log("data from modal:", data);
-      //that.documentationEntry.entryText = data;
-      that.inputData = data;
 
-      if (that.inputData) {
+      that.inputEntryTextData = data.goalEntry;
+      that.inputGoalIsRepetitive = data.repetitive;
+
+      if (that.inputEntryTextData) {
         that.newEntry = true;
       }
       console.log("modal onDidDismiss -> newEntry: ", that.newEntry);
 
-      //console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText); //undefined
-      console.log("this.inputData after modal: ", this.inputData); //as expected
+      console.log("this.inputEntryTextData after modal: ", this.inputEntryTextData);
+      console.log("this.inputGoalIsRepetitive after modal: ", this.inputGoalIsRepetitive);
 
       if (data != null) {
         this.saveGoalEntry();
@@ -408,6 +444,8 @@ export class GoalsManagementPage {
 
     let entryDate: Date;
     let entryId: number;
+    let entryText: string;
+    let isRepetitive: boolean;
 
     console.log("saveGoalEntry() -> this.aboutToEdit: ", this.aboutToEdit);
     if (this.aboutToEdit == true) {
@@ -415,15 +453,36 @@ export class GoalsManagementPage {
       console.log("saveGoalEntry() -> entryId: ", entryId);
       entryDate = this.editOrigEntryDate;
       console.log("saveGoalEntry() -> entryDate: ", entryDate);
+      entryText = this.inputEntryTextData;
+      isRepetitive = this.inputGoalIsRepetitive;
     }
+
+    else if (this.isRepetitive) {
+      console.log("saveGoalEntry() -> this.isRepetitive: ", this.isRepetitive);
+      console.log("this.editId (before adding ms)", this.editId);
+
+      let now = new Date();
+      let nowMs = now.getTime() //get current ms count
+      console.log("nowMs: ", nowMs);
+      let timeDiffMs = nowMs - this.editId; //calculate a time difference in ms between the creation date and now
+      console.log("timeDiffMs: ", timeDiffMs);
+      entryId = this.editId + timeDiffMs + 86400000; //add this time difference to the id and set Id to 24h in ms from now on
+      //-> adding the time difference ensures, that a still-open-goal, which is open more than 24h, is shown correctly.
+      console.log("saveGoalEntry() -> entryId: ", entryId);
+      entryDate = this.editOrigEntryDate;
+      console.log("saveGoalEntry() -> entryDate: ", entryDate);
+      entryText = this.editOrigEntryText;
+      isRepetitive = this.editOrigIsRepetitive;
+    }
+
     else {
       entryDate = new Date(); //date because of entryId
       entryId = Number(entryDate);
+      entryText = this.inputEntryTextData;
+      isRepetitive = this.inputGoalIsRepetitive;
     }
 
-    let entryText = this.inputData;
-
-    this.goalEntry = new GoalEntry(entryId, entryDate, entryText, false); //"false" -> a new/edited goal is always not achieved.
+    this.goalEntry = new GoalEntry(entryId, entryDate, entryText, isRepetitive, false); //"false" -> a new/edited goal is always not achieved.
 
     this.gEntryDbp.saveGoalEntry(this.goalEntry, this.isDailyGoal);
 
@@ -456,33 +515,42 @@ export class GoalsManagementPage {
     console.log("saveGoalEntry() -> this.isOpenGoal", this.isOpenGoal);
     console.log("saveGoalEntry() -> this.isDailyGoal: ", this.isDailyGoal);
     console.log("saveGoalEntry() -> this.isWeeklyGoal: ", this.isWeeklyGoal);
+    if (!this.isRepetitive) {
 
-    if (this.isDailyGoal) {
-      if (!this.isOpenGoal) {
-        this.dailyGoalEntryCollection.push(this.goalEntry);
-        console.log("saveGoalEntry() -> this.dailyGoalEntryCollection was pushed.");
+      if (this.isDailyGoal) {
+
+        if (!this.isOpenGoal) {
+          this.dailyGoalEntryCollection.push(this.goalEntry);
+          console.log("saveGoalEntry() -> this.dailyGoalEntryCollection was pushed.");
+        }
+
+        else {
+          this.openDailyGoalEntryCollection.push(this.goalEntry);
+          console.log("saveGoalEntry() -> this.openDailyGoalEntryCollection was pushed.");
+        }
+
       }
 
       else {
-        this.openDailyGoalEntryCollection.push(this.goalEntry);
-        console.log("saveGoalEntry() -> this.openDailyGoalEntryCollection was pushed.");
+
+        if (!this.isOpenGoal) {
+          this.weeklyGoalEntryCollection.push(this.goalEntry);
+          console.log("saveGoalEntry() -> this.weeklyGoalEntryCollection was pushed.");
+        }
+
+        else {
+          this.openWeeklyGoalEntryCollection.push(this.goalEntry);
+          console.log("saveGoalEntry() -> this.openWeeklyGoalEntryCollection was pushed.");
+        }
+
       }
 
     }
 
     else {
-
-      if (!this.isOpenGoal) {
-        this.weeklyGoalEntryCollection.push(this.goalEntry);
-        console.log("saveGoalEntry() -> this.weeklyGoalEntryCollection was pushed.");
-      }
-
-      else {
-        this.openWeeklyGoalEntryCollection.push(this.goalEntry);
-        console.log("saveGoalEntry() -> this.openWeeklyGoalEntryCollection was pushed.");
-      }
-
+      //do nothing
     }
+
 
     console.log("saveGoalEntry() -> goalEntry", this.goalEntry);
 
@@ -533,7 +601,7 @@ export class GoalsManagementPage {
   /**
    * Creates/presents an instant feedback modal after the user has achieved a goal.
    */
-  achievedGoal() {
+  showInstantFeedbackGoalAchieved() {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
@@ -566,6 +634,8 @@ export class GoalsManagementPage {
    * @param index - the index of this goal entry
    */
   public editGoalEntry(gEntryId: number, gEntryDate: Date, index: number) {
+    console.log("editGoalEntry() called");
+
     console.log("editGoalEntry() -> gEntryId: ", gEntryId);
     console.log("editGoalEntry() -> gEntryDate: ", gEntryDate);
 
@@ -581,12 +651,55 @@ export class GoalsManagementPage {
     this.gEntryDbp.getGoalEntryById(gEntryId, this.isDailyGoal).then((gEntry) => {
 
       that.goalEntry = gEntry;
-      //documentationEntry = dEntry;
       console.log("editGoalEntry() -> text after storage access: ", that.goalEntry);
 
       this.openModal(); //must be called here, otherwise the value of dEntry can't be passed to the modal!
       this.closeSlidingItem(this.slidingItem); //closes after the edit btn was fired
     });
+
+  }
+
+  /**
+   * handles a repetitive goal after achieving one.
+   *
+   * @param gEntryId - the goal entry id
+   * @param gEntryDate - the goal entry date
+   * @param gEntryText - the goal entry text
+   * @param isRepetitive - the boolean flag for a repetive goal
+   * @param index - the index of this goal entry
+   */
+  public handleRepetitiveGoalEntry(gEntryId: number, gEntryDate: Date, gEntryText: string, isRepetitive: boolean, index: number) {
+    console.log("handleRepetitiveGoalEntry() called");
+
+    console.log("handleRepetitiveGoalEntry() -> gEntryId: ", gEntryId);
+    console.log("handleRepetitiveGoalEntry() -> gEntryDate: ", gEntryDate);
+
+    this.isRepetitive = isRepetitive;
+
+    if (isRepetitive) {
+      this.editId = gEntryId;
+      this.editOrigEntryDate = gEntryDate;
+      this.entryIndex = index;
+      this.editOrigEntryText = gEntryText;
+      this.editOrigIsRepetitive = isRepetitive;
+      //get element by id
+      let that = this;
+
+      this.goalEntry = that.goalEntry; //is not a solution
+
+      this.gEntryDbp.getGoalEntryById(gEntryId, this.isDailyGoal).then((gEntry) => {
+
+        that.goalEntry = gEntry;
+        //documentationEntry = dEntry;
+        console.log("handleGoalEntry() -> text after storage access: ", that.goalEntry);
+        this.saveGoalEntry();
+      });
+
+    }
+
+    else {
+      //do nothing
+    }
 
   }
 

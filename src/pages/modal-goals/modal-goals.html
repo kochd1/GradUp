@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Schliessen</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label *ngIf="!goalEntry && goalIsDaily" style="font-size: 20px">
+      <b>Neues Tagesziel: </b>
+    </ion-label>
+    <ion-label *ngIf="!goalEntry && !goalIsDaily" style="font-size: 20px">
+      <b>Neues Wochenziel: </b>
+    </ion-label>
+    <ion-label *ngIf="goalEntry" style="font-size: 20px">
+      <b>Ziel anpassen: </b>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea [(ngModel)]="goalEntryText" rows="4">
+
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item no-lines *ngIf="goalIsDaily">
+    <ion-label>Zielsetzung täglich wiederholen</ion-label>
+    <ion-checkbox [(ngModel)]="goalIsRepetitive"> </ion-checkbox>
+  </ion-item>
+
+  <div class="entryDiv">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!goalEntryText"
+      (click)="setEntryText()">
+      Eintragen
+    </button>
+  </div>
+
+</ion-content>

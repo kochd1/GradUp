@@ -1,0 +1,11 @@
+page-modal-goals {
+
+  .entryDiv{
+    text-align: center;
+  }
+
+  ion-checkbox .item-cover{ //only checkbox becomes clickable
+    display:none;
+  }
+
+}
