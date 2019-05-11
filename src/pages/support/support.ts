@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { SupportSelfHelpPropositionsPage } from '../support-self-help-propositions/support-self-help-propositions';
-import { SupportCopingStrategiesPage } from '../support-coping-strategies/support-coping-strategies';
-import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
+
+//modules
 import { CallNumber } from '@ionic-native/call-number';
 import { SMS } from '@ionic-native/sms';
 import { EmailComposer } from '@ionic-native/email-composer';
 import { Storage } from '@ionic/storage';
+
+//components
+import { PopoverComponent } from '../../components/popover/popover';
+
+//pages
+import { SupportSelfHelpPropositionsPage } from '../support-self-help-propositions/support-self-help-propositions';
+import { SupportCopingStrategiesPage } from '../support-coping-strategies/support-coping-strategies';
+import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
+
 
 /**
  * Generated class for the HelpPage page.
@@ -37,12 +45,24 @@ export class SupportPage {
     private sms: SMS,
     private emailComposer: EmailComposer,
     private storage: Storage,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    public popoverCtrl: PopoverController
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HelpPage');
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Unter «Kontaktaufnahme» kannst du direkt mit deinen erfassten Personen (Bezugs- und Fachperson) via Telefon, SMS oder E-Mail in Kontakt treten."
+        + " Bei «Selbsthilfe» kannst du dir einerseits Selbsthilfeangebote, welche verlinkt sind, anschauen. Weiter kannst du deine eigenen Bewältigungsstrategien hinzufügen."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   callBezugsperson(): void {
@@ -299,7 +319,7 @@ export class SupportPage {
     // from outside. emit an event maybe?
     // var tabs = this.navCtrl.parent;
     // tabs.select(3);
-    
+
     this.navCtrl.push(ProfileCustomizecontactsPage);
   }
 }

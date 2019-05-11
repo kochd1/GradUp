@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, AlertController, NavParams, LoadingController, App } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, AlertController, PopoverController, NavParams, LoadingController, App } from 'ionic-angular';
+
+import { PopoverComponent } from '../../components/popover/popover';
+
 import { ProfileImpressumPage } from '../profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../profile-terms/profile-terms';
@@ -8,6 +11,7 @@ import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profi
 import { AdaptionsBiovotionPage } from '../adaptions-biovotion/adaptions-biovotion';
 import { MoreAwardsPage } from '../more-awards/more-awards'
 import { JournalPage } from '../journal/journal';
+
 import { Storage } from '@ionic/storage';
 import { MidataService } from '../../services/MidataService';
 
@@ -36,6 +40,7 @@ export class AdaptionsPage {
     public navCtrl: NavController,
     private menuCtrl: MenuController,
     private alertCtrl: AlertController,
+    public popoverCtrl: PopoverController,
     private loadingCtrl: LoadingController,
     public navParams: NavParams,
     private storage: Storage
@@ -51,6 +56,16 @@ export class AdaptionsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdaptionsPage');
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine Profil- und Kontaktangaben anpassen, deine Sensor- und MIDATA-Verbindungen verwalten, GradUp Auszeichnungen ansehen und weitere Infos zur App erhalten. "
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   public gotoProfileCustomizePage() {

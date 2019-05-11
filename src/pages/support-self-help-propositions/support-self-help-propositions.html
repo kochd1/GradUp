@@ -4,15 +4,16 @@
     <ion-title class="title">
       Selbsthilfeangebote
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-
-  <button ion-button id="popover" icon-only clear color="dark" large (click)="presentPopover($event)">
-    <ion-icon name="information-circle"></ion-icon>
-  </button>
   <div id="selfHelpGroupChatDiv">
     <ion-item>
       <ion-label style="font-size: 20px">

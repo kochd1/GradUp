@@ -3,17 +3,19 @@
     <ion-title class="title">
       Information
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button id="popover" icon-only clear color="dark" large (click)="presentPopover($event)">
-    <ion-icon name="information-circle"></ion-icon>
-  </button>
   <div id="awmfDiv">
     <ion-item>
       <ion-label style="font-size: 20px">
-        <b>Leitlinien: </b>
+        <b>Leitlinien</b>
       </ion-label>
     </ion-item>
     <p></p>
@@ -43,7 +45,7 @@
 
     <ion-item>
       <ion-label style="font-size: 20px">
-        <b>Fachstellen: </b>
+        <b>Fachstellen</b>
       </ion-label>
     </ion-item>
 

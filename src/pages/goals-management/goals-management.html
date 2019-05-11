@@ -4,11 +4,15 @@
       Zielverwaltung
       <!--><title-logo text="Zielverwaltung"></title-logo>-->
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Hier kannst du deine Tages- und Wochenziele verwalten.
 
   <!--<ion-tabs tabbarPlacement="top">
     <ion-tab [root]="tab1DailyGoals" tabTitle="Tagesziele"></ion-tab>

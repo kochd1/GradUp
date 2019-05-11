@@ -163,6 +163,8 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     WelcomeConnectPage,
     WeightReminderNotificationPage,
     TabsPage,
+
+    //component
     PopoverComponent,
 
     JournalPage,

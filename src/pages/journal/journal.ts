@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
+//component
+import { PopoverComponent } from '../../components/popover/popover';
 
 import { JournalEntryFormPage } from '../journal-entry-form/journal-entry-form';
 import { JournalEntryListPage } from '../journal-entry-list/journal-entry-list';
@@ -20,19 +23,30 @@ export class JournalPage {
   constructor(
     public navCtrl: NavController,
     private storage: Storage,
+    public popoverCtrl: PopoverController,
     private notificationService: NotificationService
     //private pulseStepsService: PulseStepsService,
-  ) { 
+  ) {
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JournalPage');
-    //this.scheduleNotification();
+    this.scheduleNotification();
   }
 
   ionViewDidLeave() {
     console.log('ionViewDidLeave JournalPage');
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "In deinem Tagebuch kannst du deine Erlebnisse schriftlich festhalten und sie mit einem Foto ergänzen. Zudem kannst du - gleich im Tagebuch oder auch separat - deinen aktuellen Gemütszustand erfassen."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   public gotoJournalEntryPage() {
@@ -43,7 +57,7 @@ export class JournalPage {
     this.navCtrl.push(JournalEntryListPage, {});
   }
 
-  public gotoStateOfMindPage(){
+  public gotoStateOfMindPage() {
     this.navCtrl.push(StateOfMindPage, {});
   }
 
@@ -53,7 +67,8 @@ export class JournalPage {
   }
 
   public scheduleNotification() {
-    this.notificationService.createWeeklyWeightNotification();
+    this.notificationService.createDailyMoodDeclerationNotification();
+    //this.notificationService.createWeeklyWeightNotification();
     //this.pulseStepsService.schedule();
   }
 }

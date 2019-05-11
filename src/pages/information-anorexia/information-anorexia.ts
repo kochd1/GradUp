@@ -16,24 +16,31 @@ export class InformationAnorexiaPage {
   url3: string;
   url4: string;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public popoverCtrl: PopoverController,
-              private inAppBrowser: InAppBrowser) {
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public popoverCtrl: PopoverController,
+    private inAppBrowser: InAppBrowser) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InformationAnorexiaPage');
   }
 
-  presentPopover(myEvent){
-    let popover = this.popoverCtrl.create(PopoverComponent);
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Untenstehend wurden Leitlinien - Empfehlungen resp. Behandlungsempfehlungen - seitens der AWMF (Arbeitsgemeinschaft für medizinische Fachgesellschaften) verlinkt." +
+
+        "Die Patientenleitlinie vermittelt vereinfachtes Wissen über die Krankheit und die Behandlungsmethoden und bietet dir einen guten Überblick. Die Behandlungsleitlinie S3 ist sehr ausführlich und in erster Linie für Fachpersonen gedacht." +
+        " Wenn du aber mehr und detaillierteres erfahren willst, kannst du dort nachschauen. Weiter findest du Links zu schweizerischen Fachstellen, über welche du dich zusätzlich informieren kannst."
+
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
     popover.present({
       ev: myEvent
     });
   }
 
-  public async openInformationPopover(){
+  public async openInformationPopover() {
     /*const popover = await this.popoverController.create({
       component: PopoverComponent,
       event: ev,
@@ -42,12 +49,12 @@ export class InformationAnorexiaPage {
     return await popover.present();*/
   }
 
-  public openWebPage(url: string){
+  public openWebPage(url: string) {
     const options: InAppBrowserOptions = {
 
     }
     //opening a URL and returning an InAppBrowserObject
-    this.inAppBrowser.create(url,'_self'); //options -> not required
+    this.inAppBrowser.create(url, '_self'); //options -> not required
 
     //const browser...
   }

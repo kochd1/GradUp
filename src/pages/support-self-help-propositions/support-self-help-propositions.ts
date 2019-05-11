@@ -18,14 +18,18 @@ export class SupportSelfHelpPropositionsPage {
     console.log('ionViewDidLoad SupportSelfHelpPropositionsPage');
   }
 
-  presentPopover(myEvent){
-    let popover = this.popoverCtrl.create(PopoverComponent);
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Untenstehend sind für dich Links zu Selbsthilfegruppen und Selbsthilfechats aufgelistet."
+
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
     popover.present({
       ev: myEvent
     });
   }
 
-  public async openInformationPopover(){
+  public async openInformationPopover() {
     /*const popover = await this.popoverController.create({
       component: PopoverComponent,
       event: ev,
@@ -34,12 +38,12 @@ export class SupportSelfHelpPropositionsPage {
     return await popover.present();*/
   }
 
-  public openWebPage(url: string){
+  public openWebPage(url: string) {
     const options: InAppBrowserOptions = {
 
     }
     //opening a URL and returning an InAppBrowserObject
-    this.inAppBrowser.create(url,'_self'); //options -> not required
+    this.inAppBrowser.create(url, '_self'); //options -> not required
 
     //const browser...
   }

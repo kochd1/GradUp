@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 //import documentationEntry utility class
@@ -8,6 +8,8 @@ import { DocumentationEntry } from '../../classes/documentationEntry';
 //import providers
 import { CopingStrategyEntryDatabaseProvider } from '../../providers/database/copingStrategyEntryDB';
 import { SupportPage } from "../support/support";
+
+import { PopoverComponent } from '../../components/popover/popover';
 
 @IonicPage()
 @Component({
@@ -57,6 +59,7 @@ export class SupportCopingStrategiesPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
+    public popoverCtrl: PopoverController,
     private modalCtrl: ModalController,
     private storage: Storage,
     public csEntryDbp: CopingStrategyEntryDatabaseProvider) {
@@ -88,6 +91,17 @@ export class SupportCopingStrategiesPage {
       console.log("ionViewDidLoad() -> copingStrategyEntryCollection: ", that.copingStrategyEntryCollection);
 
     }));
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine eigenen Bewältigungsstrategien erfassen. Schreibe hier auf, was dir persönlich hilft, mit Ängsten und Rückschlägen umzugehen."
+
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   /**

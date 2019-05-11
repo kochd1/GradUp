@@ -5,6 +5,11 @@
       Unterstützung
       <!--><title-logo text="Unterstützung"></title-logo>-->
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -13,7 +18,7 @@
   <ion-item id="supportItemLb">
     <ion-label style="font-size: 20px">
       <!--item-left does not change anything-->
-      <b>Kontaktaufnahme: </b>
+      <b>Kontaktaufnahme </b>
     </ion-label>
   </ion-item>
 
@@ -51,7 +56,7 @@
   <ion-item id="supportItemLb">
     <ion-label style="font-size: 20px">
       <!--item-left does not change anything-->
-      <b>Selbsthilfe: </b>
+      <b>Selbsthilfe </b>
     </ion-label>
   </ion-item>
 

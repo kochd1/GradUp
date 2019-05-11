@@ -5,24 +5,20 @@
       Mein Tagebuch
       <!--><title-logo text="Mein Tagebuch"></title-logo>-->
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
 
-  <p>
-    In deinem persönlichen Tagebuch kannst du Ausflüge
-    / Unternehmungen / Erlebnisse oder auch Rückmeldungen usw. erfassen.
-  </p>
-  <p>
-    Du kannst die Einträge mit einem Bild aus deiner Gallerie oder direkt mittels Fotoaufnahme ergänzen.
-  </p>
-
   <ion-item id="journalItemLb">
     <ion-label style="font-size: 20px">
       <!--item-left does not change anything-->
-      <b>Tagebuch: </b>
+      <b>Tagebuch </b>
     </ion-label>
   </ion-item>
 
@@ -40,7 +36,7 @@
   <ion-item id="journalItemLb">
     <ion-label style="font-size: 20px">
       <!--item-left does not change anything-->
-      <b>Gemütszustandsangabe: </b>
+      <b>Gemütszustandsangabe </b>
     </ion-label>
   </ion-item>
 

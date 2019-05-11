@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Modal, ModalController, ModalOptions } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
+import { PopoverComponent } from '../../components/popover/popover';
 
 //import goal entry utility class
 import { GoalEntry } from '../../classes/goalEntry';
@@ -158,6 +160,7 @@ export class GoalsManagementPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
+    public popoverCtrl: PopoverController,
     private modalCtrl: ModalController,
     private storage: Storage,
     public gEntryDbp: GoalEntryDatabaseProvider) {
@@ -320,6 +323,17 @@ export class GoalsManagementPage {
 
     //this.goals = "dailyGoal"; //default view
 
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine Tages- und Wochenziele verwalten, die du entweder selber für dich definierst oder in deiner Therapie festlegst. Noch offene Ziele - d. h. Ziele, die nicht am selben Tag oder nicht in derselben Woche, wo du sie erfasst hast, erreicht wurden, erscheinen separat mit einer roten Checkbox."
+        + " Du kannst die Ziele jederzeit ansehen, bearbeiten und löschen."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   segmentChanged(ev: any) {
