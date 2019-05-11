@@ -20,7 +20,7 @@ import { OnboardingProfileCapturePage } from '../pages/onboarding-profile-captur
 import { OnboardingContactCapturePage } from '../pages/onboarding-contact-capture/onboarding-contact-capture';
 import { OnboardingReferencePersonContactCapturePage } from '../pages/onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
 import { OnboardingSpecialistContactCapturePage } from '../pages/onboarding-specialist-contact-capture/onboarding-specialist-contact-capture';
-import { WelcomeConnectPage } from '../pages/welcome-connect/welcome-connect';
+import { OnboardingBiovotionPage } from '../pages/onboarding-biovotion/onboarding-biovotion';
 
 import { WeightReminderNotificationPage } from '../pages/weight-reminder-notification/weight-reminder-notification';
 
@@ -102,7 +102,7 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     OnboardingContactCapturePage,
     OnboardingReferencePersonContactCapturePage,
     OnboardingSpecialistContactCapturePage,
-    WelcomeConnectPage,
+    OnboardingBiovotionPage,
     WeightReminderNotificationPage,
     TabsPage,
 
@@ -160,7 +160,7 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     OnboardingContactCapturePage,
     OnboardingReferencePersonContactCapturePage,
     OnboardingSpecialistContactCapturePage,
-    WelcomeConnectPage,
+    OnboardingBiovotionPage,
     WeightReminderNotificationPage,
     TabsPage,
 

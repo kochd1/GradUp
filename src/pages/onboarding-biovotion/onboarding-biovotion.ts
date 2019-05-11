@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
 import { AdaptionsPage } from '../adaptions/adaptions';
 import { TabsPage } from '../tabs/tabs';
 import { BiovotionConnector, BiovotionSensor, BatteryInformation, SensorDataType, SensorDataEntry, SENSORDATATYPE } from '@ionic-native/biovotion-connector';
@@ -11,6 +11,9 @@ import { MidataService } from '../../services/MidataService';
 import { HeartRate, StepsCount, Observation } from 'Midata';
 import * as Globals from '../../../typings/globals';
 
+//components
+import { PopoverComponent } from '../../components/popover/popover';
+
 //TODO kochd1: daten mittels der .buffer() filtern und allenfalls zusätzlich filter bei der midata load() anpassen.
 
 
@@ -20,10 +23,10 @@ import * as Globals from '../../../typings/globals';
  */
 @IonicPage()
 @Component({
-  selector: 'page-welcome-connect',
-  templateUrl: 'welcome-connect.html',
+  selector: 'page-onboarding-biovotion',
+  templateUrl: 'onboarding-biovotion.html',
 })
-export class WelcomeConnectPage {
+export class OnboardingBiovotionPage {
 
   /**
    * name of this sensor
@@ -36,10 +39,10 @@ export class WelcomeConnectPage {
    */
   isConnectedToSensor: boolean = false;
 
-   /**
-   * key for local storage of isConnectedToSensor value
-   */
-  key_sensor:string="isConnectedToSensor";
+  /**
+  * key for local storage of isConnectedToSensor value
+  */
+  key_sensor: string = "isConnectedToSensor";
 
   /**
    * toggle value -> true if toggled, false if not
@@ -49,9 +52,9 @@ export class WelcomeConnectPage {
   /**
    * key for local storage of isToggled value
    */
-  key_toggle:string="isToggled";
+  key_toggle: string = "isToggled";
 
-  isPermitted:boolean = false;
+  isPermitted: boolean = false;
 
   /**
    * not in use at the moment
@@ -63,34 +66,35 @@ export class WelcomeConnectPage {
    * not in use at the moment
    * amount of steps during 10 seconds
    */
-  amountOfSteps: number ;
+  amountOfSteps: number;
 
   /**
-   * #MIDATA -> array for the heart rate, value: number }>; 
+   * #MIDATA -> array for the heart rate, value: number }>;
      store the raw data in this array.
    */
-  heartRateData: Array<{date: Date, value: number }>;
+  heartRateData: Array<{ date: Date, value: number }>;
 
-   /**
-   * #MIDATA -> array for the steps, value: number }>; 
-     store the raw data in this array.
-   */
-  stepData: Array<{date: Date, value: number }>;
+  /**
+  * #MIDATA -> array for the steps, value: number }>;
+    store the raw data in this array.
+  */
+  stepData: Array<{ date: Date, value: number }>;
 
 
-  constructor(public navCtrl: NavController, 
-    public navParams: NavParams, 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
     private biovotion: BiovotionConnector,
     private storage: Storage,
     private midataService: MidataService,
     private alertCtrl: AlertController,
+    public popoverCtrl: PopoverController,
     private toastCtrl: ToastController) {
 
     // set toggle to isConnectedToSensor
     //this.biovotion.isConnected().then((connectionState: boolean) => {
-      
+
     //}) ;
-    
+
     this.currentHeartRate = -1;
     this.amountOfSteps = -1;
 
@@ -100,7 +104,7 @@ export class WelcomeConnectPage {
     this.stepData = new Array<{ date: Date, value: number }>();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.storage.get(this.key_toggle).then((value) => {
       this.isToggled = value;
       console.log('ionViewWillEnter() -> isToggled?:', value);
@@ -114,7 +118,7 @@ export class WelcomeConnectPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomeConnectPage');
-    
+
     //#MIDATA -> load the elements
     this.loadData();
   }
@@ -133,7 +137,7 @@ export class WelcomeConnectPage {
 
     console.log("handleSensorConnection() -> sensor connected?:", this.isConnectedToSensor);
 
-    if(this.isConnectedToSensor) {
+    if (this.isConnectedToSensor) {
       console.log("about to disconnect from sensor...");
       this.disconnectSensor();
 
@@ -144,48 +148,48 @@ export class WelcomeConnectPage {
     }
   }
 
-    /**
-   * Popup to ask user for permission to connect the sensor.
-   */
-  askUserPermission(){
+  /**
+ * Popup to ask user for permission to connect the sensor.
+ */
+  askUserPermission() {
     let alert = this.alertCtrl.create({
       title: 'Verbindung mit Sensor',
       subTitle: 'GradUp möchte eine Bluetooth-Verbindung zu Ihrem Biovotion Everion Sensor herstellen.',
       buttons: [
         {
           text: 'Erlauben',
-          handler: () =>{
-          console.log("askUserPermission() -> permission ok");
-          this.isPermitted = true;
-          this.connectSensor();
-        }
-      },
-      {
-        text: 'Abbrechen',
-        handler: () =>{
-          this.isToggled = false;
-         let subAlert = this.alertCtrl.create({
-            title: 'Verbindung mit Sensor',
-            subTitle: 'Sie sind nicht einverstanden damit, Ihren Biovotion Everion Sensor mit GradUp zu verbinden. <br>'
-            +'Falls Sie dies zu einem späteren Zeitpunkt trotzdem möchten, können Sie dies in Ihrem Profil problemlos nachholen.',
-            buttons: [
-              {
-                text: 'OK',
-                handler: () => {
-                  this.gotoTabsPage();
+          handler: () => {
+            console.log("askUserPermission() -> permission ok");
+            this.isPermitted = true;
+            this.connectSensor();
+          }
+        },
+        {
+          text: 'Abbrechen',
+          handler: () => {
+            this.isToggled = false;
+            let subAlert = this.alertCtrl.create({
+              title: 'Verbindung mit Sensor',
+              subTitle: 'Sie sind nicht einverstanden damit, Ihren Biovotion Everion Sensor mit GradUp zu verbinden. <br>'
+                + 'Falls Sie dies zu einem späteren Zeitpunkt trotzdem möchten, können Sie dies in Ihrem Profil problemlos nachholen.',
+              buttons: [
+                {
+                  text: 'OK',
+                  handler: () => {
+                    this.gotoTabsPage();
+                  }
                 }
-              }
-            ]
-          });
-          subAlert.present();
+              ]
+            });
+            subAlert.present();
+          }
+
         }
+      ]
+    });
 
-      }
-  ]
-});
+    alert.present();
 
-alert.present();
-  
   }
 
   /**
@@ -196,19 +200,19 @@ alert.present();
 
     this.biovotion.scan().subscribe((sensor: BiovotionSensor) => {
       this.sensor1 = sensor;
-       // for now we only want to connect with this specific sensor
-       if (this.sensor1.address == "FE:10:32:95:6C:08") {
+      // for now we only want to connect with this specific sensor
+      if (this.sensor1.address == "FE:10:32:95:6C:08") {
         this.biovotion.connect(this.sensor1).then(() => {
 
           this.isConnectedToSensor = true;
 
           this.storage.set(this.key_sensor, this.isConnectedToSensor);
           this.storage.get(this.key_sensor).then((value) => {
-          console.log('storage -> isConnectedToSensor?:', value);
+            console.log('storage -> isConnectedToSensor?:', value);
           });
 
           this.storage.set(this.key_toggle, this.isToggled); //in trial
-          
+
           console.log("connectSensor() -> sensor connected?: ", this.isConnectedToSensor);
           console.log("battery state:", this.biovotion.getBatteryState);
           this.presentToast();
@@ -219,21 +223,21 @@ alert.present();
           dataToRequest.push(SENSORDATATYPE.steps);
 
           this.biovotion.readLiveData(dataToRequest)
-          .subscribe((liveData: SensorDataEntry) => {
-            console.log(liveData.heartRate.value);
-            var heartRate = Number(liveData.heartRate.value); //Midata -> only for first test
+            .subscribe((liveData: SensorDataEntry) => {
+              console.log(liveData.heartRate.value);
+              var heartRate = Number(liveData.heartRate.value); //Midata -> only for first test
 
 
-            console.log(liveData.steps.value);
-            var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
+              console.log(liveData.steps.value);
+              var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
 
-            this.saveHeartRateValueToMidata(heartRate);
-           this.saveStepAmountToMidata(amountOfSteps);
-            
+              this.saveHeartRateValueToMidata(heartRate);
+              this.saveStepAmountToMidata(amountOfSteps);
 
-          });
 
-          
+            });
+
+
 
           this.navCtrl.push(TabsPage, {});
         }).catch(error => {
@@ -241,115 +245,116 @@ alert.present();
           this.isToggled = false;  //in trial
         });
 
-          //this.measureData();
+        //this.measureData();
 
       }
 
- 
-    },(error) => { console.log(error);
-    this.isToggled = false; // in trial
-    console.log("scanError: connectSensor() -> is Toggled:?", this.isToggled);
-    this.presentToast();
-     
-  });
-   //this.navCtrl.push(TabsPage, {});
+
+    }, (error) => {
+      console.log(error);
+      this.isToggled = false; // in trial
+      console.log("scanError: connectSensor() -> is Toggled:?", this.isToggled);
+      this.presentToast();
+
+    });
+    //this.navCtrl.push(TabsPage, {});
   }
 
-  measureData(){
+  measureData() {
     console.log("about to measure data...")
 
-  
+
   }
 
   /**
    * Disconnects the Sensor after toggle change.
    */
-  disconnectSensor(){
+  disconnectSensor() {
 
     this.biovotion.disconnect().then(() => {
       this.isConnectedToSensor = false;
 
       this.storage.set(this.key_sensor, this.isConnectedToSensor);
-          this.storage.get(this.key_sensor).then((value) => {
-          console.log('storage -> isConnectedToSensor?:', value);
-          });
+      this.storage.get(this.key_sensor).then((value) => {
+        console.log('storage -> isConnectedToSensor?:', value);
+      });
 
       this.storage.set(this.key_toggle, this.isToggled); //in trial
 
       console.log('disconnectSensor() -> sensor connected:?', this.isConnectedToSensor);
       console.log('disconnectSensor() -> isToggled:?', this.isToggled);
-       }).catch(error => {
+    }).catch(error => {
       console.log("Error: " + error);
-       });
+    });
 
   }
 
-    /**
-   * Present a Toast based on the sensor connection.
-   */
-  public presentToast(){
-    let toastMessage:string="";
-    let toastDuration:number;
-  
-      if(this.isConnectedToSensor){ //connectSensor()
-        console.log("isConnectedToSensor:?", this.isConnectedToSensor);
-        toastMessage = "Sensor erfolgreich verbunden";
-        toastDuration = 3000;
-      }
+  /**
+ * Present a Toast based on the sensor connection.
+ */
+  public presentToast() {
+    let toastMessage: string = "";
+    let toastDuration: number;
 
-      else{
-        console.log("else");
-        toastMessage = "Sensor konnte nicht verbunden werden. Prüfen Sie u. a., ob bei Ihrem Gerät Bluetooth und/oder GPS aktiviert ist sowie ob der Sensor eingeschaltet ist.";
-        toastDuration = 5000;
-      }
-  
-      let toast = this.toastCtrl.create({
-        message: toastMessage,
-        duration: toastDuration,
-        position: 'bottom',
-        cssClass: 'toast' //not working at the moment
-      });
-  
-      toast.onDidDismiss(() => {
-        console.log('Dismissed toast');
-      })
-  
-      toast.present();
+    if (this.isConnectedToSensor) { //connectSensor()
+      console.log("isConnectedToSensor:?", this.isConnectedToSensor);
+      toastMessage = "Sensor erfolgreich verbunden";
+      toastDuration = 3000;
     }
+
+    else {
+      console.log("else");
+      toastMessage = "Sensor konnte nicht verbunden werden. Prüfen Sie u. a., ob bei Ihrem Gerät Bluetooth und/oder GPS aktiviert ist sowie ob der Sensor eingeschaltet ist.";
+      toastDuration = 5000;
+    }
+
+    let toast = this.toastCtrl.create({
+      message: toastMessage,
+      duration: toastDuration,
+      position: 'bottom',
+      cssClass: 'toast' //not working at the moment
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    })
+
+    toast.present();
+  }
 
   /**
    * save a new heart rate value to Midata.
-   * 
-   * @param heartRate 
+   *
+   * @param heartRate
    */
-  saveHeartRateValueToMidata(heartRate: number){ //any -> provisoric
+  saveHeartRateValueToMidata(heartRate: number) { //any -> provisoric
     let MessageDate = new Date();
-    
-     //#MIDATA persistance
-     this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
+
+    //#MIDATA persistance
+    this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
   }
 
   /**
    * save a new amount of steps to Midata.
-   * 
-   * @param amountOfSteps 
+   *
+   * @param amountOfSteps
    */
-  saveStepAmountToMidata(amountOfSteps: number){
+  saveStepAmountToMidata(amountOfSteps: number) {
     let MessageDate = new Date();
-    
+
     //#MIDATA persistance
     this.midataService.save(new StepsCount(amountOfSteps, MessageDate.toISOString()));
   }
 
-   
 
-   /**
-    * #MIDATA: adds all heart rate measures to the array "heartRateData".
-    * 
-    * @param measure 
-    * @param date 
-    */
-   addHeartRateMeasure(measure: number, date: Date): void {
+
+  /**
+   * #MIDATA: adds all heart rate measures to the array "heartRateData".
+   *
+   * @param measure
+   * @param date
+   */
+  addHeartRateMeasure(measure: number, date: Date): void {
     /*if (moment().diff(date) >= 0){
 
     }*/
@@ -359,32 +364,32 @@ alert.present();
 
   }
 
-   
 
-   /**
-    * #MIDATA: adds all step measures to the array "stepData".
-    * 
-    * @param measure 
-    * @param date 
-    */
-   addStepMeasure(measure: number, date: Date): void {
+
+  /**
+   * #MIDATA: adds all step measures to the array "stepData".
+   *
+   * @param measure
+   * @param date
+   */
+  addStepMeasure(measure: number, date: Date): void {
     /*if (moment().diff(date) >= 0){
 
     }*/
 
     //push the data to the array
     this.stepData.push({ date: date, value: measure });
-    
+
   }
 
-   
-   /**
-    * #MIDATA: loads the data (FHIR Observations with code "heart rate" & "steps") from the MIDATA server
-    */
-   private loadData(): void {
+
+  /**
+   * #MIDATA: loads the data (FHIR Observations with code "heart rate" & "steps") from the MIDATA server
+   */
+  private loadData(): void {
     this.midataService.search('Observation/$lastn', { max: 1000, _sort: '-date', code: Globals.HEARTRATE.toString, patient: this.midataService.getUser().id })
       .then(response => {
-        if( response.length > 0) {
+        if (response.length > 0) {
 
 
           response.forEach((measure: Observation) => {
@@ -399,9 +404,9 @@ alert.present();
       }
       );
 
-      this.midataService.search('Observation/$lastn', { max: 1000, _sort: '-date', code: Globals.STEPS.toString, patient: this.midataService.getUser().id })
+    this.midataService.search('Observation/$lastn', { max: 1000, _sort: '-date', code: Globals.STEPS.toString, patient: this.midataService.getUser().id })
       .then(response => {
-        if( response.length > 0) {
+        if (response.length > 0) {
 
 
           response.forEach((measure: Observation) => {
@@ -424,7 +429,7 @@ alert.present();
     this.navCtrl.push(TabsPage, {});
   }
 
-  public gotoAdaptionsPage(){
+  public gotoAdaptionsPage() {
     this.navCtrl.push(AdaptionsPage, {});
   }
 

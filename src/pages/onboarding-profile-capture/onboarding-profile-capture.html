@@ -1,88 +1,89 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Profil erfassen"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title class="title">
+      Profil erfassen
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-        <p></p>
+    <p></p>
 
-        <!--<h3 ion-text color="primary">Obligatorisch:</h3>-->
+    <!--<h3 ion-text color="primary">Obligatorisch:</h3>-->
 
-        <p>Benutzername:</p>
-        <ion-item id="textfield">
-            <ion-input [(ngModel)]="inputtext" formControlName="username" type="text" value=""></ion-input>
-        </ion-item>
-        <p class="information-text">
-            Gebe einen Benutzernamen ein, mit dem du in Zukunft durch GradUp angesprochen werden möchtest.
-        </p>
-        <p *ngIf="isSubmitted && !formGroup.controls.username.valid" class="error-message">
-            Bitte einen Benutzernamen eingeben.
-        </p>
-
-        <p>Tätigkeit:</p>
-        <ion-item id="select-popover">
-                <ion-label>     </ion-label>   
-            <ion-select interface="popover" [(ngModel)]="userType" formControlName="occupationM">
-                <ion-option value="1">Sitzende Tätigkeit</ion-option>
-                <ion-option value="2">Handwerkliche Tätigkeit</ion-option>
-                <ion-option value="3">Student/-in</ion-option>
-                <ion-option value="4">Hausfrau/-mann</ion-option>
-                <ion-option value="5">Pflegende oder betreuende Tätigkeit</ion-option>
-            </ion-select>
-      
-        </ion-item>
-        <p class="information-text">
-            Wähle einen Tätigkeitsbereich, der am besten auf dich zutrifft.
-        </p>
-        <p *ngIf="isSubmitted && !formGroup.controls.occupationM.valid" class="error-message">
-            Bitte wähle einen Tätigkeitsbereich.
-        </p>
-
-        <!--current weight-->
-        <p>Aktuelles Gewicht:</p>
-        <ion-item id="textfield">
-            <ion-input [(ngModel)]="currentWeight" formControlName="currentWeight" type="number" value="">
-            </ion-input>
-            <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.currentWeight.valid" class="error-message">
-            Bitte das aktuelle Gewicht korrekt eingeben (Anzahl Kilogramm mit Angabe Kommastelle).
-        </p>
-
-        <!--weight gain-->
-        <p>Mein geplanter Wochenfortschritt:</p>
-        <ion-item id="textfield">
-            <ion-input [(ngModel)]="weightGain" formControlName="weightGainValidation" type="number" value="">
-            </ion-input>
-            <ion-label color="primary" class="fixedLabel" fixed>(500-1500 g)</ion-label>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.weightGainValidation.valid" class="error-message">Bitte den Wochenfortschritt korrekt eingeben (z. B. "750" oder "1200"). 
-            (Dieser muss zwischen 500 und 1500 g liegen.)
-        </p>
-
-    </form>
-
-    <p class="save-text">
-        * Der Benutzername wird nicht auf MIDATA gespeichert.
+    <p>Benutzername:</p>
+    <ion-item id="textfield">
+      <ion-input [(ngModel)]="inputtext" formControlName="username" type="text" value=""></ion-input>
+    </ion-item>
+    <p class="information-text">
+      Gebe einen Benutzernamen ein, mit dem du in Zukunft durch GradUp angesprochen werden möchtest.
     </p>
+    <p *ngIf="isSubmitted && !formGroup.controls.username.valid" class="error-message">
+      Bitte einen Benutzernamen eingeben.
+    </p>
+
+    <p>Tätigkeit:</p>
+    <ion-item id="select-popover">
+      <ion-label> </ion-label>
+      <ion-select interface="popover" [(ngModel)]="userType" formControlName="occupationM">
+        <ion-option value="1">Sitzende Tätigkeit</ion-option>
+        <ion-option value="2">Handwerkliche Tätigkeit</ion-option>
+        <ion-option value="3">Student/-in</ion-option>
+        <ion-option value="4">Hausfrau/-mann</ion-option>
+        <ion-option value="5">Pflegende oder betreuende Tätigkeit</ion-option>
+      </ion-select>
+
+    </ion-item>
+    <p class="information-text">
+      Wähle einen Tätigkeitsbereich, der am besten auf dich zutrifft.
+    </p>
+    <p *ngIf="isSubmitted && !formGroup.controls.occupationM.valid" class="error-message">
+      Bitte wähle einen Tätigkeitsbereich.
+    </p>
+
+    <!--current weight-->
+    <p>Aktuelles Gewicht:</p>
+    <ion-item id="textfield">
+      <ion-input [(ngModel)]="currentWeight" formControlName="currentWeight" type="number" value="">
+      </ion-input>
+      <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.currentWeight.valid" class="error-message">
+      Bitte das aktuelle Gewicht korrekt eingeben (Anzahl Kilogramm mit Angabe Kommastelle).
+    </p>
+
+    <!--weight gain-->
+    <p>Mein geplanter Wochenfortschritt:</p>
+    <ion-item id="textfield">
+      <ion-input [(ngModel)]="weightGain" formControlName="weightGainValidation" type="number" value="">
+      </ion-input>
+      <ion-label color="primary" class="fixedLabel" fixed>(500-1500 g)</ion-label>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.weightGainValidation.valid" class="error-message">Bitte den
+      Wochenfortschritt korrekt eingeben (z. B. "750" oder "1200").
+      (Dieser muss zwischen 500 und 1500 g liegen.)
+    </p>
+
+  </form>
+
+  <p class="save-text">
+    * Der Benutzername wird nicht auf MIDATA gespeichert.
+  </p>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
-            Speichern
-        </button>
-        <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoWelcomeContactPage()">
-            Überspringen (Demo)
-        </button>
-    </ion-toolbar>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
+      Speichern
+    </button>
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoWelcomeContactPage()">
+      Überspringen (Demo)
+    </button>
+  </ion-toolbar>
 </ion-footer>

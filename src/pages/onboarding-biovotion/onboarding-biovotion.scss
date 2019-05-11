@@ -1,4 +1,4 @@
-page-onboarding-contact-capture {
+page-onboarding-biovotion {
 
   .title {
     text-align: right;
@@ -6,10 +6,14 @@ page-onboarding-contact-capture {
     vertical-align: bottom;
   }
 
-  #contactIconDiv{
-    text-align: center;
-    margin-top: 25%;
-  }
+  .popoverBtn{
+    right: 20%;
+}
+
+#bluetoothIconDiv{
+  text-align: center;
+  margin-top: 25%;
+}
 
     .scroll-content {
         overflow-y: hidden;

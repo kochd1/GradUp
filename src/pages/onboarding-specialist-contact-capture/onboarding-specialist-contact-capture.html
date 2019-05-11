@@ -1,66 +1,62 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Fachperson erfassen"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Fachperson erfassen
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-        <p></p>
+    <p></p>
 
-        <p>Daten und Text für die <span class="highlight">Fachperson</span> erfassen.</p>
+    <p>Daten und Text für die <span class="highlight">Fachperson</span> erfassen.</p>
 
-        <p>Name der Fachperson:</p>
-        <ion-item id="textfield">
-            <ion-input [(ngModel)]="fachperson_inputtext" formControlName="inputtext" type="text"></ion-input>
-        </ion-item>
+    <p>Name der Fachperson:</p>
+    <ion-item id="textfield">
+      <ion-input [(ngModel)]="fachperson_inputtext" formControlName="inputtext" type="text"></ion-input>
+    </ion-item>
 
-        <p>Praxis-Telefonnummer:</p>
-        <ion-item id="telefonnummer">
-            <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="telefonnummer" type="tel">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte korrekte Telefon
-            Nummer eingeben.</p>
+    <p>Praxis-Telefonnummer:</p>
+    <ion-item id="telefonnummer">
+      <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="telefonnummer" type="tel">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte korrekte Telefon
+      Nummer eingeben.</p>
 
-        <p>E-Mail-Adresse:</p>
-        <ion-item id="e-mail">
-            <ion-input [(ngModel)]="fachperson_email" formControlName="email" type="email">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte korrekte E-Mail-Adresse
-            eingeben.</p>
+    <p>E-Mail-Adresse:</p>
+    <ion-item id="e-mail">
+      <ion-input [(ngModel)]="fachperson_email" formControlName="email" type="email">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte korrekte E-Mail-Adresse
+      eingeben.</p>
 
-        <p>E-Mail-Text:</p>
-        <ion-item id="emailtext">
-            <ion-textarea [(ngModel)]="fachperson_emailtext" formControlName="emailtext" rows="1">
-            </ion-textarea>
-        </ion-item>
+    <p>E-Mail-Text:</p>
+    <ion-item id="emailtext">
+      <ion-textarea [(ngModel)]="fachperson_emailtext" formControlName="emailtext" rows="1">
+      </ion-textarea>
+    </ion-item>
 
-        <p class="save-text">
-            * Die Kontaktinformationen werden nur lokal auf deinem Smartphone gespeichert.
-        </p>
+    <p class="save-text">
+      * Die Kontaktinformationen werden nur lokal auf deinem Smartphone gespeichert.
+    </p>
 
-    </form>
+  </form>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <ion-buttons left>
-            <button ion-button icon-only (click)="gotoOnboardingReferencePersonContactPage()">
-                <ion-icon name="arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
-        <button ion-button [color]="primary" type="submit" [outline]="false" [round]="true" [disabled]="!fachperson_inputtext || (!fachperson_telefonnummer && !fachperson_email)" (click)="saveData()">
-            Speichern
-        </button>
-    </ion-toolbar>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" type="submit" [outline]="false" [round]="true"
+      [disabled]="!fachperson_inputtext || (!fachperson_telefonnummer && !fachperson_email)" (click)="saveData()">
+      Speichern
+    </button>
+  </ion-toolbar>
 </ion-footer>

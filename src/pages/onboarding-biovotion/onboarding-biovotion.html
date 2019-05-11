@@ -1,0 +1,36 @@
+<ion-header>
+
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Biovotion Everion
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <p>Du kannst hier bereits deinen Biovotion Everion Sensor mit GradUp verbinden oder dies später im Tab «Mehr» tun.</p>
+
+  <ion-item>
+    <ion-label> Biovotion Everion Sensor </ion-label>
+    <ion-toggle [(ngModel)]="isToggled" (ngModelChange)="handleSensorConnection()"></ion-toggle>
+    <!--checked = "isToggled"  -->
+  </ion-item>
+
+  <!--Entwicklung -> isToggled?: {{ isToggled }}-->
+
+  <div id="bluetoothIconDiv">
+    <ion-icon style="font-size: 200px" color="grey" name="bluetooth"></ion-icon>
+  </div>
+
+</ion-content>
+
+
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoTabsPage()">
+      Später
+    </button>
+  </ion-toolbar>
+</ion-footer>

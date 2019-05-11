@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
+import { OnboardingBiovotionPage } from '../onboarding-biovotion/onboarding-biovotion';
 import { OnboardingReferencePersonContactCapturePage } from '../onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
 
 @IonicPage()
@@ -17,8 +17,8 @@ export class OnboardingContactCapturePage {
     console.log('ionViewDidLoad OnboardingContactCapturePage');
   }
 
-  public gotoWelcomeConnectPage() {
-    this.navCtrl.push(WelcomeConnectPage, {});
+  public gotoOnboardingBiovotionPage() {
+    this.navCtrl.push(OnboardingBiovotionPage, {});
   }
 
   public gotoOnboardingReferencePersonContactCapturePage() {

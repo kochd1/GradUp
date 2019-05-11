@@ -4,14 +4,13 @@ import { OnboardingSpecialistContactCapturePage } from '../onboarding-specialist
 import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 
 import { Storage } from '@ionic/storage';
-import { FormBuilder, FormGroup } from '@angular/forms'; 
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { validatePhoneIfNotEmpty, validateEmailIfNotEmpty } from '../../services/validators';
 
 /**
- * Generated class for the WelcomeContact2Page page.
+ * Generated class for the OnboardingReferencePersonContactCapturePage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -28,7 +27,7 @@ export class OnboardingReferencePersonContactCapturePage {
   bezugsperson_emailtext: string;
 
   isSubmitted: boolean = false;
-  formGroup: FormGroup; 
+  formGroup: FormGroup;
 
   constructor(
     private zone: NgZone,
@@ -37,7 +36,7 @@ export class OnboardingReferencePersonContactCapturePage {
     private storage: Storage,
     formBuilder: FormBuilder
   ) {
-  
+
     this.formGroup = formBuilder.group({
       inputtext: [''],
       telefonnummer: ['', validatePhoneIfNotEmpty],
@@ -51,11 +50,11 @@ export class OnboardingReferencePersonContactCapturePage {
 
   /**
    * Saves the contact data to the local storage.
-   */  
+   */
   saveData() {
 
     this.isSubmitted = true;
- 
+
     if (!this.formGroup.valid) {
       this.zone.run(() => {
         // force ui repaint
@@ -72,7 +71,7 @@ export class OnboardingReferencePersonContactCapturePage {
       this.storage.set('bezugsperson_emailtext', this.bezugsperson_emailtext)
     ]).then(() => {
       this.gotoOnboardingSpecialstContactCapturePage();
-    })  
+    })
   }
 
   /**

@@ -15,7 +15,7 @@ import { JournalPage } from '../pages/journal/journal';
 })
 export class MyApp {
 
-  rootPage: any = WelcomePage;
+  rootPage: any; //= WelcomePage;
   loadingDisplay: Loading;
 
   constructor(
@@ -45,10 +45,14 @@ export class MyApp {
       .then((result) => {
         console.log("appComponent() : openSession success", result);
         console.log("appComponent() : midata user", this.midataService.getUser());
+        this.rootPage = TabsPage;
         this.gotoJournalPage();
+
       })
       .catch((result) => {
         console.log("appComponent() : openSession failed", result);
+
+        this.rootPage = WelcomePage;
 
         this.storage.get("username").then((username: any) => {
           console.log("appComponent() : storage username:=", username);
@@ -61,14 +65,14 @@ export class MyApp {
   }
 
   private gotoJournalPage() {
-    console.log("gotoJournalPage()");
+    console.log("app.component -> gotoJournalPage()");
     this.app.getActiveNav().setRoot(TabsPage);
   }
 
   // Helper method. Provide a loading animation
   private getLoadingDisplay(): Loading {
     return this.loadingDisplay = this.loadingCtrl.create({
-      content: "Please wait..."
+      content: "Bitte warten..."
     })
   }
 

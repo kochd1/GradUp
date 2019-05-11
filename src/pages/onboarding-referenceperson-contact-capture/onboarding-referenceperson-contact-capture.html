@@ -1,70 +1,66 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Bezugsperson erfassen"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Bezugsperson erfassen
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-        <p></p>
+    <p></p>
 
-        <p>Daten und Texte für die <span class="highlight">Bezugsperson</span> erfassen.</p>
+    <p>Daten und Texte für die <span class="highlight">Bezugsperson</span> erfassen.</p>
 
-        <p>Name der Bezugsperson:</p>
-        <ion-item id="textfield">
-            <ion-input [(ngModel)]="bezugsperson_inputtext" formControlName="inputtext" type="text"></ion-input>
-        </ion-item>
+    <p>Name der Bezugsperson:</p>
+    <ion-item id="textfield">
+      <ion-input [(ngModel)]="bezugsperson_inputtext" formControlName="inputtext" type="text"></ion-input>
+    </ion-item>
 
-        <p>Telefonnummer:</p>
-        <ion-item id="telefonnummer">
-            <ion-input [(ngModel)]="bezugsperson_telefonnummer" formControlName="telefonnummer" type="tel">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte korrekte Telefon
-            Nummer eingeben.</p>
+    <p>Telefonnummer:</p>
+    <ion-item id="telefonnummer">
+      <ion-input [(ngModel)]="bezugsperson_telefonnummer" formControlName="telefonnummer" type="tel">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte korrekte Telefon
+      Nummer eingeben.</p>
 
-        <p>SMS-Text:</p>
-        <ion-item id="smstext">
-            <ion-textarea [(ngModel)]="bezugsperson_smstext" formControlName="smstext" rows="1"></ion-textarea>
-        </ion-item>
+    <p>SMS-Text:</p>
+    <ion-item id="smstext">
+      <ion-textarea [(ngModel)]="bezugsperson_smstext" formControlName="smstext" rows="1"></ion-textarea>
+    </ion-item>
 
-        <p>E-Mail-Adresse:</p>
-        <ion-item id="e-mail">
-            <ion-input [(ngModel)]="bezugsperson_email" formControlName="email" type="email">
-            </ion-input>
-        </ion-item>
-        <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte korrekte E-Mail-Adresse
-            eingeben.</p>
+    <p>E-Mail-Adresse:</p>
+    <ion-item id="e-mail">
+      <ion-input [(ngModel)]="bezugsperson_email" formControlName="email" type="email">
+      </ion-input>
+    </ion-item>
+    <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte korrekte E-Mail-Adresse
+      eingeben.</p>
 
-        <p>E-Mail-Text:</p>
-        <ion-item id="emailtext">
-            <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="emailtext" rows="1"></ion-textarea>
-        </ion-item>
+    <p>E-Mail-Text:</p>
+    <ion-item id="emailtext">
+      <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="emailtext" rows="1"></ion-textarea>
+    </ion-item>
 
-        <p class="save-text">
-            * Die Kontaktinformationen werden nur lokal auf deinem Smartphone gespeichert.
-        </p>
+    <p class="save-text">
+      * Die Kontaktinformationen werden nur lokal auf deinem Smartphone gespeichert.
+    </p>
 
-    </form>
+  </form>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <ion-buttons left>
-            <button ion-button icon-only (click)="gotoOnboardingContactCapturePage()">
-                <ion-icon name="arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
-        <button ion-button [color]="primary" [outline]="false" type="submit" [round]="true" [disabled]="!bezugsperson_inputtext || (!bezugsperson_telefonnummer && !bezugsperson_email)" (click)="saveData()">
-            Speichern
-        </button>
-    </ion-toolbar>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" [outline]="false" type="submit" [round]="true"
+      [disabled]="!bezugsperson_inputtext || (!bezugsperson_telefonnummer && !bezugsperson_email)" (click)="saveData()">
+      Speichern
+    </button>
+  </ion-toolbar>
 </ion-footer>

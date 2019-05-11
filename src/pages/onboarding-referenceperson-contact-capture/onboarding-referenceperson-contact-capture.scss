@@ -1,5 +1,11 @@
 page-onboarding-referenceperson-contact-capture {
 
+  .title {
+    text-align: right;
+    position: relative;
+    vertical-align: bottom;
+  }
+
     #textfield {
         padding-left: 0;
         bottom: 10px;
@@ -24,5 +30,5 @@ page-onboarding-referenceperson-contact-capture {
         padding-left: 0;
         bottom: 20px;
     }
-    
+
 }

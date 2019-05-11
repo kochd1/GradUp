@@ -1,38 +1,38 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Kontakte erfassen"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Kontakte erfassen
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
 
-    <p></p>
-    <p>Hier kannst du Kontaktdaten deiner Bezugsperson sowie deiner Fachperson erfassen, um sie direkt aus der App kontaktieren zu können.</p>
-    <p></p>
-    <p></p>
+  <p></p>
+  <p>Nachfolgend kannst du Kontaktdaten deiner Bezugsperson sowie deiner Fachperson erfassen, um sie direkt aus der App
+    kontaktieren zu können.
+    Du kannst dies auch später beim Tab «Mehr» nacherfassen. </p>
+  <p></p>
+  <p></p>
 
-    <ion-footer class="footer-no-borders">
-        <ion-buttons left>
-            <p> Du kannst dies auch später bei den Anpassungen nacherfassen. </p>
-            <p></p>
-        </ion-buttons>
-    </ion-footer>
+  <div id="contactIconDiv">
+    <ion-icon text-center style="font-size: 200px" color="grey" name="contacts"></ion-icon>
+  </div>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoWelcomeConnectPage()">
-            Später
-        </button>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoOnboardingBiovotionPage()">
+      Später
+    </button>
 
-        <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoOnboardingReferencePersonContactCapturePage()">
-            Erfassen
-        </button>
-    </ion-toolbar>
+    <button ion-button [color]="primary" [outline]="false" [round]="true"
+      (click)="gotoOnboardingReferencePersonContactCapturePage()">
+      Erfassen
+    </button>
+  </ion-toolbar>
 </ion-footer>

@@ -1,18 +1,17 @@
 import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
+import { OnboardingBiovotionPage } from '../onboarding-biovotion/onboarding-biovotion';
 import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
-import { OnboardingReferencePersonContactCapturePage} from '../onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
+import { OnboardingReferencePersonContactCapturePage } from '../onboarding-referenceperson-contact-capture/onboarding-referenceperson-contact-capture';
 
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { validatePhoneIfNotEmpty, validateEmailIfNotEmpty } from '../../services/validators';
 
 /**
- * Generated class for the WelcomeContact3Page page.
+ * Generated class for the OnboardingSpecialistContactCapturePage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -44,9 +43,16 @@ export class OnboardingSpecialistContactCapturePage {
       email: ['', validateEmailIfNotEmpty],
       emailtext: ['']
     });
+
+    this.getData();
+
   }
 
-  //Lokal Storage  
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad OnboardingSpecialistContactCapturePage');
+  }
+
+  //Lokal Storage
   saveData() {
 
     this.isSubmitted = true;
@@ -65,20 +71,42 @@ export class OnboardingSpecialistContactCapturePage {
       this.storage.set('fachperson_email', this.fachperson_email),
       this.storage.set('fachperson_emailtext', this.fachperson_emailtext)
     ]).then(() => {
-      this.gotoWelcomeConnectPage();
+      this.gotoOnboardingBiovotionPage();
     })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomeContact3Page');
+  /**
+   * Gets the contact data from the local storage.
+   */
+  getData() {
+    let that = this;
+
+    // TODO: move to separate service...
+    this.storage.get('fachperson_inputtext').then((value) => {
+      that.fachperson_inputtext = value;
+    });
+
+    this.storage.get('fachperson_telefonnummer').then((value) => {
+      that.fachperson_telefonnummer = value;
+    });
+
+    this.storage.get('fachperson_email').then((value) => {
+      that.fachperson_email = value;
+    });
+
+    this.storage.get('fachperson_emailtext').then((value) => {
+      that.fachperson_emailtext = value;
+    });
   }
+
+
 
   public gotoOnboardingReferencePersonContactPage() {
     this.navCtrl.push(OnboardingReferencePersonContactCapturePage, {});
   }
 
-  public gotoWelcomeConnectPage() {
-    this.navCtrl.push(WelcomeConnectPage, {});
+  public gotoOnboardingBiovotionPage() {
+    this.navCtrl.push(OnboardingBiovotionPage, {});
   }
 
 }

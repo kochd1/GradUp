@@ -1,45 +1,47 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, DateTime } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { WelcomeAppexplanationPage } from '../welcome-appexplanation/welcome-appexplanation';
 import { OnboardingProfileCapturePage } from '../onboarding-profile-capture/onboarding-profile-capture';
-import { WelcomeConnectPage } from '../welcome-connect/welcome-connect';
+import { OnboardingBiovotionPage } from '../onboarding-biovotion/onboarding-biovotion';
 import { TabsPage } from '../tabs/tabs';
 import { OnboardingContactCapturePage } from '../onboarding-contact-capture/onboarding-contact-capture';
 
 @IonicPage()
 @Component({
-   selector: 'page-welcome',
-   templateUrl: 'welcome.html',
+  selector: 'page-welcome',
+  templateUrl: 'welcome.html',
 })
 export class WelcomePage {
 
-   constructor(
-      public navCtrl: NavController,
-      public navParams: NavParams
-   ) { }
 
-   ionViewDidLoad() {
-      console.log('ionViewDidLoad WelcomePage');
-   }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+  }
 
-   public gotoWelcomeAppexplanationPage() {
-      this.navCtrl.push(WelcomeAppexplanationPage, {});
-   }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad WelcomePage');
+  }
 
-   //only necessary for development
-   public gotoProfilePage() {
-      this.navCtrl.push(OnboardingProfileCapturePage, {});
-   }
+  public gotoWelcomeAppexplanationPage() {
+    this.navCtrl.push(WelcomeAppexplanationPage, {});
+  }
 
-   public gotoWelcomeContactPage() {
-      this.navCtrl.push(OnboardingContactCapturePage, {});
-   }
+  //only necessary for development
+  public gotoProfilePage() {
+    this.navCtrl.push(OnboardingProfileCapturePage, {});
+  }
 
-   public gotoWelcomeConnectPage() {
-      this.navCtrl.push(WelcomeConnectPage, {});
-   }
+  public gotoOnboardingContactCapturePage() {
+    this.navCtrl.push(OnboardingContactCapturePage, {});
+  }
 
-   public gotoTabsPage() {
-      this.navCtrl.push(TabsPage, {});
-   }
+  public gotoOnboardingBiovotionPage() {
+    this.navCtrl.push(OnboardingBiovotionPage, {});
+  }
+
+  public gotoTabsPage() {
+    this.navCtrl.push(TabsPage, {});
+  }
 }
