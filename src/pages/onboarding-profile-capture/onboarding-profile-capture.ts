@@ -23,10 +23,9 @@ import { MyResource } from '../../resources/occupation';
 
 
 /**
- * Generated class for the WelcomeCapturePage page.
+ * Generated class for the OnboardingProfileCapturePage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -36,7 +35,7 @@ import { MyResource } from '../../resources/occupation';
 })
 export class OnboardingProfileCapturePage {
 
-  //Local storage for username 
+  //Local storage for username
   inputtext: string;
   key: string = "username";
 
@@ -60,7 +59,7 @@ export class OnboardingProfileCapturePage {
 
 
   /**
-   * #MIDATA -> array for the weight data 
+   * #MIDATA -> array for the weight data
      store the raw data in this array.
    */
   weightData: Array<{ date: Date, value: number }>;
@@ -68,7 +67,7 @@ export class OnboardingProfileCapturePage {
   //Global variable for current weight
   currentWeight: any;
 
-  //Global variable for goal weight 
+  //Global variable for goal weight
   weightGain: number;
 
   //Global variable for work Occupation
@@ -76,7 +75,7 @@ export class OnboardingProfileCapturePage {
 
   items: any;
 
-  //Form validation 
+  //Form validation
   isSubmitted: boolean = false;
   formGroup: FormGroup;
 
@@ -87,7 +86,7 @@ export class OnboardingProfileCapturePage {
     private storage: Storage,
     private midataService: MidataService,
     private notificationService: NotificationService,
-    formBuilder: FormBuilder    
+    formBuilder: FormBuilder
   ) {
 
     //Form validation
@@ -95,7 +94,7 @@ export class OnboardingProfileCapturePage {
       username: ['', Validators.required],
       occupationM: ['', Validators.required],
       currentWeight: ['', validateWeightInputFormat],
-      weightGainValidation: ['', Validators.compose ([validateWeightGainInputFormat, validateWeightGainRange])]
+      weightGainValidation: ['', Validators.compose([validateWeightGainInputFormat, validateWeightGainRange])]
     });
   }
 
@@ -131,7 +130,7 @@ export class OnboardingProfileCapturePage {
     // #MIDATA persistance: add Weight
     var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
 
-    // #MIDATA persistance: add Goal 
+    // #MIDATA persistance: add Goal
     let goal = new Goal(this.weightGain);
     let saveGoal = this.midataService.save(goal)
       .then((response) => {
@@ -141,7 +140,7 @@ export class OnboardingProfileCapturePage {
         console.error("Error in save request:", error);
       });
 
-    // #MIDATA persistance: add Occupation 
+    // #MIDATA persistance: add Occupation
     let occupation = new MyResource(this.userType);
     let saveOccupation = this.midataService.save(occupation)
       .then((response) => {

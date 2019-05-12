@@ -179,6 +179,8 @@ export class GoalsManagementPage {
 
     this.isDataAvailable = false;
 
+    //this.goals = "dailyGoal"; // !!loading and presenting problems when user has to login at the beginning.!!
+
   }
 
   ionViewCanEnter() {
@@ -312,16 +314,16 @@ export class GoalsManagementPage {
       }
       console.log("ionViewDidLoad() -> weeklyGoalEntryCollection: ", that.weeklyGoalEntryCollection);
 
-    }));
+    }));*/
 
-    //this.goals = "dailyGoal"; //default view*/
+    //this.goals = "dailyGoal"; //!!test default view -> does not work!!
   }
 
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad GoalsManagementPage');
 
-    //this.goals = "dailyGoal"; //default view
+    //this.goals = "dailyGoal"; // does not work! default view
 
   }
 

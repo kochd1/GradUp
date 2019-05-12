@@ -10,24 +10,24 @@
 
   <ion-item>
     <ion-label *ngIf="!goalEntry && goalIsDaily" style="font-size: 20px">
-      <b>Neues Tagesziel: </b>
+      <b>Neues Tagesziel</b>
     </ion-label>
     <ion-label *ngIf="!goalEntry && !goalIsDaily" style="font-size: 20px">
-      <b>Neues Wochenziel: </b>
+      <b>Neues Wochenziel</b>
     </ion-label>
     <ion-label *ngIf="goalEntry" style="font-size: 20px">
-      <b>Ziel anpassen: </b>
+      <b>Ziel anpassen</b>
     </ion-label>
   </ion-item>
 
   <ion-item>
-    <ion-textarea [(ngModel)]="goalEntryText" rows="4">
+    <ion-textarea id="inputField" [(ngModel)]="goalEntryText" rows="4" placeholder="Ziel">
 
     </ion-textarea>
   </ion-item>
 
   <ion-item no-lines *ngIf="goalIsDaily">
-    <ion-label>Zielsetzung täglich wiederholen</ion-label>
+    <ion-label id="checkboxRepetitiveLb">Zielsetzung täglich wiederholen</ion-label>
     <ion-checkbox [(ngModel)]="goalIsRepetitive"> </ion-checkbox>
   </ion-item>
 

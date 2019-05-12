@@ -20,20 +20,19 @@
   </ion-tabs>-->
 
   <ion-segment value="dailyGoal" [(ngModel)]="goals" (ionChange)="segmentChanged($event)">
+
     <ion-segment-button value="dailyGoal">
       <ion-label class="segmentLb">Tagesziele</ion-label>
     </ion-segment-button>
     <ion-segment-button value="weeklyGoal">
       <ion-label class="segmentLb">Wochenziele</ion-label>
     </ion-segment-button>
+
   </ion-segment>
 
   <div class="goalsDiv" [ngSwitch]="goals">
-    <!--><ion-label style="font-size: 18px" *ngSwitchCase="'dailyGoal'">
-      <b>Heute:</b>
-    </ion-label>-->
 
-    <!--weekly goals-->
+    <!--daily goals-->
 
     <div *ngIf="openDailyGoalEntryCollection.length!=0">
       <div class="openDailyGoalDiv" *ngSwitchCase="'dailyGoal'">

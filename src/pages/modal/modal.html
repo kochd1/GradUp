@@ -7,32 +7,33 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons end>
-        <button ion-button (click)="closeModal()">Schliessen</button>
+      <button ion-button (click)="closeModal()">Schliessen</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-item>
-        <ion-label *ngIf = "!documentationEntry" style="font-size: 20px">
-          <b>Neuer Eintrag: </b>
-        </ion-label>
-        <ion-label *ngIf = "documentationEntry" style="font-size: 20px">
-          <b>Eintrag anpassen: </b>
-      </ion-label>
-    </ion-item>
+  <ion-item>
+    <ion-label *ngIf="!documentationEntry" style="font-size: 20px">
+      <b>Neuer Eintrag </b>
+    </ion-label>
+    <ion-label *ngIf="documentationEntry" style="font-size: 20px">
+      <b>Eintrag anpassen </b>
+    </ion-label>
+  </ion-item>
 
-    <ion-item>
-        <ion-textarea [(ngModel)]="documentationEntryText" rows ="4">
+  <ion-item>
+    <ion-textarea [(ngModel)]="documentationEntryText" rows="4" placeholder="Eintrag">
 
-        </ion-textarea>
-    </ion-item>
+    </ion-textarea>
+  </ion-item>
 
-    <div class = "entryDiv">
-      <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!documentationEntryText" (click)="setEntryText()">
-        Eintragen
-      </button>
-    </div>
+  <div class="entryDiv">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!documentationEntryText"
+      (click)="setEntryText()">
+      Eintragen
+    </button>
+  </div>
 
 </ion-content>

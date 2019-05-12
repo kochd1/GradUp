@@ -238,7 +238,7 @@ export class OnboardingBiovotionPage {
             });
 
 
-
+          this.storage.set('DidOnboarding', true);
           this.navCtrl.push(TabsPage, {});
         }).catch(error => {
           console.log("Connection Error: " + error);
@@ -426,6 +426,7 @@ export class OnboardingBiovotionPage {
 
 
   public gotoTabsPage() {
+    this.storage.set('DidOnboarding', true);
     this.navCtrl.push(TabsPage, {});
   }
 
