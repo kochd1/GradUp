@@ -4,15 +4,17 @@
     <ion-title class="title">
       Profil
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-
-    <p></p>
-    <p>Hier kannst du deine Profilangaben anpassen.</p>
 
     <ion-item>
       <ion-label stacked>Benutzername:</ion-label>
@@ -22,7 +24,6 @@
     <p *ngIf="isSubmitted && !formGroup.controls.usernameValidation.valid" class="error-message">
       Bitte einen Benutzernamen eingeben.
     </p>
-
 
     <ion-item id="select-popover">
       <ion-label stacked>Ihr Tätigkeitsbereich:</ion-label>
@@ -41,12 +42,9 @@
 
   </form>
 
-
+  <!--remove later when there's no use-->
   <p class="save-text">
-    * Der Benutzername wird nicht auf MIDATA gespeichert.
-    Dein aktuelles Gewicht sowie deinen Wochenfortschritt für die Folgewoche kannst du wöchentlich via
-    Push-Benachrichtigung
-    aktualisieren.
+
   </p>
 
 </ion-content>

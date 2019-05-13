@@ -1,30 +1,31 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AdaptionsPage } from '../adaptions/adaptions';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
+//component
+import { PopoverComponent } from '../../components/popover/popover';
 
 //Form Validation
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
- * Generated class for the WelcomeCapturePage page.
+ * Generated class for the MoreProfileAdaptionsPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-customisation',
-  templateUrl: 'profile-customisation.html',
+  selector: 'page-more-profile-adaptions',
+  templateUrl: 'more-profile-adaptions.html',
 })
-export class ProfileCustomisationPage {
+export class MoreProfileAdaptionsPage {
 
   inputtext: string;
   key: string = "username";
 
   /**
-   * #MIDATA -> array for the weight data 
+   * #MIDATA -> array for the weight data
      store the raw data in this array.
    */
 
@@ -33,13 +34,14 @@ export class ProfileCustomisationPage {
 
   items: any;
 
-  //Form Validation 
+  //Form Validation
   isSubmitted: boolean = false;
   formGroup: FormGroup;
 
   constructor(
     private zone: NgZone,
     public navCtrl: NavController,
+    private popoverCtrl: PopoverController,
     public navParams: NavParams,
     private storage: Storage,
     //private midataService: MidataService,
@@ -57,6 +59,18 @@ export class ProfileCustomisationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfileCustomisationPage');
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine Profilangaben anpassen. " +
+        "Der Benutzername wird nicht auf MIDATA gespeichert. Dein aktuelles Gewicht sowie deinen Wochenfortschritt für die Folgewoche kannst du wöchentlich via " +
+        "Lokale-Benachrichtigung aktualisieren."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   getData() {

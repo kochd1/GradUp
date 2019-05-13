@@ -13,14 +13,13 @@ import { PopoverComponent } from '../../components/popover/popover';
 //pages
 import { SupportSelfHelpPropositionsPage } from '../support-self-help-propositions/support-self-help-propositions';
 import { SupportCopingStrategiesPage } from '../support-coping-strategies/support-coping-strategies';
-import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
+import { MoreContactsAdaptionsPage } from '../more-contacts-adaptions/more-contacts-adaptions';
 
 
 /**
- * Generated class for the HelpPage page.
+ * Generated class for the SupportPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -320,6 +319,6 @@ export class SupportPage {
     // var tabs = this.navCtrl.parent;
     // tabs.select(3);
 
-    this.navCtrl.push(ProfileCustomizecontactsPage);
+    this.navCtrl.push(MoreContactsAdaptionsPage);
   }
 }

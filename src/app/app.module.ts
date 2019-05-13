@@ -44,10 +44,10 @@ import { SupportPage } from '../pages/support/support';
 import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
 import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/support-coping-strategies';
 
-//adaptions
+//more
 import { AdaptionsPage } from '../pages/adaptions/adaptions';
-import { ProfileCustomisationPage } from '../pages/profile-customisation/profile-customisation';
-import { ProfileCustomizecontactsPage } from '../pages/profile-customizecontacts/profile-customizecontacts';
+import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-profile-adaptions';
+import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
 import { ProfileImpressumPage } from '../pages/profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../pages/profile-privacy/profile-privacy';
@@ -125,8 +125,8 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     SupportCopingStrategiesPage,
 
     AdaptionsPage,
-    ProfileCustomisationPage,
-    ProfileCustomizecontactsPage,
+    MoreProfileAdaptionsPage,
+    MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,
     MoreAwardsPage,
     ProfileImpressumPage,
@@ -186,8 +186,8 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     SupportCopingStrategiesPage,
 
     AdaptionsPage,
-    ProfileCustomisationPage,
-    ProfileCustomizecontactsPage,
+    MoreProfileAdaptionsPage,
+    MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,
     MoreAwardsPage,
     ProfileImpressumPage,

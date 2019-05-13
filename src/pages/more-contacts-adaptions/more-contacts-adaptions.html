@@ -4,16 +4,25 @@
     <ion-title class="title">
       Kontakte
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <ion-item no-lines class="contactPersonItemLb">
+    <ion-label style="font-size: 18px">
+      <!--item-left does not change anything-->
+      <b>Bezugsperson </b>
+    </ion-label>
+  </ion-item>
 
-    <p></p>
-    <p>Hier können Sie die gesamten Kontaktdaten und Texte pflegen.</p>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
     <ion-item>
       <ion-label stacked>Name der Bezugsperson:</ion-label>
@@ -52,6 +61,13 @@
       <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="bezugsperson_emailtext" rows="1"
         placeholder="Kein Eintrag vorhanden">
       </ion-textarea>
+    </ion-item>
+
+    <ion-item no-lines class="contactPersonItemLb">
+      <ion-label style="font-size: 18px">
+        <!--item-left does not change anything-->
+        <b>Fachperson </b>
+      </ion-label>
     </ion-item>
 
     <ion-item>

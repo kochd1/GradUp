@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController, AlertController, PopoverController, NavParams, LoadingController, App } from 'ionic-angular';
 
+//component
 import { PopoverComponent } from '../../components/popover/popover';
 
 import { ProfileImpressumPage } from '../profile-impressum/profile-impressum';
 import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../profile-terms/profile-terms';
-import { ProfileCustomisationPage } from '../profile-customisation/profile-customisation';
-import { ProfileCustomizecontactsPage } from '../profile-customizecontacts/profile-customizecontacts';
+import { MoreProfileAdaptionsPage } from '../more-profile-adaptions/more-profile-adaptions';
+import { MoreContactsAdaptionsPage } from '../more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../adaptions-biovotion/adaptions-biovotion';
 import { MoreAwardsPage } from '../more-awards/more-awards'
 import { JournalPage } from '../journal/journal';
@@ -68,12 +69,12 @@ export class AdaptionsPage {
     });
   }
 
-  public gotoProfileCustomizePage() {
-    this.navCtrl.push(ProfileCustomisationPage, {});
+  public gotoMoreProfileAdaptionsPage() {
+    this.navCtrl.push(MoreProfileAdaptionsPage, {});
   }
 
-  public gotoProfileCustomizecontactsPage() {
-    this.navCtrl.push(ProfileCustomizecontactsPage, {});
+  public gotoMoreContactsAdaptionsPage() {
+    this.navCtrl.push(MoreContactsAdaptionsPage, {});
   }
 
   public gotoProfileBiovotionPage() {

@@ -1,17 +1,19 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AdaptionsPage } from '../adaptions/adaptions';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { validatePhoneIfNotEmpty, validateEmailIfNotEmpty } from '../../services/validators';
 
+//component
+import { PopoverComponent } from '../../components/popover/popover';
+
 @IonicPage()
 @Component({
-  selector: 'page-profile-customizecontacts',
-  templateUrl: 'profile-customizecontacts.html',
+  selector: 'page-more-contacts-adaptions',
+  templateUrl: 'more-contacts-adaptions.html',
 })
-export class ProfileCustomizecontactsPage {
+export class MoreContactsAdaptionsPage {
 
   fachperson_inputtext = '';
   fachperson_telefonnummer = '';
@@ -33,6 +35,7 @@ export class ProfileCustomizecontactsPage {
   constructor(
     private zone: NgZone,
     public navCtrl: NavController,
+    private popoverCtrl: PopoverController,
     public navParams: NavParams,
     private storage: Storage,
     formBuilder: FormBuilder
@@ -56,6 +59,16 @@ export class ProfileCustomizecontactsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfileCustomizecontactsPage');
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine gesamten Kontaktdaten und Texte anpassen, damit du unter «Kontaktaufnahme» stets die richtigen Personen erreichen kannst."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
   }
 
   /**
@@ -108,7 +121,7 @@ export class ProfileCustomizecontactsPage {
   saveData() {
 
     this.isSubmitted = true;
- 
+
     if (!this.formGroup.valid) {
       this.zone.run(() => {
         // force ui repaint
