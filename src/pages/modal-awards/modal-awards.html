@@ -1,0 +1,66 @@
+<!--><ion-header>
+  <ion-navbar>
+    <!-<ion-buttons end>
+      <button ion-button (click)="closeModal()">Schliessen</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>-->
+
+<ion-content padding>
+
+  <div *ngIf="awardType=='Niedergeschrieben'">
+
+    <div class="awardDiv">
+      <ion-img [width]="88" [height]="88" src="assets/imgs/writtenDownAward.png"></ion-img>
+      <br>{{ awardType }}
+    </div>
+
+    <ion-label style="font-size: 16px" text-wrap>
+      Erstelle einen ersten Dokumentationseintrag (Angst/Freude, Ansicht/Überzeugung, Rückschlag/Erfolg, weitere
+      Gedanken)
+    </ion-label>
+
+  </div>
+
+  <div *ngIf="awardType=='Gedankenpower'">
+
+    <div class="awardDiv">
+      <ion-img [width]="88" [height]="88" src="assets/imgs/mentalPowerAward.png"></ion-img>
+      <br>{{ awardType }}
+    </div>
+
+    <ion-label style="font-size: 16px" text-wrap>
+      Erfasse eine deiner Ansichten/Überzeugungen
+    </ion-label>
+
+  </div>
+
+  <div *ngIf="awardType=='Selbstreflekteur/in'">
+
+    <div class="awardDiv">
+      <ion-img [width]="88" [height]="88" src="assets/imgs/selfreflectorAward.png"></ion-img>
+      <br>{{ awardType }}
+      <br>(Stufe 1)
+      <!--now hard coded for demo-->
+    </div>
+
+    <ion-label style="font-size: 16px" text-wrap>
+      Dokumentiere Einträge (Ängste/Freuden, Ansichten/Überzeugungen, Rückschläge/Erfolge und/oder weitere
+      Gedanken)<br>
+      <br>
+      <div class="awardDiv">
+        1. Stern: 10 erfasste Einträge<br>
+        2. Stern: 30 erfasste Einträge<br>
+        3. Stern: 60 erfasste Einträge
+      </div>
+    </ion-label>
+  </div>
+
+
+  <div class="okayBtnDiv">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="closeModal()">
+      Okay
+    </button>
+  </div>
+
+</ion-content>

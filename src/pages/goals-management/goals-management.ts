@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, PopoverController, Modal, ModalController, ModalOptions } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+//component
 import { PopoverComponent } from '../../components/popover/popover';
 
 //import goal entry utility class

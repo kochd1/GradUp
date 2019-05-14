@@ -1,10 +1,48 @@
 <ion-header>
   <ion-navbar color=primary hideBackButton="false">
     <ion-title class="title">GradUp Auszeichnungen</ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  Übersicht folgt...
+
+  <ion-grid>
+
+    <ion-row class="awardRow">
+
+      <ion-col class="awardCol">
+        <button ion-button icon-only clear class="awardBtn" (click)="openModal('Niedergeschrieben')">
+          <!--image is bigger than the others -> reason unknown -> corr via reduzed width and height-->
+          <ion-img [width]="86" [height]="86" src="assets/imgs/writtenDownAward.png"></ion-img>
+          <!--important: no "-" in the filename-->
+        </button>
+      </ion-col>
+
+      <ion-col class="awardCol">
+        <button ion-button icon-only clear class="awardBtn" (click)="openModal('Gedankenpower')">
+          <ion-img [width]="88" [height]="88" src="assets/imgs/mentalPowerAward.png"></ion-img>
+        </button>
+      </ion-col>
+
+      <ion-col class="awardCol">
+        <button ion-button icon-only clear class="awardBtn" (click)="openModal('Selbstreflekteur/in')">
+          <ion-img [width]="88" [height]="88" src="assets/imgs/selfreflectorAward.png"></ion-img>
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+  <br>
+  <br>
+  <div id="moreToCome">
+    <p style="font-size: 17px">Weitere Auszeichnungen in Arbeit...</p>
+  </div>
 
 </ion-content>
