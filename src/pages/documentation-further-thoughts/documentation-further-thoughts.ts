@@ -13,8 +13,7 @@ import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../../provider
 /**
  * Generated class for the FurtherThoughtsPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 
 @IonicPage()
@@ -36,14 +35,14 @@ export class DocumentationFurtherThoughtsPage {
    */
   storageDataToEdit: string;
 
-   /**
-    * id of this documentation entry.
-    */
-   documentationEntryId: number;
+  /**
+   * id of this documentation entry.
+   */
+  documentationEntryId: number;
 
-   /**
-    * collection of views/beliefs entries.
-    */
+  /**
+   * collection of views/beliefs entries.
+   */
   furtherThoughtDocumentationEntryCollection: DocumentationEntry[] = [];
 
   furtherThoughtDocumentationEntryCollectionIsNull: boolean;
@@ -60,37 +59,36 @@ export class DocumentationFurtherThoughtsPage {
   entryIndex: number;
 
   slidingItem;
-  
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public alertCtrl: AlertController,
-              private modalCtrl: ModalController,
-              private storage: Storage,
-              public dEntryDbp: FurtherThoughtDocumentationEntryDatabaseProvider) {
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private storage: Storage,
+    public dEntryDbp: FurtherThoughtDocumentationEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
     this.furtherThoughtDocumentationEntryCollectionIsNull = false;
 
-    this.newEntry=false;
-    this.aboutToEdit=false;
+    this.newEntry = false;
+    this.aboutToEdit = false;
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentationFurtherThoughtsPage');
 
-  
+
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
     //fear documentation entry collection
     this.storage.get('furtherThoughtDocumentationEntryCollection').then((value => {
-      if(value!=null)
-      {
-      that.furtherThoughtDocumentationEntryCollection = value;
+      if (value != null) {
+        that.furtherThoughtDocumentationEntryCollection = value;
       }
 
-      else{
+      else {
         that.furtherThoughtDocumentationEntryCollectionIsNull = true;
       }
       console.log("ionViewDidLoad() -> furtherThoughtDocumentationEntryCollection: ", that.furtherThoughtDocumentationEntryCollection);
@@ -99,20 +97,20 @@ export class DocumentationFurtherThoughtsPage {
   }
 
   /**
-   * resets the "documentationEntry" and the "aboutToEdit" variable (necessary, if an entry modification is being aborted 
+   * resets the "documentationEntry" and the "aboutToEdit" variable (necessary, if an entry modification is being aborted
    * and a new one is being created instead.) This method will be executed everytime the "add entry" button is being pushed.
    */
-  public resetDocumentationEntry(){
+  public resetDocumentationEntry() {
 
-    this.documentationEntry=null;
-    this.aboutToEdit=false;
+    this.documentationEntry = null;
+    this.aboutToEdit = false;
 
   }
 
   /**
    * opens the modal to add or to edit an entry.
    */
-  public openModal(){
+  public openModal() {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
@@ -121,17 +119,16 @@ export class DocumentationFurtherThoughtsPage {
     let myModal: Modal;
 
     //only go through, if there's an entry to edit
-    if(this.aboutToEdit==true)
-    {
+    if (this.aboutToEdit == true) {
 
-    let myModalData: DocumentationEntry = this.documentationEntry;
-    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+      let myModalData: DocumentationEntry = this.documentationEntry;
+      console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
-    myModal = this.modalCtrl.create('ModalPage', {data: myModalData}, myModalOptions);
+      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', { data: myModalData }, myModalOptions);
     }
 
-    else{
-      myModal = this.modalCtrl.create('ModalPage', myModalOptions);
+    else {
+      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', myModalOptions);
     }
 
     myModal.present();
@@ -144,120 +141,117 @@ export class DocumentationFurtherThoughtsPage {
       //that.documentationEntry.entryText = data;
       that.inputData = data;
 
-      if(that.inputData)
-      {
-      that.newEntry=true;
+      if (that.inputData) {
+        that.newEntry = true;
       }
       console.log("modal onDidDismiss -> newEntry: ", that.newEntry);
-      
+
       //console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText); //undefined
       console.log("this.inputData after modal: ", this.inputData); //as expected
 
-      if(data!=null)
-      { 
+      if (data != null) {
         this.saveDocumentationEntry();
         console.log("saveDocumentationEntry() called")
       }
-     
+
     });
 
   }
-  
+
   /**
    * Add an entry to the list (saving is not handled here)
    * @deprecated
    */
- public addDocumentationEntry(){
-  console.log("addDocumentationEntry() called");
+  public addDocumentationEntry() {
+    console.log("addDocumentationEntry() called");
 
-  this.documentationEntry.entryId=1;
-  //this.documentationEntry.entryDate= new Date();
-  //this.documentationEntry.entryText='';
+    this.documentationEntry.entryId = 1;
+    //this.documentationEntry.entryDate= new Date();
+    //this.documentationEntry.entryText='';
 
-  console.log("documentationEntry_temp: ", this.documentationEntry);
-  this.furtherThoughtDocumentationEntryCollection.push(this.documentationEntry);
-  this.newEntry = true;
+    console.log("documentationEntry_temp: ", this.documentationEntry);
+    this.furtherThoughtDocumentationEntryCollection.push(this.documentationEntry);
+    this.newEntry = true;
 
- }
+  }
 
- /**
-  * Aborts the entry input and splices the last unfinished/unsaved entry.
-  * @deprecated
-  */
- public abortEntryInput(){
-   this.newEntry=false;
-   this.furtherThoughtDocumentationEntryCollection.splice(this.furtherThoughtDocumentationEntryCollection.length-1, 1);
- }
+  /**
+   * Aborts the entry input and splices the last unfinished/unsaved entry.
+   * @deprecated
+   */
+  public abortEntryInput() {
+    this.newEntry = false;
+    this.furtherThoughtDocumentationEntryCollection.splice(this.furtherThoughtDocumentationEntryCollection.length - 1, 1);
+  }
 
- /**
-  * Saves the documentation entry from the modal input.
-  */
- public saveDocumentationEntry(){
-   this.newEntry=true;
+  /**
+   * Saves the documentation entry from the modal input.
+   */
+  public saveDocumentationEntry() {
+    this.newEntry = true;
 
-   let entryDate = new Date();
-   let entryId;
-   if(this.aboutToEdit==true)
-   {
+    let entryDate = new Date();
+    let entryId;
+    if (this.aboutToEdit == true) {
       entryId = this.editId;
-   }
-   else{
-    entryId = Number(entryDate);
-   }
-  
-   let entryText = this.inputData;
+    }
+    else {
+      entryId = Number(entryDate);
+    }
 
-   this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
+    let entryText = this.inputData;
 
-   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry);
+    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
 
-   if(this.aboutToEdit){
-    
+    this.dEntryDbp.saveDocumentationEntry(this.documentationEntry);
+
+    if (this.aboutToEdit) {
+
       this.furtherThoughtDocumentationEntryCollection.splice(this.entryIndex, 1);
-   }
+    }
 
 
     this.furtherThoughtDocumentationEntryCollection.push(this.documentationEntry);
     console.log("this.furtherThoughtDocumentationEntryCollection was pushed.");
-   
-   
-   
-   console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
 
-   this.aboutToEdit = false; //necessary because of new entries without page reload
 
- }
 
- /**
-  * closes the sliding item for editing.
-  * 
-  * @param slidingItem 
-  */
- public closeSlidingItem(slidingItem){
-  this.slidingItem = slidingItem;
-  slidingItem.close();
- }
+    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
+
+    this.aboutToEdit = false; //necessary because of new entries without page reload
+
+  }
+
+  /**
+   * closes the sliding item for editing.
+   *
+   * @param slidingItem
+   */
+  public closeSlidingItem(slidingItem) {
+    this.slidingItem = slidingItem;
+    slidingItem.close();
+  }
 
   /**
    * Gets the entry to edit and opens the modal.
-   * 
-   * @param dEntryId 
-   * @param index 
+   *
+   * @param dEntryId
+   * @param index
    */
-  public editDocumentationEntry(dEntryId: number, index: number){
+  public editDocumentationEntry(dEntryId: number, index: number) {
     console.log("editDocumentationEntry() -> dEntryId: ", dEntryId); //as expected
-    this.aboutToEdit=true;
+    this.aboutToEdit = true;
     this.editId = dEntryId;
     this.entryIndex = index;
     //get element by id
     let that = this;
 
-    this.documentationEntry=that.documentationEntry; //is not a solution
+    this.documentationEntry = that.documentationEntry; //is not a solution
 
     //var documentationEntry: DocumentationEntry;
 
-    this.dEntryDbp.getDocumentationEntryById(dEntryId).then((dEntry) =>{
-      
+    this.dEntryDbp.getDocumentationEntryById(dEntryId).then((dEntry) => {
+
       that.documentationEntry = dEntry;
       //documentationEntry = dEntry;
       console.log("editDocumentationEntry() -> text after storage access: ", that.documentationEntry); //
@@ -270,11 +264,11 @@ export class DocumentationFurtherThoughtsPage {
 
   /**
    * deletes the respective documentation entry.
-   * 
+   *
    * @param dEntryId - the id of the entry
    * @param index - the index of the entry (relevant for the data presentation)
    */
-  public deleteDocumentationEntry(dEntryId: number, index: number){ //vorher (item)
+  public deleteDocumentationEntry(dEntryId: number, index: number) { //vorher (item)
     console.log("deleteEntry() called");
 
     this.documentationEntryId = dEntryId;
@@ -285,8 +279,8 @@ export class DocumentationFurtherThoughtsPage {
 
     this.dEntryDbp.deleteDocumentationEntry(dEntryId); //db processing
 
-      this.furtherThoughtDocumentationEntryCollection.splice(index, 1);
-   
+    this.furtherThoughtDocumentationEntryCollection.splice(index, 1);
+
 
 
   }

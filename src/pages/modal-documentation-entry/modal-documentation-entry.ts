@@ -12,10 +12,10 @@ import { DocumentationEntry } from '../../classes/documentationEntry';
 
 @IonicPage()
 @Component({
-  selector: 'page-modal',
-  templateUrl: 'modal.html',
+  selector: 'page-modal-documentation-entry',
+  templateUrl: 'modal-documentation-entry.html',
 })
-export class ModalPage {
+export class ModalDocumentationEntryPage {
 
   documentationEntry: DocumentationEntry;
 

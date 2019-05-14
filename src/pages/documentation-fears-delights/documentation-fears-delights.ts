@@ -32,14 +32,14 @@ export class DocumentationFearsDelightsPage {
    */
   storageDataToEdit: string;
 
-   /**
-    * id of this documentation entry.
-    */
-   documentationEntryId: number;
+  /**
+   * id of this documentation entry.
+   */
+  documentationEntryId: number;
 
-   /**
-    * collection of fear entries.
-    */
+  /**
+   * collection of fear entries.
+   */
   fearDocumentationEntryCollection: DocumentationEntry[] = [];
 
   fearDocumentationEntryCollectionIsNull: boolean;
@@ -66,40 +66,39 @@ export class DocumentationFearsDelightsPage {
   entryIndex: number;
 
   slidingItem;
-  
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams,
-              public alertCtrl: AlertController,
-              private modalCtrl: ModalController,
-              private storage: Storage,
-              public dEntryDbp: FearDelightDocumentationEntryDatabaseProvider) {
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private storage: Storage,
+    public dEntryDbp: FearDelightDocumentationEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
     this.fearDocumentationEntryCollectionIsNull = false;
     this.delightDocumentationEntryCollectionIsNull = false;
 
-    this.newEntry=false;
-    this.isFear=false;
-    this.isDelight=false;
-    this.aboutToEdit=false;
+    this.newEntry = false;
+    this.isFear = false;
+    this.isDelight = false;
+    this.aboutToEdit = false;
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DocumentationFearsDelightsPage');
 
-  
+
     //this.documentationEntryCollection.push(this.testData);
     let that = this;
     //fear documentation entry collection
     this.storage.get('fearDocumentationEntryCollection').then((value => {
-      if(value!=null)
-      {
-      that.fearDocumentationEntryCollection = value;
+      if (value != null) {
+        that.fearDocumentationEntryCollection = value;
       }
 
-      else{
+      else {
         that.fearDocumentationEntryCollectionIsNull = true;
       }
       console.log("ionViewDidLoad() -> fearDocumentationEntryCollection: ", that.fearDocumentationEntryCollection);
@@ -108,12 +107,11 @@ export class DocumentationFearsDelightsPage {
 
     //delight documentation entry collection
     this.storage.get('delightDocumentationEntryCollection').then((value => {
-      if(value!=null)
-      {
-      that.delightDocumentationEntryCollection = value;
+      if (value != null) {
+        that.delightDocumentationEntryCollection = value;
       }
 
-      else{
+      else {
         that.delightDocumentationEntryCollectionIsNull = true;
       }
       console.log("ionViewDidLoad() -> delightDocumentationEntryCollection: ", that.delightDocumentationEntryCollection);
@@ -124,28 +122,28 @@ export class DocumentationFearsDelightsPage {
   /**
    * Sets the type of this entry via "add entry" button.
    */
-  public setEntryType(entryType: string){
+  public setEntryType(entryType: string) {
     this.documentationEntry = null; //reset documentation entry (necessary, if an entry modification is aborted)
-    this.aboutToEdit=false; //same reason
+    this.aboutToEdit = false; //same reason
 
     console.log("setEntryType() called with value: ", entryType)
-    if(entryType=='fear'){
-      this.isFear=true;
+    if (entryType == 'fear') {
+      this.isFear = true;
       console.log("setEntryType() -> this.isFear: ", this.isFear);
-      this.isDelight=false; //vice versa
+      this.isDelight = false; //vice versa
     }
 
-    else{
-      this.isDelight=true;
+    else {
+      this.isDelight = true;
       console.log("setEntryType() -> this.isDelight: ", this.isDelight);
-      this.isFear=false; //necessary, if user firstly want to enter a fear
+      this.isFear = false; //necessary, if user firstly want to enter a fear
     }
   }
 
   /**
    * opens the modal to add or to edit an entry.
    */
-  public openModal(){
+  public openModal() {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
@@ -154,17 +152,16 @@ export class DocumentationFearsDelightsPage {
     let myModal: Modal;
 
     //only go through, if there's an entry to edit
-    if(this.aboutToEdit==true)
-    {
+    if (this.aboutToEdit == true) {
 
-    let myModalData: DocumentationEntry = this.documentationEntry;
-    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+      let myModalData: DocumentationEntry = this.documentationEntry;
+      console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
-    myModal = this.modalCtrl.create('ModalPage', {data: myModalData}, myModalOptions);
+      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', { data: myModalData }, myModalOptions);
     }
 
-    else{
-      myModal = this.modalCtrl.create('ModalPage', myModalOptions);
+    else {
+      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', myModalOptions);
     }
 
     myModal.present();
@@ -177,136 +174,131 @@ export class DocumentationFearsDelightsPage {
       //that.documentationEntry.entryText = data;
       that.inputData = data;
 
-      if(that.inputData)
-      {
-      that.newEntry=true;
+      if (that.inputData) {
+        that.newEntry = true;
       }
       console.log("modal onDidDismiss -> newEntry: ", that.newEntry);
-      
+
       //console.log("documentationEntry.entryText after modal: ", this.documentationEntry.entryText); //undefined
       console.log("this.inputData after modal: ", this.inputData); //as expected
 
-      if(data!=null)
-      { 
+      if (data != null) {
         this.saveDocumentationEntry();
         console.log("saveDocumentationEntry() called")
       }
-     
+
     });
 
   }
-  
+
   /**
    * Add an entry to the list (saving is not handled here)
    * @deprecated
    */
- public addDocumentationEntry(){
-  console.log("addDocumentationEntry() called");
+  public addDocumentationEntry() {
+    console.log("addDocumentationEntry() called");
 
-  this.documentationEntry.entryId=1;
-  //this.documentationEntry.entryDate= new Date();
-  //this.documentationEntry.entryText='';
+    this.documentationEntry.entryId = 1;
+    //this.documentationEntry.entryDate= new Date();
+    //this.documentationEntry.entryText='';
 
-  console.log("documentationEntry_temp: ", this.documentationEntry);
-  this.fearDocumentationEntryCollection.push(this.documentationEntry);
-  this.newEntry = true;
-
- }
-
- /**
-  * Aborts the entry input and splices the last unfinished/unsaved entry.
-  * @deprecated
-  */
- public abortEntryInput(){
-   this.newEntry=false;
-   this.fearDocumentationEntryCollection.splice(this.fearDocumentationEntryCollection.length-1, 1);
- }
-
- /**
-  * Saves the documentation entry from the modal input.
-  */
- public saveDocumentationEntry(){
-   this.newEntry=true;
-
-   let entryDate = new Date();
-   let entryId;
-   if(this.aboutToEdit==true)
-   {
-      entryId = this.editId;
-   }
-   else{
-    entryId = Number(entryDate);
-   }
-  
-   let entryText = this.inputData;
-
-   this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
-
-   this.dEntryDbp.saveDocumentationEntry(this.documentationEntry, this.isFear);
-
-   if(this.aboutToEdit){
-     if(this.isFear)
-     {
-      this.fearDocumentationEntryCollection.splice(this.entryIndex, 1);
-     }
-
-     else{
-      this.delightDocumentationEntryCollection.splice(this.entryIndex, 1);
-     }
-    
-   }
-
-   console.log("saveDocumentationEntry() -> this.isFear: ", this.isFear);
-   console.log("saveDocumentationEntry() -> this.isDelight: ", this.isDelight);
-
-   if(this.isFear)
-   {
+    console.log("documentationEntry_temp: ", this.documentationEntry);
     this.fearDocumentationEntryCollection.push(this.documentationEntry);
-    console.log("this.fearDocumentationEntryCollection was pushed.");
-   }
+    this.newEntry = true;
 
-   else{
-    this.delightDocumentationEntryCollection.push(this.documentationEntry);
-    console.log("this.delightDocumentationEntryCollection was pushed.");
-   }
-   
-   
-   console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
+  }
 
-   this.aboutToEdit = false; //necessary because of new entries without page reload
+  /**
+   * Aborts the entry input and splices the last unfinished/unsaved entry.
+   * @deprecated
+   */
+  public abortEntryInput() {
+    this.newEntry = false;
+    this.fearDocumentationEntryCollection.splice(this.fearDocumentationEntryCollection.length - 1, 1);
+  }
 
- }
+  /**
+   * Saves the documentation entry from the modal input.
+   */
+  public saveDocumentationEntry() {
+    this.newEntry = true;
 
- /**
-  * closes the sliding item for editing.
-  * 
-  * @param slidingItem 
-  */
- public closeSlidingItem(slidingItem){
-  this.slidingItem = slidingItem;
-  slidingItem.close();
- }
+    let entryDate = new Date();
+    let entryId;
+    if (this.aboutToEdit == true) {
+      entryId = this.editId;
+    }
+    else {
+      entryId = Number(entryDate);
+    }
+
+    let entryText = this.inputData;
+
+    this.documentationEntry = new DocumentationEntry(entryId, entryDate, entryText);
+
+    this.dEntryDbp.saveDocumentationEntry(this.documentationEntry, this.isFear);
+
+    if (this.aboutToEdit) {
+      if (this.isFear) {
+        this.fearDocumentationEntryCollection.splice(this.entryIndex, 1);
+      }
+
+      else {
+        this.delightDocumentationEntryCollection.splice(this.entryIndex, 1);
+      }
+
+    }
+
+    console.log("saveDocumentationEntry() -> this.isFear: ", this.isFear);
+    console.log("saveDocumentationEntry() -> this.isDelight: ", this.isDelight);
+
+    if (this.isFear) {
+      this.fearDocumentationEntryCollection.push(this.documentationEntry);
+      console.log("this.fearDocumentationEntryCollection was pushed.");
+    }
+
+    else {
+      this.delightDocumentationEntryCollection.push(this.documentationEntry);
+      console.log("this.delightDocumentationEntryCollection was pushed.");
+    }
+
+
+    console.log("saveDocumentationEntry() -> documentationEntry", this.documentationEntry);
+
+    this.aboutToEdit = false; //necessary because of new entries without page reload
+
+  }
+
+  /**
+   * closes the sliding item for editing.
+   *
+   * @param slidingItem
+   */
+  public closeSlidingItem(slidingItem) {
+    this.slidingItem = slidingItem;
+    slidingItem.close();
+  }
 
   /**
    * Gets the entry to edit and opens the modal.
-   * 
-   * @param dEntryId 
-   * @param index 
+   *
+   * @param dEntryId
+   * @param index
    */
-  public editDocumentationEntry(dEntryId: number, index: number){
+  public editDocumentationEntry(dEntryId: number, index: number) {
     console.log("editDocumentationEntry() -> dEntryId: ", dEntryId); //as expected
-    this.aboutToEdit=true;
+    this.aboutToEdit = true;
     this.editId = dEntryId;
     this.entryIndex = index;
     //get element by id
     let that = this;
 
-    this.documentationEntry=that.documentationEntry; //is not a solution
+    this.documentationEntry = that.documentationEntry; //is not a solution
 
     //var documentationEntry: DocumentationEntry;
 
-    this.dEntryDbp.getDocumentationEntryById(dEntryId, this.isFear).then((dEntry) =>{
-      
+    this.dEntryDbp.getDocumentationEntryById(dEntryId, this.isFear).then((dEntry) => {
+
       that.documentationEntry = dEntry;
       //documentationEntry = dEntry;
       console.log("editDocumentationEntry() -> text after storage access: ", that.documentationEntry); //
@@ -319,11 +311,11 @@ export class DocumentationFearsDelightsPage {
 
   /**
    * deletes the respective documentation entry.
-   * 
+   *
    * @param dEntryId - the id of the entry
    * @param index - the index of the entry (relevant for the data presentation)
    */
-  public deleteDocumentationEntry(dEntryId: number, index: number){ //vorher (item)
+  public deleteDocumentationEntry(dEntryId: number, index: number) { //vorher (item)
     console.log("deleteEntry() called");
 
     this.documentationEntryId = dEntryId;
@@ -335,12 +327,11 @@ export class DocumentationFearsDelightsPage {
 
     this.dEntryDbp.deleteDocumentationEntry(dEntryId, this.isFear); //db processing
 
-    if(this.isFear)
-    {
+    if (this.isFear) {
       this.fearDocumentationEntryCollection.splice(index, 1);
     }
 
-    else{
+    else {
       this.delightDocumentationEntryCollection.splice(index, 1);
     }
 
