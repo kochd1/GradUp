@@ -15,7 +15,7 @@ import { JournalPage } from '../pages/journal/journal';
 })
 export class MyApp {
 
-  rootPage: any; //= WelcomePage;
+  rootPage: any; //= TabsPage //= WelcomePage;
   loadingDisplay: Loading;
 
   constructor(
@@ -33,16 +33,18 @@ export class MyApp {
     platform.ready()
       .then(() => {
 
-        splashScreen.hide();
+
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
         statusBar.styleLightContent();   //styleDefault(); //dark text for light backgrounds
-
+        splashScreen.hide();
 
         // this does not work in the browser.
         // only in cordova, this makes development quite tricky.
         return this.midataService.openSession()
       })
+
+
       .then((result) => {
         console.log("appComponent() : openSession success", result);
         console.log("appComponent() : midata user", this.midataService.getUser());
@@ -86,3 +88,4 @@ export class MyApp {
     });
   }
 }
+

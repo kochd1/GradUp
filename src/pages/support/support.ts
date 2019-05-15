@@ -79,11 +79,11 @@ export class SupportPage {
 
   showNotPhonnumber() {
     let alert = this.alertCtrl.create({
-      title: "Sie haben im Onboarding-Prozess keine Telefonnummer erfasst",
-      subTitle: "Sie können nun diese Nummer im Profil erfassen oder direkt dem Notfall (144) anrufen.",
+      title: "Du hast im Onboarding-Prozess keine Telefonnummer erfasst.",
+      subTitle: "Tippe unten auf «Kontakte», um die Telefonnummer nachzuerfassen. Du kannst dies auch später bei den Anpassungen/Einstellungen unter «Mehr» tun.",
       buttons: [
         {
-          text: 'Profil',
+          text: 'Kontakte',
           handler: () => {
             this.gotoCustomizeContacts()
           }
@@ -91,7 +91,7 @@ export class SupportPage {
         {
           text: '144',
           handler: () => {
-            this.callNumber.callNumber("000", true);
+            this.callNumber.callNumber("000", true); //set to respective number when about to officially release the app
           }
         },
         {

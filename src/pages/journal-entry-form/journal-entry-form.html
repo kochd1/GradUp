@@ -92,7 +92,10 @@
           placeholder="Wieso fühlst du dich so?">
         </ion-input>
       </ion-item>
-      <span id="characterCount">{{ 25 - journalEntry.entryMoodReason.length }} Zeichen verbleibend</span>
+      <span id="characterCount" *ngIf="!journalEntry.entryMoodReason">25 Zeichen verbleibend</span>
+      <span id="characterCount" *ngIf="journalEntry.entryMoodReason">{{ 25 - journalEntry.entryMoodReason.length }}
+        Zeichen verbleibend</span>
+      <!--two spans necessary because of unknown property problem when loading the page-->
     </ion-row>
   </ion-grid>
 

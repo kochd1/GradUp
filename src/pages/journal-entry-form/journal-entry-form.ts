@@ -118,6 +118,10 @@ export class JournalEntryFormPage {
 
     this.journalEntry = new JournalEntry(); //without this, the page will throw a "Uncaught (in promise): TypeError"
 
+    this.journalEntry.entryMoodReason = "";
+
+    this.moodReason = "";
+
     //#MIDATA
     this.subjectiveConditionData = new Array<{ date: Date, value: number }>();
 
@@ -182,8 +186,6 @@ export class JournalEntryFormPage {
   //Runs when the page has loaded.
   ionViewDidLoad() {
 
-
-
     //this.loadData();
     /*console.log('ionViewDidLoad JournalEntryPage');
     this.dbp.getJournalEntryCollection().then((val) => {
@@ -203,8 +205,8 @@ export class JournalEntryFormPage {
 
     let alert = this.alertCtrl.create({
       title: 'Infos über die Datenspeicherung',
-      subTitle: 'Ihre Text- und Bilddateneinträge werden nur lokal gespeichert und nicht für die Forschung verwendet.'
-        + '<br> Angaben über Ihren Gemütszustand (Smilie) werden auf MIDATA gespeichert. Diese Angaben sind jedoch optional. ',
+      subTitle: 'Deine Text- und Bilddateneinträge werden nur lokal gespeichert und nicht für die Forschung verwendet.'
+        + '<br> Angaben über deinen Gemütszustand (Smiley) werden auf MIDATA gespeichert. Diese Angaben sind jedoch optional. ',
       buttons: [
         {
           text: 'OK',

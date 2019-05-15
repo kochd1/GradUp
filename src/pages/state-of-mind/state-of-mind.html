@@ -33,7 +33,10 @@
         </ion-input>
         <!--maxlength does only work in browser-->
       </ion-item>
-      <span id="characterCount">{{ 25 - moodReason.length }} Zeichen verbleibend</span>
+      <span id="characterCount" *ngIf="!moodReason">25 Zeichen verbleibend</span>
+      <span id="characterCount" *ngIf="moodReason">{{ 25 - moodReason.length }} Zeichen
+        verbleibend</span>
+      <!--two spans necessary because of unknown property problem when loading the page-->
     </ion-row>
   </ion-grid>
 </ion-content>
