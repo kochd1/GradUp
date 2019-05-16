@@ -47,6 +47,7 @@ export class SupportPage {
     private alertCtrl: AlertController,
     public popoverCtrl: PopoverController
   ) {
+
   }
 
   ionViewDidLoad() {
@@ -65,11 +66,13 @@ export class SupportPage {
   }
 
   callBezugsperson(): void {
+
     this.storage.get("bezugsperson_telefonnummer").then(value => {
       console.log('callBezugsperson() : value:=', value);
 
       if (!value) {
-        this.showNotPhonnumber();
+
+        this.showNoPhoneNumberAlert();
         return;
       }
 
@@ -77,21 +80,16 @@ export class SupportPage {
     });
   }
 
-  showNotPhonnumber() {
+  showNoPhoneNumberAlert() {
+
     let alert = this.alertCtrl.create({
-      title: "Du hast im Onboarding-Prozess keine Telefonnummer erfasst.",
+      title: "Du hast keine Telefonnummer hinterlegt.",
       subTitle: "Tippe unten auf «Kontakte», um die Telefonnummer nachzuerfassen. Du kannst dies auch später bei den Anpassungen/Einstellungen unter «Mehr» tun.",
       buttons: [
         {
           text: 'Kontakte',
           handler: () => {
-            this.gotoCustomizeContacts()
-          }
-        },
-        {
-          text: '144',
-          handler: () => {
-            this.callNumber.callNumber("000", true); //set to respective number when about to officially release the app
+            this.gotoCustomizeContacts();
           }
         },
         {
@@ -103,6 +101,7 @@ export class SupportPage {
         }
       ]
     });
+
     alert.present();
   }
 
@@ -112,7 +111,7 @@ export class SupportPage {
         console.log('writeSMS() : text:=', text, ', telNr:=', telNr);
 
         if (!text) {
-          this.showNotSMSText();
+          this.showNoSMSTextAlert();
           return;
         }
 
@@ -137,21 +136,15 @@ export class SupportPage {
     });
   }
 
-  showNotSMSText() {
+  showNoSMSTextAlert() {
     let alert = this.alertCtrl.create({
-      title: "Sie haben im Onboarding-Prozess keinen SMS-Text erfasst",
-      subTitle: "Sie können nun diesen Text im Profil erfassen oder direkt dem Notfall (144) anrufen.",
+      title: "Du hast keinen SMS-Text vorerfasst.",
+      subTitle: "Tippe unten auf «Kontakte», um den SMS-Text nachzuerfassen. Du kannst dies auch später bei den Anpassungen/Einstellungen unter «Mehr» tun.",
       buttons: [
         {
-          text: 'Profil',
+          text: 'Kontakte',
           handler: () => {
             this.gotoCustomizeContacts()
-          }
-        },
-        {
-          text: '144',
-          handler: () => {
-            this.callNumber.callNumber("000", true);
           }
         },
         {
@@ -172,12 +165,12 @@ export class SupportPage {
         console.log('eMailBezugsperson() : mail:=', mail, ',  text:=', text);
 
         if (!mail) {
-          this.showNotMailAddress();
+          this.showNoMailAddressAlert();
           return;
         }
 
         if (!text) {
-          this.showNotMailText();
+          this.showNoMailTextAlert();
           return;
         }
 
@@ -201,21 +194,15 @@ export class SupportPage {
     });
   }
 
-  showNotMailAddress() {
+  showNoMailAddressAlert() {
     let alert = this.alertCtrl.create({
-      title: "Sie haben im Onboarding-Prozess keine E-Mail-Adresse erfasst",
-      subTitle: "Sie können nun diese Adresse im Profil erfassen oder direkt dem Notfall (144) anrufen.",
+      title: "Du hast keine E-Mail-Adresse hinterlegt.",
+      subTitle: "Tippe unten auf «Kontakte», um die E-Mail-Adresse nachzuerfassen. Du kannst dies auch später bei den Anpassungen/Einstellungen unter «Mehr» tun.",
       buttons: [
         {
-          text: 'Profil',
+          text: 'Kontakte',
           handler: () => {
             this.gotoCustomizeContacts()
-          }
-        },
-        {
-          text: '144',
-          handler: () => {
-            this.callNumber.callNumber("000", true);
           }
         },
         {
@@ -230,21 +217,15 @@ export class SupportPage {
     alert.present();
   }
 
-  showNotMailText() {
+  showNoMailTextAlert() {
     let alert = this.alertCtrl.create({
-      title: "Sie haben im Onboarding-Prozess keinen Mail-Text erfasst",
-      subTitle: "Sie können nun diesen Text im Profil erfassen oder direkt dem Notfall (144) anrufen.",
+      title: "Du hast keinen Mail-Text vorerfasst.",
+      subTitle: "Tippe unten auf «Kontakte», um den Mail-Text nachzuerfassen. Du kannst dies auch später bei den Anpassungen/Einstellungen unter «Mehr» tun.",
       buttons: [
         {
-          text: 'Profil',
+          text: 'Kontakte',
           handler: () => {
             this.gotoCustomizeContacts()
-          }
-        },
-        {
-          text: '144',
-          handler: () => {
-            this.callNumber.callNumber("000", true);
           }
         },
         {
@@ -263,7 +244,7 @@ export class SupportPage {
     this.storage.get("fachperson_telefonnummer").then(value => {
       console.log('callFachperson() : value:=', value);
       if (!value) {
-        this.showNotPhonnumber();
+        this.showNoPhoneNumberAlert();
         return;
       }
 
@@ -277,12 +258,12 @@ export class SupportPage {
         console.log('eMailFachperson() : mail:=', mail, ',  text:=', text);
 
         if (!mail) {
-          this.showNotMailAddress();
+          this.showNoMailAddressAlert();
           return;
         }
 
         if (!text) {
-          this.showNotMailText();
+          this.showNoMailTextAlert();
           return;
         }
 
@@ -294,7 +275,7 @@ export class SupportPage {
 
         let email = {
           to: mail,
-          subject: 'Ich brauche Ihre Hilfe',
+          subject: 'Ich brauche Ihre Hilfe!',
           body: text,
           isHtml: true
         };
