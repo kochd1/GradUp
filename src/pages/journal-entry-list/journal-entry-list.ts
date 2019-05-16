@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController, Events } from 'ionic-angular';
 import { JournalPage } from '../journal/journal';
 
+//component
+import { PopoverComponent } from '../../components/popover/popover';
+
+//class
 import { JournalEntry } from '../../classes/journalEntry';
 
 //Page, where the entries are being saved
@@ -24,34 +28,35 @@ export class JournalEntryListPage {
   /**
    * journal entry form page.
    */
-   journalEntryFormPage: any = JournalEntryFormPage;
+  journalEntryFormPage: any = JournalEntryFormPage;
 
-   /**
-    * the journal entry.
-    */
-   journalEntry: JournalEntry;
+  /**
+   * the journal entry.
+   */
+  journalEntry: JournalEntry;
 
-   /**
-    * id of this journal entry.
-    */
-   journalEntryId: number;
-  
-    /**
-     * collection of journal entries.
-     */
-   journalEntryCollection: JournalEntry[] = [];
+  /**
+   * id of this journal entry.
+   */
+  journalEntryId: number;
+
+  /**
+   * collection of journal entries.
+   */
+  journalEntryCollection: JournalEntry[] = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public dbp: DatabaseProvider,
     public events: Events,
-    private alertCtrl: AlertController) {
-      console.log("visited constructor JournalDeletePage");
+    private alertCtrl: AlertController,
+    private popoverCtrl: PopoverController) {
+    console.log("visited constructor JournalDeletePage");
 
-      /*this.events.subscribe('journalEntryCollection:updated', () => {
-        this.ionViewWillEnter()
-      
-      });*/
+    /*this.events.subscribe('journalEntryCollection:updated', () => {
+      this.ionViewWillEnter()
+
+    });*/
 
     //this.journalEntry = new JournalEntry();
   }
@@ -60,7 +65,7 @@ export class JournalEntryListPage {
     console.log('ionViewDidLoad JournalDeletePage');
 
     this.dbp.getJournalEntryCollection().then((val) => {
-      if(val == null) {
+      if (val == null) {
         // There's no journalEntry
 
       } else {
@@ -74,20 +79,30 @@ export class JournalEntryListPage {
 
   }
 
-  ionViewWillEnter(){
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
+  }
+
+  ionViewWillEnter() {
     console.log("ionHomeViewWillEnter");
 
     //this.journalEntryCollection = this.navParams.data;
     //console.log("jEntryColl.: " + this.journalEntryCollection);
 
     this.dbp.getJournalEntryCollection().then((val) => {
-      if(val == null) {
+      if (val == null) {
         // There's no journalEntry
 
       } else {
         this.journalEntryCollection = val;
 
-        this.journalEntryCollection.forEach(jEntry =>{
+        this.journalEntryCollection.forEach(jEntry => {
           console.log(jEntry.entryId);
         })
 
@@ -102,24 +117,24 @@ export class JournalEntryListPage {
 
   /**
    * Edit the journal entry with the respective journal entry id
-   * 
-   * @param jEntryId 
+   *
+   * @param jEntryId
    */
-  editJournalEntry(jEntryId: number): void{
+  editJournalEntry(jEntryId: number): void {
 
-  this.dbp.getJournalEntryById(jEntryId).then((jEntry) => {
-    this.navCtrl.push(this.journalEntryFormPage, jEntry);
-  })
-   
+    this.dbp.getJournalEntryById(jEntryId).then((jEntry) => {
+      this.navCtrl.push(this.journalEntryFormPage, jEntry);
+    })
+
   }
 
   /**
    * Delete the journal entry with the respective journal entry id.
    * Show a pop up before the journal entry can be deleted.
-   * 
-   * @param jEntryId 
+   *
+   * @param jEntryId
    */
-  deleteJournalEntry(jEntryId: number): void{
+  deleteJournalEntry(jEntryId: number): void {
 
     this.journalEntryId = jEntryId;
 
@@ -133,22 +148,24 @@ export class JournalEntryListPage {
         {
           text: 'Ja',
           role: 'ja',
-          handler: () => {this.dbp.deleteJournalEntryById(jEntryId).then(val => {
-            if(val){
-              this.dbp.getJournalEntryCollection().then(valArray => {
-                this.journalEntryCollection = valArray;
-              })
+          handler: () => {
+            this.dbp.deleteJournalEntryById(jEntryId).then(val => {
+              if (val) {
+                this.dbp.getJournalEntryCollection().then(valArray => {
+                  this.journalEntryCollection = valArray;
+                })
 
-              this.gotoJournalPage();
-            }
-          })
+                this.gotoJournalPage();
+              }
+            })
           }
         },
 
         {
           text: 'Abbrechen',
           role: 'abbrechen',
-          handler: () => {console.log('Cancel clicked');
+          handler: () => {
+            console.log('Cancel clicked');
           }
         }
       ]

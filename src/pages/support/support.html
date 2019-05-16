@@ -22,52 +22,52 @@
     </ion-label>
   </ion-item>
 
-  <div text-left class="help-buttons">
-    <p>Direkt mit der <span class="highlight">Bezugsperson</span> in Kontakt treten:</p>
+  <p>Direkt mit deiner <b>Bezugsperson</b> in Kontakt treten:
+    <div text-left class="help-buttons">
+      <!--><span class="highlight">Bezugsperson</span> in Kontakt treten:</p>-->
+      <button ion-button icon-only clear class="" (click)="callBezugsperson()">
+        <ion-icon style="font-size: 30px" name="call"></ion-icon>
+        <span>Telefon</span>
+      </button>
+      <button ion-button icon-only clear class="" (click)="writeSMS()">
+        <ion-icon style="font-size: 30px" name="chatboxes"></ion-icon>
+        <span>SMS</span>
+      </button>
+      <button ion-button icon-only clear class="" (click)="eMailBezugsperson()">
+        <ion-icon style="font-size: 30px" name="mail"></ion-icon>
+        <span>E-Mail</span>
+      </button>
+    </div>
 
-    <button ion-button icon-only clear class="" (click)="callBezugsperson()">
-      <ion-icon name="call"></ion-icon>
-      <span>Telefon</span>
-    </button>
-    <button ion-button icon-only clear class="" (click)="writeSMS()">
-      <ion-icon name="mail"></ion-icon>
-      <span>SMS</span>
-    </button>
-    <button ion-button icon-only clear class="" (click)="eMailBezugsperson()">
-      <ion-icon name="mail"></ion-icon>
-      <span>E-Mail</span>
-    </button>
-  </div>
+    <p>Direkt mit deiner <b>Fachperson</b> in Kontakt treten:
+      <div text-left class="help-buttons">
+        <!--><span class="highlight">Fachsperson</span> in Kontakt treten:</p>-->
+        <button ion-button icon-only clear class="" (click)="callFachperson()">
+          <ion-icon style="font-size: 30px" name="call"></ion-icon>
+          <span>Telefon</span>
+        </button>
 
+        <button ion-button icon-only clear class="" (click)="eMailFachperson()">
+          <ion-icon style="font-size: 30px" name="mail"></ion-icon>
+          <span>E-Mail</span>
+        </button>
+      </div>
 
-  <div text-left class="help-buttons">
-    <p>Direkt mit der <span class="highlight">Fachsperson</span> in Kontakt treten:</p>
-    <button ion-button icon-only clear class (click)="callFachperson()">
-      <ion-icon name="call"></ion-icon>
-      <span>Telefon</span>
-    </button>
+      <ion-item id="supportItemLb">
+        <ion-label style="font-size: 20px">
+          <!--item-left does not change anything-->
+          <b>Selbsthilfe </b>
+        </ion-label>
+      </ion-item>
 
-    <button ion-button icon-only clear class="" (click)="eMailFachperson()">
-      <ion-icon name="mail"></ion-icon>
-      <span>E-Mail</span>
-    </button>
-  </div>
+      <ion-list class="with-borders">
+        <button ion-item (click)="gotoSupportSelfHelpPropositionsPage()">
+          <span class="highlight">Selbsthilfegruppen und Chats</span>
+        </button>
 
-  <ion-item id="supportItemLb">
-    <ion-label style="font-size: 20px">
-      <!--item-left does not change anything-->
-      <b>Selbsthilfe </b>
-    </ion-label>
-  </ion-item>
-
-  <ion-list class="with-borders">
-    <button ion-item (click)="gotoSupportSelfHelpPropositionsPage()">
-      <span class="highlight">Selbsthilfegruppen und Chats</span>
-    </button>
-
-    <button ion-item (click)="gotoSupportCopingStrategiesPage()">
-      <span class="highlight">Bewältigungsstrategien</span>
-    </button>
-  </ion-list>
+        <button ion-item (click)="gotoSupportCopingStrategiesPage()">
+          <span class="highlight">Bewältigungsstrategien</span>
+        </button>
+      </ion-list>
 
 </ion-content>

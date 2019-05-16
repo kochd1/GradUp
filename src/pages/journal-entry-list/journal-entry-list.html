@@ -4,13 +4,16 @@
     <ion-title class="title">
       Mein Tagebuch
     </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <p></p>
-  <p>Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen.</p>
 
   <!--Auflistung Tagebucheinträge-->
 

@@ -15,8 +15,20 @@
 </ion-header>
 
 <ion-content padding>
-  <p></p>
-  <!--><p>Hier kannst du sämtliche Angaben und Einstellungen verwalten.</p>-->
+
+  <ion-item id="awardsItemLb">
+    <ion-label style="font-size: 17px">
+      <!--item-left does not change anything-->
+      <b>GradUp Auszeichnungen</b>
+    </ion-label>
+  </ion-item>
+
+  <ion-list class="with-borders">
+    <button ion-item (click)="gotoMoreAwardsPage()">
+      <span class="highlight">Deine Auszeichnungen ansehen</span>
+    </button>
+  </ion-list>
+
   <div class="topOptions">
     <ion-item id="adaptionsItemLb">
       <ion-label style="font-size: 17px">
@@ -31,7 +43,7 @@
       </button>
 
       <button ion-item (click)="gotoMoreContactsAdaptionsPage()">
-        <span class="highlight">Kontakte anpassen / erfassen</span>
+        <span class="highlight">Kontakte erfassen/anpassen</span>
       </button>
 
       <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="!checkSensorConnection()">
@@ -48,19 +60,6 @@
 
       <button ion-item (click)="logout()" *ngIf="isLoggedIn()">
         <span class="highlight">MIDATA-Verbindung trennen</span>
-      </button>
-    </ion-list>
-
-    <ion-item id="awardsItemLb">
-      <ion-label style="font-size: 17px">
-        <!--item-left does not change anything-->
-        <b>Auszeichnungen</b>
-      </ion-label>
-    </ion-item>
-
-    <ion-list class="with-borders">
-      <button ion-item (click)="gotoMoreAwardsPage()">
-        <span class="highlight">GradUp Auszeichnungen</span>
       </button>
     </ion-list>
 
