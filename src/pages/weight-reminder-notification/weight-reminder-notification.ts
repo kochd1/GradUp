@@ -12,8 +12,7 @@ import { validateWeightInputFormat, validateWeightGainInputFormat, validateWeigh
 /**
  * Generated class for the WeightReminderNotificationPage page.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * @author kochd1
  */
 @IonicPage()
 @Component({
@@ -45,7 +44,7 @@ export class WeightReminderNotificationPage {
   ) {
     this.formGroup = formBuilder.group({
       currentWeightValidation: ['', validateWeightInputFormat],
-      weightGainValidation: ['', Validators.compose ([validateWeightGainInputFormat, validateWeightGainRange])]
+      weightGainValidation: ['', Validators.compose([validateWeightGainInputFormat, validateWeightGainRange])]
     });
   }
 
@@ -78,7 +77,7 @@ export class WeightReminderNotificationPage {
       });
 
     this.midataService
-      .search('Goal', { 
+      .search('Goal', {
         //max: 1,
         //_sort: '-date',
         category: 'dietary'
@@ -130,11 +129,11 @@ export class WeightReminderNotificationPage {
     let message = '';
 
     if (weightChange == this.previousGoal) {
-      message = `Super ${this.userName}, Du hast Dein Ziel erreicht, mach weiter so!`;
+      message = `Super ${this.userName}, Du hast dein Ziel erreicht, mach weiter so!`;
     } else if (weightChange > this.previousGoal) {
-      message = `Super ${this.userName}, Du hast Dein Ziel übertroffen, mach weiter so!`;
+      message = `Super ${this.userName}, Du hast dein Ziel übertroffen, mach weiter so!`;
     } else {
-      message = `Schade ${this.userName}, leider hast Du Dein Ziel nicht erreicht. Bitte schau nächtste Woche besser zu Dir und Deinem Körper.`;
+      message = `Schade ${this.userName}, leider hast du Dein Ziel nicht erreicht. Bitte schau nächtste Woche besser zu dir und deinem Körper.`;
     }
 
     console.log("saveData() : ", weightChange, "gr.", message);

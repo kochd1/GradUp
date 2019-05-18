@@ -12,7 +12,6 @@ import { StateOfMindPage } from '../state-of-mind/state-of-mind';
 import { NotificationService } from '../../services/notification.service';
 import { WeightReminderNotificationPage } from '../weight-reminder-notification/weight-reminder-notification';
 import { PulseStepsService } from '../../services/pulse-steps.service';
-import { WelcomePage } from '../welcome/welcome';
 
 @Component({
   selector: 'page-journal',
@@ -24,15 +23,19 @@ export class JournalPage {
     public navCtrl: NavController,
     private storage: Storage,
     public popoverCtrl: PopoverController,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
     //private pulseStepsService: PulseStepsService,
   ) {
+
+
+    console.log("JournalPage constr() called");
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad JournalPage');
     this.scheduleNotification();
+
   }
 
   ionViewDidLeave() {
@@ -67,8 +70,9 @@ export class JournalPage {
   }
 
   public scheduleNotification() {
+    //this.notificationService.createTestNotification();
     this.notificationService.createDailyMoodDeclerationNotification();
-    //this.notificationService.createWeeklyWeightNotification();
+    this.notificationService.createWeeklyWeightNotification();
     //this.pulseStepsService.schedule();
   }
 }

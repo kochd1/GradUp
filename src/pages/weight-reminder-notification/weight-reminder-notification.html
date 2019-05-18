@@ -1,54 +1,57 @@
 <ion-header>
 
-    <ion-navbar hideBackButton="true">
-        <ion-title>
-            <title-logo text="Gewichtsangaben neu erfassen"></title-logo>
-        </ion-title>
-    </ion-navbar>
+  <ion-navbar color=primary hideBackButton="true">
+    <ion-title class="title">
+      Gewichts- und Zielangaben aktualisieren
+    </ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
 
-        <p *ngIf="message">{{message}}</p>
+    <p *ngIf="message">{{message}}</p>
 
-        <div *ngIf="state === 'FORM'">
-            <p>Aktuelles Gewicht:</p>
-            <ion-item id="textfield">
-                <ion-input [(ngModel)]="currentWeight" formControlName="currentWeightValidation" type="number">
-                </ion-input>
-                <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
-            </ion-item>
-            <p *ngIf="isSubmitted && !formGroup.controls.currentWeightValidation.valid" class="error-message">
-                Bitte das aktuelle Gewicht korrekt eingeben.
-            </p>
+    <div *ngIf="state === 'FORM'">
+      <p>Aktuelles Gewicht:</p>
+      <ion-item id="textfield">
+        <ion-input [(ngModel)]="currentWeight" formControlName="currentWeightValidation" type="number">
+        </ion-input>
+        <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
+      </ion-item>
+      <p *ngIf="isSubmitted && !formGroup.controls.currentWeightValidation.valid" class="error-message">
+        Bitte das aktuelle Gewicht korrekt eingeben (Anzahl Kilogramm mit Angabe Kommastelle).
+      </p>
 
-            <p>In der nächsten Woche möchte ich</p>
-            <ion-item id="textfield">
-                <ion-input [(ngModel)]="weightGain" type="number" formControlName="weightGainValidation">
-                </ion-input>
-                <ion-label color="primary" class="fixedLabel" fixed>(500-1500gr)</ion-label>
-            </ion-item>
-            <p *ngIf="isSubmitted && !formGroup.controls.weightGainValidation.valid" class="error-message">
-                Bitte den Wochenfortschritt korrekt eingeben.
-            </p>
-            <p>gewinnen.</p>
-        </div>
+      <br>
 
-    </form>
+      <p>Für die nächsten 7 Tage möchte ich mir folgende Gewichtszunahme als Ziel setzen: </p>
+      <ion-item id="textfield">
+        <ion-input [(ngModel)]="weightGain" type="number" formControlName="weightGainValidation">
+        </ion-input>
+        <ion-label color="primary" class="fixedLabel" fixed>(500-1500gr)</ion-label>
+      </ion-item>
+      <p *ngIf="isSubmitted && !formGroup.controls.weightGainValidation.valid" class="error-message">
+        Bitte den Wochenfortschritt korrekt eingeben (z. B. "750" oder "1200").
+        (Dieser muss zwischen 500 und 1500 g liegen.)
+      </p>
+    </div>
+
+  </form>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <button *ngIf="state === 'FORM'" ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
-            Speichern
-        </button>
+  <ion-toolbar position="bottom">
+    <button *ngIf="state === 'FORM'" ion-button [color]="primary" [outline]="false" [round]="true" (click)="saveData()">
+      Speichern
+    </button>
 
-        <button *ngIf="state === 'DONE'" ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoTabsPage()">
-            Weiter
-        </button>
-    </ion-toolbar>
+    <button *ngIf="state === 'DONE'" ion-button [color]="primary" [outline]="false" [round]="true"
+      (click)="gotoTabsPage()">
+      Weiter
+    </button>
+  </ion-toolbar>
 </ion-footer>
