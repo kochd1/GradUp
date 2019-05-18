@@ -1,0 +1,31 @@
+page-more-privacy {
+
+  .title {
+    text-align: right;
+    position: relative;
+    vertical-align: bottom;
+  }
+
+  .popoverBtn{
+    right: 20%;
+}
+
+    .scroll-content {
+      overflow-y: hidden;
+    }
+
+    #link{
+      text-transform: none;
+      font-size: 17px;
+      margin-left: -5%;
+    }
+
+    .midataLinkBtn{
+      width: 280px;
+      height: 35px;
+        .button-inner {
+          justify-content: flex-start;
+        }
+      }
+
+}

@@ -1,0 +1,108 @@
+<ion-header>
+
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Nutzungsbedingungen
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-label style="font-size: 16px" text-wrap>
+    <b>Allgemeine Geschäftsbedingungen MIDATA-Plattform</b>
+  </ion-label>
+
+  <button ion-button id="link" clear color="dark"
+    (click)="openWebPage('https://ch.midata.coop/#/portal/terms/midata-terms-of-use')"><span>Tippe hier, um dich zu
+      informieren.</span>
+  </button>
+  <!--><button ion-button icon-only clear (click)="openWebPage('https://ch.midata.coop/#/portal/terms/midata-terms-of-use')">
+    <ion-icon name="link"></ion-icon>
+  </button>-->
+
+  <br>
+  <br>
+
+  <ion-label style="font-size: 16px" text-wrap>
+    <b>Nutzungsbedingungen «GradUp»-App und Teilnahme mit
+      anonymisierten Daten an der Pilotstudie «GradUp»</b>
+  </ion-label>
+  <p>
+    Herzlich Willkommen bei «GradUp». Die «GradUp»-App ermöglicht dir, persönliche Daten zu deiner Anorexie
+    aufzuzeichnen und Teil der «GradUp»-Benutzer-Community zu werden.
+    Die persönlichen Daten, die du in der App sammelst, gehören dir und werden in deinem persönlichen Konto
+    verschlüsselt auf der MIDATA-Plattform gespeichert. Nur du persönlich hast Einsicht in und Kontrolle über die von
+    deinen gesammelten Daten.<br>
+    <br>
+    Durch deine Teilnahme an der Pilotstudie ermöglichst du, neue Erkenntnisse bezüglich der Krankheit Anorexie Nervosa
+    im Zusammenhang mit verschiedenen physiologischen Parametern und sonstigen Angaben zu gewinnen, indem du mit der
+    Nutzung der App dein Einverständnis gibst, dass folgende mit der App gesammelten Daten in anonymisierter Form für
+    Forschungszwecke benutzt werden.<br>
+
+  </p>
+
+  <ul style="list-style-type:circle; font-size: 17px">
+    <li>Geburtsdatum</li>
+    <li>Geschlecht</li>
+    <li>Tätigkeit</li>
+    <li>Aktuelles Gewicht</li>
+    <li>Mein Wochenfortschritt</li>
+    <li>Mein Befinden (Smiley) und zugehöriger Grund (optional)</li>
+  </ul>
+
+  <p>Biovotion Everion Messparameter:</p>
+  <ul style="list-style-type:circle; font-size: 17px">
+    <li>Puls</li>
+    <li>Herzratenvariabilität</li>
+    <li>RR-Intervall</li>
+    <li>Atemfrequenz</li>
+    <li>Hautleitfähigkeit</li>
+    <li>Hauttemperatur</li>
+    <li>Energieverbrauch</li>
+    <li>Schritte</li>
+  </ul>
+
+  <p><u>Nicht</u> für Forschungszwecke verwendet werden:</p>
+  <ul style="list-style-type:circle; font-size: 17px">
+    <li>Benutzername</li>
+    <li>Tagebucheinträge (Text und Bild)</li>
+    <li>Dokumentationseinträge</li>
+    <li>Zieleinträge</li>
+    <li>Bewältigungstrategien</li>
+    <li>Kontaktdaten (Bezugsperson und Fachperson)</li>
+    <ul style="list-style-type:circle; font-size: 17px">
+      <li>Telefonnummer</li>
+      <li>Mailadresse</li>
+      <li>SMS-Text</li>
+      <li>E-Mail-Text </li>
+    </ul>
+
+  </ul>
+
+  <p>Die obenstehenden Daten, welche nicht für Forschungszwecke verwendet werden, werden nur lokal auf deinem Gerät
+    gespeichert und können nicht von Forschern eingesehen werden. Es steht dir frei zu entscheiden, ob diese Daten nur
+    für dich sein sollen
+    oder du sie
+    bspw. mit einem Therapeuten / einer Therapeutin teilst resp. zeigst.<br>
+    <br>
+    13. Juni 2019
+  </p>
+
+
+
+</ion-content>
+
+<ion-footer class="footer-no-borders">
+  <!--><ion-buttons left>
+        <button ion-button icon-only (click)="gotoAdaptionsPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>-->
+</ion-footer>

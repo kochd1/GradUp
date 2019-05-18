@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar color=primary hideBackButton="false">
+    <ion-title class="title">
+      Datenschutzerklärung
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button class="popoverBtn" icon-only clear color="light" medium (click)="presentPopover($event)">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-label style="font-size: 16px" text-wrap>
+    <b>Allgemeine Geschäftsbedingungen MIDATA-Plattform</b>
+  </ion-label>
+
+  <button ion-button id="link" clear color="dark"
+    (click)="openWebPage('https://ch.midata.coop/#/portal/terms/midata-privacy-policy')"><span>Tippe hier, um dich zu
+      informieren.</span>
+  </button>
+  <!--><button ion-button icon-only clear
+    (click)="openWebPage('https://ch.midata.coop/#/portal/terms/midata-privacy-policy')">
+    <ion-icon name="link"></ion-icon>
+  </button>-->
+
+</ion-content>
+
+<ion-footer class="footer-no-borders">
+  <!--><ion-buttons left>
+        <button ion-button icon-only (click)="gotoAdaptionsPage()">
+            <ion-icon name="arrow-back"></ion-icon>
+        </button>
+    </ion-buttons>-->
+</ion-footer>

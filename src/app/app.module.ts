@@ -50,8 +50,8 @@ import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-p
 import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
 import { MoreImpressumPage } from '../pages/more-impressum/more-impressum';
-import { ProfilePrivacyPage } from '../pages/profile-privacy/profile-privacy';
-import { ProfileTermsPage } from '../pages/profile-terms/profile-terms';
+import { MorePrivacyPage } from '../pages/more-privacy/more-privacy';
+import { MoreTermsPage } from '../pages/more-terms/more-terms';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -131,8 +131,8 @@ import { AwardService } from '../services/awards.service';
     AdaptionsBiovotionPage,
     MoreAwardsPage,
     MoreImpressumPage,
-    ProfilePrivacyPage,
-    ProfileTermsPage,
+    MorePrivacyPage,
+    MoreTermsPage,
 
     // components
     TitleLogoComponent,
@@ -192,8 +192,8 @@ import { AwardService } from '../services/awards.service';
     AdaptionsBiovotionPage,
     MoreAwardsPage,
     MoreImpressumPage,
-    ProfilePrivacyPage,
-    ProfileTermsPage
+    MorePrivacyPage,
+    MoreTermsPage
   ],
   providers: [
     StatusBar,

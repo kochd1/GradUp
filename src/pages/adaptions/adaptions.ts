@@ -5,8 +5,8 @@ import { IonicPage, NavController, MenuController, AlertController, PopoverContr
 import { PopoverComponent } from '../../components/popover/popover';
 
 import { MoreImpressumPage } from '../more-impressum/more-impressum';
-import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
-import { ProfileTermsPage } from '../profile-terms/profile-terms';
+import { MorePrivacyPage } from '../more-privacy/more-privacy';
+import { MoreTermsPage } from '../more-terms/more-terms';
 import { MoreProfileAdaptionsPage } from '../more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../adaptions-biovotion/adaptions-biovotion';
@@ -89,12 +89,12 @@ export class AdaptionsPage {
     this.navCtrl.push(MoreImpressumPage, {});
   }
 
-  public gotoProfilePrivacyPage() {
-    this.navCtrl.push(ProfilePrivacyPage, {});
+  public gotoMorePrivacyPage() {
+    this.navCtrl.push(MorePrivacyPage, {});
   }
 
-  public gotoProfileTermsPage() {
-    this.navCtrl.push(ProfileTermsPage, {});
+  public gotoMoreTermsPage() {
+    this.navCtrl.push(MoreTermsPage, {});
   }
 
   public isLoggedIn(): boolean {
