@@ -7,6 +7,9 @@ import { Storage } from '@ionic/storage';
 import { DocumentationEntry } from '../../classes/documentationEntry';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 
+//services
+import { AwardService } from '../../services/awards.service';
+
 //import providers
 import { FearDelightDocumentationEntryDatabaseProvider } from '../../providers/database/fearDelightDocumentationEntryDB';
 
@@ -72,6 +75,7 @@ export class DocumentationFearsDelightsPage {
     public alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private storage: Storage,
+    public awardService: AwardService,
     public dEntryDbp: FearDelightDocumentationEntryDatabaseProvider) {
 
     let newDate: Date = new Date();
@@ -255,11 +259,13 @@ export class DocumentationFearsDelightsPage {
     if (this.isFear) {
       this.fearDocumentationEntryCollection.push(this.documentationEntry);
       console.log("this.fearDocumentationEntryCollection was pushed.");
+      this.awardService.checkAwardReceipt("Festgehalten");
     }
 
     else {
       this.delightDocumentationEntryCollection.push(this.documentationEntry);
       console.log("this.delightDocumentationEntryCollection was pushed.");
+      this.awardService.checkAwardReceipt("Festgehalten");
     }
 
 

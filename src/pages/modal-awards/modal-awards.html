@@ -8,11 +8,11 @@
 
 <ion-content padding>
 
-  <div *ngIf="awardType=='Niedergeschrieben'">
+  <div *ngIf="awardType=='Festgehalten' && isReceived==false">
 
     <div class="awardDiv">
-      <ion-img [width]="88" [height]="88" src="assets/imgs/writtenDownAward.png"></ion-img>
-      <br>{{ awardType }}
+      <ion-img [width]="96" [height]="96" src="assets/imgs/setDownWrittenAward.png"></ion-img>
+      <br><span class="awardType">{{ awardType }}</span>
     </div>
 
     <ion-label style="font-size: 16px" text-wrap>
@@ -22,11 +22,28 @@
 
   </div>
 
+  <div *ngIf="awardType=='Festgehalten' && isReceived==true">
+
+    <div class="awardDiv">
+      <ion-img [width]="96" [height]="96" src="assets/imgs/setDownWrittenAward.png"></ion-img>
+      <br><span class="awardType">{{ awardType }}</span>
+      <br>
+      <br>
+      <p id="congrats"><b>Glückwunsch :)</b></p>
+    </div>
+
+    <ion-label style="font-size: 16px" text-wrap>
+      Du hast soeben deinen ersten Dokumentationseintrag erstellt! Dafür erhälst du die Auszeichnung
+      "Festgehalten".
+    </ion-label>
+
+  </div>
+
   <div *ngIf="awardType=='Gedankenpower'">
 
     <div class="awardDiv">
-      <ion-img [width]="88" [height]="88" src="assets/imgs/mentalPowerAward.png"></ion-img>
-      <br>{{ awardType }}
+      <ion-img [width]="96" [height]="96" src="assets/imgs/mentalPowerAward.png"></ion-img>
+      <br><span class="awardType">{{ awardType }}</span>
     </div>
 
     <ion-label style="font-size: 16px" text-wrap>
@@ -38,9 +55,9 @@
   <div *ngIf="awardType=='Selbstreflekteur/in'">
 
     <div class="awardDiv">
-      <ion-img [width]="88" [height]="88" src="assets/imgs/selfreflectorAward.png"></ion-img>
-      <br>{{ awardType }}
-      <br>(Stufe 1)
+      <ion-img [width]="96" [height]="96" src="assets/imgs/selfreflectorAward.png"></ion-img>
+      <br><span class="awardType">{{ awardType }}</span>
+      <br><span class="awardType">(Stufe 1)</span>
       <!--now hard coded for demo-->
     </div>
 
@@ -57,9 +74,15 @@
   </div>
 
 
-  <div class="okayBtnDiv">
+  <div class="okayBtnDiv" *ngIf="!isReceived">
     <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="closeModal()">
       OK
+    </button>
+  </div>
+
+  <div class="okayBtnDiv" *ngIf="isReceived">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="closeModal()">
+      Weiter geht's
     </button>
   </div>
 

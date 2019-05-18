@@ -10,6 +10,9 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 //import providers
 import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../../providers/database/setbackSuccessDocumentationEntryDB';
 
+//services
+import { AwardService } from '../../services/awards.service';
+
 /**
  * Generated class for the SetbackSuccessPage page.
  *
@@ -82,7 +85,8 @@ export class DocumentationSetbackSuccessPage {
     public alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private storage: Storage,
-    public dEntryDbp: SetbackSuccessDocumentationEntryDatabaseProvider) {
+    public dEntryDbp: SetbackSuccessDocumentationEntryDatabaseProvider,
+    public awardService: AwardService) {
 
     let newDate: Date = new Date();
     this.setbackSuccessdocumentationEntry = new SetbackSuccessDocumentationEntry(0, newDate, "", "");
@@ -271,11 +275,13 @@ export class DocumentationSetbackSuccessPage {
     if (this.isSetbackEntry) {
       this.setbackDocumentationEntryCollection.push(this.setbackSuccessdocumentationEntry);
       console.log("this.setbackDocumentationEntryCollection was pushed.");
+      this.awardService.checkAwardReceipt("Festgehalten");
     }
 
     else {
       this.successDocumentationEntryCollection.push(this.setbackSuccessdocumentationEntry);
       console.log("this.successDocumentationEntryCollection was pushed.");
+      this.awardService.checkAwardReceipt("Festgehalten");
     }
 
 

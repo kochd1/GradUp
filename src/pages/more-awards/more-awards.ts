@@ -42,8 +42,8 @@ export class MoreAwardsPage {
 
     let customClass: string;
 
-    if (awardType == 'Niedergeschrieben') {
-      customClass = 'writtenDownAward';
+    if (awardType == 'Festgehalten') {
+      customClass = 'setDownWrittenAward';
     }
 
     else if (awardType == 'Gedankenpower') {
@@ -61,7 +61,11 @@ export class MoreAwardsPage {
 
     let myModal: Modal;
 
-    let myModalData: string = awardType;
+    let myModalData = {
+      awardType: awardType,
+      isReceived: false
+    }
+
     console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
     myModal = this.modalCtrl.create('ModalAwardsPage', { data: myModalData }, myModalOptions);

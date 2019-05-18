@@ -10,6 +10,9 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 //import providers
 import { ViewBeliefDocumentationEntryDatabaseProvider } from '../../providers/database/viewBeliefDocumentationEntryDB';
 
+//services
+import { AwardService } from '../../services/awards.service';
+
 @IonicPage()
 @Component({
   selector: 'page-documentation-views-beliefs',
@@ -64,7 +67,8 @@ export class DocumentationViewsBeliefsPage {
     public alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private storage: Storage,
-    public dEntryDbp: ViewBeliefDocumentationEntryDatabaseProvider) {
+    public dEntryDbp: ViewBeliefDocumentationEntryDatabaseProvider,
+    public awardService: AwardService) {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
@@ -212,6 +216,7 @@ export class DocumentationViewsBeliefsPage {
 
     this.viewBeliefDocumentationEntryCollection.push(this.documentationEntry);
     console.log("this.viewBeliefDocumentationEntryCollection was pushed.");
+    this.awardService.checkAwardReceipt("Festgehalten");
 
 
 

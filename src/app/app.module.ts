@@ -88,6 +88,7 @@ import { SetbackSuccessDocumentationEntryDatabaseProvider } from '../providers/d
 import { CopingStrategyEntryDatabaseProvider } from '../providers/database/copingStrategyEntryDB';
 import { GoalEntryDatabaseProvider } from '../providers/database/goalEntryDB';
 import { MoreAwardsPage } from '../pages/more-awards/more-awards';
+import { AwardService } from '../services/awards.service';
 
 
 @NgModule({
@@ -202,6 +203,7 @@ import { MoreAwardsPage } from '../pages/more-awards/more-awards';
     MidataPulseService,
     MidataStepsService,
     PulseStepsService,
+    AwardService,
     NativeStorage,
     SecureStorage,
     Network,

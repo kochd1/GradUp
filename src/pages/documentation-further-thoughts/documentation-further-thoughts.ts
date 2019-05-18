@@ -10,6 +10,9 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 //import providers
 import { FurtherThoughtDocumentationEntryDatabaseProvider } from '../../providers/database/furtherThoughtDocumentationEntryDB';
 
+//services
+import { AwardService } from '../../services/awards.service';
+
 /**
  * Generated class for the FurtherThoughtsPage page.
  *
@@ -65,7 +68,8 @@ export class DocumentationFurtherThoughtsPage {
     public alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private storage: Storage,
-    public dEntryDbp: FurtherThoughtDocumentationEntryDatabaseProvider) {
+    public dEntryDbp: FurtherThoughtDocumentationEntryDatabaseProvider,
+    public awardService: AwardService) {
 
     let newDate: Date = new Date();
     this.documentationEntry = new DocumentationEntry(0, newDate, "");
@@ -213,6 +217,7 @@ export class DocumentationFurtherThoughtsPage {
 
     this.furtherThoughtDocumentationEntryCollection.push(this.documentationEntry);
     console.log("this.furtherThoughtDocumentationEntryCollection was pushed.");
+    this.awardService.checkAwardReceipt("Festgehalten");
 
 
 

@@ -14,7 +14,9 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class ModalAwardsPage {
 
+  data: any;
   awardType: string;
+  isReceived: boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
   }
@@ -22,9 +24,13 @@ export class ModalAwardsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ModalAwardsPage');
 
-    this.awardType = this.navParams.get('data'); //können hiermit Daten ins Modal speisen
+    this.data = this.navParams.get('data'); //können hiermit Daten ins Modal speisen
 
-    console.log("text data filtered from entry-overview page", this.awardType);
+    this.awardType = this.data.awardType;
+    console.log("awardType filtered", this.awardType);
+
+    this.isReceived = this.data.isReceived;
+    console.log("isReceived filtered", this.isReceived);
 
   }
 

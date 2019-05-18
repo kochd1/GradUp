@@ -4,10 +4,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
-import { TabsPage } from '../pages/tabs/tabs';
+//services
+import { AwardService } from '../services/awards.service';
 import { MidataService } from '../services/MidataService';
+
+import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { JournalPage } from '../pages/journal/journal';
+
 
 
 @Component({
@@ -26,6 +30,7 @@ export class MyApp {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private midataService: MidataService,
+    private awardService: AwardService,
     private storage: Storage
   ) {
     splashScreen.show();
@@ -33,11 +38,28 @@ export class MyApp {
     platform.ready()
       .then(() => {
 
-
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
         statusBar.styleLightContent();   //styleDefault(); //dark text for light backgrounds
         splashScreen.hide();
+
+        let startCount;
+        this.storage.get('StartCount').then((value => {
+
+          if (value == null) {
+            console.log("platform.ready() StartCount value: ", value);
+            startCount = this.storage.set('StartCount', 1);
+            console.log("platform.ready() StartCount var after init: ", startCount);
+          }
+
+          else {
+            startCount = this.storage.set('StartCount', value + 1);
+            console.log("platform.ready() StartCount var after +1 : ", startCount);
+          }
+
+          this.awardService.initializeAwardManagement();
+
+        }));
 
         // this does not work in the browser.
         // only in cordova, this makes development quite tricky.
