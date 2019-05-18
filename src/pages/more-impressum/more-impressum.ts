@@ -4,16 +4,16 @@ import { AdaptionsPage } from '../adaptions/adaptions';
 
 @IonicPage()
 @Component({
-  selector: 'page-profile-impressum',
-  templateUrl: 'profile-impressum.html',
+  selector: 'page-more-impressum',
+  templateUrl: 'more-impressum.html',
 })
-export class ProfileImpressumPage {
+export class MoreImpressumPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileImpressumPage');
+    console.log('ionViewDidLoad MoreImpressumPage');
   }
 
   public gotoAdaptionsPage() {

@@ -4,7 +4,7 @@ import { IonicPage, NavController, MenuController, AlertController, PopoverContr
 //component
 import { PopoverComponent } from '../../components/popover/popover';
 
-import { ProfileImpressumPage } from '../profile-impressum/profile-impressum';
+import { MoreImpressumPage } from '../more-impressum/more-impressum';
 import { ProfilePrivacyPage } from '../profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../profile-terms/profile-terms';
 import { MoreProfileAdaptionsPage } from '../more-profile-adaptions/more-profile-adaptions';
@@ -85,8 +85,8 @@ export class AdaptionsPage {
     this.navCtrl.push(MoreAwardsPage, {});
   }
 
-  public gotoProfileImpressumPage() {
-    this.navCtrl.push(ProfileImpressumPage, {});
+  public gotoMoreImpressumPage() {
+    this.navCtrl.push(MoreImpressumPage, {});
   }
 
   public gotoProfilePrivacyPage() {

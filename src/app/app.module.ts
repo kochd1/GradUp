@@ -39,17 +39,17 @@ import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-del
 //goals management
 import { GoalsManagementPage } from '../pages/goals-management/goals-management';
 
-//support
+//Support
 import { SupportPage } from '../pages/support/support';
 import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
 import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/support-coping-strategies';
 
-//more
+//More
 import { AdaptionsPage } from '../pages/adaptions/adaptions';
 import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
-import { ProfileImpressumPage } from '../pages/profile-impressum/profile-impressum';
+import { MoreImpressumPage } from '../pages/more-impressum/more-impressum';
 import { ProfilePrivacyPage } from '../pages/profile-privacy/profile-privacy';
 import { ProfileTermsPage } from '../pages/profile-terms/profile-terms';
 
@@ -130,7 +130,7 @@ import { AwardService } from '../services/awards.service';
     MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,
     MoreAwardsPage,
-    ProfileImpressumPage,
+    MoreImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage,
 
@@ -191,7 +191,7 @@ import { AwardService } from '../services/awards.service';
     MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,
     MoreAwardsPage,
-    ProfileImpressumPage,
+    MoreImpressumPage,
     ProfilePrivacyPage,
     ProfileTermsPage
   ],
