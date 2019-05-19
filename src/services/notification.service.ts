@@ -55,9 +55,16 @@ export class NotificationService {
 
     this.localNotifications.requestPermission().then((permission) => {
       this.storage.get("username").then(userName => {
-        var s = options.text as string
-        if (s) {
-          options.text = s.replace('{{UserName}}', userName);
+        var str = options.text as string
+        if (str) {
+          if (userName) {
+            options.text = str.replace('{{UserName}}', userName);
+          }
+
+          else {
+            options.text = str.replace('{{UserName}}', ""); //in case there's no username
+          }
+
         }
 
         this.localNotifications.schedule(options);
