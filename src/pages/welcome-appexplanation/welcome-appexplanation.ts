@@ -17,6 +17,8 @@ export class WelcomeAppexplanationPage {
 
   isOnboardingDone: boolean;
 
+  success: boolean;
+
   constructor(
     private app: App,
     public navCtrl: NavController,
@@ -26,6 +28,7 @@ export class WelcomeAppexplanationPage {
     private storage: Storage
   ) {
     this.nextPage = OnboardingProfileCapturePage;
+    this.success = false;
   }
 
   ionViewDidLoad() {
@@ -48,6 +51,12 @@ export class WelcomeAppexplanationPage {
   public goNext() {
     console.log("goNext() -> isOnboardingDone: ", this.isOnboardingDone);
 
+    let that = this;
+
+    if (this.isOnboardingDone) {
+      this.nextPage = TabsPage;
+    }
+
     let loading = this.loadingCtrl.create({
       content: 'Bitte warten...'
     });
@@ -57,31 +66,39 @@ export class WelcomeAppexplanationPage {
     this.midataService.authenticate()
       .then((success: boolean) => {
 
-        if (this.isOnboardingDone) {
-          this.nextPage = TabsPage;
-        }
+        console.log("this.midataService -> success: ", success);
 
-        console.log("this.navCtrl.getPrevious(): ", this.navCtrl.getPrevious());
-        let currentIndex = this.navCtrl.getActive().index;
-        console.log("currentIndex: ", currentIndex);
-        this.navCtrl.push(this.nextPage).then(() => {
-          this.navCtrl.remove(currentIndex);
-        });
+        that.success = success;
+        this.success = success;
 
+        console.log("this.midataService -> that.success: ", that.success);
+        console.log("this.midataService -> this.success: ", this.success);
+        //this.pushNextPage(); --> segment view error
         //this.goToTabsPage();//this.navCtrl.popTo(this.nextPage);//this.app.getActiveNav().setRoot(this.nextPage);//this.navCtrl.setRoot(this.nextPage);
       })
       .then(() => {
+        //this.pushNextPage(); --> segment view error
         loading.dismiss().catch();
+        //this.pushNextPage(); --> segment view error
+
       })
+      /*.then(() => {
+        this.pushNextPage(); --> segment view error
+      })*/
       .catch((error) => {
         console.log(error);
         console.log(this.midataService.getNetworkState());
         loading.dismiss().catch();
-      })
+      });
+
+    this.pushNextPage(); //workaround -> dirty load -> load TabsPage, even when the login is not successful
+
+
   }
 
-  goToTabsPage() {
-
-    return this.navCtrl.push(TabsPage, {}); //same problem
+  pushNextPage() {
+    console.log("pushNextPage() called");
+    //console.log("pushNextPage() -> this.success: ", this.success);
+    return this.navCtrl.push(this.nextPage, {});
   }
 }
