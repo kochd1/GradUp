@@ -1,9 +1,3 @@
-<!--
-  Generated template for the SetbackSuccessModalPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
   <ion-navbar>
     <ion-buttons end>
@@ -22,10 +16,16 @@
       <b>Eintrag vom {{setbackSuccessDocumentationEntry.entryDate | date: 'dd.MM.yy' }} anpassen: </b>
     </ion-label>
   </ion-item>
-  <ion-item>
-    <ion-textarea [(ngModel)]="documentationEntrySubjectText" placeholder="Was war dein Erfolg/Rückschlag?" rows="3">
+
+  <ion-item *ngIf="isSetbackEntry">
+    <ion-textarea [(ngModel)]="documentationEntrySubjectText" placeholder="Was war dein Rückschlag?" rows="3">
     </ion-textarea>
   </ion-item>
+  <ion-item *ngIf="!isSetbackEntry">
+    <ion-textarea [(ngModel)]="documentationEntrySubjectText" placeholder="Was war dein Erfolg?" rows="3">
+    </ion-textarea>
+  </ion-item>
+
   <ion-item>
     <ion-textarea [(ngModel)]="documentationEntryReasonText" placeholder="Wie kam es dazu?" rows="3">
     </ion-textarea>

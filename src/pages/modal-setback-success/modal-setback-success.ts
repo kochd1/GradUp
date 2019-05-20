@@ -7,10 +7,14 @@ import { SetbackSuccessDocumentationEntry } from '../../classes/setbackSuccessdo
 
 @IonicPage()
 @Component({
-  selector: 'page-setback-success-modal',
-  templateUrl: 'setback-success-modal.html',
+  selector: 'page-modal-setback-success',
+  templateUrl: 'modal-setback-success.html',
 })
-export class SetbackSuccessModalPage {
+export class ModalSetbackSuccessPage {
+
+  data: any;
+
+  isSetbackEntry: boolean;
 
   setbackSuccessDocumentationEntry: SetbackSuccessDocumentationEntry;
 
@@ -28,7 +32,14 @@ export class SetbackSuccessModalPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SetbackSuccessModalPage');
 
-    this.setbackSuccessDocumentationEntry = this.navParams.get('data'); //können hiermit Daten ins Modal speisen
+    //get all data
+    this.data = this.navParams.get('data');
+    console.log("data from goals-management-page:", this.data);
+
+    this.isSetbackEntry = this.data.isSetbackEntry;
+    console.log("modal -> isSetbackEntry: ", this.isSetbackEntry);
+
+    this.setbackSuccessDocumentationEntry = this.data.dEntry; //können hiermit Daten ins Modal speisen
     console.log("data from entry-overview page", this.setbackSuccessDocumentationEntry);
 
     this.documentationEntrySubjectText = this.setbackSuccessDocumentationEntry.entrySubjectText;
@@ -38,22 +49,22 @@ export class SetbackSuccessModalPage {
     console.log("reason text data filtered from entry-overview page", this.documentationEntryReasonText);
   }
 
-   /**
-   * Modal dismissed the entry text to the respective class.
-   */
-  public setEntryText(){
+  /**
+  * Modal dismissed the entry text to the respective class.
+  */
+  public setEntryText() {
     let entryData = {
       subject: this.documentationEntrySubjectText,
       reason: this.documentationEntryReasonText
     }
     this.viewCtrl.dismiss(entryData);
-    
+
     console.log("Modal setEntryText() -> this.documentationEntrySubjectText", this.documentationEntrySubjectText);
     console.log("Modal setEntryText() -> this.documentationEntryReasonText", this.documentationEntryReasonText);
     console.log("Modal setEntryText() -> entryData", entryData);
   }
 
-  public closeModal(){
+  public closeModal() {
 
     this.viewCtrl.dismiss();
     /*const data = {

@@ -166,18 +166,14 @@ export class DocumentationSetbackSuccessPage {
 
     let myModal: Modal;
 
-    //only go through, if there's an entry to edit
-    if (this.aboutToEdit == true) {
-
-      let myModalData: SetbackSuccessDocumentationEntry = this.setbackSuccessdocumentationEntry;
-      console.log("myModalData (data to pass to modal): ", myModalData); //as expected
-
-      myModal = this.modalCtrl.create('SetbackSuccessModalPage', { data: myModalData }, myModalOptions);
+    let myModalData = {
+      dEntry: this.setbackSuccessdocumentationEntry,
+      isSetbackEntry: this.isSetbackEntry
     }
 
-    else {
-      myModal = this.modalCtrl.create('SetbackSuccessModalPage', null, myModalOptions);
-    }
+    console.log("myModalData (data to pass to modal): ", myModalData); //as expected
+
+    myModal = this.modalCtrl.create('ModalSetbackSuccessPage', { data: myModalData }, myModalOptions);
 
     myModal.present();
 
