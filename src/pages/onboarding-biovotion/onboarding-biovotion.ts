@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
-import { AdaptionsPage } from '../adaptions/adaptions';
 import { TabsPage } from '../tabs/tabs';
 import { BiovotionConnector, BiovotionSensor, BatteryInformation, SensorDataType, SensorDataEntry, SENSORDATATYPE } from '@ionic-native/biovotion-connector';
 import { Storage } from '@ionic/storage';
@@ -422,16 +421,9 @@ export class OnboardingBiovotionPage {
       );
   }
 
-
-
-
   public gotoTabsPage() {
     this.storage.set('DidOnboarding', true);
     this.navCtrl.push(TabsPage, {});
-  }
-
-  public gotoAdaptionsPage() {
-    this.navCtrl.push(AdaptionsPage, {});
   }
 
 }

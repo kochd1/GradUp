@@ -27,14 +27,14 @@
     <ion-item>
       <ion-label stacked>Name der Bezugsperson:</ion-label>
       <ion-input [(ngModel)]="bezugsperson_inputtext" formControlName="bezugsperson_inputtext"
-        placeholder="Kein Eintrag vorhanden" type="text">
+        placeholder="Kein Name erfasst" type="text">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Telefonnummer:</ion-label>
       <ion-input [(ngModel)]="bezugsperson_telefonnummer" formControlName="bezugsperson_telefonnummer" type="tel"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Keine Telefonnummer erfasst">
       </ion-input>
     </ion-item>
     <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_telefonnummer.valid" class="error-message">Bitte
@@ -43,14 +43,14 @@
     <ion-item>
       <ion-label stacked>SMS-Text:</ion-label>
       <ion-textarea [(ngModel)]="bezugsperson_smstext" formControlName="bezugsperson_smstext" rows="1"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Kein SMS-Text erfasst">
       </ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>E-Mail-Adresse:</ion-label>
       <ion-input [(ngModel)]="bezugsperson_email" formControlName="bezugsperson_email" type="email"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Keine E-Mail-Adresse erfasst">
       </ion-input>
     </ion-item>
     <p *ngIf="isSubmitted && !formGroup.controls.bezugsperson_email.valid" class="error-message">Bitte korrekte
@@ -59,7 +59,7 @@
     <ion-item>
       <ion-label stacked>E-Mail-Text:</ion-label>
       <ion-textarea [(ngModel)]="bezugsperson_emailtext" formControlName="bezugsperson_emailtext" rows="1"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Kein E-Mail-Text erfasst">
       </ion-textarea>
     </ion-item>
 
@@ -73,14 +73,14 @@
     <ion-item>
       <ion-label stacked>Name der Fachperson:</ion-label>
       <ion-input [(ngModel)]="fachperson_inputtext" formControlName="fachperson_inputtext" type="text"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Kein Name erfasst">
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Praxis-Telefonnummer:</ion-label>
       <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="fachperson_telefonnummer" type="tel"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Keine Telefonnummer erfasst">
       </ion-input>
     </ion-item>
     <p *ngIf="isSubmitted && !formGroup.controls.fachperson_telefonnummer.valid" class="error-message">Bitte
@@ -89,7 +89,7 @@
     <ion-item>
       <ion-label stacked>E-Mail-Adresse:</ion-label>
       <ion-input [(ngModel)]="fachperson_email" formControlName="fachperson_email" type="email"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Keine E-Mail-Adresse erfasst">
       </ion-input>
     </ion-item>
     <p *ngIf="isSubmitted && !formGroup.controls.fachperson_email.valid" class="error-message">Bitte korrekte
@@ -98,7 +98,7 @@
     <ion-item>
       <ion-label stacked>E-Mail-Text:</ion-label>
       <ion-textarea [(ngModel)]="fachperson_emailtext" formControlName="fachperson_emailtext" rows="1"
-        placeholder="Kein Eintrag vorhanden">
+        placeholder="Kein E-Mail-Text erfasst">
       </ion-textarea>
     </ion-item>
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser'
-import { AdaptionsPage } from '../adaptions/adaptions';
 
 //component
 import { PopoverComponent } from '../../components/popover/popover';
@@ -43,7 +42,7 @@ export class MoreTermsPage {
     //const browser...
   }
 
-  public gotoAdaptionsPage() {
+  public gotoMorePage() {
     //this.navCtrl.push(AdaptionsPage, {});
     this.navCtrl.popToRoot();
   }

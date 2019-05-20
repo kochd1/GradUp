@@ -19,10 +19,10 @@ import { MidataService } from '../../services/MidataService';
 
 @IonicPage()
 @Component({
-  selector: 'page-adaptions',
-  templateUrl: 'adaptions.html',
+  selector: 'page-more',
+  templateUrl: 'more.html',
 })
-export class AdaptionsPage {
+export class MorePage {
 
   /**
   * Indicates, if the Biovotion Everion Sensor is connected to GradUp.

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { AdaptionsPage } from '../adaptions/adaptions';
+import { MorePage } from '../more/more';
 import { TabsPage } from '../tabs/tabs';
 import { BiovotionConnector, BiovotionSensor, BatteryInformation, SensorDataType, SensorDataEntry, SENSORDATATYPE } from '@ionic-native/biovotion-connector';
 import { Storage } from '@ionic/storage';
@@ -62,6 +62,11 @@ export class AdaptionsBiovotionPage {
   isPermitted: boolean = false;
 
   /**
+   * varialbe to show current battery state to user
+   */
+  batteryCapacity: string;
+
+  /**
    * not in use at the moment
    * Stores the current heart rate.
    */
@@ -101,6 +106,7 @@ export class AdaptionsBiovotionPage {
 
     this.currentHeartRate = -1;
     this.amountOfSteps = -1;
+    this.batteryCapacity = "keine Angabe";
 
     //#MIDATA
     //this.dailyData = this.navParams.get('data');
@@ -213,7 +219,9 @@ export class AdaptionsBiovotionPage {
           this.storage.set(this.key_toggle, this.isToggled); //in trial
 
           console.log("connectSensor() -> sensor connected?: ", this.isConnectedToSensor);
-          console.log("battery state:", this.biovotion.getBatteryState);
+
+          this.getBatteryCapacity(); //doesn't work
+
           this.presentToast();
           //this.isToggled = true;
 
@@ -281,7 +289,7 @@ export class AdaptionsBiovotionPage {
 
 
 
-          this.navCtrl.push(TabsPage, {});
+          this.navCtrl.pop();//navigate back to MorePage -> fixes the goal mgmt presenting & loading error
         }).catch(error => {
           console.log("Connection Error: " + error);
           this.isToggled = false;  //in trial
@@ -305,6 +313,28 @@ export class AdaptionsBiovotionPage {
     //}
     //console.log("no permission to connect!");
     //this.isToggled = false; //in trial
+  }
+
+  /**
+   * Gets the current battery state
+   */
+  getBatteryCapacity() {
+
+    let that = this;
+
+    this.biovotion.getBatteryState().then((value) => {
+      that.batteryCapacity = value.capacity; //string value
+      //this.batteryCapacity = value.capacity; //!test!
+      console.log("that.batteryCapacity: ", that.batteryCapacity);
+      //console.log("that.batteryCapacity: ", that.batteryCapacity);
+
+      //this.batteryCapacity = that.batteryCapacity; //no effect
+    });
+
+    //this.batteryCapacity = that.batteryCapacity;
+
+    console.log("this.batteryCapacity: ", this.batteryCapacity);
+
   }
 
   measureData() {

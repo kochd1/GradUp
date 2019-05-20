@@ -45,7 +45,7 @@ import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-prop
 import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/support-coping-strategies';
 
 //More
-import { AdaptionsPage } from '../pages/adaptions/adaptions';
+import { MorePage } from '../pages/more/more';
 import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
 import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
@@ -125,7 +125,7 @@ import { AwardService } from '../services/awards.service';
     SupportSelfHelpPropositionsPage,
     SupportCopingStrategiesPage,
 
-    AdaptionsPage,
+    MorePage,
     MoreProfileAdaptionsPage,
     MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,
@@ -186,7 +186,7 @@ import { AwardService } from '../services/awards.service';
     SupportSelfHelpPropositionsPage,
     SupportCopingStrategiesPage,
 
-    AdaptionsPage,
+    MorePage,
     MoreProfileAdaptionsPage,
     MoreContactsAdaptionsPage,
     AdaptionsBiovotionPage,

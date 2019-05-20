@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AdaptionsPage } from '../adaptions/adaptions';
+import { MorePage } from '../more/more';
 
 @IonicPage()
 @Component({
@@ -16,7 +16,7 @@ export class MoreImpressumPage {
     console.log('ionViewDidLoad MoreImpressumPage');
   }
 
-  public gotoAdaptionsPage() {
+  public gotoMorePage() {
     //this.navCtrl.push(AdaptionsPage, {});
     this.navCtrl.popToRoot();
   }
