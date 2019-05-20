@@ -4,6 +4,10 @@ page-modal-goals {
     text-align: center;
   }
 
+  .scroll-content {
+    overflow-y: hidden; //site is not scrollable
+  }
+
   ion-checkbox .item-cover{ //only checkbox becomes clickable
     display:none;
   }

@@ -161,10 +161,10 @@ img {
   }
 }*/
 
- .modal-wrapper{
+ .modal-wrapper{ //default
     position: absolute;
     width: 90vw;
-    height: 50vh;
+    height: 50vh; //orig 50vh
     top: 0;
     bottom: 20%;
     left: 0;
@@ -177,11 +177,43 @@ img {
 
     }
 
+    //additional -> is needed for backdrop visibility!
     @media (min-width: 300px) and (min-height: 500px) {
     ion-modal ion-backdrop {
     visibility: visible;
-
  }
+}
+
+.documentationEntry .modal-wrapper{
+  position: absolute;
+  width: 90vw; //was 90vw before
+  height: 43vh;
+  top: 0;
+  bottom: 34%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 0;
+  background: rgba(0,0,0,0.5);
+  border-radius: 25px !important; //added for rounded edges
+  overflow:hidden !important; //dito
+
+  }
+
+.setbackSuccess .modal-wrapper{
+  position: absolute;
+  width: 90vw;
+  height: 53vh;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 0;
+  background: rgba(0,0,0,0.5);
+  border-radius: 25px !important; //added for rounded edges
+  overflow:hidden !important; //dito
+
 }
 
 .setDownWrittenAward .modal-wrapper{
@@ -199,12 +231,6 @@ img {
   overflow:hidden !important; //dito
 
   }
-  @media (min-width: 100px) and (min-height: 100px) { //min-width: 300px, min-height: 500px
-  ion-modal ion-backdrop {
-  visibility: visible;
-
-  }
-}
 
 .setDownWrittenAwardReceived .modal-wrapper{
   position: absolute;
@@ -221,12 +247,6 @@ img {
   overflow:hidden !important; //dito
 
   }
-  @media (min-width: 100px) and (min-height: 100px) { //min-width: 300px, min-height: 500px
-  ion-modal ion-backdrop {
-  visibility: visible;
-
-  }
-}
 
 .mentalPowerAward .modal-wrapper{
   position: absolute;
@@ -243,12 +263,6 @@ img {
   overflow:hidden !important; //dito
 
   }
-  @media (min-width: 100px) and (min-height: 100px) { //min-width: 300px, min-height: 500px
-  ion-modal ion-backdrop {
-  visibility: visible;
-
-  }
-}
 
 .selfreflectorAward .modal-wrapper{
   position: absolute;
@@ -265,12 +279,6 @@ img {
   overflow:hidden !important; //dito
 
   }
-  @media (min-width: 100px) and (min-height: 100px) { //min-width: 300px, min-height: 500px
-  ion-modal ion-backdrop {
-  visibility: visible;
-
-  }
-}
 
  //for certain documentation entry pages
  .EntryDivTop{

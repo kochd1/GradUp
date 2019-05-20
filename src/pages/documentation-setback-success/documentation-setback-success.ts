@@ -161,6 +161,7 @@ export class DocumentationSetbackSuccessPage {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
+      cssClass: 'setbackSuccess'
     }
 
     let myModal: Modal;
@@ -175,7 +176,7 @@ export class DocumentationSetbackSuccessPage {
     }
 
     else {
-      myModal = this.modalCtrl.create('SetbackSuccessModalPage', myModalOptions);
+      myModal = this.modalCtrl.create('SetbackSuccessModalPage', null, myModalOptions);
     }
 
     myModal.present();

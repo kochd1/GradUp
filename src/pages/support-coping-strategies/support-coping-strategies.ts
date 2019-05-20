@@ -141,6 +141,7 @@ export class SupportCopingStrategiesPage {
 
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
+      cssClass: 'documentationEntry'
     }
 
     let myModal: Modal;
@@ -155,7 +156,7 @@ export class SupportCopingStrategiesPage {
     }
 
     else {
-      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', myModalOptions);
+      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', null, myModalOptions);
     }
 
     myModal.present();

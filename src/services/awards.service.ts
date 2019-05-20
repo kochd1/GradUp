@@ -74,11 +74,11 @@ export class AwardService {
     }
 
     else if (this.awardType == 'Gedankenpower') {
-      customClass = 'mentalPowerAward';
+      customClass = 'mentalPowerAwardReceived';
     }
 
     else {
-      customClass = 'selfreflectorAward';
+      customClass = 'selfreflectorAwardReceived';
     }
 
     const myModalOptions: ModalOptions = {
