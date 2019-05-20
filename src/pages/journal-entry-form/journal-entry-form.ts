@@ -135,13 +135,21 @@ export class JournalEntryFormPage {
    * Runs when the page is about to enter and become the active page.
    */
   ionViewWillEnter() {
-    console.log("willEnter journalEntryPage");
+    console.log("ionViewWillEnter journalEntryPage");
 
     //this.journalEntryId = this.navParams.data; //-> fetches data from "journal-deletePage" --> do not delete!, otherwise delete won't work properly
 
-    this.journalEntry = this.navParams.data;
+    this.journalEntry = this.navParams.data; //get full entry data from the JournalEntryListPage
+
+    console.log("this.journalEntry.entryDate: ", this.journalEntry.entryDate);
+
+    if (this.journalEntry.entryDate == null) {
+      this.journalEntry.entryDate = new Date().toISOString().substring(0, 10);
+      console.log("this.journalEntry.entryDate after undefined: ", this.journalEntry.entryDate);
+    }
 
     console.log("ionViewWillEnter() -> journalEntry:", this.journalEntry);
+
     this.myPhoto = this.journalEntry.entryPhoto;
 
     this.subjectiveCondition = this.journalEntry.entrySubjCondition;
@@ -283,8 +291,10 @@ export class JournalEntryFormPage {
   /**
    * Saves the journal entry to database.
    */
-  public saveEntry(): void {
-    console.log("saveJournalEntry button was clicked");
+  public saveJournalEntry(): void {
+    console.log("saveJournalEntry() called");
+
+    console.log("saveJournalEntry() -> this.journalEntry.entryDate: ", this.journalEntry.entryDate); //YYYY-MM-DD format
 
     //checks before setting the id, if it is a new or edited entry
     if (this.journalEntry.entryId == 0 || this.journalEntry.entryId == null) {

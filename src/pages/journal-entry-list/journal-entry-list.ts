@@ -51,7 +51,8 @@ export class JournalEntryListPage {
     public events: Events,
     private alertCtrl: AlertController,
     private popoverCtrl: PopoverController) {
-    console.log("visited constructor JournalDeletePage");
+
+    console.log("constr() JournalEntryListPage");
 
     /*this.events.subscribe('journalEntryCollection:updated', () => {
       this.ionViewWillEnter()
@@ -61,36 +62,8 @@ export class JournalEntryListPage {
     //this.journalEntry = new JournalEntry();
   }
 
-  ionViewDidLoad() { //-> does not work, page is not getting reloaded after updating an journal entry
-    console.log('ionViewDidLoad JournalDeletePage');
-
-    this.dbp.getJournalEntryCollection().then((val) => {
-      if (val == null) {
-        // There's no journalEntry
-
-      } else {
-        this.journalEntryCollection = val;
-
-        /*this.dbp.getJournalEntryById(this.journalEntryId).then((val) => {
-          this.journalEntry = val;
-        });*/
-      }
-    });
-
-  }
-
-  presentPopover(myEvent) {
-    let myPopoverData = {
-      infoText: "Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen."
-    }
-    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
-    popover.present({
-      ev: myEvent
-    });
-  }
-
   ionViewWillEnter() {
-    console.log("ionHomeViewWillEnter");
+    console.log("ionViewWillEnter JournalEntryListPage");
 
     //this.journalEntryCollection = this.navParams.data;
     //console.log("jEntryColl.: " + this.journalEntryCollection);
@@ -109,6 +82,22 @@ export class JournalEntryListPage {
       }
     });
   }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad JournalEntryListPage');
+
+  }
+
+  presentPopover(myEvent) {
+    let myPopoverData = {
+      infoText: "Hier kannst du deine erfassten Einträge ansehen, bearbeiten oder löschen."
+    }
+    let popover = this.popoverCtrl.create(PopoverComponent, { data: myPopoverData });
+    popover.present({
+      ev: myEvent
+    });
+  }
+
 
   public gotoJournalPage() {
     //this.navCtrl.push(JournalPage, {});
