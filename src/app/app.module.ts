@@ -13,7 +13,7 @@ import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
 
-//onboarding
+//onboarding Pages
 import { WelcomePage } from '../pages/welcome/welcome';
 import { WelcomeAppexplanationPage } from '../pages/welcome-appexplanation/welcome-appexplanation';
 import { OnboardingProfileCapturePage } from '../pages/onboarding-profile-capture/onboarding-profile-capture';
@@ -24,27 +24,27 @@ import { OnboardingBiovotionPage } from '../pages/onboarding-biovotion/onboardin
 
 import { WeightReminderNotificationPage } from '../pages/weight-reminder-notification/weight-reminder-notification';
 
-//journal
+//journal Pages
 import { JournalPage } from '../pages/journal/journal';
 import { JournalEntryFormPage } from '../pages/journal-entry-form/journal-entry-form';
 import { JournalEntryListPage } from '../pages/journal-entry-list/journal-entry-list';
 
 import { StateOfMindPage } from '../pages/state-of-mind/state-of-mind';
 
-//information & documentation
+//information & documentation pages
 import { InformationDocumentationPage } from '../pages/information-documentation/information-documentation';
 import { InformationAnorexiaPage } from '../pages/information-anorexia/information-anorexia';
 import { DocumentationFearsDelightsPage } from '../pages/documentation-fears-delights/documentation-fears-delights';
 
-//goals management
+//goals management page
 import { GoalsManagementPage } from '../pages/goals-management/goals-management';
 
-//Support
+//support pages
 import { SupportPage } from '../pages/support/support';
 import { SupportSelfHelpPropositionsPage } from '../pages/support-self-help-propositions/support-self-help-propositions';
 import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/support-coping-strategies';
 
-//More
+//more pages
 import { MorePage } from '../pages/more/more';
 import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
