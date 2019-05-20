@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Schliessen</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label *ngIf="!strategyEntry" style="font-size: 20px">
+      <b>Neue Bewältigungsstrategie</b>
+    </ion-label>
+    <ion-label *ngIf="strategyEntry" style="font-size: 20px">
+      <b>Bewältigungsstrategie anpassen</b>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea [(ngModel)]="strategyEntryText" rows="4" placeholder="Strategie">
+
+    </ion-textarea>
+  </ion-item>
+
+  <div class="entryDiv">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" [disabled]="!strategyEntryText"
+      (click)="setEntryText()">
+      Eintragen
+    </button>
+  </div>
+
+</ion-content>

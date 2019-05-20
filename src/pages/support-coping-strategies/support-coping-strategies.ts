@@ -152,11 +152,11 @@ export class SupportCopingStrategiesPage {
       let myModalData: DocumentationEntry = this.copingStrategyEntry;
       console.log("myModalData (data to pass to modal): ", myModalData); //as expected
 
-      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', { data: myModalData }, myModalOptions);
+      myModal = this.modalCtrl.create('ModalCopingStrategyPage', { data: myModalData }, myModalOptions);
     }
 
     else {
-      myModal = this.modalCtrl.create('ModalDocumentationEntryPage', null, myModalOptions);
+      myModal = this.modalCtrl.create('ModalCopingStrategyPage', null, myModalOptions);
     }
 
     myModal.present();
