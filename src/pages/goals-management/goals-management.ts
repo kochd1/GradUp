@@ -375,8 +375,18 @@ export class GoalsManagementPage {
    */
   public openModal() {
 
+    let customClass: string;
+    if (this.isDailyGoal) {
+      customClass = 'dailyGoalEntry';
+    }
+
+    else {
+      customClass = 'weeklyGoalEntry'
+    }
+
     const myModalOptions: ModalOptions = {
       enableBackdropDismiss: false, //user can only go back via close btn
+      cssClass: customClass
     }
 
     let myModal: Modal;

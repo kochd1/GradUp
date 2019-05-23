@@ -216,6 +216,38 @@ img {
 
 }
 
+.dailyGoalEntry .modal-wrapper{
+  position: absolute;
+  width: 90vw; //was 90vw before
+  height: 50vh;
+  top: 0;
+  bottom: 34%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: 0;
+  background: rgba(0,0,0,0.5);
+  border-radius: 25px !important; //added for rounded edges
+  overflow:hidden !important; //dito
+
+  }
+
+  .weeklyGoalEntry .modal-wrapper{
+    position: absolute;
+    width: 90vw; //was 90vw before
+    height: 43vh;
+    top: 0;
+    bottom: 34%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 25px !important; //added for rounded edges
+    overflow:hidden !important; //dito
+
+    }
+
 .setDownWrittenAward .modal-wrapper{
   position: absolute;
   width: 90vw; //was 90vw before

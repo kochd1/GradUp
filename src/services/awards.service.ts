@@ -20,9 +20,18 @@ export class AwardService {
 
     console.log("AwardService: showAwardStatus() called");
 
-    console.log("Niedergeschrieben award status:", this.storage.get('Niedergeschrieben'));
-    console.log("Gedankenpower award status:", this.storage.get('Gedankenpower'));
-    console.log("Selbstreflekteur/in award status:", this.storage.get('Selbstreflekteur/in'));
+    this.storage.get('Festgehalten').then((status => {
+      console.log("Festgehalten award status:", status);
+    }));
+
+    this.storage.get('Gedankenpower').then((status => {
+      console.log("Gedankenpower award status:", status)
+
+    }));
+
+    this.storage.get('Selbstreflekteur/in').then((status => {
+      console.log("Selbstreflekteur/in award status:", status);
+    }));
 
   }
 
