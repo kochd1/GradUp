@@ -109,6 +109,12 @@ private getPopupDialog(title: string, message: string): Alert {
     buttons: ['OK']
   });
 }*/
+
+    if (platform.exitApp) {
+      this.storage.set('isToggled', false);
+      this.storage.set('isConnectedToSensor', false);
+    }
+
   }
 
 }

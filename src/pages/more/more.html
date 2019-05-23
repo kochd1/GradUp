@@ -46,11 +46,11 @@
         <span class="highlight">Kontakte erfassen/anpassen</span>
       </button>
 
-      <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="!checkSensorConnection()">
+      <button ion-item (click)="gotoMoreBiovotionPage()" *ngIf="!checkSensorConnection()">
         <span class="highlight">Biovotion Everion Sensor verbinden</span>
       </button>
 
-      <button ion-item (click)="gotoProfileBiovotionPage()" *ngIf="checkSensorConnection()">
+      <button ion-item (click)="gotoMoreBiovotionPage()" *ngIf="checkSensorConnection()">
         <span class="highlight">Biovotion Everion Sensor trennen</span>
       </button>
 

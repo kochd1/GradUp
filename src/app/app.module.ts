@@ -48,7 +48,7 @@ import { SupportCopingStrategiesPage } from '../pages/support-coping-strategies/
 import { MorePage } from '../pages/more/more';
 import { MoreProfileAdaptionsPage } from '../pages/more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../pages/more-contacts-adaptions/more-contacts-adaptions';
-import { AdaptionsBiovotionPage } from '../pages/adaptions-biovotion/adaptions-biovotion';
+import { MoreBiovotionPage } from '../pages/more-biovotion/more-biovotion';
 import { MoreImpressumPage } from '../pages/more-impressum/more-impressum';
 import { MorePrivacyPage } from '../pages/more-privacy/more-privacy';
 import { MoreTermsPage } from '../pages/more-terms/more-terms';
@@ -128,7 +128,7 @@ import { AwardService } from '../services/awards.service';
     MorePage,
     MoreProfileAdaptionsPage,
     MoreContactsAdaptionsPage,
-    AdaptionsBiovotionPage,
+    MoreBiovotionPage,
     MoreAwardsPage,
     MoreImpressumPage,
     MorePrivacyPage,
@@ -189,7 +189,7 @@ import { AwardService } from '../services/awards.service';
     MorePage,
     MoreProfileAdaptionsPage,
     MoreContactsAdaptionsPage,
-    AdaptionsBiovotionPage,
+    MoreBiovotionPage,
     MoreAwardsPage,
     MoreImpressumPage,
     MorePrivacyPage,

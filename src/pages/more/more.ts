@@ -9,7 +9,7 @@ import { MorePrivacyPage } from '../more-privacy/more-privacy';
 import { MoreTermsPage } from '../more-terms/more-terms';
 import { MoreProfileAdaptionsPage } from '../more-profile-adaptions/more-profile-adaptions';
 import { MoreContactsAdaptionsPage } from '../more-contacts-adaptions/more-contacts-adaptions';
-import { AdaptionsBiovotionPage } from '../adaptions-biovotion/adaptions-biovotion';
+import { MoreBiovotionPage } from '../more-biovotion/more-biovotion';
 import { MoreAwardsPage } from '../more-awards/more-awards'
 import { JournalPage } from '../journal/journal';
 
@@ -51,7 +51,7 @@ export class MorePage {
 
     this.storage.get(this.key_sensor).then((value) => {
       this.isConnectedToSensor = value;
-      console.log('profile.ts ionViewWillEnter() -> isConnectedToSensor?:', value);
+      console.log('ionViewWillEnter() -> isConnectedToSensor?:', value);
     });
   }
 
@@ -77,8 +77,8 @@ export class MorePage {
     this.navCtrl.push(MoreContactsAdaptionsPage, {});
   }
 
-  public gotoProfileBiovotionPage() {
-    this.navCtrl.push(AdaptionsBiovotionPage, {});
+  public gotoMoreBiovotionPage() {
+    this.navCtrl.push(MoreBiovotionPage, {});
   }
 
   public gotoMoreAwardsPage() {

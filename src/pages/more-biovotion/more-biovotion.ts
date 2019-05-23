@@ -23,15 +23,16 @@ import { SkinTemperatureObs } from '../../resources/skinTemperature';
 
 
 /**
- * Generated class for the WelcomeConnectPage page.
+ * Generated class for the MoreBiovotionPage page.
+ *
  * @author kochd1
  */
 @IonicPage()
 @Component({
-  selector: 'page-adaptions-biovotion',
-  templateUrl: 'adaptions-biovotion.html',
+  selector: 'page-more-biovotion',
+  templateUrl: 'more-biovotion.html',
 })
-export class AdaptionsBiovotionPage {
+export class MoreBiovotionPage {
 
   /**
    * name of this sensor
@@ -117,12 +118,12 @@ export class AdaptionsBiovotionPage {
   ionViewWillEnter() {
     this.storage.get(this.key_toggle).then((value) => {
       this.isToggled = value;
-      console.log('ionViewWillEnter -> isToggled?:', value);
+      console.log('MoreBiovotionPage ionViewWillEnter -> isToggled?:', value);
     });
 
     this.storage.get(this.key_sensor).then((value) => {
       this.isConnectedToSensor = value;
-      console.log('ionViewWillEnter -> isConnectedToSensor?:', value);
+      console.log('MoreBiovotionPage ionViewWillEnter -> isConnectedToSensor?:', value);
     });
   }
 
@@ -166,8 +167,16 @@ export class AdaptionsBiovotionPage {
 
     let alert = this.alertCtrl.create({
       title: 'Verbindung mit Sensor',
-      subTitle: 'GradUp möchte eine Bluetooth-Verbindung zu Ihrem Biovotion Everion Sensor herstellen.',
+      subTitle: 'GradUp möchte eine Bluetooth-Verbindung zu deinem Biovotion Everion Sensor herstellen.',
       buttons: [
+        {
+          text: 'Abbrechen',
+          handler: () => {
+            console.log("askUserPermission() -> no permission");
+            this.isToggled = false;
+            this.gotoMorePage();
+          }
+        },
         {
           text: 'Erlauben',
           handler: () => {
@@ -178,13 +187,6 @@ export class AdaptionsBiovotionPage {
             {
               this.isToggled = false; //in trial
             }*/
-          }
-        },
-        {
-          text: 'Abbrechen',
-          handler: () => {
-            this.isToggled = false;
-            this.gotoAdaptionsPage();
           }
 
         }
@@ -202,6 +204,8 @@ export class AdaptionsBiovotionPage {
     console.log("connectSensor() called");
 
     //if(this.isPermitted){
+
+    let tempArr = [];
 
     this.biovotion.scan().subscribe((sensor: BiovotionSensor) => {
       this.sensor1 = sensor;
@@ -229,10 +233,9 @@ export class AdaptionsBiovotionPage {
           dataToRequest.push(SENSORDATATYPE.heartRate);
           dataToRequest.push(SENSORDATATYPE.steps);
           dataToRequest.push(SENSORDATATYPE.respirationRate);
-          //dataToRequest.push(SENSORDATATYPE //skinTemperature
-          dataToRequest.push(SENSORDATATYPE.cTemp);
-          dataToRequest.push(SENSORDATATYPE.localTemp);
-          dataToRequest.push(SENSORDATATYPE.objectTemp);
+          //dataToRequest.push(SENSORDATATYPE.cTemp);
+          //dataToRequest.push(SENSORDATATYPE.localTemp);
+          dataToRequest.push(SENSORDATATYPE.objectTemp); //skin temperature
           dataToRequest.push(SENSORDATATYPE.gsrElectrode);
           dataToRequest.push(SENSORDATATYPE.heartRateVariability);
           //dataToRequest.push(SENSORDATATYPE) //Inter-Beat-Interval
@@ -241,9 +244,11 @@ export class AdaptionsBiovotionPage {
           this.biovotion.readLiveData(dataToRequest)
             .subscribe((liveData: SensorDataEntry) => {
 
+              tempArr.push(liveData); //buffer data temporarily until next upload
+
               //heart rate
               console.log("heart rate (bpm):", liveData.heartRate.value);
-              var heartRate = Number(liveData.heartRate.value); //Midata -> only for first test
+              var heartRate = Number(liveData.heartRate.value);
 
               //heart rate variability
               console.log("heart rate variability (ms): ", liveData.heartRateVariability.value);
@@ -253,7 +258,7 @@ export class AdaptionsBiovotionPage {
 
               //steps
               console.log("steps/s: ", liveData.steps.value);
-              var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
+              var amountOfSteps = Number(liveData.steps.value);
 
               //respiration rate
               console.log("respiration rate:", liveData.respirationRate);
@@ -277,17 +282,23 @@ export class AdaptionsBiovotionPage {
               console.log("energy expenditure (quality): ", liveData.energy.quality);
               var energyExpenditure = Number(liveData.energy.value);
 
-              //this.saveHeartRateValueToMidata(heartRate); //works, do not save at the moment
-              //this.saveStepAmountToMidata(amountOfSteps); //works do not save at the moment
-              //this.saveRespirationRateToMIDATA(respirationRate); //works, do not save at the moment
-              //this.saveSkinTemperatureToMIDATA(skinTemperature); //works, do not save at the moment
-              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse); //works do not save at the moment
-              //this.saveHeartRateVariabilityValuesToMidata(heartRateVariability); //do not save at the moment
-              //this.saveEnergyExpenditureToMIDATA(energyExpenditure); //works, do not save at the moment
+
+              if (tempArr.length >= 30) {
+
+                console.log("tempArr: ", tempArr);
+                tempArr = []; //reset array
+
+              }
+
+              this.saveHeartRateValueToMIDATA(heartRate);
+              this.saveStepAmountToMIDATA(amountOfSteps);
+              this.saveRespirationRateToMIDATA(respirationRate);
+              this.saveSkinTemperatureToMIDATA(skinTemperature);
+              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse);
+              this.saveHeartRateVariabilityValuesToMIDATA(heartRateVariability);
+              this.saveEnergyExpenditureToMIDATA(energyExpenditure);
 
             });
-
-
 
           this.navCtrl.pop();//navigate back to MorePage -> fixes the goal mgmt presenting & loading error
         }).catch(error => {
@@ -339,7 +350,6 @@ export class AdaptionsBiovotionPage {
 
   measureData() {
     console.log("about to measure data...")
-
 
   }
 
@@ -412,11 +422,18 @@ export class AdaptionsBiovotionPage {
    *
    * @param heartRate
    */
-  saveHeartRateValueToMidata(heartRate: number) {
+  saveHeartRateValueToMIDATA(heartRate: number) {
     let MessageDate = new Date();
 
     //#MIDATA persistence
-    this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
+    this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString())).then((response) => {
+      // we can now access the midata response
+      console.log("HeartRateObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Heart rate -> error in save request:", error);
+    });
 
     this.calculateIBI(heartRate);
   }
@@ -430,30 +447,26 @@ export class AdaptionsBiovotionPage {
 
     let interBeatInterval = (60 / heartRate) * 1000; //*1000 -> ms
     console.log("calculateIBI() -> interBeatInterval [ms]", interBeatInterval);
-    this.saveInterBeatIntervalToMIDATA(Number(interBeatInterval.toFixed(4))); //must be overthinked for the potential clinical trial
+    this.saveInterBeatIntervalValuesToMIDATA(Number(interBeatInterval.toFixed(4))); //must be reconsidered for the potential clinical trial
   }
 
-  /**
-   * Saves the calculated inter-beat-interval values to MIDATA.
-   *
-   * @param interBeatInterval
-   */
-  saveInterBeatIntervalToMIDATA(interBeatInterval: number) {
-
-    console.log("saveInterBeatIntervalToMIDATA() -> interBeatInterval [ms] to fixed(4): ", interBeatInterval);
-    this.midataService.save(new InterBeatIntervalObs(interBeatInterval));
-
-  }
 
   /**
    * Saves the heart rate variability rate values to MIDATA.
    *
    * @param heartRateVariability
    */
-  saveHeartRateVariabilityValuesToMidata(heartRateVariability: number) {
+  saveHeartRateVariabilityValuesToMIDATA(heartRateVariability: number) {
 
     //#MIDATA persistence
-    this.midataService.save(new HeartRateVariabilityObs(heartRateVariability));
+    this.midataService.save(new HeartRateVariabilityObs(heartRateVariability)).then((response) => {
+      // we can now access the midata response
+      console.log("HeartRateVariabilityObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("HRV -> error in save request:", error);
+    });
   }
 
   /**
@@ -461,10 +474,17 @@ export class AdaptionsBiovotionPage {
    *
    * @param interBeatInterval
    */
-  saveInterBeatIntervalValuesToMidata(interBeatInterval: number) {
+  saveInterBeatIntervalValuesToMIDATA(interBeatInterval: number) {
 
     //#MIDATA persistence
-    this.midataService.save(new InterBeatIntervalObs(interBeatInterval));
+    this.midataService.save(new InterBeatIntervalObs(interBeatInterval)).then((response) => {
+      // we can now access the midata response
+      console.log("interbeat interval fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("IBI -> error in save request:", error);
+    });
   }
 
   /**
@@ -472,11 +492,18 @@ export class AdaptionsBiovotionPage {
    *
    * @param amountOfSteps
    */
-  saveStepAmountToMidata(amountOfSteps: number) {
+  saveStepAmountToMIDATA(amountOfSteps: number) {
     let MessageDate = new Date();
 
     //#MIDATA persistence
-    this.midataService.save(new StepsCount(amountOfSteps, MessageDate.toISOString()));
+    this.midataService.save(new StepsCount(amountOfSteps, MessageDate.toISOString())).then((response) => {
+
+      console.log("Amount of steps fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Amount of steps -> Error in save request:", error);
+    });
   }
 
   /**
@@ -495,7 +522,7 @@ export class AdaptionsBiovotionPage {
 
 
     }).catch((error) => {
-      console.error("Error in save request:", error);
+      console.error("respiration rate -> Error in save request:", error);
     });
 
     console.log("respiration rate: " + respirationRate);
@@ -517,7 +544,7 @@ export class AdaptionsBiovotionPage {
 
 
     }).catch((error) => {
-      console.error("Error in save request:", error);
+      console.error("skin temperature -> error in save request:", error);
     });
 
     console.log("skin temperature: " + skinTemperature);
@@ -537,10 +564,10 @@ export class AdaptionsBiovotionPage {
 
 
     }).catch((error) => {
-      console.error("Error in save request:", error);
+      console.error("GSR -> rrror in save request:", error);
     });
 
-    console.log("respiration rate: " + galvanicSkinResponse);
+    console.log("galvanic skin response: " + galvanicSkinResponse);
   }
 
   /**
@@ -557,12 +584,11 @@ export class AdaptionsBiovotionPage {
 
 
     }).catch((error) => {
-      console.error("Error in save request:", error);
+      console.error("Energy expenditure -> error in save request:", error);
     });
 
-    console.log("respiration rate: " + energyExpenditure);
+    console.log("energy expenditure: " + energyExpenditure);
   }
-
 
 
   /**
@@ -580,8 +606,6 @@ export class AdaptionsBiovotionPage {
     this.heartRateData.push({ date: date, value: measure });
 
   }
-
-
 
   /**
    * #MIDATA: adds all step measures to the array "stepData".
@@ -608,7 +632,6 @@ export class AdaptionsBiovotionPage {
       .then(response => {
         if (response.length > 0) {
 
-
           response.forEach((measure: Observation) => {
             //console.log(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
             this.addHeartRateMeasure(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
@@ -625,7 +648,6 @@ export class AdaptionsBiovotionPage {
       .then(response => {
         if (response.length > 0) {
 
-
           response.forEach((measure: Observation) => {
             //console.log(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
             this.addStepMeasure(measure.getProperty('valueQuantity')['value'], measure.getProperty('effectiveDateTime'));
@@ -640,13 +662,11 @@ export class AdaptionsBiovotionPage {
   }
 
 
-
-
   public gotoTabsPage() {
     this.navCtrl.push(TabsPage, {});
   }
 
-  public gotoAdaptionsPage() {
+  public gotoMorePage() {
     //this.navCtrl.push(AdaptionsPage, {});
     this.navCtrl.popToRoot();
   }
