@@ -71,7 +71,7 @@ export class OnboardingProfileCapturePage {
   weightGain: number;
 
   //Global variable for work Occupation
-  userType: number;
+  userType: string;
 
   items: any;
 
@@ -92,7 +92,7 @@ export class OnboardingProfileCapturePage {
     //Form validation
     this.formGroup = formBuilder.group({
       username: ['', Validators.required],
-      occupationM: ['', Validators.required],
+      occupationValidation: ['', Validators.required],
       currentWeight: ['', validateWeightInputFormat],
       weightGainValidation: ['', Validators.compose([validateWeightGainInputFormat, validateWeightGainRange])]
     });

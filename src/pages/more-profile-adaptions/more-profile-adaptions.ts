@@ -8,6 +8,10 @@ import { PopoverComponent } from '../../components/popover/popover';
 //Form Validation
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { MidataService } from '../../services/MidataService';
+
+import { MyResource } from '../../resources/occupation';
+
 /**
  * Generated class for the MoreProfileAdaptionsPage page.
  *
@@ -30,7 +34,7 @@ export class MoreProfileAdaptionsPage {
    */
 
   //Global variable for work Occupation
-  userType: number;
+  userType: string;
 
   items: any;
 
@@ -44,7 +48,7 @@ export class MoreProfileAdaptionsPage {
     private popoverCtrl: PopoverController,
     public navParams: NavParams,
     private storage: Storage,
-    //private midataService: MidataService,
+    private midataService: MidataService,
     formBuilder: FormBuilder
   ) {
 
@@ -58,7 +62,7 @@ export class MoreProfileAdaptionsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfileCustomisationPage');
+    console.log('ionViewDidLoad MoreProfileAdaptionsPage');
   }
 
   presentPopover(myEvent) {
@@ -97,6 +101,16 @@ export class MoreProfileAdaptionsPage {
       })
       return
     }
+
+    // #MIDATA persistance: add Occupation
+    let occupation = new MyResource(this.userType);
+    let saveOccupation = this.midataService.save(occupation)
+      .then((response) => {
+        console.log("occupation saved", response);
+      })
+      .catch((error) => {
+        console.error("Error in save request:", error);
+      });
 
     // TODO: move to separate service...
     let saveAll = [
