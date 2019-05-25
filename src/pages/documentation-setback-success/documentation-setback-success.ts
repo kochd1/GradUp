@@ -110,6 +110,9 @@ export class DocumentationSetbackSuccessPage {
     this.storage.get('setbackDocumentationEntryCollection').then((value => {
       if (value != null) {
         that.setbackDocumentationEntryCollection = value;
+        that.setbackDocumentationEntryCollection.sort(function (a, b) {
+          return b.entryId - a.entryId;
+        });
       }
 
       else {
@@ -123,6 +126,9 @@ export class DocumentationSetbackSuccessPage {
     this.storage.get('successDocumentationEntryCollection').then((value => {
       if (value != null) {
         that.successDocumentationEntryCollection = value;
+        that.successDocumentationEntryCollection.sort(function (a, b) {
+          return b.entryId - a.entryId;
+        });
       }
 
       else {
@@ -255,30 +261,40 @@ export class DocumentationSetbackSuccessPage {
 
     this.dEntryDbp.saveDocumentationEntry(this.setbackSuccessdocumentationEntry, this.isSetbackEntry);
 
-    if (this.aboutToEdit) {
-      if (this.isSetbackEntry) {
-        this.setbackDocumentationEntryCollection.splice(this.entryIndex, 1);
-      }
-
-      else {
-        this.successDocumentationEntryCollection.splice(this.entryIndex, 1);
-      }
-
-    }
-
     console.log("saveDocumentationEntry() -> this.isSetbackEntry: ", this.isSetbackEntry);
     console.log("saveDocumentationEntry() -> this.isSuccessEntry: ", this.isSuccessEntry);
 
-    if (this.isSetbackEntry) {
-      this.setbackDocumentationEntryCollection.push(this.setbackSuccessdocumentationEntry);
-      console.log("this.setbackDocumentationEntryCollection was pushed.");
-      this.awardService.checkAwardReceipt("Festgehalten");
+    if (this.aboutToEdit) {
+      if (this.isSetbackEntry) {
+        this.setbackDocumentationEntryCollection.splice(this.entryIndex, 1, this.setbackSuccessdocumentationEntry);
+        console.log("saveDocumentationEntry)( -> setBackEntry -> spliced array");
+        console.log("dEntyColl: ", this.setbackDocumentationEntryCollection);
+
+      }
+
+      else {
+        this.successDocumentationEntryCollection.splice(this.entryIndex, 1, this.setbackSuccessdocumentationEntry);
+        console.log("saveDocumentationEntry() successEntry -> spliced array");
+        console.log("dEntyColl: ", this.successDocumentationEntryCollection);
+
+      }
+
     }
 
     else {
-      this.successDocumentationEntryCollection.push(this.setbackSuccessdocumentationEntry);
-      console.log("this.successDocumentationEntryCollection was pushed.");
-      this.awardService.checkAwardReceipt("Festgehalten");
+
+      if (this.isSetbackEntry) {
+        this.setbackDocumentationEntryCollection.splice(0, 0, this.setbackSuccessdocumentationEntry);
+        console.log("this.setbackDocumentationEntryCollection was pushed.");
+        this.awardService.checkAwardReceipt("Festgehalten");
+      }
+
+      else {
+        this.successDocumentationEntryCollection.splice(0, 0, this.setbackSuccessdocumentationEntry);
+        console.log("this.successDocumentationEntryCollection was pushed.");
+        this.awardService.checkAwardReceipt("Festgehalten");
+      }
+
     }
 
 
