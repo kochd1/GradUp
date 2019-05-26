@@ -1,40 +1,59 @@
 <ion-header>
 
-    <ion-navbar>
-        <ion-title></ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title></ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding fullscreen>
-    <div class="centered">
-        <img alt="logo" src="assets/imgs/logo.png" class="welcome-image" />
-    </div>
+  <div class="centered">
+    <img alt="logo" src="assets/imgs/IconWelcomeScreen.png" class="welcome-image" />
+  </div>
 
-    <p></p>
-    <h3 ion-text color="primary">Weitere Informationen zu GradUp</h3>
-    <p></p>
-    <p>GradUp dient zur Motivation und Unterstützung von Anorexiebetroffenen, aber auch der Forschung. Deshalb ist eine
-        Anmeldung oder das Einloggen auf MIDATA erforderlich.</p>
-    <p></p>
-    <p>Beim Profilerfassen sind Gewicht, Mein Wochenfortschritt und Auswahl einer Tätigkeit Pflicht. Diese Angaben
-        werden anonymisiert auf MIDATA gespeichert und dienen Forschungs- und Motivationszwecken.</p>
-    <p></p>
-    <p>Das Verbinden von GradUp mit Biovotion Everion Sensor ist freiwillig. Mit der Erfassung von vorerst zwei
-        Parametern Puls und Schritte (Speicherung auf MIDATA) soll der Zusammenhang von Vitalparametern und
-        Veränderungen bei anorektischen Personen weiter erforscht werden können.</p>
-    <p></p>
-    <p>Im Tagebuch kann nebst Einträgen auch mittels Smilies die Stimmung erfasst werden. Dies wird ebenfalls zu
-        Forschungszwecken auf MIDATA gespeichert.</p>
-    <p></p>
-    <p>Die anderen Angaben werden lokal auf Ihrem Gerät gespeichert und fliessen nicht in die Forschung ein.</p>
+  <p></p>
+  <h3 ion-text color="primary">Weitere Informationen zu GradUp</h3>
+  <p></p>
+  <p>GradUp dient zur Motivation und Unterstützung von Anorexie-Patienten (Magersüchtige), aber auch der Forschung.
+    Deshalb ist das
+    Anmelden/Einloggen auf <span style="color:#488aff">MIDATA</span> erforderlich.</p>
+  <p></p>
+  <p>GradUp bietet folgende Funktionen:</p>
+  <ul style="list-style-type:circle; font-size: 17px">
+    <li><span style="color:#488aff"><b>Tagebuch: </b></span>Erfasse deine täglichen Erlebnisse</li>
+    <li><span style="color:#488aff"><b>Information & Dokumentation:</b></span> <br>
+      Info: Informiere dich mehr über die Krankheit und deren Behandlungsmöglichkeiten<br>
+      Doku: Befasse dich mit dir selbst resp. dokumentiere u. a. deine Ängste/Freuden, Rückschläge/Erfolge</li>
+    <li><span style="color:#488aff"><b>Ziele: </b></span>Erfasse/verwalte deine eigenen oder in deiner
+      Therapie definierten Ziele</li>
+    <li><span style="color:#488aff"><b>Unterstützung: </b></span>Lass dir helfen und/oder hilf dir selbst</li>
+    <li><span style="color:#488aff"><b>Mehr: </b></span> Hol dir die GradUp Auszeichnungen bei der Nutzung der App, nimm
+      Anpassungen vor etc.) </li>
+  </ul>
+
+  <p>Bei der Profilerfassung sind Angaben bezüglich Gewicht, persönlicher Wochenfortschritt und Auswahl einer Tätigkeit
+    Pflicht. Diese Angaben
+    werden anonymisiert auf MIDATA gespeichert und dienen Forschungs- und Motivationszwecken.</p>
+  <p></p>
+  <p>Das Verbinden von GradUp mit dem Biovotion Everion Sensor ist freiwillig. Mit der Erfassung von acht Messparametern
+    (Speicherung auf MIDATA) soll am Ende der Zusammenhang von den Messparametern und der Krankheit Anorexia Nervosa
+    (Magersucht) weiter erforscht werden können.</p>
+  <p></p>
+  <p>Im Tagebuch kann nebst Einträgen auch mittels Smileys die Stimmung inkl. Angabe des Grunds (beides optional)
+    erfasst werden. Dies wird ebenfalls zu
+    Forschungszwecken auf MIDATA gespeichert.</p>
+  <p></p>
+  <p>Die anderen Angaben werden lokal auf deinem Gerät gespeichert und fliessen nicht in die Forschung mit ein.</p>
 
 </ion-content>
 
 <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-        <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="goNext()">
-            MIDATA Anmeldung
-        </button>
-    </ion-toolbar>
+  <ion-toolbar position="bottom">
+    <button ion-button [color]="primary" [outline]="false" [round]="true" (click)="goNext()">
+      MIDATA Anmeldung
+    </button>
+    <!--><button ion-button [color]="primary" [outline]="false" [round]="true" (click)="gotoWelcomeCapturePage()">
+      Überspringen (Entwicklung)
+    </button>-->
+  </ion-toolbar>
 </ion-footer>

@@ -19,7 +19,7 @@ import { JournalPage } from '../pages/journal/journal';
 })
 export class MyApp {
 
-  rootPage = TabsPage; //: any // = TabsPage //= WelcomePage;
+  rootPage: any; //: any (default) // = TabsPage //= WelcomePage;
   loadingDisplay: Loading;
 
   constructor(
@@ -61,61 +61,61 @@ export class MyApp {
 
         }));
 
+        if (platform.exitApp) {
+          this.storage.set('isToggled', false);
+          this.storage.set('isConnectedToSensor', false);
+        }
+
         // this does not work in the browser.
         // only in cordova, this makes development quite tricky.
-        //return this.midataService.openSession()
+        return this.midataService.openSession();
       })
 
 
-    /*.then((result) => {
-      console.log("appComponent() : openSession success", result);
-      console.log("appComponent() : midata user", this.midataService.getUser());
-      this.rootPage = TabsPage;
-      this.gotoJournalPage();
+      .then((result) => {
+        console.log("appComponent() : openSession success", result);
+        console.log("appComponent() : midata user", this.midataService.getUser());
+        this.rootPage = TabsPage;
+        this.gotoJournalPage();
 
-    })
-    .catch((result) => {
-      console.log("appComponent() : openSession failed", result);
+      })
+      .catch((result) => {
+        console.log("appComponent() : openSession failed", result);
 
-      this.rootPage = WelcomePage;
+        this.rootPage = WelcomePage;
 
-      this.storage.get("username").then((username: any) => {
-        console.log("appComponent() : storage username:=", username);
-        if (username) {
-          // => So it would be correct, it is checked whether a user name is already set. If yes, it goes directly to the diary page. For demonstration purposes the start is at the welcome page.
-          // this.gotoJournalPage();
-        }
+        this.storage.get("username").then((username: any) => {
+          console.log("appComponent() : storage username:=", username);
+          if (username) {
+            // => So it would be correct, it is checked whether a user name is already set. If yes, it goes directly to the diary page. For demonstration purposes the start is at the welcome page.
+            // this.gotoJournalPage();
+          }
+        });
       });
-    });
-}
-
-private gotoJournalPage() {
-  console.log("app.component -> gotoJournalPage()");
-  this.app.getActiveNav().setRoot(TabsPage);
-}
-
-// Helper method. Provide a loading animation
-private getLoadingDisplay(): Loading {
-  return this.loadingDisplay = this.loadingCtrl.create({
-    content: "Bitte warten..."
-  })
-}
-
-// Helper method. Provide a popup dialog
-private getPopupDialog(title: string, message: string): Alert {
-  return this.alertCtrl.create({
-    title: title,
-    subTitle: message,
-    buttons: ['OK']
-  });
-}*/
-
-    if (platform.exitApp) {
-      this.storage.set('isToggled', false);
-      this.storage.set('isConnectedToSensor', false);
-    }
-
   }
+
+  private gotoJournalPage() {
+    console.log("app.component -> gotoJournalPage()");
+    this.app.getActiveNav().setRoot(TabsPage);
+  }
+
+  // Helper method. Provide a loading animation
+  private getLoadingDisplay(): Loading {
+    return this.loadingDisplay = this.loadingCtrl.create({
+      content: "Bitte warten..."
+    })
+  }
+
+  // Helper method. Provide a popup dialog
+  private getPopupDialog(title: string, message: string): Alert {
+    return this.alertCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons: ['OK']
+    });
+  }
+
+
 
 }
 

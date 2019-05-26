@@ -153,24 +153,17 @@ export class OnboardingBiovotionPage {
   askUserPermission() {
     let alert = this.alertCtrl.create({
       title: 'Verbindung mit Sensor',
-      subTitle: 'GradUp möchte eine Bluetooth-Verbindung zu Ihrem Biovotion Everion Sensor herstellen.',
+      subTitle: 'GradUp möchte eine Bluetooth-Verbindung zu deinem Biovotion Everion Sensor herstellen.',
       buttons: [
-        {
-          text: 'Erlauben',
-          handler: () => {
-            console.log("askUserPermission() -> permission ok");
-            this.isPermitted = true;
-            this.connectSensor();
-          }
-        },
         {
           text: 'Abbrechen',
           handler: () => {
+
             this.isToggled = false;
             let subAlert = this.alertCtrl.create({
               title: 'Verbindung mit Sensor',
-              subTitle: 'Sie sind nicht einverstanden damit, Ihren Biovotion Everion Sensor mit GradUp zu verbinden. <br>'
-                + 'Falls Sie dies zu einem späteren Zeitpunkt trotzdem möchten, können Sie dies in Ihrem Profil problemlos nachholen.',
+              subTitle: 'Du bist nicht einverstanden damit, deinen Biovotion Everion Sensor mit GradUp zu verbinden. <br>'
+                + 'Falls du dies zu einem späteren Zeitpunkt trotzdem möchtest, kannst du es unter dem Tab «Mehr» nachholen.',
               buttons: [
                 {
                   text: 'OK',
@@ -181,6 +174,15 @@ export class OnboardingBiovotionPage {
               ]
             });
             subAlert.present();
+          }
+        },
+        {
+          text: 'Erlauben',
+          handler: () => {
+            console.log("askUserPermission() -> permission ok");
+            this.isPermitted = true;
+            this.connectSensor();
+
           }
 
         }
@@ -238,7 +240,7 @@ export class OnboardingBiovotionPage {
 
 
           this.storage.set('DidOnboarding', true);
-          this.navCtrl.push(TabsPage, {});
+          //this.navCtrl.push(TabsPage, {}); -> Goal presentation error
         }).catch(error => {
           console.log("Connection Error: " + error);
           this.isToggled = false;  //in trial
@@ -256,7 +258,8 @@ export class OnboardingBiovotionPage {
       this.presentToast();
 
     });
-    //this.navCtrl.push(TabsPage, {});
+
+    this.gotoTabsPage(); //dirty load (workaround) -> load TabsPage before the sensor is connected
   }
 
   measureData() {
