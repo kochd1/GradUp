@@ -13,6 +13,14 @@ import * as Globals from '../../../typings/globals';
 //components
 import { PopoverComponent } from '../../components/popover/popover';
 
+//resources import
+import { RespirationRateObs } from '../../resources/respirationRate';
+import { GalvanicSkinResponseObs } from '../../resources/galvanicSkinResponse';
+import { HeartRateVariabilityObs } from '../../resources/heartRateVariability';
+import { InterBeatIntervalObs } from '../../resources/interBeatInterval';
+import { EnergyExpenditureObs } from '../../resources/energyExpenditure';
+import { SkinTemperatureObs } from '../../resources/skinTemperature';
+
 //TODO kochd1: daten mittels der .buffer() filtern und allenfalls zusätzlich filter bei der midata load() anpassen.
 
 
@@ -222,18 +230,61 @@ export class OnboardingBiovotionPage {
           let dataToRequest: SENSORDATATYPE[] = [];
           dataToRequest.push(SENSORDATATYPE.heartRate);
           dataToRequest.push(SENSORDATATYPE.steps);
+          dataToRequest.push(SENSORDATATYPE.respirationRate);
+          //dataToRequest.push(SENSORDATATYPE.cTemp);
+          //dataToRequest.push(SENSORDATATYPE.localTemp);
+          dataToRequest.push(SENSORDATATYPE.objectTemp); //skin temperature
+          dataToRequest.push(SENSORDATATYPE.gsrElectrode);
+          dataToRequest.push(SENSORDATATYPE.heartRateVariability);
+          //dataToRequest.push(SENSORDATATYPE) //Inter-Beat-Interval
+          dataToRequest.push(SENSORDATATYPE.energy);
 
           this.biovotion.readLiveData(dataToRequest)
             .subscribe((liveData: SensorDataEntry) => {
-              console.log(liveData.heartRate.value);
-              var heartRate = Number(liveData.heartRate.value); //Midata -> only for first test
 
+              //heart rate
+              console.log("heart rate (bpm):", liveData.heartRate.value);
+              var heartRate = Number(liveData.heartRate.value);
 
-              console.log(liveData.steps.value);
-              var amountOfSteps = Number(liveData.steps.value); //Midata -> only for first test
+              //heart rate variability
+              console.log("heart rate variability (ms): ", liveData.heartRateVariability.value);
+              console.log("heart rate variability quality: ", liveData.heartRateVariability.quality);
+              console.log("heart rate variability object: ", liveData.heartRateVariability);
+              var heartRateVariability = Number(liveData.heartRateVariability.value);
 
-              this.saveHeartRateValueToMidata(heartRate);
-              this.saveStepAmountToMidata(amountOfSteps);
+              //steps
+              console.log("steps/s: ", liveData.steps.value);
+              var amountOfSteps = Number(liveData.steps.value);
+
+              //respiration rate
+              console.log("respiration rate:", liveData.respirationRate);
+              console.log("respiration rate (tag):", liveData.respirationRate.tag);
+              console.log("respiration rate (value):", liveData.respirationRate.value);
+              console.log("respiration rate (quality)", liveData.respirationRate.quality);
+              var respirationRate = Number(liveData.respirationRate.value);
+
+              //skin temperature
+              console.log("objectTemp (skin temperature): ", liveData.objectTemp);
+              var skinTemperature = Number(liveData.objectTemp.value);
+
+              //galvanic skin response (also electrodermal activity)
+              console.log("galvanic skin response: ", liveData.gsrElectrode.value);
+              var galvanicSkinResponse = Number(liveData.gsrElectrode.value);
+
+              //energy expenditure
+              console.log("energy expenditure: ", liveData.energy);
+              console.log("energy expenditure (tag): ", liveData.energy.tag);
+              console.log("energy expenditure (kCal): ", liveData.energy.value);
+              console.log("energy expenditure (quality): ", liveData.energy.quality);
+              var energyExpenditure = Number(liveData.energy.value);
+
+              this.saveHeartRateValueToMIDATA(heartRate);
+              this.saveStepAmountToMIDATA(amountOfSteps);
+              this.saveRespirationRateToMIDATA(respirationRate);
+              this.saveSkinTemperatureToMIDATA(skinTemperature);
+              this.saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse);
+              this.saveHeartRateVariabilityValuesToMIDATA(heartRateVariability);
+              this.saveEnergyExpenditureToMIDATA(energyExpenditure);
 
 
             });
@@ -325,30 +376,177 @@ export class OnboardingBiovotionPage {
   }
 
   /**
-   * save a new heart rate value to Midata.
+   * save a new heart rate value to MIDATA.
    *
    * @param heartRate
    */
-  saveHeartRateValueToMidata(heartRate: number) { //any -> provisoric
+  saveHeartRateValueToMIDATA(heartRate: number) {
     let MessageDate = new Date();
 
-    //#MIDATA persistance
-    this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString()));
+    //#MIDATA persistence
+    this.midataService.save(new HeartRate(heartRate, MessageDate.toISOString())).then((response) => {
+      // we can now access the midata response
+      console.log("HeartRateObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Heart rate -> error in save request:", error);
+    });
+
+    this.calculateIBI(heartRate);
   }
 
   /**
-   * save a new amount of steps to Midata.
+   * Caluclates the inter-beat-interval based on the measured heart beat (plugin does not support the direct reading from the sensor)
    *
-   * @param amountOfSteps
+   * @param heartRate
    */
-  saveStepAmountToMidata(amountOfSteps: number) {
-    let MessageDate = new Date();
+  calculateIBI(heartRate: number) {
 
-    //#MIDATA persistance
-    this.midataService.save(new StepsCount(amountOfSteps, MessageDate.toISOString()));
+    let interBeatInterval = (60 / heartRate) * 1000; //*1000 -> ms
+    console.log("calculateIBI() -> interBeatInterval [ms]", interBeatInterval);
+    this.saveInterBeatIntervalValuesToMIDATA(Number(interBeatInterval.toFixed(4))); //must be reconsidered for the potential clinical trial
   }
 
 
+  /**
+   * Saves the heart rate variability rate values to MIDATA.
+   *
+   * @param heartRateVariability
+   */
+  saveHeartRateVariabilityValuesToMIDATA(heartRateVariability: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new HeartRateVariabilityObs(heartRateVariability)).then((response) => {
+      // we can now access the midata response
+      console.log("HeartRateVariabilityObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("HRV -> error in save request:", error);
+    });
+  }
+
+  /**
+   * Saves the inter-beat-interval values to MIDATA.
+   *
+   * @param interBeatInterval
+   */
+  saveInterBeatIntervalValuesToMIDATA(interBeatInterval: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new InterBeatIntervalObs(interBeatInterval)).then((response) => {
+      // we can now access the midata response
+      console.log("interbeat interval fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("IBI -> error in save request:", error);
+    });
+  }
+
+  /**
+   * save a new amount of steps to MIDATA.
+   *
+   * @param amountOfSteps
+   */
+  saveStepAmountToMIDATA(amountOfSteps: number) {
+    let MessageDate = new Date();
+
+    //#MIDATA persistence
+    this.midataService.save(new StepsCount(amountOfSteps, MessageDate.toISOString())).then((response) => {
+
+      console.log("Amount of steps fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Amount of steps -> Error in save request:", error);
+    });
+  }
+
+  /**
+   * save the respiraton rates to MIDATA.
+   *
+   * @param respirationRate
+   */
+  saveRespirationRateToMIDATA(respirationRate: number) {
+
+    //let MessageDate = new Date();
+
+    //#MIDATA persistence
+    this.midataService.save(new RespirationRateObs(respirationRate)).then((response) => {
+      // we can now access the midata response
+      console.log("RespirationRateObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("respiration rate -> Error in save request:", error);
+    });
+
+    console.log("respiration rate: " + respirationRate);
+  }
+
+  /**
+   * saves the skin temperature values to MIDATA.
+   *
+   * @param skinTemperature
+   */
+  saveSkinTemperatureToMIDATA(skinTemperature: number) {
+
+    //let MessageDate = new Date();
+
+    //#MIDATA persistence
+    this.midataService.save(new SkinTemperatureObs(skinTemperature)).then((response) => {
+      // we can now access the midata response
+      console.log("SkinTemperatureObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("skin temperature -> error in save request:", error);
+    });
+
+    console.log("skin temperature: " + skinTemperature);
+  }
+
+  /**
+   * Saves the galvanicSkinResponses to MIDATA.
+   *
+   * @param galvanicSkinResponse
+   */
+  saveGalvanicSkinResponseToMIDATA(galvanicSkinResponse: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new GalvanicSkinResponseObs(galvanicSkinResponse)).then((response) => {
+      // we can now access the midata response
+      console.log("GalvanicSkinResponseObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("GSR -> rrror in save request:", error);
+    });
+
+    console.log("galvanic skin response: " + galvanicSkinResponse);
+  }
+
+  /**
+   * Saves the energy expenditure values to MIDATA.
+   *
+   * @param energyExpenditure
+   */
+  saveEnergyExpenditureToMIDATA(energyExpenditure: number) {
+
+    //#MIDATA persistence
+    this.midataService.save(new EnergyExpenditureObs(energyExpenditure)).then((response) => {
+      // we can now access the midata response
+      console.log("EnergyExpenditureObs fired on MIDATA");
+
+
+    }).catch((error) => {
+      console.error("Energy expenditure -> error in save request:", error);
+    });
+
+    console.log("energy expenditure: " + energyExpenditure);
+  }
 
   /**
    * #MIDATA: adds all heart rate measures to the array "heartRateData".
@@ -365,8 +563,6 @@ export class OnboardingBiovotionPage {
     this.heartRateData.push({ date: date, value: measure });
 
   }
-
-
 
   /**
    * #MIDATA: adds all step measures to the array "stepData".

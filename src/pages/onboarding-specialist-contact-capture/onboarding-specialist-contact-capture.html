@@ -27,15 +27,15 @@
       <ion-input [(ngModel)]="fachperson_telefonnummer" formControlName="telefonnummer" type="tel">
       </ion-input>
     </ion-item>
-    <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte korrekte Telefon
-      Nummer eingeben.</p>
+    <p *ngIf="isSubmitted && !formGroup.controls.telefonnummer.valid" class="error-message">Bitte Telefonnummer korrekt
+      eingeben (z. B. 079 999 99 99).</p>
 
     <p>E-Mail-Adresse:</p>
     <ion-item id="e-mail">
       <ion-input [(ngModel)]="fachperson_email" formControlName="email" type="email">
       </ion-input>
     </ion-item>
-    <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte korrekte E-Mail-Adresse
+    <p *ngIf="isSubmitted && !formGroup.controls.email.valid" class="error-message">Bitte E-Mail-Adresse korrekt
       eingeben.</p>
 
     <p>E-Mail-Text:</p>

@@ -18,19 +18,19 @@
 
     <p>Benutzername:</p>
     <ion-item id="textfield">
-      <ion-input [(ngModel)]="inputtext" formControlName="username" type="text" value=""></ion-input>
+      <ion-input [(ngModel)]="username" formControlName="usernameValidation" type="text" value=""></ion-input>
     </ion-item>
     <p class="information-text">
       Gebe einen Benutzernamen ein, mit dem du in Zukunft durch GradUp angesprochen werden möchtest.
     </p>
-    <p *ngIf="isSubmitted && !formGroup.controls.username.valid" class="error-message">
+    <p *ngIf="isSubmitted && !formGroup.controls.usernameValidation.valid" class="error-message">
       Bitte einen Benutzernamen eingeben.
     </p>
 
     <p>Tätigkeit:</p>
     <ion-item id="select-popover">
       <ion-label> </ion-label>
-      <ion-select interface="popover" [(ngModel)]="userType" formControlName="occupationValidation">
+      <ion-select interface="popover" [(ngModel)]="workOccupation" formControlName="occupationValidation">
         <ion-option value="Sitzende Tätigkeit">Sitzende Tätigkeit</ion-option>
         <ion-option value="Handwerkliche Tätigkeit">Handwerkliche Tätigkeit</ion-option>
         <ion-option value="Student/in">Student/-in</ion-option>
@@ -42,18 +42,18 @@
     <p class="information-text">
       Wähle einen Tätigkeitsbereich, der am besten auf dich zutrifft.
     </p>
-    <p *ngIf="isSubmitted && !formGroup.controls.occupationM.valid" class="error-message">
+    <p *ngIf="isSubmitted && !formGroup.controls.occupationValidation.valid" class="error-message">
       Bitte wähle einen Tätigkeitsbereich.
     </p>
 
     <!--current weight-->
     <p>Aktuelles Gewicht:</p>
     <ion-item id="textfield">
-      <ion-input [(ngModel)]="currentWeight" formControlName="currentWeight" type="number" value="">
+      <ion-input [(ngModel)]="currentWeight" formControlName="currentWeightValidation" type="number" value="">
       </ion-input>
       <ion-label color="primary" class="fixedLabel" fixed>kg</ion-label>
     </ion-item>
-    <p *ngIf="isSubmitted && !formGroup.controls.currentWeight.valid" class="error-message">
+    <p *ngIf="isSubmitted && !formGroup.controls.currentWeightValidation.valid" class="error-message">
       Bitte das aktuelle Gewicht korrekt eingeben (Anzahl Kilogramm mit Angabe Kommastelle).
     </p>
 

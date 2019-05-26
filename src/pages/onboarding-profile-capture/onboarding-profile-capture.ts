@@ -35,11 +35,22 @@ import { MyResource } from '../../resources/occupation';
 })
 export class OnboardingProfileCapturePage {
 
-  //Local storage for username
-  inputtext: string;
+  /**
+   * stores the username
+   */
+  username: string;
+
+  /**
+   * key user name for storage
+   */
   key: string = "username";
 
-  relationship_status: string;
+  /**
+   * stores the work occupation
+   */
+  workOccupation: string;
+
+  /*relationship_status: string;
   key1: string = "relationship_status";
 
   hobbies_status: string;
@@ -55,7 +66,7 @@ export class OnboardingProfileCapturePage {
   key5: string = "residential_input";
 
   residential_status: string;
-  key6: string = "residential_status";
+  key6: string = "residential_status";*/
 
 
   /**
@@ -69,9 +80,6 @@ export class OnboardingProfileCapturePage {
 
   //Global variable for goal weight
   weightGain: number;
-
-  //Global variable for work Occupation
-  userType: string;
 
   items: any;
 
@@ -91,9 +99,9 @@ export class OnboardingProfileCapturePage {
 
     //Form validation
     this.formGroup = formBuilder.group({
-      username: ['', Validators.required],
+      usernameValidation: ['', Validators.required],
       occupationValidation: ['', Validators.required],
-      currentWeight: ['', validateWeightInputFormat],
+      currentWeightValidation: ['', validateWeightInputFormat],
       weightGainValidation: ['', Validators.compose([validateWeightGainInputFormat, validateWeightGainRange])]
     });
   }
@@ -118,14 +126,14 @@ export class OnboardingProfileCapturePage {
     }
 
     let MessageDate = new Date();
-    this.storage.set(this.key, this.inputtext);
-    this.storage.set(this.key1, this.relationship_status);
-    this.storage.set('userType', this.userType);
-    this.storage.set(this.key2, this.hobbies_status);
-    this.storage.set(this.key3, this.pet_input);
-    this.storage.set(this.key4, this.pet_status);
-    this.storage.set(this.key5, this.residential_input);
-    this.storage.set(this.key6, this.residential_status);
+    this.storage.set(this.key, this.username);
+    //this.storage.set(this.key1, this.relationship_status);
+    this.storage.set('workOccupation', this.workOccupation);
+    //this.storage.set(this.key2, this.hobbies_status);
+    //this.storage.set(this.key3, this.pet_input);
+    //this.storage.set(this.key4, this.pet_status);
+    //this.storage.set(this.key5, this.residential_input);
+    //this.storage.set(this.key6, this.residential_status);
 
     // #MIDATA persistance: add Weight
     var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
@@ -141,7 +149,7 @@ export class OnboardingProfileCapturePage {
       });
 
     // #MIDATA persistance: add Occupation
-    let occupation = new MyResource(this.userType);
+    let occupation = new MyResource(this.workOccupation);
     let saveOccupation = this.midataService.save(occupation)
       .then((response) => {
         console.log("occupation saved", response);
