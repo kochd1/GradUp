@@ -22,23 +22,27 @@ export class NotificationService {
     var observable = this.localNotifications.on('click');
     observable.subscribe(
       notification => {
-        if (notification.data == 'TEST') {
-          //alert('Is test notification.');
-          this.appCtrl.getActiveNav().setRoot(WeightReminderNotificationPage);
-        }
-        if (notification.data == 'ENTER_WEIGHT') {
-          //alert('Todo redirect to enter weight page.');
-          this.appCtrl.getActiveNav().push(WeightReminderNotificationPage);
-        }
-
         if (notification.data == 'ENTER_MOOD') {
           //alert('Todo redirect to mood enter page.');
           this.appCtrl.getActiveNav().push(StateOfMindPage); //local-notification arrives, does open the page but page has refresh errors.
-          //this.appCtrl.getActiveNav().setRoot(StateOfMindPage); //push-notification arrives, does open the page but page is corrupt
+          //this.appCtrl.getActiveNav().setRoot(StateOfMindPage); //local-notification arrives, does open the page but page is corrupt
           //this.navCtrl.push(StateOfMindPage) //doesn't work, journal page can't be loaded
           //this.viewCtrl.dismiss(); //new -> doesn't work
           //this.app.getRootNav().push(StateOfMindPage); //push-notification doesn't arrive.
 
+          notification.data = "ENTER_WEIGHT";
+
+        }
+        else if (notification.data == 'ENTER_WEIGHT') {
+          //alert('Todo redirect to enter weight page.');
+          this.appCtrl.getActiveNav().push(WeightReminderNotificationPage);
+
+          notification.data = "ENTER_MOOD";
+        }
+        //'TEST'
+        else {
+          //alert('Is test notification.');
+          this.appCtrl.getActiveNav().setRoot(WeightReminderNotificationPage);
         }
       },
       (error) => {
@@ -82,7 +86,7 @@ export class NotificationService {
     console.log("time: ", time);
 
     let notification: any = {
-      text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Klicke auf diese Push-Nachricht, um deinen Gemütszustand rückblickend auf den Tag anzugeben.',
+      text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Klicke auf diese Benachrichtigung, um deinen Gemütszustand rückblickend auf den Tag anzugeben.',
       trigger: {
         firstAt: new Date(time),
         every: {
@@ -118,9 +122,9 @@ export class NotificationService {
     console.log("time: ", time);
 
     this.schedule({
-      text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Tippe auf diese Nachricht, um GradUp zu öffnen und deinen Gemütszustand rückblickend auf den Tag anzugeben.',
+      text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Tippe auf diese Benachrichtigung, um GradUp zu öffnen und deinen Gemütszustand rückblickend auf den Tag anzugeben.',
       trigger: {
-        at: new Date(time),
+        firstAt: new Date(time),
 
         /*every: {
           minute: 1
@@ -154,7 +158,7 @@ export class NotificationService {
     };*/
 
     this.schedule({
-      text: `Hallo {{UserName}}, es sind schon wieder 7 Tage vergangen. Tippe auf diese Nachricht, um dein aktuelles Gewicht und deinen neuen Wochenfortschritt einzugeben.`,
+      text: `Hallo {{UserName}}, es sind schon wieder 7 Tage vergangen. Tippe auf diese Benachrichtigung, um dein aktuelles Gewicht und deinen neuen Wochenfortschritt einzugeben.`,
       trigger: trigger,
       data: 'ENTER_WEIGHT'
     });

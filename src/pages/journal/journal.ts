@@ -72,7 +72,11 @@ export class JournalPage {
   public scheduleNotification() {
     //this.notificationService.createTestNotification();
     this.notificationService.createDailyMoodDeclerationNotification();
-    this.notificationService.createWeeklyWeightNotification();
+
+    if (new Date().getHours() < 20) { //workaround, not safe
+      this.notificationService.createWeeklyWeightNotification();
+    }
+
     //this.pulseStepsService.schedule();
   }
 }
