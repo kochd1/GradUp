@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, PopoverController, ToastController } from 'ionic-angular';
 
 //modules
 import { CallNumber } from '@ionic-native/call-number';
@@ -45,7 +45,8 @@ export class SupportPage {
     private emailComposer: EmailComposer,
     private storage: Storage,
     private alertCtrl: AlertController,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    private toastCtrl: ToastController
   ) {
 
   }
@@ -65,6 +66,9 @@ export class SupportPage {
     });
   }
 
+  /**
+   * calls the reference person via Android call function.
+   */
   callBezugsperson(): void {
 
     this.storage.get("bezugsperson_telefonnummer").then(value => {
@@ -80,6 +84,9 @@ export class SupportPage {
     });
   }
 
+  /**
+   * Shows alert if there's no phone number.
+   */
   showNoPhoneNumberAlert() {
 
     let alert = this.alertCtrl.create({
@@ -105,15 +112,27 @@ export class SupportPage {
     alert.present();
   }
 
+  /**
+   * sends a SMS via Android message function.
+   */
   writeSMS(): void {
     this.storage.get("bezugsperson_smstext").then(text => {
       this.storage.get("bezugsperson_telefonnummer").then(telNr => {
         console.log('writeSMS() : text:=', text, ', telNr:=', telNr);
 
-        if (!text) {
+        let toastMessage: string = "";
+        let toastDuration: number;
+
+        if (!telNr) {
+          this.showNoPhoneNumberAlert();
+          return;
+        }
+
+        else if (!text) {
           this.showNoSMSTextAlert();
           return;
         }
+
 
         var options = {
           replaceLineBreaks: false, // true to replace \n by a new line, false by default
@@ -128,14 +147,45 @@ export class SupportPage {
         this.sms.send(telNr, text, options)
           .then(() => {
             console.log('sms sent successfully');
+            toastMessage = "SMS erfolreich gesendet";
+            toastDuration = 3000;
+            let toast = this.toastCtrl.create({
+              message: toastMessage,
+              duration: toastDuration,
+              position: 'bottom',
+              cssClass: 'toast' //not working at the moment
+            });
+
+            toast.onDidDismiss(() => {
+              console.log('Dismissed toast');
+            })
+
+            toast.present();
           })
           .catch((error) => {
             console.error(error);
+            toastMessage = "SMS konnte nicht gesendet werden. Versuche es erneut und prüfe allenfalls die Netzverbindung.";
+            toastDuration = 5000;
+            let toast = this.toastCtrl.create({
+              message: toastMessage,
+              duration: toastDuration,
+              position: 'bottom',
+              cssClass: 'toast' //not working at the moment
+            });
+
+            toast.onDidDismiss(() => {
+              console.log('Dismissed toast');
+            })
+
+            toast.present();
           });
       });
     });
   }
 
+  /**
+   * Shows a alert if there's no SMS text.
+   */
   showNoSMSTextAlert() {
     let alert = this.alertCtrl.create({
       title: "Du hast keinen SMS-Text vorerfasst.",
@@ -159,6 +209,9 @@ export class SupportPage {
     alert.present();
   }
 
+  /**
+   * opens eMail program and prepares draft
+   */
   eMailBezugsperson(): void {
     this.storage.get("bezugsperson_email").then(mail => {
       this.storage.get("bezugsperson_emailtext").then(text => {
@@ -194,6 +247,9 @@ export class SupportPage {
     });
   }
 
+  /**
+   * Shows alert if there's no mail address.
+   */
   showNoMailAddressAlert() {
     let alert = this.alertCtrl.create({
       title: "Du hast keine E-Mail-Adresse hinterlegt.",
@@ -217,6 +273,9 @@ export class SupportPage {
     alert.present();
   }
 
+  /**
+   * shows alert if there's no mail text.
+   */
   showNoMailTextAlert() {
     let alert = this.alertCtrl.create({
       title: "Du hast keinen Mail-Text vorerfasst.",
@@ -240,6 +299,9 @@ export class SupportPage {
     alert.present();
   }
 
+  /**
+   * calls the specialist via Android call function.
+   */
   callFachperson(): void {
     this.storage.get("fachperson_telefonnummer").then(value => {
       console.log('callFachperson() : value:=', value);
@@ -252,6 +314,9 @@ export class SupportPage {
     });
   }
 
+  /**
+   * opens eMail application to send one to the specialist.
+   */
   eMailFachperson(): void {
     this.storage.get("fachperson_email").then(mail => {
       this.storage.get("fachperson_emailtext").then(text => {
