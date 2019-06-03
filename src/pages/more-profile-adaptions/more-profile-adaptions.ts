@@ -86,7 +86,7 @@ export class MoreProfileAdaptionsPage {
       that.inputtext = value;
     });
 
-    this.storage.get('userType').then((value) => {
+    this.storage.get('workOccupation').then((value) => {
       that.userType = value;
     });
   }

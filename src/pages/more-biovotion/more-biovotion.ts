@@ -399,7 +399,7 @@ export class MoreBiovotionPage {
 
     else {
       console.log("else");
-      toastMessage = "Sensor konnte nicht verbunden werden. Prüfen Sie u. a., ob bei Ihrem Gerät Bluetooth und/oder GPS aktiviert ist sowie ob der Sensor eingeschaltet ist.";
+      toastMessage = "Sensor konnte nicht verbunden werden. Prüfe u. a., ob bei deinem Smartphone Bluetooth und/oder GPS aktiviert ist sowie ob der Sensor eingeschaltet ist.";
       toastDuration = 5000;
     }
 
