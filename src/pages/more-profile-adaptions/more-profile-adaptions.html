@@ -26,7 +26,7 @@
     </p>
 
     <ion-item id="select-popover">
-      <ion-label stacked>Ihr Tätigkeitsbereich:</ion-label>
+      <ion-label stacked>Tätigkeitsbereich:</ion-label>
 
       <ion-select interface="popover" [(ngModel)]="userType" formControlName="occupationValidation">
         <ion-option value="Sitzende Tätigkeit">Sitzende Tätigkeit</ion-option>
@@ -37,7 +37,7 @@
       </ion-select>
     </ion-item>
     <p *ngIf="isSubmitted && !formGroup.controls.occupationValidation.valid" class="error-message">
-      Bitte wählen Sie einen Tätigkeitsbereich.
+      Bitte wähle deinen Tätigkeitsbereich.
     </p>
 
   </form>
