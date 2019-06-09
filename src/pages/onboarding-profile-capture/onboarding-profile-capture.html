@@ -21,7 +21,7 @@
       <ion-input [(ngModel)]="username" formControlName="usernameValidation" type="text" value=""></ion-input>
     </ion-item>
     <p class="information-text">
-      Gebe einen Benutzernamen ein, mit dem du in Zukunft durch GradUp angesprochen werden möchtest.
+      Gib einen Benutzernamen ein, mit dem du in Zukunft durch GradUp angesprochen werden möchtest.
     </p>
     <p *ngIf="isSubmitted && !formGroup.controls.usernameValidation.valid" class="error-message">
       Bitte einen Benutzernamen eingeben.
