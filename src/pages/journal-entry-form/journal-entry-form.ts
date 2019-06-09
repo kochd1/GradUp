@@ -247,16 +247,18 @@ export class JournalEntryFormPage {
           subTitle: 'Eintrag/Änderungen verwerfen?',
           buttons: [
             {
-              text: 'Ja',
+              text: 'Nein',
               handler: () => {
-                alert.dismiss().then(() => {
-                  this.exitPage();
-                })
+                console.log("discarded changes");
               }
             },
             {
-              text: 'Nein',
+              text: 'Ja',
               handler: () => {
+
+                alert.dismiss().then(() => {
+                  this.exitPage();
+                })
               }
             }
           ]

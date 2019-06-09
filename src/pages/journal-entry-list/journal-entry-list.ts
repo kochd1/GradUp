@@ -132,12 +132,22 @@ export class JournalEntryListPage {
 
     let alert = this.alertCtrl.create({
       title: "Achtung!",
-      subTitle: "Wollen Sie diesen Eintrag wirklich löschen?",
+      subTitle: "Willst du diesen Eintrag wirklich löschen?",
       buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'abbrechen',
+          handler: () => {
+
+            console.log('Cancel clicked');
+          }
+        },
+
         {
           text: 'Ja',
           role: 'ja',
           handler: () => {
+
             this.dbp.deleteJournalEntryById(jEntryId).then(val => {
               if (val) {
                 this.dbp.getJournalEntryCollection().then(valArray => {
@@ -147,14 +157,6 @@ export class JournalEntryListPage {
                 this.gotoJournalPage();
               }
             })
-          }
-        },
-
-        {
-          text: 'Abbrechen',
-          role: 'abbrechen',
-          handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]

@@ -147,7 +147,7 @@ export class SupportPage {
         this.sms.send(telNr, text, options)
           .then(() => {
             console.log('sms sent successfully');
-            toastMessage = "SMS erfolreich gesendet";
+            toastMessage = "SMS erfolgreich gesendet";
             toastDuration = 3000;
             let toast = this.toastCtrl.create({
               message: toastMessage,
