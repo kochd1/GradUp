@@ -42,7 +42,7 @@ export class NotificationService {
         //'TEST'
         else {
           //alert('Is test notification.');
-          this.appCtrl.getActiveNav().setRoot(WeightReminderNotificationPage);
+          this.appCtrl.getActiveNav().push(WeightReminderNotificationPage);
         }
       },
       (error) => {
@@ -80,13 +80,15 @@ export class NotificationService {
   }
 
   public createTestNotification() { //does not work!
+    console.log("createTestNotification() called");
+
     let time = new Date();
-    time.setHours(15, 40, 0, 0); //works only one time
+    time.setHours(13, 45, 0, 0); //works only one time
 
     console.log("time: ", time);
 
     let notification: any = {
-      text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Klicke auf diese Benachrichtigung, um deinen Gemütszustand rückblickend auf den Tag anzugeben.',
+      text: 'GradUp Testbenachrichtigung',
       trigger: {
         firstAt: new Date(time),
         every: {
@@ -105,15 +107,17 @@ export class NotificationService {
 
     console.log("notification: ", notification);
     this.schedule(notification);
+    console.log("createTestNotification: ", this.schedule);
     console.log("scheduled or not: ", this.localNotifications.isScheduled);
+
   }
-
-
 
   /**
    * The user receives daily a push-notification, in which the user can declerate his current mood plus the reason for it.
    */
   public createDailyMoodDeclerationNotification() {
+    console.log("createDailyMoodDelecationNotification() called");
+
     // First notification at 8pm, repeating daily
 
     let time = new Date();
@@ -125,11 +129,15 @@ export class NotificationService {
       text: 'Hallo {{UserName}}, wie fühlst du dich nach diesem Tag? Tippe auf diese Benachrichtigung, um GradUp zu öffnen und deinen Gemütszustand rückblickend auf den Tag anzugeben.',
       trigger: {
         firstAt: new Date(time),
+        every: ELocalNotificationTriggerUnit.DAY,
+        count: 365
+        //at: time //dito
 
         /*every: {
-          minute: 1
-        },
-        count: 1*/
+          hour: time.getHours(),
+          minute: time.getMinutes(),
+        },*/
+        //count: 1
         //every: ELocalNotificationTriggerUnit.SECOND,
         //count: 10
       }, //{ at: new Date(new Date().getTime() + 3600) },
@@ -139,6 +147,9 @@ export class NotificationService {
       data: 'ENTER_MOOD'
 
     });
+
+    console.log("createDailyMoodNotification: ", this.schedule);
+    console.log("createDailyMoodNotification() -> isScheduled: ", this.localNotifications.isScheduled);
   }
 
   /**
@@ -146,22 +157,27 @@ export class NotificationService {
    * and also new weight gain for the following week.
    */
   public createWeeklyWeightNotification() {
+    console.log("createDailyMoodDelecationNotification() called");
+
     // First notification in 7 days, repeating each week
     let trigger: ILocalNotificationTrigger = {
-      every: ELocalNotificationTriggerUnit.WEEK
+      every: ELocalNotificationTriggerUnit.WEEK,
+      count: 52
     };
 
     // for testing reduced interval to 45 seconds
-    /*trigger = {
-      every: ELocalNotificationTriggerUnit.SECOND,
-      count: 45
-    };*/
+    //trigger = {
+    //every: ELocalNotificationTriggerUnit.SECOND,
+    //count: 45
+    //};
 
     this.schedule({
       text: `Hallo {{UserName}}, es sind schon wieder 7 Tage vergangen. Tippe auf diese Benachrichtigung, um dein aktuelles Gewicht und deinen neuen Wochenfortschritt einzugeben.`,
       trigger: trigger,
       data: 'ENTER_WEIGHT'
     });
+
+    console.log("createWeeklyWeightNotification: ", this.schedule);
   }
 
   showNegativeHeartRate() {

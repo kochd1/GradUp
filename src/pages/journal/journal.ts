@@ -73,8 +73,9 @@ export class JournalPage {
     //this.notificationService.createTestNotification();
     this.notificationService.createDailyMoodDeclerationNotification();
 
-    if (new Date().getHours() < 20) { //workaround, not safe
+    if (new Date().getHours() < 20) { //workaround, no good solution
       this.notificationService.createWeeklyWeightNotification();
+      console.log("goto createWeeklyWeightNotification()");
     }
 
     //this.pulseStepsService.schedule();

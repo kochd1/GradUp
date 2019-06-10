@@ -41,14 +41,26 @@ export class OnboardingProfileCapturePage {
   username: string;
 
   /**
-   * key user name for storage
+   * storage key user name
    */
-  key: string = "username";
+  usernameKey: string = "username";
+
+  /**
+   * storage key weight
+   */
+  currentWeightKey: string = "currentWeight";
+
+  /**
+   * storage key weight gain
+   */
+  weightGainKey: string = "weightGain";
 
   /**
    * stores the work occupation
    */
   workOccupation: string;
+
+
 
   /*relationship_status: string;
   key1: string = "relationship_status";
@@ -126,7 +138,7 @@ export class OnboardingProfileCapturePage {
     }
 
     let MessageDate = new Date();
-    this.storage.set(this.key, this.username);
+    this.storage.set(this.usernameKey, this.username);
     //this.storage.set(this.key1, this.relationship_status);
     this.storage.set('workOccupation', this.workOccupation);
     //this.storage.set(this.key2, this.hobbies_status);
@@ -135,8 +147,13 @@ export class OnboardingProfileCapturePage {
     //this.storage.set(this.key5, this.residential_input);
     //this.storage.set(this.key6, this.residential_status);
 
+    this.storage.set(this.currentWeightKey, this.currentWeight);
+    this.storage.set(this.weightGainKey, this.weightGain);
+
     // #MIDATA persistance: add Weight
     var saveWeight = this.midataService.save(new BodyWeight(+this.currentWeight, MessageDate.toISOString()));
+
+
 
     // #MIDATA persistance: add Goal
     let goal = new Goal(this.weightGain);

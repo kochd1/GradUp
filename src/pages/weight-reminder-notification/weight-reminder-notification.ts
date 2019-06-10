@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { BodyWeight, Observation, Resource } from 'Midata';
 import { MidataService } from '../../services/MidataService';
@@ -40,6 +40,7 @@ export class WeightReminderNotificationPage {
     public navParams: NavParams,
     private midataService: MidataService,
     private storage: Storage,
+    private alertCtrl: AlertController,
     formBuilder: FormBuilder
   ) {
     this.formGroup = formBuilder.group({
@@ -54,8 +55,20 @@ export class WeightReminderNotificationPage {
     //let userId = this.midataService.getUser().id;
     //console.log('ionViewDidLoad() : userId:=', userId);
 
-    this.previousWeight = 40;
-    this.previousGoal = 500;
+    this.storage.get("username").then(username => {
+      this.userName = username;
+      console.log('ionViewDidLoad() : userName:=', this.userName);
+    });
+
+    this.storage.get('currentWeight').then(currentWeight => {
+      this.previousWeight = currentWeight;
+      console.log("previousWeight", this.previousWeight);
+    });
+
+    this.storage.get('weightGain').then(weightGain => {
+      this.previousGoal = weightGain;
+      console.log("previousGoal: ", this.previousGoal);
+    });
 
     /*this.midataService
       .search('Observation/$lastn', {
@@ -97,10 +110,6 @@ export class WeightReminderNotificationPage {
         this.previousGoal = 0;
       });*/
 
-    this.storage.get("username").then(username => {
-      this.userName = username;
-      console.log('ionViewDidLoad() : userName:=', this.userName);
-    });
   }
 
   saveData() {
@@ -113,34 +122,51 @@ export class WeightReminderNotificationPage {
       return
     }
 
-    let a = parseFloat(this.currentWeight);
-    console.log("a: ", a);
-    let b = parseFloat(this.previousWeight);
-    console.log("b: ", b);
-    if (a === NaN || b === NaN) {
+    let currentWeight = parseFloat(this.currentWeight);
+    this.storage.set('currentWeight', this.currentWeight);
+    console.log("currentWeight: ", currentWeight);
+
+    this.storage.set('weightGain', this.weightGain);
+    console.log("weightGain: ", this.weightGain);
+
+    let previousWeight = parseFloat(this.previousWeight);
+    console.log("previousWeight: ", previousWeight);
+    if (currentWeight === NaN || previousWeight === NaN) {
       this.zone.run(() => {
         this.message = "Ungültige Eingabe";
       });
       return;
     }
 
-    let weightChange = Math.round((a - b) * 1000);
+    let weightChange = Math.round((currentWeight - previousWeight) * 1000);
     console.log("weight change", weightChange);
     let message = '';
 
     if (weightChange == this.previousGoal) {
-      message = `Super ${this.userName}, Du hast dein Ziel erreicht, mach weiter so!`;
+      message = `Toll ${this.userName}, du hast dein Ziel erreicht, mach weiter so! :)`;
     } else if (weightChange > this.previousGoal) {
-      message = `Super ${this.userName}, Du hast dein Ziel übertroffen, mach weiter so!`;
+      message = `Super ${this.userName}, du hast dein Ziel übertroffen, mach weiter so! :)`;
     } else {
-      message = `Schade ${this.userName}, leider hast du Dein Ziel nicht erreicht. Bitte schau nächtste Woche besser zu dir und deinem Körper.`;
+      message = `Schade ${this.userName}, leider hast du dein Ziel nicht erreicht. :( Bitte schau besser zu dir und deinem Körper.`;
     }
 
-    console.log("saveData() : ", weightChange, "gr.", message);
-
-    this.zone.run(() => {
-      this.message = "Speichere Daten...";
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: message,
+      cssClass: 'alert-button-inner',
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.gotoTabsPage();
+          }
+        }
+      ]
     });
+
+    alert.present();
+
+    console.log("saveData() : ", weightChange, "gr.", message);
 
     let saveWeight = new BodyWeight(this.currentWeight, new Date().toISOString());//this.midataService.save(new BodyWeight(this.currentWeight, new Date().toISOString()))
 
@@ -155,11 +181,11 @@ export class WeightReminderNotificationPage {
     //   resolve(null);
     // });
 
-    Promise.all([saveWeight, saveGoal])
+    /*Promise.all([saveWeight, saveGoal])
       .then(() => {
         this.zone.run(() => {
-          this.state = 'DONE';
-          this.message = message;
+          //this.state = 'DONE';
+          //this.message = message;
           console.log("saveData() : DONE", this.message);
         });
       })
@@ -168,7 +194,7 @@ export class WeightReminderNotificationPage {
           this.message = 'Gewicht konnte nicht gespeichert werden. Bitte versuche es nochmals';
           this.state = 'FORM';
         });
-      })
+      })*/
   }
 
   public gotoTabsPage() {
